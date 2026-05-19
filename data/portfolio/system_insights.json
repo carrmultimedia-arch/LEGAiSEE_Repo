@@ -1,0 +1,9 @@
+[
+    {
+        "type": "engagement_decline",
+        "summary": "Detected 4 signals in engagement_decline",
+        "strength": 4,
+        "priority": "high",
+        "created_at": "2026-05-03T23:35:36-04:00"
+    }
+]

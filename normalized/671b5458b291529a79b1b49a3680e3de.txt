@@ -1,0 +1,8 @@
+{
+    "client": "file_intelligence",
+    "session_id": "session_1777245168",
+    "query": "# LEGAiSEE Command Center v1.0\n\nComplete Business Archaeology Platform with Multi-AI Excavation\n\n## Features\n\n\u2705 Multi-AI Excavation Interface (4 platforms simultaneously)\n\u2705 Chat Archive with full-text search\n\u2705 Real Legaisee logo integration\n\u2705 SQLite database (no MySQL needed)\n\u2705 Mobile-responsive design\n\n## Files\n\n- setup.php - System initialization\n- index.php - Dashboard with logo\n- excavation.php - Multi-AI query launcher\n- search.php - Full-text search with clickable results\n- view.php - Chat viewer with export\n- upload.php - File upload interface\n- api.php - Backend API\n\n## Installation\n\n1. Upload all files to your server\n2. Visit setup.php\n3. Click \"Initialize System\"\n4. Done!\n\n## Logo\n\nThe system uses your real Legaisee logo from:\nhttps:\/\/www.legaisee.com\/Images\/Legaisee-sm-300.png\n\nNo configuration needed - it loads automatically.\n\n## Next Steps\n\nConfigure API keys in settings to enable live Multi-AI queries:\n- OpenAI (ChatGPT)\n- Anthropic (Claude)\n- Google (Gemini)\n- ",
+    "source_file": "README.md",
+    "created_at": "2026-04-26 23:12:48",
+    "status": "pending"
+}

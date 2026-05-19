@@ -1,0 +1,22 @@
+[
+  {
+    "goal_id": "network_stability",
+    "priority": 10,
+    "target_metrics": {
+      "risk_score_max": 30,
+      "state_score_min": 40
+    },
+    "weight": 1.0,
+    "status": "active"
+  },
+
+  {
+    "goal_id": "anomaly_detection",
+    "priority": 8,
+    "target_metrics": {
+      "anomaly_sensitivity": "high"
+    },
+    "weight": 1.0,
+    "status": "active"
+  }
+]

@@ -1,0 +1,16 @@
+.vscode/
+.windsurf/
+node_modules/
+
+*.log
+.DS_Store
+Thumbs.db
+
+data/cache/
+data/temp/
+
+vendor/
+.env
+
+_backup/
+*.zip

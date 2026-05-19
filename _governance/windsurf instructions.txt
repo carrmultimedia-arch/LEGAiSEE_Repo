@@ -1,0 +1,127 @@
+Create THREE Files
+
+Inside:
+
+commandcenter/_governance/
+
+Create:
+
+File	Purpose
+MASTER_SYSTEM_BIBLE.md	your full bible
+DAILY_STATE.md	current progress
+CURRENT_OBJECTIVE.md	what is being built RIGHT NOW
+Why This Matters
+
+Then in Windsurf:
+you can say:
+
+Read _governance/MASTER_SYSTEM_BIBLE.md and CURRENT_OBJECTIVE.md before making changes.
+
+That is FAR more reliable than pasting into chat repeatedly.
+
+Best Practice
+
+Before ANY major Windsurf task:
+
+Prompt:
+
+Before editing:
+1. Read MASTER_SYSTEM_BIBLE.md
+2. Summarize architectural constraints
+3. Explain how your proposed changes comply
+4. List files you intend to modify
+5. Wait for approval
+
+=================================================================
+
+Example Workflow
+STEP 1 — Ask Claude
+Create a BUILD_SPEC for:
+- adding embedding pipeline
+- preserving all LEGAiSEE architecture rules
+- no inline CSS
+- API endpoints in api/
+- module registration required
+- full file replacement strategy only
+STEP 2 — Claude Outputs SPEC ONLY
+
+NOT CODE.
+
+Example:
+
+OBJECTIVE:
+Add embedding generation during ingest save flow.
+
+FILES TO MODIFY:
+- modules/ingest_module.php
+- api/ingest_action.php
+- engine/embedding_engine.php
+- kernel/module_registry.php
+
+FILES TO CREATE:
+- engine/embedding_engine.php
+
+RESTRICTIONS:
+- No standalone pages
+- No inline CSS
+- Use kernel_db()
+- Context separation mandatory
+- API responses JSON only
+
+IMPLEMENTATION ORDER:
+1. Create engine/embedding_engine.php
+2. Add lee_embed()
+3. Modify ingest endpoint
+4. Store vectors in embeddings table
+5. Add error handling
+
+VALIDATION:
+- ingest still saves
+- embedding row created
+- shell router unaffected
+STEP 3 — Give SPEC To Windsurf/GPT
+
+Now Windsurf is no longer inventing architecture.
+
+It is executing:
+
+constrained contracts
+
+That is MUCH safer.
+
+STEP 4 — Return Result To Claude
+
+Then ask Claude:
+
+Review implementation against BUILD_SPEC and MASTER_SYSTEM_BIBLE.
+List violations only.
+
+Now Claude becomes:
+
+QA architect
+
+Instead of token-expensive coder.
+
+THIS IS A HUGE ADVANTAGE
+
+Because now:
+
+Claude sessions last MUCH longer
+architecture remains stable
+cheap/free models do labor
+system drift reduces dramatically
+IMPORTANT REALITY
+
+No AI today is truly “unfoulable.”
+
+Especially:
+
+autonomous IDE agents
+multi-file refactors
+large systems
+
+So:
+
+governance is the solution
+
+Not finding the “perfect AI.”

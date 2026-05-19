@@ -1,0 +1,1837 @@
+/* =====================================================
+   LEGAiSEE — GLOBAL STYLESHEET
+   ui/global.css
+   All pages link this. No embedded CSS anywhere else.
+   ===================================================== */
+
+/* ── RESET ── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    background: #0a0a0c;
+    color: #CDAD69;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+body {
+    background:
+        linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.88)),
+        url('/commandcenter/ui/images/dark-room-with-black-wall-black-wall-with-carved-design_902639-63079-upscale-4x.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* ── APP SHELL ── */
+.app-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ── TOPBAR / NAV ── */
+.top-nav {
+    background: linear-gradient(rgba(10,10,10,0.65), rgba(10,10,10,0.40));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.50);
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 20px;
+}
+
+.top-nav-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.top-nav-title {
+    color: #F4E185;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.top-nav-sub {
+    color: #89612B;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.top-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.top-nav a,
+.top-nav-links a {
+    color: #CDAD69;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.top-nav a:hover,
+.top-nav-links a:hover {
+    color: #F4E185;
+    border-color: rgba(230, 194, 86, 0.3);
+    background: rgba(230, 194, 86, 0.05);
+}
+
+.top-nav a.active,
+.top-nav-links a.active {
+    color: #F4E185;
+    border-color: rgba(230, 194, 86, 0.4);
+    background: rgba(230, 194, 86, 0.08);
+}
+
+/* ── BODY ── */
+.app-body {
+    flex: 1;
+    padding: 28px 32px 60px;
+}
+
+/* ── GRAND LOBBY HERO ── */
+.lobby-hero {
+    margin-bottom: 48px;
+    padding: 56px 64px;
+    background: linear-gradient(180deg, rgba(22,22,24,0.80), rgba(10,10,12,0.65));
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 24px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.04);
+    position: relative;
+    overflow: hidden;
+}
+
+.lobby-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top center, rgba(244,225,133,0.07), transparent 60%);
+    pointer-events: none;
+}
+
+.lobby-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #89612B;
+    margin-bottom: 10px;
+}
+
+.lobby-title {
+    font-size: 64px;
+    font-weight: 200;
+    color: #F4E185;
+    margin-bottom: 14px;
+    line-height: 1;
+}
+
+.lobby-text {
+    color: #AC8B56;
+    font-size: 15px;
+}
+
+/* ── DASHBOARD GROUPS ── */
+.dashboard-group {
+    margin-bottom: 36px;
+}
+
+.dashboard-group-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #89612B;
+    margin-bottom: 14px;
+    padding-left: 2px;
+}
+
+/* ── GRID ── */
+.layout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+/* ── CARDS ── */
+.ui-card {
+    background: linear-gradient(180deg, rgba(24,24,26,0.85), rgba(10,10,12,0.75));
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04);
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ui-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(244,225,133,0.05), transparent 60%);
+    pointer-events: none;
+}
+
+.ui-card:hover {
+    border-color: rgba(230,194,86,0.30);
+    transform: translateY(-6px);
+    box-shadow: 0 36px 80px rgba(0,0,0,0.70), 0 0 24px rgba(230,194,86,0.07);
+}
+
+.ui-card-title {
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: #d4af37;
+    font-weight: 500;
+}
+
+.ui-card-body {
+    font-size: 12px;
+    color: #89612B;
+    line-height: 1.5;
+}
+
+.ui-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* ── SINGLE MODULE VIEW ── */
+.module-view {
+    width: 100%;
+}
+
+.module-view-header {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+}
+
+.module-back {
+    color: #89612B;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+
+.module-back:hover {
+    color: #F4E185;
+}
+
+.module-view-title {
+    font-size: 36px;
+    font-weight: 200;
+    color: #F4E185;
+    line-height: 1;
+}
+
+.module-view-body {
+    background: linear-gradient(180deg, rgba(24,24,26,0.88), rgba(10,10,12,0.80));
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 36px;
+    min-height: 300px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.60), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+/* ── EXEC PANEL (key/value output) ── */
+.exec-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.exec-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.exec-key {
+    color: #89612B;
+    flex: 0 0 160px;
+    font-size: 12px;
+    word-break: break-word;
+}
+
+.exec-value {
+    color: #F4E185;
+    flex: 1;
+    font-size: 13px;
+    text-align: right;
+    word-break: break-word;
+}
+
+/* ── INSPECTOR (brain module) ── */
+.inspector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.inspector-card {
+    background: linear-gradient(180deg, rgba(24,24,26,0.88), rgba(10,10,12,0.80));
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+    transition: border-color 0.25s ease;
+}
+
+.inspector-card:hover {
+    border-color: rgba(230,194,86,0.20);
+}
+
+.inspector-title {
+    color: #d4af37;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.inspector-meta {
+    color: #89612B;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.inspector-content {
+    color: #CDAD69;
+    font-size: 12px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.7;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+}
+
+/* ── DATA TEXT ── */
+.data-text {
+    color: #CDAD69;
+    font-size: 13px;
+    line-height: 1.7;
+    word-break: break-word;
+}
+
+/* ── STATE MESSAGES ── */
+.empty {
+    color: #89612B;
+    font-size: 13px;
+    font-style: italic;
+    padding: 8px 0;
+}
+
+.error {
+    color: #ff7d7d;
+    font-size: 13px;
+    padding: 8px 0;
+}
+
+/* ── UIC COMPONENTS ── */
+.uic-card { margin-bottom: 12px; }
+.uic-title { color: #F4E185; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+.uic-summary { color: #AC8B56; font-size: 12px; line-height: 1.7; margin-bottom: 10px; }
+.uic-label { color: #89612B; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.uic-signal { color: #CDAD69; font-size: 12px; padding: 2px 0; line-height: 1.6; }
+.uic-footer { color: #89612B; font-size: 11px; margin-top: 8px; }
+.uic-system {
+    color: #89612B;
+    font-size: 12px;
+    font-style: italic;
+    padding: 6px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    margin-top: 8px;
+}
+
+/* ── TREE ── */
+.ui-tree {
+    list-style: none;
+    padding-left: 10px;
+}
+
+/* =====================================================
+   FORM SYSTEM
+   ===================================================== */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.field label {
+    color: #89612B;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(18, 18, 20, 0.96);
+    color: #F4E185;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    border-color: rgba(244, 225, 133, 0.45);
+    box-shadow: 0 0 0 3px rgba(244, 225, 133, 0.08);
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 180px;
+    line-height: 1.7;
+}
+
+.field select option {
+    background: #121214;
+    color: #F4E185;
+}
+
+/* UIC v2 fields */
+.uic-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.uic-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #89612B;
+}
+
+.uic-input,
+.uic-textarea {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #F4E185;
+    padding: 12px 14px;
+    border-radius: 12px;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.uic-textarea {
+    resize: vertical;
+    min-height: 180px;
+    line-height: 1.7;
+}
+
+.uic-input:focus,
+.uic-textarea:focus {
+    border-color: rgba(244, 225, 133, 0.35);
+}
+
+.uic-select-wrap { position: relative; }
+
+.uic-select {
+    width: 100%;
+    background: #121214;
+    color: #F4E185;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 14px;
+    border-radius: 12px;
+    appearance: none;
+    font-family: inherit;
+}
+
+select,
+select option {
+    background-color: #121214;
+    color: #F4E185;
+}
+
+/* =====================================================
+   BUTTON SYSTEM
+   ===================================================== */
+.btn-gold {
+    border: none;
+    border-radius: 999px;
+    padding: 14px 28px;
+    background: linear-gradient(180deg, #F4E185, #CDAD69);
+    color: #0a0a0c;
+    font-weight: 700;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(244, 225, 133, 0.18);
+}
+
+.btn-ghost {
+    border: 1px solid rgba(230, 194, 86, 0.3);
+    border-radius: 999px;
+    padding: 10px 20px;
+    background: transparent;
+    color: #CDAD69;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-ghost:hover {
+    border-color: rgba(230, 194, 86, 0.6);
+    color: #F4E185;
+}
+
+/* =====================================================
+   WORKSPACE LAYOUT
+   ===================================================== */
+.workspace-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.workspace-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.status-box {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #CDAD69;
+    font-size: 13px;
+}
+/* =============================================================
+   MODULE: search
+   System Search + Dual Compare
+   Append this block to ui/global.css
+   ============================================================= */
+
+/* ── Layout ──────────────────────────────────────────────────── */
+
+.srch-wrap {
+    display: flex;
+    height: calc(100vh - 140px); /* accounts for shell topbar */
+    gap: 0;
+    overflow: hidden;
+}
+
+/* ── Left panel ──────────────────────────────────────────────── */
+
+.srch-left {
+    width: 28%;
+    min-width: 240px;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(244, 225, 133, 0.15);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* ── Search form ─────────────────────────────────────────────── */
+
+.srch-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.75rem 0.85rem 0.6rem;
+    border-bottom: 1px solid rgba(244, 225, 133, 0.1);
+}
+
+.srch-input {
+    width: 100%;
+    background: rgba(10, 10, 12, 0.7);
+    border: 1px solid rgba(244, 225, 133, 0.3);
+    border-bottom: none;
+    color: #e8e0cc;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.88rem;
+    font-family: inherit;
+    border-radius: 6px 6px 0 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.srch-input:focus {
+    border-color: #F4E185;
+    background: rgba(10, 10, 12, 0.9);
+}
+
+.srch-execute-btn {
+    width: 100%;
+    background: #89612B;
+    color: #F4E185;
+    border: 1px solid rgba(244, 225, 133, 0.3);
+    border-top: none;
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 0 0 6px 6px;
+    transition: background 0.15s;
+}
+
+.srch-execute-btn:hover {
+    background: #CDAD69;
+    color: #0a0a0c;
+}
+
+/* ── Result count ────────────────────────────────────────────── */
+
+.srch-count {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.72rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(244, 225, 133, 0.07);
+}
+
+/* ── Results list ────────────────────────────────────────────── */
+
+.srch-results {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.4rem 0.6rem;
+}
+
+.srch-empty {
+    padding: 1rem 0.85rem;
+    font-size: 0.85rem;
+    color: #555;
+    font-style: italic;
+}
+
+.srch-empty strong {
+    color: #888;
+}
+
+/* ── Result item ─────────────────────────────────────────────── */
+
+.srch-item {
+    border: 1px solid rgba(244, 225, 133, 0.12);
+    border-radius: 7px;
+    padding: 0.65rem 0.7rem;
+    margin-bottom: 0.5rem;
+    background: rgba(10, 10, 12, 0.35);
+    transition: border-color 0.15s;
+}
+
+.srch-item:hover {
+    border-color: rgba(244, 225, 133, 0.28);
+}
+
+.srch-item-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    margin-bottom: 0.3rem;
+}
+
+.srch-type-badge {
+    flex-shrink: 0;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    background: rgba(137, 97, 43, 0.35);
+    color: #CDAD69;
+    border: 1px solid rgba(205, 173, 105, 0.25);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    margin-top: 1px;
+}
+
+.srch-item-label {
+    font-size: 0.83rem;
+    color: #e8e0cc;
+    line-height: 1.3;
+    word-break: break-word;
+}
+
+.srch-snippet {
+    font-size: 0.74rem;
+    color: #777;
+    font-family: monospace;
+    margin: 0.25rem 0 0.3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.srch-item-source {
+    font-size: 0.68rem;
+    color: #555;
+    margin-bottom: 0.45rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* ── Load A / B buttons ──────────────────────────────────────── */
+
+.srch-load-row {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.srch-load-btn {
+    flex: 1;
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.28rem 0;
+    border-radius: 4px;
+    border: 1px solid;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: background 0.15s;
+}
+
+.srch-load-a {
+    border-color: rgba(100, 180, 100, 0.35);
+    color: #7dc97d;
+    background: rgba(80, 160, 80, 0.08);
+}
+
+.srch-load-a:hover {
+    background: rgba(80, 160, 80, 0.2);
+    color: #a0e0a0;
+}
+
+.srch-load-b {
+    border-color: rgba(100, 140, 220, 0.35);
+    color: #7da8d9;
+    background: rgba(80, 120, 200, 0.08);
+}
+
+.srch-load-b:hover {
+    background: rgba(80, 120, 200, 0.2);
+    color: #a0c0f0;
+}
+
+/* ── Right: dual pane area ───────────────────────────────────── */
+
+.srch-right {
+    flex: 1;
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.75rem 0.85rem 0.75rem 0.85rem;
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* ── Individual pane ─────────────────────────────────────────── */
+
+.srch-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(244, 225, 133, 0.15);
+    border-radius: 8px;
+    background: rgba(10, 10, 12, 0.4);
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* ── Pane header ─────────────────────────────────────────────── */
+
+.srch-pane-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba(244, 225, 133, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+.srch-pane-label {
+    font-size: 0.7rem;
+    font-weight: 900;
+    padding: 0.1rem 0.45rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+    letter-spacing: 0.06em;
+}
+
+.srch-pane-label--a {
+    background: rgba(80, 160, 80, 0.25);
+    color: #7dc97d;
+    border: 1px solid rgba(80, 160, 80, 0.35);
+}
+
+.srch-pane-label--b {
+    background: rgba(80, 120, 200, 0.25);
+    color: #7da8d9;
+    border: 1px solid rgba(80, 120, 200, 0.35);
+}
+
+.srch-pane-title {
+    font-size: 0.8rem;
+    color: #CDAD69;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.srch-pane-clear {
+    font-size: 0.75rem;
+    color: #555;
+    text-decoration: none;
+    flex-shrink: 0;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+}
+
+.srch-pane-clear:hover {
+    color: #e08080;
+    background: rgba(200, 60, 60, 0.1);
+}
+
+/* ── Find bar ────────────────────────────────────────────────── */
+
+.srch-findbar {
+    display: flex;
+    gap: 0;
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid rgba(244, 225, 133, 0.08);
+    flex-shrink: 0;
+}
+
+.srch-find-input {
+    flex: 1;
+    background: rgba(10, 10, 12, 0.6);
+    border: 1px solid rgba(244, 225, 133, 0.2);
+    border-right: none;
+    color: #e8e0cc;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+    font-family: inherit;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.srch-find-input:focus {
+    border-color: rgba(244, 225, 133, 0.4);
+}
+
+.srch-find-clear {
+    background: rgba(10, 10, 12, 0.6);
+    border: 1px solid rgba(244, 225, 133, 0.2);
+    color: #555;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+
+.srch-find-clear:hover {
+    color: #e08080;
+}
+
+/* ── Viewer (content display) ────────────────────────────────── */
+
+.srch-viewer {
+    flex: 1;
+    overflow: auto;
+    padding: 0.85rem 1rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.78rem;
+    line-height: 1.65;
+    color: #c8bfa8;
+    margin: 0;
+    background: transparent;
+}
+
+/* ── Find highlight ──────────────────────────────────────────── */
+
+.srch-mark {
+    background: #F4E185;
+    color: #0a0a0c;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+
+/* ── Scrollbar styling (webkit) ──────────────────────────────── */
+
+.srch-results::-webkit-scrollbar,
+.srch-viewer::-webkit-scrollbar  { width: 5px; }
+
+.srch-results::-webkit-scrollbar-track,
+.srch-viewer::-webkit-scrollbar-track  { background: transparent; }
+
+.srch-results::-webkit-scrollbar-thumb,
+.srch-viewer::-webkit-scrollbar-thumb  {
+    background: rgba(244, 225, 133, 0.2);
+    border-radius: 3px;
+}
+
+
+/* =============================================================
+   MODULE: search  —  3-column Search + Dual Compare
+   Append this entire block to the BOTTOM of ui/global.css
+   If you already added a previous search block, REPLACE it
+   with this one.
+   ============================================================= */
+
+/* ── Force the module's parent shell container to allow full
+      width + height layout. These selectors target common
+      wrapper patterns shell.php uses. Adjust class names if
+      your shell uses different ones. ─────────────────────── */
+
+.module-output,
+.module-wrap,
+.module-content,
+.wing-content,
+.shell-content,
+[class*="module-"] {
+    padding: 0 !important;
+    overflow: visible !important;
+    max-width: none !important;
+    width: 100% !important;
+}
+
+/* ── Outer wrapper: true 3-column grid ───────────────────── */
+
+.srch3-wrap {
+    display: grid !important;
+    grid-template-columns: 280px 1fr 1fr !important;
+    width: 100% !important;
+    height: calc(100vh - 120px) !important;
+    overflow: hidden !important;
+    gap: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   COLUMN 1 — Search panel
+══════════════════════════════════════════════════════════ */
+
+.srch3-col-search {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(244, 225, 133, 0.15);
+    overflow: hidden;
+    background: rgba(10, 10, 12, 0.3);
+}
+
+/* Controls: input + Execute + Set A/B ───────────────────── */
+
+.srch3-controls {
+    padding: 0.8rem 0.75rem 0.65rem;
+    border-bottom: 1px solid rgba(244, 225, 133, 0.1);
+    flex-shrink: 0;
+}
+
+.srch3-query-input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background: #0a0a0c !important;
+    border: 1px solid rgba(244, 225, 133, 0.35) !important;
+    border-bottom: none !important;
+    color: #e8e0cc !important;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.88rem;
+    font-family: inherit !important;
+    border-radius: 6px 6px 0 0;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.srch3-query-input:focus {
+    border-color: #F4E185 !important;
+    background: #111115 !important;
+}
+
+.srch3-query-input::placeholder {
+    color: #4a4a4a;
+}
+
+.srch3-btn-execute {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background: #89612B !important;
+    color: #F4E185 !important;
+    border: 1px solid rgba(244, 225, 133, 0.3) !important;
+    border-top: none !important;
+    border-radius: 0 0 6px 6px;
+    padding: 0.52rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.srch3-btn-execute:hover {
+    background: #CDAD69 !important;
+    color: #0a0a0c !important;
+}
+
+/* Set A / Set B ─────────────────────────────────────────── */
+
+.srch3-ab-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+    margin-top: 0.55rem;
+}
+
+.srch3-btn-set {
+    padding: 0.45rem 0;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-radius: 5px;
+    border: 1px solid;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.srch3-btn-seta {
+    background: rgba(60, 140, 60, 0.12) !important;
+    border-color: rgba(80, 180, 80, 0.4) !important;
+    color: #7dc97d !important;
+}
+.srch3-btn-seta:hover {
+    background: rgba(60, 140, 60, 0.3) !important;
+    color: #a0e8a0 !important;
+}
+
+.srch3-btn-setb {
+    background: rgba(60, 100, 190, 0.12) !important;
+    border-color: rgba(80, 130, 220, 0.4) !important;
+    color: #7da8d9 !important;
+}
+.srch3-btn-setb:hover {
+    background: rgba(60, 100, 190, 0.3) !important;
+    color: #a0c4f8 !important;
+}
+
+/* Result count ──────────────────────────────────────────── */
+
+.srch3-result-count {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.7rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(244, 225, 133, 0.07);
+    flex-shrink: 0;
+}
+
+.srch3-empty {
+    padding: 0.9rem 0.75rem;
+    font-size: 0.83rem;
+    color: #555;
+    font-style: italic;
+}
+
+/* Scrollable results list ───────────────────────────────── */
+
+.srch3-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.35rem 0.5rem;
+}
+
+.srch3-list::-webkit-scrollbar       { width: 4px; }
+.srch3-list::-webkit-scrollbar-track { background: transparent; }
+.srch3-list::-webkit-scrollbar-thumb {
+    background: rgba(244, 225, 133, 0.18);
+    border-radius: 2px;
+}
+
+/* Result item ───────────────────────────────────────────── */
+
+.srch3-item {
+    border: 1px solid rgba(244, 225, 133, 0.1);
+    border-radius: 6px;
+    padding: 0.55rem 0.65rem;
+    margin-bottom: 0.4rem;
+    cursor: pointer;
+    transition: border-color 0.12s, background 0.12s;
+    background: rgba(10, 10, 12, 0.3);
+}
+
+.srch3-item:hover {
+    border-color: rgba(244, 225, 133, 0.3);
+    background: rgba(244, 225, 133, 0.04);
+}
+
+.srch3-item--sel {
+    border-color: #F4E185 !important;
+    background: rgba(244, 225, 133, 0.08) !important;
+}
+
+.srch3-item-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    margin-bottom: 0.25rem;
+}
+
+.srch3-badge {
+    flex-shrink: 0;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 0.1rem 0.32rem;
+    border-radius: 3px;
+    background: rgba(137, 97, 43, 0.35);
+    color: #CDAD69;
+    border: 1px solid rgba(205, 173, 105, 0.25);
+    margin-top: 1px;
+    white-space: nowrap;
+}
+
+.srch3-item-label {
+    font-size: 0.82rem;
+    color: #e0d8c4;
+    line-height: 1.35;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.srch3-snippet {
+    font-size: 0.72rem;
+    color: #666;
+    font-family: monospace;
+    margin: 0.2rem 0 0.25rem;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+.srch3-item-src {
+    font-size: 0.66rem;
+    color: #4a4a4a;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* ══════════════════════════════════════════════════════════
+   COLUMNS 2 & 3 — Panes A and B
+══════════════════════════════════════════════════════════ */
+
+.srch3-col-pane {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(244, 225, 133, 0.1);
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* Pane header ───────────────────────────────────────────── */
+
+.srch3-pane-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba(244, 225, 133, 0.1);
+    background: rgba(0, 0, 0, 0.25);
+    flex-shrink: 0;
+    min-height: 40px;
+}
+
+.srch3-pane-badge {
+    font-size: 0.68rem;
+    font-weight: 900;
+    padding: 0.1rem 0.42rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+    letter-spacing: 0.06em;
+}
+
+.srch3-pane-badge--a {
+    background: rgba(60, 140, 60, 0.25);
+    color: #7dc97d;
+    border: 1px solid rgba(80, 180, 80, 0.35);
+}
+
+.srch3-pane-badge--b {
+    background: rgba(60, 100, 190, 0.25);
+    color: #7da8d9;
+    border: 1px solid rgba(80, 130, 220, 0.35);
+}
+
+.srch3-pane-title {
+    flex: 1;
+    font-size: 0.78rem;
+    color: #CDAD69;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.srch3-pane-clear {
+    background: none !important;
+    border: none !important;
+    color: #444 !important;
+    cursor: pointer;
+    font-size: 0.78rem;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+    line-height: 1;
+}
+.srch3-pane-clear:hover {
+    color: #e08080 !important;
+    background: rgba(200, 60, 60, 0.1) !important;
+}
+
+/* Find bar ──────────────────────────────────────────────── */
+
+.srch3-findbar {
+    display: flex;
+    align-items: center;
+    padding: 0.38rem 0.55rem;
+    border-bottom: 1px solid rgba(244, 225, 133, 0.08);
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.15);
+    gap: 0;
+}
+
+.srch3-find-input {
+    flex: 1;
+    min-width: 0;
+    background: #0a0a0c !important;
+    border: 1px solid rgba(244, 225, 133, 0.2) !important;
+    border-right: none !important;
+    color: #e8e0cc !important;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.78rem;
+    font-family: inherit !important;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.srch3-find-input:focus {
+    border-color: rgba(244, 225, 133, 0.45) !important;
+}
+.srch3-find-input::placeholder {
+    color: #3a3a3a;
+}
+
+.srch3-find-nav {
+    background: #0a0a0c !important;
+    border: 1px solid rgba(244, 225, 133, 0.2) !important;
+    border-right: none !important;
+    color: #CDAD69 !important;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.78rem;
+    cursor: pointer;
+    line-height: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: inherit;
+}
+.srch3-find-nav:hover {
+    background: rgba(244, 225, 133, 0.1) !important;
+    color: #F4E185 !important;
+}
+
+.srch3-find-tally {
+    background: #0a0a0c;
+    border: 1px solid rgba(244, 225, 133, 0.2);
+    border-right: none;
+    color: #555;
+    padding: 0.3rem 0.4rem;
+    font-size: 0.68rem;
+    white-space: nowrap;
+    min-width: 36px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.srch3-find-x {
+    background: #0a0a0c !important;
+    border: 1px solid rgba(244, 225, 133, 0.2) !important;
+    color: #555 !important;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.78rem;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    line-height: 1;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.srch3-find-x:hover {
+    color: #e08080 !important;
+}
+
+/* Viewer ────────────────────────────────────────────────── */
+
+.srch3-viewer {
+    flex: 1;
+    overflow: auto;
+    padding: 0.9rem 1rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.79rem;
+    line-height: 1.7;
+    color: #c8bfa8;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    margin: 0;
+}
+
+.srch3-viewer::-webkit-scrollbar       { width: 5px; height: 5px; }
+.srch3-viewer::-webkit-scrollbar-track { background: transparent; }
+.srch3-viewer::-webkit-scrollbar-thumb {
+    background: rgba(244, 225, 133, 0.18);
+    border-radius: 3px;
+}
+
+/* Find highlights ───────────────────────────────────────── */
+
+.srch3-mark {
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.srch3-mark--a { background: rgba(244, 225, 133, 0.85); color: #0a0a0c; }
+.srch3-mark--b { background: rgba(100, 180, 255, 0.75); color: #0a0a0c; }
+/* =============================================================
+   MODULE: search  —  3-column Search + Dual Compare
+   Append this entire block to the BOTTOM of ui/global.css
+   If you already added a previous search block, REPLACE it
+   with this one.
+   ============================================================= */
+
+/* ── Force the module's parent shell container to allow full
+      width + height layout. These selectors target common
+      wrapper patterns shell.php uses. Adjust class names if
+      your shell uses different ones. ─────────────────────── */
+
+.module-output,
+.module-wrap,
+.module-content,
+.wing-content,
+.shell-content,
+[class*="module-"] {
+    padding: 0 !important;
+    overflow: visible !important;
+    max-width: none !important;
+    width: 100% !important;
+}
+
+/* ── Outer wrapper: true 3-column grid ───────────────────── */
+
+.srch3-wrap {
+    display: grid !important;
+    grid-template-columns: 280px 1fr 1fr !important;
+    width: 100% !important;
+    height: calc(100vh - 120px) !important;
+    overflow: hidden !important;
+    gap: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   COLUMN 1 — Search panel
+══════════════════════════════════════════════════════════ */
+
+.srch3-col-search {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(244, 225, 133, 0.15);
+    overflow: hidden;
+    background: rgba(10, 10, 12, 0.3);
+}
+
+/* Controls: input + Execute + Set A/B ───────────────────── */
+
+.srch3-controls {
+    padding: 0.8rem 0.75rem 0.65rem;
+    border-bottom: 1px solid rgba(244, 225, 133, 0.1);
+    flex-shrink: 0;
+}
+
+.srch3-query-input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background: #0a0a0c !important;
+    border: 1px solid rgba(244, 225, 133, 0.35) !important;
+    border-bottom: none !important;
+    color: #e8e0cc !important;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.88rem;
+    font-family: inherit !important;
+    border-radius: 6px 6px 0 0;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.srch3-query-input:focus {
+    border-color: #F4E185 !important;
+    background: #111115 !important;
+}
+
+.srch3-query-input::placeholder {
+    color: #4a4a4a;
+}
+
+.srch3-btn-execute {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background: #89612B !important;
+    color: #F4E185 !important;
+    border: 1px solid rgba(244, 225, 133, 0.3) !important;
+    border-top: none !important;
+    border-radius: 0 0 6px 6px;
+    padding: 0.52rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.srch3-btn-execute:hover {
+    background: #CDAD69 !important;
+    color: #0a0a0c !important;
+}
+
+/* Set A / Set B ─────────────────────────────────────────── */
+
+.srch3-ab-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+    margin-top: 0.55rem;
+}
+
+.srch3-btn-set {
+    padding: 0.45rem 0;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-radius: 5px;
+    border: 1px solid;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.srch3-btn-seta {
+    background: rgba(60, 140, 60, 0.12) !important;
+    border-color: rgba(80, 180, 80, 0.4) !important;
+    color: #7dc97d !important;
+}
+.srch3-btn-seta:hover {
+    background: rgba(60, 140, 60, 0.3) !important;
+    color: #a0e8a0 !important;
+}
+
+.srch3-btn-setb {
+    background: rgba(60, 100, 190, 0.12) !important;
+    border-color: rgba(80, 130, 220, 0.4) !important;
+    color: #7da8d9 !important;
+}
+.srch3-btn-setb:hover {
+    background: rgba(60, 100, 190, 0.3) !important;
+    color: #a0c4f8 !important;
+}
+
+/* Result count ──────────────────────────────────────────── */
+
+.srch3-result-count {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.7rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(244, 225, 133, 0.07);
+    flex-shrink: 0;
+}
+
+.srch3-empty {
+    padding: 0.9rem 0.75rem;
+    font-size: 0.83rem;
+    color: #555;
+    font-style: italic;
+}
+
+/* Scrollable results list ───────────────────────────────── */
+
+.srch3-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.35rem 0.5rem;
+}
+
+.srch3-list::-webkit-scrollbar       { width: 4px; }
+.srch3-list::-webkit-scrollbar-track { background: transparent; }
+.srch3-list::-webkit-scrollbar-thumb {
+    background: rgba(244, 225, 133, 0.18);
+    border-radius: 2px;
+}
+
+/* Result item ───────────────────────────────────────────── */
+
+.srch3-item {
+    border: 1px solid rgba(244, 225, 133, 0.1);
+    border-radius: 6px;
+    padding: 0.55rem 0.65rem;
+    margin-bottom: 0.4rem;
+    cursor: pointer;
+    transition: border-color 0.12s, background 0.12s;
+    background: rgba(10, 10, 12, 0.3);
+}
+
+.srch3-item:hover {
+    border-color: rgba(244, 225, 133, 0.3);
+    background: rgba(244, 225, 133, 0.04);
+}
+
+.srch3-item--sel {
+    border-color: #F4E185 !important;
+    background: rgba(244, 225, 133, 0.08) !important;
+}
+
+.srch3-item-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    margin-bottom: 0.25rem;
+}
+
+.srch3-badge {
+    flex-shrink: 0;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 0.1rem 0.32rem;
+    border-radius: 3px;
+    background: rgba(137, 97, 43, 0.35);
+    color: #CDAD69;
+    border: 1px solid rgba(205, 173, 105, 0.25);
+    margin-top: 1px;
+    white-space: nowrap;
+}
+
+.srch3-item-label {
+    font-size: 0.82rem;
+    color: #e0d8c4;
+    line-height: 1.35;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.srch3-snippet {
+    font-size: 0.72rem;
+    color: #666;
+    font-family: monospace;
+    margin: 0.2rem 0 0.25rem;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+.srch3-item-src {
+    font-size: 0.66rem;
+    color: #4a4a4a;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* ══════════════════════════════════════════════════════════
+   COLUMNS 2 & 3 — Panes A and B
+══════════════════════════════════════════════════════════ */
+
+.srch3-col-pane {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(244, 225, 133, 0.1);
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* Pane header ───────────────────────────────────────────── */
+
+.srch3-pane-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba(244, 225, 133, 0.1);
+    background: rgba(0, 0, 0, 0.25);
+    flex-shrink: 0;
+    min-height: 40px;
+}
+
+.srch3-pane-badge {
+    font-size: 0.68rem;
+    font-weight: 900;
+    padding: 0.1rem 0.42rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+    letter-spacing: 0.06em;
+}
+
+.srch3-pane-badge--a {
+    background: rgba(60, 140, 60, 0.25);
+    color: #7dc97d;
+    border: 1px solid rgba(80, 180, 80, 0.35);
+}
+
+.srch3-pane-badge--b {
+    background: rgba(60, 100, 190, 0.25);
+    color: #7da8d9;
+    border: 1px solid rgba(80, 130, 220, 0.35);
+}
+
+.srch3-pane-title {
+    flex: 1;
+    font-size: 0.78rem;
+    color: #CDAD69;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.srch3-pane-clear {
+    background: none !important;
+    border: none !important;
+    color: #444 !important;
+    cursor: pointer;
+    font-size: 0.78rem;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+    line-height: 1;
+}
+.srch3-pane-clear:hover {
+    color: #e08080 !important;
+    background: rgba(200, 60, 60, 0.1) !important;
+}
+
+/* Find bar ──────────────────────────────────────────────── */
+
+.srch3-findbar {
+    display: flex;
+    align-items: center;
+    padding: 0.38rem 0.55rem;
+    border-bottom: 1px solid rgba(244, 225, 133, 0.08);
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.15);
+    gap: 0;
+}
+
+.srch3-find-input {
+    flex: 1;
+    min-width: 0;
+    background: #0a0a0c !important;
+    border: 1px solid rgba(244, 225, 133, 0.2) !important;
+    border-right: none !important;
+    color: #e8e0cc !important;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.78rem;
+    font-family: inherit !important;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.srch3-find-input:focus {
+    border-color: rgba(244, 225, 133, 0.45) !important;
+}
+.srch3-find-input::placeholder {
+    color: #3a3a3a;
+}
+
+.srch3-find-nav {
+    background: #0a0a0c !important;
+    border: 1px solid rgba(244, 225, 133, 0.2) !important;
+    border-right: none !important;
+    color: #CDAD69 !important;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.78rem;
+    cursor: pointer;
+    line-height: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: inherit;
+}
+.srch3-find-nav:hover {
+    background: rgba(244, 225, 133, 0.1) !important;
+    color: #F4E185 !important;
+}
+
+.srch3-find-tally {
+    background: #0a0a0c;
+    border: 1px solid rgba(244, 225, 133, 0.2);
+    border-right: none;
+    color: #555;
+    padding: 0.3rem 0.4rem;
+    font-size: 0.68rem;
+    white-space: nowrap;
+    min-width: 36px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.srch3-find-x {
+    background: #0a0a0c !important;
+    border: 1px solid rgba(244, 225, 133, 0.2) !important;
+    color: #555 !important;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.78rem;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    line-height: 1;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.srch3-find-x:hover {
+    color: #e08080 !important;
+}
+
+/* Viewer ────────────────────────────────────────────────── */
+
+.srch3-viewer {
+    flex: 1;
+    overflow: auto;
+    padding: 0.9rem 1rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.79rem;
+    line-height: 1.7;
+    color: #c8bfa8;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    margin: 0;
+}
+
+.srch3-viewer::-webkit-scrollbar       { width: 5px; height: 5px; }
+.srch3-viewer::-webkit-scrollbar-track { background: transparent; }
+.srch3-viewer::-webkit-scrollbar-thumb {
+    background: rgba(244, 225, 133, 0.18);
+    border-radius: 3px;
+}
+
+/* Find highlights ───────────────────────────────────────── */
+
+.srch3-mark {
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.srch3-mark--a { background: rgba(244, 225, 133, 0.85); color: #0a0a0c; }
+.srch3-mark--b { background: rgba(100, 180, 255, 0.75); color: #0a0a0c; }
+/* =============================================================
+ 
+
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#e6c256, #ce9008);
+    border-radius: 999px;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 768px) {
+    .app-body { padding: 16px; }
+    .top-nav { height: auto; padding: 12px 16px; flex-wrap: wrap; }
+    .lobby-title { font-size: 32px; }
+    .module-view-title { font-size: 24px; }
+}

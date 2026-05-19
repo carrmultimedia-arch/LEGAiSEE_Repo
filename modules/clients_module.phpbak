@@ -1,0 +1,110 @@
+<?php
+<?php
+declare(strict_types=1);
+
+require_once __DIR__ . '/utils/bootstrap.php';
+
+$clients = load_json_dir(__DIR__ . '/../data/clients');
+
+$items = [];
+
+foreach ($clients as $index => $client) {
+
+    $items[] = [
+
+        'label' => 'Client ' . ($index + 1),
+
+        'value' => '<pre>' .
+            htmlspecialchars(
+                json_encode($client, JSON_PRETTY_PRINT)
+            ) .
+        '</pre>'
+    ];
+}
+
+if (empty($items)) {
+
+    $items[] = [
+        'label' => 'Status',
+        'value' => 'No client JSON files found'
+    ];
+}
+
+return [
+
+    'type'  => 'list',
+
+    'title' => 'Client Data Diagnostic',
+
+    'items' => $items
+];
+
+
+===
+declare(strict_types=1);
+
+require_once __DIR__ . '/utils/bootstrap.php';
+
+/* ===================================================== */
+/* LOAD CLIENTS */
+/* ===================================================== */
+
+$clients = load_json_dir(__DIR__ . '/../data/clients');
+
+/* ===================================================== */
+/* SAFE CLIENT DIRECTORY SCAFFOLDING */
+/* ===================================================== */
+
+if (!empty($clientId)) {
+
+    $base = __DIR__ . '/../data/clients/' . $clientId;
+
+    @mkdir($base, 0777, true);
+    @mkdir($base . '/cases', 0777, true);
+    @mkdir($base . '/artifacts', 0777, true);
+    @mkdir($base . '/artifacts/raw', 0777, true);
+    @mkdir($base . '/artifacts/processed', 0777, true);
+    @mkdir($base . '/artifacts/metadata', 0777, true);
+}
+
+/* ===================================================== */
+/* EMPTY STATE */
+/* ===================================================== */
+
+if (empty($clients)) {
+
+    return [
+        'type'  => 'empty',
+        'title' => 'Client Vault Empty',
+        'text'  => 'No client intelligence dossiers found.'
+    ];
+}
+
+/* ===================================================== */
+/* BUILD DISPLAY ITEMS */
+/* ===================================================== */
+
+$items = [];
+
+foreach ($clients as $client) {
+
+    $items[] = [
+
+        'label' => $client['name'] ?? 'Unnamed Client',
+
+        'value' => 'ID: ' . ($client['id'] ?? 'unknown')
+    ];
+}
+
+/* ===================================================== */
+/* RETURN UIC STRUCTURE */
+/* ===================================================== */
+
+return [
+
+    'type'  => 'list',
+
+    'title' => 'Client Intelligence Vault',
+
+    'items' => $items
+];

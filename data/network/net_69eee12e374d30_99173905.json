@@ -1,0 +1,237 @@
+{
+    "id": "net_69eee12e374d30_99173905",
+    "created_at": "2026-04-27 04:08:14",
+    "nodes": [
+        {
+            "id": "n1",
+            "type": "signal",
+            "strength": 120
+        },
+        {
+            "id": "n2",
+            "type": "anomaly",
+            "strength": 80
+        },
+        {
+            "id": "n3",
+            "type": "signal",
+            "strength": 300
+        },
+        {
+            "id": "n_69eee9b745fd3",
+            "type": "signal",
+            "strength": 100,
+            "created_at": "2026-04-27 04:44:39"
+        },
+        {
+            "id": "n_69eee9bca1176",
+            "type": "anomaly",
+            "strength": 80,
+            "created_at": "2026-04-27 04:44:44"
+        },
+        {
+            "id": "n_69eee9be72470",
+            "type": "signal",
+            "strength": 100,
+            "created_at": "2026-04-27 04:44:46"
+        },
+        {
+            "id": "n_69eee9bf9a0de",
+            "type": "anomaly",
+            "strength": 80,
+            "created_at": "2026-04-27 04:44:47"
+        },
+        {
+            "id": "n_69eee9d21cc5f",
+            "type": "signal",
+            "strength": 100,
+            "created_at": "2026-04-27 04:45:06"
+        },
+        {
+            "id": "n_69eee9d37662e",
+            "type": "anomaly",
+            "strength": 80,
+            "created_at": "2026-04-27 04:45:07"
+        },
+        {
+            "id": "n_69eee9d733321",
+            "type": "signal",
+            "strength": 100,
+            "created_at": "2026-04-27 04:45:11"
+        },
+        {
+            "id": "n_69eee9d8788b7",
+            "type": "anomaly",
+            "strength": 80,
+            "created_at": "2026-04-27 04:45:12"
+        },
+        {
+            "id": "n_69eeeb16c7d9c",
+            "type": "signal",
+            "strength": 64,
+            "content": "market growth opportunity with risk factors",
+            "created_at": "2026-04-27 04:50:30"
+        },
+        {
+            "id": "n_69eeecb401469",
+            "type": "signal",
+            "strength": 63,
+            "content": "market growth opportunity with risk",
+            "created_at": "2026-04-27 04:57:24"
+        },
+        {
+            "id": "n_69eeecbd616ec",
+            "type": "signal",
+            "strength": 63,
+            "content": "market growth opportunity with risk",
+            "created_at": "2026-04-27 04:57:33"
+        },
+        {
+            "id": "n_69eeecc0eb06f",
+            "type": "signal",
+            "strength": 63,
+            "content": "market growth opportunity with risk",
+            "created_at": "2026-04-27 04:57:36"
+        },
+        {
+            "id": "n_69eeecc24d9c8",
+            "type": "signal",
+            "strength": 63,
+            "content": "market growth opportunity with risk",
+            "created_at": "2026-04-27 04:57:38"
+        },
+        {
+            "id": "n_69eeedfc18db3",
+            "type": "signal",
+            "strength": 64,
+            "content": "major market risk and growth opportunity detected",
+            "created_at": "2026-04-27 05:02:52"
+        },
+        {
+            "id": "n_69eeedfcb5a45",
+            "type": "signal",
+            "strength": 64,
+            "content": "major market risk and growth opportunity detected",
+            "created_at": "2026-04-27 05:02:52"
+        },
+        {
+            "id": "n_69eeedfd7b68f",
+            "type": "signal",
+            "strength": 64,
+            "content": "major market risk and growth opportunity detected",
+            "created_at": "2026-04-27 05:02:53"
+        }
+    ],
+    "edges": [
+        {
+            "from": "n1",
+            "to": "n2",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n2",
+            "to": "n3",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n3",
+            "to": "n_69eee9b745fd3",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eee9b745fd3",
+            "to": "n_69eee9bca1176",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eee9bca1176",
+            "to": "n_69eee9be72470",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eee9be72470",
+            "to": "n_69eee9bf9a0de",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eee9bf9a0de",
+            "to": "n_69eee9d21cc5f",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eee9d21cc5f",
+            "to": "n_69eee9d37662e",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eee9d37662e",
+            "to": "n_69eee9d733321",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eee9d733321",
+            "to": "n_69eee9d8788b7",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eee9d8788b7",
+            "to": "n_69eeeb16c7d9c",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eeeb16c7d9c",
+            "to": "n_69eeecb401469",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eeecb401469",
+            "to": "n_69eeecbd616ec",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eeecbd616ec",
+            "to": "n_69eeecc0eb06f",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eeecc0eb06f",
+            "to": "n_69eeecc24d9c8",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eeecc24d9c8",
+            "to": "n_69eeedfc18db3",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eeedfc18db3",
+            "to": "n_69eeedfcb5a45",
+            "type": "sequence",
+            "weight": 1
+        },
+        {
+            "from": "n_69eeedfcb5a45",
+            "to": "n_69eeedfd7b68f",
+            "type": "sequence",
+            "weight": 1
+        }
+    ],
+    "event_queue": [],
+    "status": "active"
+}

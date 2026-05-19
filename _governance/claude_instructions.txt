@@ -1,0 +1,16 @@
+On server with content: ARCHITECTURE_LOCK, BUILD_SPEC, MASTER_SYSTEM_BIBLE, WINDSURF_EXECUTION_BIBLE ✅
+Empty (0B — need filling): CURRENT_OBJECTIVE, DAILY_STATE, SESSION_LOG, VALIDATION_CHECKLIST
+Missing entirely from server (you pasted them to me but never uploaded): DECISION_LOG, PROTECTED_FILES, CHANGE_IMPACT_MATRIX, RECOVERY_PLAYBOOK, DEPLOYMENT_CHECKLIST, MODULE_INDEX, BUILD_HISTORY, DRIFT_PATTERNS, SAFE_EXECUTION_PROMPT, ACTIVE_TASK_QUEUE, SESSION_HANDOFF
+Needs creating (new): AGENT_ROLES, CLAUDE_SESSION_PROTOCOL, ERROR_ESCALATION_PROTOCOL, DAILY_WORK_ORDER
+Also — that .htaccess is likely blocking web access to this folder (explains why I get binary/403 errors fetching). That's actually correct for security — governance files shouldn't be publicly readable. Keep it. It just means you paste files to me rather than me fetching them, which is fine.
+Let me now produce everything. I'll generate all files in one pass.Created 5 files, ran a command, read a fileCreated 5 files, ran a command, read a fileHere's what you now have — four files ready to upload to _governance/:
+WO-001 (DAILY_WORK_ORDER) is your action item for today. It's all manual — no executor needed, no code risk. It has three parts: finish the governance folder, audit the server to know what's actually deployed, and run the DB migrations. Everything after this depends on knowing those answers.
+Quick summary of what WO-001 tells you to do:
+
+Upload all 4 new files (these downloads) + the 11 files you pasted to me today that were never on the server
+Fill the 4 empty files (DAILY_STATE, CURRENT_OBJECTIVE, SESSION_LOG, VALIDATION_CHECKLIST) — exact content is written inside WO-001, just copy/paste
+Audit 9 specific files in commandcenter/ via cPanel to see what's actually deployed vs. missing
+Run 3 SQL checks in phpMyAdmin (context columns, case_id on review_flags, embeddings table) — exact SQL is in the order
+
+How tomorrow works: You update SESSION_LOG with today's results, paste it to me at the start of the next session, and I write WO-002 — which will either be "deploy missing files" or "start the embedding pipeline" depending on what the audit finds.
+The pipeline is live. Go run WO-001.Daily work orderDocument · MD DownloadAgent rolesDocument · MD DownloadClaude session protocolDocument · MD DownloadError escalation protocolDocument · MD DownloadDownload all

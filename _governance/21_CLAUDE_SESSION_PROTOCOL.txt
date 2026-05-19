@@ -1,0 +1,201 @@
+# LEGAiSEE — CLAUDE SESSION PROTOCOL
+### How to Start Every Claude Architect Session
+### Last Updated: 2026-05-19
+
+---
+
+# PURPOSE
+
+Claude has no memory between sessions.
+This protocol ensures every session starts with exactly the right context —
+no more, no less — so tokens are not wasted re-orienting.
+
+Follow this exactly every time.
+
+---
+
+# THE GOLDEN RULE
+
+Paste files in the ORDER listed below.
+Do not add extra files unless the session type requires them.
+Do not paste files not listed — they waste tokens.
+
+---
+
+# SESSION TYPES
+
+---
+
+## TYPE 1 — STANDARD DAILY SESSION
+### Use When: Starting normal build day
+
+### Paste These Files (in order):
+
+```
+1. SESSION_LOG.md          ← what happened yesterday + any errors
+2. DAILY_STATE.md          ← current system status
+3. ACTIVE_TASK_QUEUE.md    ← priority list
+```
+
+### Then Say:
+```
+Good morning. Review the above and produce today's DAILY_WORK_ORDER.md.
+Flag anything that needs my decision before you write the work order.
+```
+
+### Claude Will Produce:
+- DAILY_WORK_ORDER.md for today
+- Any flags requiring John's decision
+- Updated ACTIVE_TASK_QUEUE if priorities shift
+
+---
+
+## TYPE 2 — ESCALATION SESSION
+### Use When: Executor hit a problem or broke something
+
+### Paste These Files (in order):
+
+```
+1. SESSION_LOG.md          ← what was attempted
+2. DAILY_WORK_ORDER.md     ← the work order that was being executed
+3. [Error output or broken file contents]
+```
+
+### Then Say:
+```
+Executor hit a problem. Review the work order and error below.
+Diagnose the issue and produce a corrected work order or fix instructions.
+```
+
+### Claude Will Produce:
+- Diagnosis of the failure
+- Corrected work order or specific fix instructions
+- Update to RECOVERY_PLAYBOOK if it's a new failure pattern
+
+---
+
+## TYPE 3 — NEW FEATURE PLANNING SESSION
+### Use When: Starting a major new feature not yet in ACTIVE_TASK_QUEUE
+
+### Paste These Files (in order):
+
+```
+1. MASTER_SYSTEM_BIBLE.md  ← full system context
+2. ARCHITECTURE_LOCK.md    ← constraints
+3. ACTIVE_TASK_QUEUE.md    ← where this fits
+4. MODULE_INDEX.md         ← current module status
+```
+
+### Then Say:
+```
+I want to plan [feature name]. Review the above and produce:
+1. A BUILD_SPEC for this feature
+2. Where it fits in ACTIVE_TASK_QUEUE
+3. Any architecture risks or decisions needed before we start
+```
+
+### Claude Will Produce:
+- Complete BUILD_SPEC.md for the feature
+- ACTIVE_TASK_QUEUE update
+- Architecture risk flags if any
+
+---
+
+## TYPE 4 — ARCHITECTURE REVIEW SESSION
+### Use When: Something feels off, or after a major executor session
+
+### Paste These Files (in order):
+
+```
+1. MASTER_SYSTEM_BIBLE.md
+2. ARCHITECTURE_LOCK.md
+3. DRIFT_PATTERNS.md
+4. [Any files the executor modified — paste their current content]
+```
+
+### Then Say:
+```
+Review the modified files against the architecture rules.
+List any violations, drift, or risks found.
+```
+
+### Claude Will Produce:
+- List of violations (if any)
+- Specific corrections needed
+- Updated RECOVERY_PLAYBOOK entries if new patterns found
+
+---
+
+# WHAT NOT TO PASTE
+
+These waste tokens and are NOT needed unless explicitly required:
+
+| File | When NOT to paste |
+|------|-------------------|
+| MASTER_SYSTEM_BIBLE.md | Not needed for standard daily sessions |
+| ARCHITECTURE_LOCK.md | Not needed unless architecture is in question |
+| WINDSURF_EXECUTION_BIBLE.md | Never paste to Claude — that's for executors |
+| VALIDATION_CHECKLIST.md | Not needed unless reviewing compliance |
+| RECOVERY_PLAYBOOK.md | Not needed unless diagnosing a failure |
+
+---
+
+# WHAT CLAUDE NEEDS TO FUNCTION
+
+Claude needs to know three things to produce a work order:
+
+1. **What is the current state?** (SESSION_LOG + DAILY_STATE)
+2. **What is the priority?** (ACTIVE_TASK_QUEUE)
+3. **Are there any blockers?** (John states them or they're in SESSION_LOG)
+
+That is all. Keep sessions focused.
+
+---
+
+# AFTER CLAUDE PRODUCES DAILY_WORK_ORDER.md
+
+1. Read it fully before handing to executor
+2. If anything looks wrong, ask Claude before proceeding
+3. Copy DAILY_WORK_ORDER.md to _governance/ on server
+4. Hand to executor with this instruction:
+
+```
+Read _governance/DAILY_WORK_ORDER.md and _governance/WINDSURF_EXECUTION_BIBLE.md.
+Execute the work order exactly. Do not deviate from scope.
+When done, provide a completion report listing:
+- files modified
+- files created
+- anything you could not complete and why
+```
+
+---
+
+# END OF DAY ROUTINE
+
+Before closing the session:
+
+1. Update SESSION_LOG.md with:
+   - What was completed ✓
+   - What failed and exact error
+   - What was skipped and why
+   - Current blockers
+
+2. Update DAILY_STATE.md with any status changes
+
+3. Upload updated SESSION_LOG.md and DAILY_STATE.md to _governance/ on server
+
+4. That's it. Claude will read SESSION_LOG at the start of the next session.
+
+---
+
+# NOTES ON CLAUDE'S MEMORY
+
+Claude has NO memory between conversations.
+Every session starts fresh.
+SESSION_LOG.md IS Claude's memory.
+If SESSION_LOG is not pasted, Claude starts blind.
+Keep SESSION_LOG current — it is the most important file in this pipeline.
+
+---
+
+# END CLAUDE SESSION PROTOCOL

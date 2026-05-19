@@ -1,0 +1,8 @@
+{
+    "client": "file_intelligence",
+    "session_id": "session_1777350997",
+    "query": "<?php\n\nrequire_once(__DIR__ . '\/db.php');\n\nheader('Content-Type: application\/json');\n\n$action = $_GET['action'] ?? '';\n\ntry {\n\n    \/\/ ============================\n    \/\/ CREATE CLIENT\n    \/\/ ============================\n    if ($action === 'create_client') {\n\n        $name = $_POST['name'] ?? '';\n\n        if (!$name) {\n            echo json_encode(['status' => 'error', 'message' => 'Client name required']);\n            exit;\n        }\n\n        $stmt = $pdo->prepare(\"INSERT INTO clients (name) VALUES (?)\");\n        $stmt->execute([$name]);\n\n        echo json_encode(['status' => 'success']);\n        exit;\n    }\n\n    \/\/ ============================\n    \/\/ GET CLIENTS\n    \/\/ ============================\n    if ($action === 'get_clients') {\n\n        $stmt = $pdo->query(\"SELECT * FROM clients ORDER BY name ASC\");\n        $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);\n\n        echo json_encode($clients);\n        exit;\n    }\n\n    \/\/ ============================\n    \/\/ CREATE SESSION\n    \/\/ ====",
+    "source_file": "api.php",
+    "created_at": "2026-04-28 04:36:37",
+    "status": "pending"
+}

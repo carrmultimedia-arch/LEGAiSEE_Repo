@@ -1,0 +1,344 @@
+# LEGAiSEE — DAILY WORK ORDER
+### WO-001 — Governance Completion + Server Audit + Database Migrations
+### Issued By: Claude (Architect)
+### Date: 2026-05-19
+### Executor: JOHN (manual tasks — no code executor needed for this order)
+### Priority: CRITICAL — nothing else can build on top of an incomplete foundation
+
+---
+
+# OBJECTIVE
+
+Three things must be true before any code build can proceed safely:
+
+1. The governance system is complete and live on the server
+2. We know exactly what is and is not deployed in commandcenter/
+3. The database schema has the required columns
+
+This work order accomplishes all three.
+
+---
+
+# TASK 1 — COMPLETE THE GOVERNANCE FOLDER
+## Executor: John (manual cPanel upload)
+## Risk: None — adding files only, no code changes
+
+### 1A — Upload New Governance Files
+
+Upload these files (produced by Claude today) to:
+```
+commandcenter/_governance/
+```
+
+| File | Source |
+|------|--------|
+| AGENT_ROLES.md | Download from Claude session |
+| CLAUDE_SESSION_PROTOCOL.md | Download from Claude session |
+| ERROR_ESCALATION_PROTOCOL.md | Download from Claude session |
+| DAILY_WORK_ORDER.md | This file |
+
+---
+
+### 1B — Upload Previously Written But Missing Governance Files
+
+These files were written but never uploaded to the server.
+You have the content from our session today.
+Upload each one to commandcenter/_governance/:
+
+| File | Content Source |
+|------|---------------|
+| DECISION_LOG.md | Paste content from today's session |
+| PROTECTED_FILES.md | Paste content from today's session |
+| CHANGE_IMPACT_MATRIX.md | Paste content from today's session |
+| RECOVERY_PLAYBOOK.md | Paste content from today's session |
+| DEPLOYMENT_CHECKLIST.md | Paste content from today's session |
+| MODULE_INDEX.md | Paste content from today's session |
+| BUILD_HISTORY.md | Paste content from today's session |
+| DRIFT_PATTERNS.md | Paste content from today's session |
+| SAFE_EXECUTION_PROMPT.md | Paste content from today's session |
+| ACTIVE_TASK_QUEUE.md | Paste content from today's session |
+| SESSION_HANDOFF.md | Paste content from today's session |
+
+Method: cPanel File Manager → open each empty/missing file → paste content → save.
+
+---
+
+### 1C — Fill In The Empty Files
+
+These files exist on server but are 0 bytes. Fill them now:
+
+#### DAILY_STATE.md — Paste this content:
+
+```markdown
+# LEGAiSEE — DAILY STATE
+### Last Updated: 2026-05-19
+
+## Environment
+- Hosting: SureServer — s413.sureserver.com
+- User: carrmulti
+- Live URL: https://www.legaisee.com/commandcenter/
+- Stack: PHP 8+, MySQL, flat JSON
+- Main Entry: shell.php
+
+## Currently Confirmed Working (from prior sessions)
+- shell.php routing
+- module loading system
+- module_registry.php
+- global.css system
+- kernel boot chain
+
+## Working Modules (reported working as of 2026-05-17)
+- intelligence_dashboard, dashboard, graph, clients, cases
+- brain, anomaly_engine, cluster, compare, decision
+- entity_resolution, insight, predictive, recommendation
+- relations, report (connected, assembly not built)
+- root_cause, time_intelligence, vault, cross_case
+
+## Modules With Known Issues
+- excavation_module.php — shows {} — pipeline not wired
+- report_module.php — connected but section assembly not built
+
+## Pending Deploy Verification (UNKNOWN IF LIVE)
+- modules/search_module.php
+- modules/files_module.php
+- modules/ingest_module.php
+- modules/dig_review_module.php
+- api/search_load.php
+- api/files_action.php
+- engine/plain_english_helper.php
+- CSS additions (ingest_and_files_css, search_module_css) → global.css
+
+## Database Status
+- context_migration.sql: STATUS UNKNOWN — verify in WO-001
+- review_flags.case_id column: NOT YET ADDED
+- embeddings table: NOT yet implemented
+- entities/relationships tables: Empty — needs excavation pipeline
+
+## Current Blockers
+- Server audit not yet completed (WO-001 in progress)
+
+## Last Successful Build
+- Governance system creation: 2026-05-19
+
+## Current Development Priority
+- WO-001: Governance + Audit + DB migrations
+```
+
+---
+
+#### CURRENT_OBJECTIVE.md — Paste this content:
+
+```markdown
+# LEGAiSEE — CURRENT OBJECTIVE
+### Last Updated: 2026-05-19
+
+## ACTIVE OBJECTIVE
+WO-001: Complete governance setup, audit server state, run DB migrations.
+
+## BUSINESS PURPOSE
+Nothing can be safely built until we know exactly what is deployed and the
+database has the correct schema. This is foundational.
+
+## SUCCESS CRITERIA
+- [ ] All governance files live in _governance/
+- [ ] Server audit complete — known state of every pending file
+- [ ] context column confirmed present on all major tables
+- [ ] case_id column added to review_flags
+- [ ] SESSION_LOG.md updated with results
+
+## NEXT OBJECTIVE AFTER THIS
+WO-002: Deploy any missing modules/APIs confirmed absent in audit,
+then begin embedding pipeline.
+```
+
+---
+
+#### SESSION_LOG.md — Paste this content:
+
+```markdown
+# LEGAiSEE — SESSION LOG
+### Running Build History
+### Format: DATE | STATUS | SUMMARY | BLOCKERS
+
+---
+
+## 2026-05-19 — SESSION 001
+### Status: IN PROGRESS
+### Objective: WO-001 — Governance completion + server audit + DB migrations
+### Claude Role: Produced AGENT_ROLES, CLAUDE_SESSION_PROTOCOL,
+###              ERROR_ESCALATION_PROTOCOL, DAILY_WORK_ORDER WO-001
+### Executor: John (manual tasks)
+### Result: [UPDATE WHEN COMPLETE]
+### Files Modified: [LIST WHEN DONE]
+### Blockers Found: [LIST IF ANY]
+### Notes: Governance folder had 11 files missing or empty on server.
+###        No code builds possible until WO-001 complete.
+
+---
+
+## INSTRUCTIONS
+After each session, append a new entry:
+- Date and session number
+- Objective and work order number
+- Who executed (John / Windsurf / GPT / Kimi)
+- Result: COMPLETE / PARTIAL / FAILED
+- Files modified (exact paths)
+- Blockers found
+- Notes
+
+This file is pasted to Claude at the start of every new session.
+It is Claude's memory. Keep it current.
+```
+
+---
+
+#### VALIDATION_CHECKLIST.md
+
+This file was produced in your earlier governance docs.
+Paste that full content (from what you sent Claude today) into this file.
+
+---
+
+### 1D — Verify .htaccess in _governance/
+
+The .htaccess in _governance/ is 22 bytes.
+Open it in cPanel and confirm it contains exactly:
+```
+Deny from all
+```
+or similar deny directive.
+
+This is CORRECT behavior. Governance files should NOT be publicly accessible.
+Do NOT remove this protection.
+This is why Claude reads them from John's pastes, not from the web.
+
+---
+
+# TASK 2 — SERVER AUDIT
+## Executor: John (manual cPanel file check)
+## Risk: None — read-only audit, no file changes
+
+### 2A — Check These Files Exist and Are Not Empty
+
+Go to cPanel File Manager. For each file below, confirm:
+- File exists at the listed path
+- File size is greater than 0 bytes
+
+```
+commandcenter/modules/search_module.php
+commandcenter/modules/files_module.php
+commandcenter/modules/ingest_module.php
+commandcenter/modules/dig_review_module.php
+commandcenter/api/search_load.php
+commandcenter/api/files_action.php
+commandcenter/engine/plain_english_helper.php
+commandcenter/engine/entity_extraction_engine.php
+commandcenter/ui/global.css
+```
+
+### 2B — Record Audit Results
+
+For each file, note: EXISTS / MISSING / EMPTY
+
+Paste these results into SESSION_LOG.md for today's entry.
+Also paste to Claude at next session if any files are missing.
+
+---
+
+# TASK 3 — DATABASE MIGRATIONS
+## Executor: John (phpMyAdmin)
+## Risk: LOW — additive schema changes only, no data modification
+
+### 3A — Verify context_migration.sql Was Run
+
+In phpMyAdmin, run this query:
+```sql
+SHOW COLUMNS FROM entities LIKE 'context';
+```
+
+If it returns a row: context column exists — migration already ran. ✓
+If it returns nothing: migration has NOT been run.
+
+If not run, run context_migration.sql now.
+(You have this file from prior sessions.)
+
+Repeat this check for: artifacts, cases, documents, files, memory_ingest,
+relationships, reports, review_flags.
+
+---
+
+### 3B — Add case_id to review_flags
+
+Check if column already exists:
+```sql
+SHOW COLUMNS FROM review_flags LIKE 'case_id';
+```
+
+If it returns nothing, run:
+```sql
+ALTER TABLE review_flags
+ADD COLUMN case_id INT NULL DEFAULT NULL AFTER context,
+ADD INDEX idx_review_flags_case_id (case_id);
+```
+
+This is required for report assembly to tie confirmed findings to specific
+client cases. Nothing in the report pipeline works without this.
+
+---
+
+### 3C — Verify embeddings Table
+
+```sql
+SHOW TABLES LIKE 'embeddings';
+```
+
+If it doesn't exist, run:
+```sql
+CREATE TABLE embeddings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    source_table VARCHAR(64) NOT NULL,
+    source_id INT NOT NULL,
+    context VARCHAR(32) NOT NULL DEFAULT 'legaisee',
+    embedding_model VARCHAR(64) NOT NULL DEFAULT 'text-embedding-3-small',
+    vector_data MEDIUMTEXT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_embeddings_source (source_table, source_id),
+    INDEX idx_embeddings_context (context)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
+
+Note: This table will remain empty until the embedding pipeline is built
+in WO-002. Creating the schema now prevents migration blockers later.
+
+---
+
+# COMPLETION CRITERIA FOR WO-001
+
+This work order is COMPLETE when:
+
+- [ ] All governance files uploaded to _governance/
+- [ ] DAILY_STATE, CURRENT_OBJECTIVE, SESSION_LOG, VALIDATION_CHECKLIST filled
+- [ ] .htaccess in _governance/ confirmed correct
+- [ ] Server audit complete — every file status known
+- [ ] context columns confirmed present (or migration run)
+- [ ] case_id added to review_flags
+- [ ] embeddings table confirmed present (or created)
+- [ ] SESSION_LOG.md updated with all results
+
+---
+
+# WHAT COMES NEXT (WO-002 Preview)
+
+After WO-001 is confirmed complete, the next work order will cover:
+
+IF any pending files were MISSING in the audit:
+→ WO-002 will be: deploy missing modules/APIs (Windsurf executes)
+
+IF all pending files were present:
+→ WO-002 will be: build lee_embed() embedding function + wire into ingest
+
+Claude will produce WO-002 at the next session after John reports WO-001 results.
+
+---
+
+# END WORK ORDER WO-001

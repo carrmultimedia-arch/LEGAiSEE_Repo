@@ -1,0 +1,19 @@
+{
+    "nodes": [
+        {
+            "id": "n_69f7ce2726d3b",
+            "type": "signal",
+            "strength": 100,
+            "content": "market risk detected in Houston retail expansion",
+            "created_at": "2026-05-03T18:37:27-04:00"
+        },
+        {
+            "id": "n_69f7cf60677fb",
+            "type": "signal",
+            "strength": 100,
+            "content": "growth opportunity in Houston retail",
+            "created_at": "2026-05-03T18:42:40-04:00"
+        }
+    ],
+    "edges": []
+}

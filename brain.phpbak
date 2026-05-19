@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>LEGAISEE Brain OS</title>
+
+<style>
+body { background:#0a0a0f; color:#FFD700; font-family:Segoe UI; padding:20px; }
+select, button, textarea { margin:5px; padding:8px; }
+textarea { width:100%; height:80px; }
+.box { border:1px solid #333; padding:10px; margin-top:10px; white-space:pre-wrap; }
+</style>
+</head>
+
+<body>
+
+<h2>🧠 LEGAISEE Brain OS</h2>
+
+<select id="clientSelect"></select>
+<select id="caseSelect"></select>
+
+<br>
+
+<textarea id="input" placeholder="Enter intelligence..."></textarea>
+
+<br>
+
+<button onclick="ingest()">Ingest</button>
+<button onclick="runWorker()">Run Worker</button>
+<button onclick="viewGraph()">View Graph</button>
+<button onclick="viewDashboard()">Dashboard</button>
+
+<div class="box" id="output">Output...</div>
+
+<script>
+
+let CLIENT_ID = '';
+let CASE_ID = '';
+
+/*
+============================
+LOAD CLIENTS
+============================
+*/
+
+fetch("api/v8/get_clients.php")
+.then(res=>res.json())
+.then(data=>{
+    let sel = document.getElementById("clientSelect");
+
+    data.forEach(c=>{
+        let opt = document.createElement("option");
+        opt.value = c.id;
+        opt.text = c.name;
+        sel.appendChild(opt);
+    });
+
+    if(data.length){
+        CLIENT_ID = data[0].id;
+        loadCases();
+    }
+});
+
+/*
+============================
+LOAD CASES
+============================
+*/
+
+function loadCases(){
+
+    fetch("api/v8/get_cases.php?client_id="+CLIENT_ID)
+    .then(res=>res.json())
+    .then(data=>{
+
+        let sel = document.getElementById("caseSelect");
+        sel.innerHTML = "";
+
+        data.forEach(c=>{
+            let opt = document.createElement("option");
+            opt.value = c.id;
+            opt.text = c.name;
+            sel.appendChild(opt);
+        });
+
+        if(data.length){
+            CASE_ID = data[0].id;
+        }
+    });
+}
+
+document.getElementById("clientSelect").onchange = function(){
+    CLIENT_ID = this.value;
+    loadCases();
+};
+
+document.getElementById("caseSelect").onchange = function(){
+    CASE_ID = this.value;
+};
+
+/*
+============================
+ACTIONS
+============================
+*/
+
+function ingest(){
+
+    let fd = new FormData();
+    fd.append("client_id", CLIENT_ID);
+    fd.append("case_id", CASE_ID);
+    fd.append("content", document.getElementById("input").value);
+
+    fetch("api/v8/network_add_node.php", {method:"POST", body:fd})
+    .then(res=>res.text())
+    .then(t=>output(t));
+}
+
+function runWorker(){
+    fetch("api/v8/run_worker.php")
+    .then(res=>res.text())
+    .then(t=>output(t));
+}
+
+function viewGraph(){
+
+    fetch("data/clients/"+CLIENT_ID+"/cases/"+CASE_ID+"/network.json")
+    .then(res=>res.text())
+    .then(t=>output(t));
+}
+
+function viewDashboard(){
+
+    fetch("api/v8/dashboard.php?client_id="+CLIENT_ID+"&case_id="+CASE_ID)
+    .then(res=>res.text())
+    .then(t=>{
+        document.getElementById("output").innerHTML = t;
+    });
+}
+
+function output(t){
+    document.getElementById("output").innerText = t;
+}
+
+</script>
+
+</body>
+</html>

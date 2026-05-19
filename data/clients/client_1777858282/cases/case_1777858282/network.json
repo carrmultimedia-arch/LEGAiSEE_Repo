@@ -1,0 +1,33 @@
+{
+    "nodes": [
+        {
+            "id": "n_69f7f73ba9171",
+            "type": "signal",
+            "strength": 100,
+            "content": "social engagement dropping despite double the posting since jan2026",
+            "created_at": "2026-05-03T21:32:43-04:00"
+        },
+        {
+            "id": "n_69f7fb2785876",
+            "type": "signal",
+            "strength": 100,
+            "content": "social engagement falling even tho posting increased in jan 2026",
+            "created_at": "2026-05-03T21:49:27-04:00"
+        },
+        {
+            "id": "n_69f7fd9a8d7f3",
+            "type": "signal",
+            "strength": 100,
+            "content": "social engagement declined despite posting increase frequence jan 2026",
+            "created_at": "2026-05-03T21:59:54-04:00"
+        },
+        {
+            "id": "n_69f7fd9a8d82f",
+            "type": "signal",
+            "strength": 100,
+            "content": "social engagement declined despite posting increase frequence jan 2026",
+            "created_at": "2026-05-03T21:59:54-04:00"
+        }
+    ],
+    "edges": []
+}

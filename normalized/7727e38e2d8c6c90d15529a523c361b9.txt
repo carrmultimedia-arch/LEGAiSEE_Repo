@@ -1,0 +1,8 @@
+[
+    {
+        "type": "fallback",
+        "title": "System Active - No Strong Patterns",
+        "action": "Continue monitoring incoming signals",
+        "priority": "low"
+    }
+]

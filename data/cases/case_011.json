@@ -1,0 +1,8 @@
+{
+  "id": "case_011",
+  "client_id": "client_001",
+  "status": "open",
+  "analysis": {
+    "patterns": ["delay", "inventory"]
+  }
+}

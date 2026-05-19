@@ -1,0 +1,35 @@
+{
+  "id": "case_001",
+  "client_id": "client_001",
+
+  "title": "",
+  "status": "open",
+
+  "problem_statement": "",
+  "context": "",
+
+  "created_at": "YYYY-MM-DD",
+  "updated_at": "YYYY-MM-DD",
+
+  "data_sources": {
+    "files": [],
+    "notes": [],
+    "imports": []
+  },
+
+  "analysis": {
+    "findings": [],
+    "patterns": [],
+    "hypotheses": []
+  },
+
+  "outputs": {
+    "recommendations": [],
+    "decisions": []
+  },
+
+  "linked_memory": [],
+  "linked_clients": ["client_001"],
+
+  "confidence_score": 0
+}

@@ -1,0 +1,802 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<meta charset="UTF-8">
+<title>Legaisee – scrollfx</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blur Behind Example</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
+
+  <meta charset="UTF-8"><head>
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
+
+
+
+  
+  
+
+  <title>CSS scroll-driven scroll-snapping animations</title>
+
+    <link rel="canonical" href="https://codepen.io/giana/pen/BabdgjB">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..400;1,9..144,100..400&amp;family=Noto+Sans+Display:wght@200..700&amp;display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://codepen.io/giana/pen/rNRzgRj.css">
+  
+<style>
+* {
+    --font-size-min: 16;
+    --font-size-max: 20;
+    --font-size-min-viewport: 320;
+    --font-size-max-viewport: 1440;
+    --font-size-units: calc(0.0625rem);
+    --_font-size-step: calc((var(--font-size-max) - var(--font-size-min)) / (var(--font-size-max-viewport) - var(--font-size-min-viewport)));
+    --_font-size-base-value: calc(var(--font-size-min) - var(--font-size-min-viewport) * var(--_font-size-step));
+    --font-size: clamp(min(var(--font-size-min), var(--font-size-max)) * var(--font-size-units), var(--_font-size-base-value) * var(--font-size-units) + var(--_font-size-step) * 100vw, max(var(--font-size-max), var(--font-size-min)) * var(--font-size-units));
+    --line-height-units: 1em;
+    --line-height-min: 1.2;
+    --line-height-max: 1.6;
+    --line-height-min-viewport: calc(320 / var(--font-size-min));
+    --line-height-max-viewport: calc(1440 / var(--font-size-max));
+    --_line-height-step: calc((var(--line-height-max) - var(--line-height-min)) / (var(--line-height-max-viewport) - var(--line-height-min-viewport)));
+    --_line-height-base-value: calc(var(--line-height-min) - var(--line-height-min-viewport) * var(--_line-height-step));
+    --line-height: clamp(min(var(--line-height-min), var(--line-height-max)) * var(--line-height-units), var(--_line-height-base-value) * var(--line-height-units) + var(--_line-height-step) * 100vw, max(var(--line-height-max), var(--line-height-min)) * var(--line-height-units));
+}
+<style>
+:root {
+    text-size-adjust: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+}
+<style>
+:root {
+    --font-family-default: 'Noto Sans Display', Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+    --font-family-heading: 'Fraunces', Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif;
+    --font-family-monospace: 'Nimbus Mono PS', 'Courier New', monospace;
+    --max-content-width: 100rem;
+    --max-reading-measure: 50ch;
+    --min-tap-size: 48px;
+    --min-tap-space: 8px;
+    --color-background: #000;
+    --color-text: #fff0f4;
+    --color-primary: oklch(74% 0.15 32);
+    --color-secondary: oklch(65% 0.13 210);
+    --color-ui: oklch(65% 0.05 210);
+    --color-yellow: oklch(80% 0.16 85);
+    --color-green: oklch(60% 0.16 135);
+    --color-red: oklch(65% 0.18 15);
+    --color-green-2: oklch(54% 0.11 164);
+    --color-purple: oklch(62% 0.15 318);
+    --color-red-2: oklch(57% 0.2 15);
+    --color-link: var(--color-primary);
+    --color-link-hover: var(--color-secondary);
+}
+<style>
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+<style>
+*, ::before, ::after {
+    background-repeat: no-repeat;
+    box-sizing: inherit;
+}
+html[Attributes Style] {
+    -webkit-locale: "en";
+}
+user agent stylesheet
+:root {
+    view-transition-name: root;
+}
+user agent stylesheet
+html {
+    display: block;
+}
+<style>
+*, ::before, ::after {
+    background-repeat: no-repeat;
+    box-sizing: inherit;
+}
+<style>
+*, ::before, ::after {
+    background-repeat: no-repeat;
+    box-sizing: inherit;
+}
+<style>
+::selection {
+    background-color: highlight;
+    color: highlighttext;
+    text-shadow: none !important;
+}
+
+@layer base, rhythm, layout, components, default, overwrites;
+
+html {
+  /* Create a snapping rule on the html element */
+  scroll-snap-type: y mandatory;
+
+  /* Create a timeline scope, so we can target any element on the page */
+  timeline-scope: --section, --main, --site-header;
+}
+
+/* We'll want to match these colors for the best melty effect */
+/* But play around with them (and add a color to section) to see happens */
+body,
+.content {
+  background-color: var(--color-background, black);
+  
+}
+
+main {
+  view-timeline: --main;
+}
+
+.section {
+  /* Creating a snapping rule on the section element */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+
+  /* Attach the timeline to the section element*/
+  view-timeline: --section;
+
+  /* Set each section to the full dynamic height of the viewport */
+  height: 100dvh;
+}
+
+.content {
+  /* Fix the content, so it doesn't scroll with the section */
+  overflow: hidden;
+  position: fixed;
+  inset: 0;
+
+  /* Animate the content based on the section scrolling */
+  --contrast: 4;
+  --blur: 0.5rem;
+
+  animation: blink ease-in-out both;
+  animation-timeline: --section;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    filter: blur(var(--blur)) contrast(var(--contrast));
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  50% {
+    filter: blur(0) contrast(1);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* 
+  This is a bit of a hack to get the indicator to work because I'm lazy.
+  We're translating the dot from the top to the bottom of its parent,
+  using the browser scroll position as the animation timeline.
+  It's not really matched up to the scrolling sections, only appears to be.
+*/
+.indicator::before {
+  animation: indicate linear both;
+  animation-timeline: --main;
+  animation-range: contain;
+}
+
+/* And we're manually setting the colors because see: lazy comment above */
+@keyframes indicate {
+  0% {
+    --color-indicator: var(--color-primary);
+    transform: translateY(0);
+  }
+
+  25% {
+    --color-indicator: var(--color-yellow);
+  }
+
+  50% {
+    --color-indicator: var(--color-secondary);
+  }
+
+  75% {
+    --color-indicator: var(--color-red);
+  }
+
+  100% {
+    --color-indicator: var(--color-purple);
+    transform: translateY(
+      calc(var(--indicator-total-height) - var(--indicator-size))
+    );
+  }
+}
+
+/* Remove gradient indicator on scroll-to-end (visible on small screens */
+
+.site-header label:last-of-type {
+  view-timeline: --site-header inline;
+}
+
+.site-header::after {
+  animation: fade-scroll ease-in-out both;
+  animation-timeline: --site-header;
+  animation-range: entry-crossing;
+}
+
+@keyframes fade-scroll {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Change animation based on radio checked */
+body:has([value="horizontal-scroll"]:checked) .content {
+  /* 
+    The only reason we're repeat these two properties instead of simply 
+    setting `animation-name` is so the polyfill will pick them up 
+    They're flaky though and tend to get stuck. You might need to
+    refresh the page and select an option before scrolling
+  */
+  animation: horizontal-scroll ease-in-out both;
+  animation-timeline: --section;
+}
+
+body:has([value="backwards-scroll"]:checked) .content {
+  animation: backwards-scroll ease-in-out both;
+  animation-timeline: --section;
+}
+
+body:has([value="zoom-scroll"]:checked) .content {
+  animation: zoom-scroll ease-in-out both;
+  animation-timeline: --section;
+}
+
+/* Alternative animations */
+/* Very cool, try it */
+@keyframes horizontal-scroll {
+  0% {
+    transform: translate3d(100%, 0%, 0);
+  }
+
+  50% {
+    transform: none;
+  }
+
+  100% {
+    transform: translate3d(-100%, 0%, 0);
+  }
+}
+
+/* Befuddling, try it */
+@keyframes backwards-scroll {
+  0% {
+    transform: translate3d(0%, -100%, 0);
+  }
+
+  50% {
+    transform: none;
+  }
+
+  100% {
+    transform: translate3d(0%, 100%, 0);
+  }
+}
+
+/* WIP */
+@keyframes zoom-scroll {
+  0% {
+    filter: blur(5rem);
+    transform: scale(0);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  50% {
+    filter: blur(0);
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    filter: blur(3rem);
+    transform: scale(1.5);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* 
+  The actual page styling is in a different stylesheet to not clutter
+  this pen with irrelevant or confusing code
+
+  https://codepen.io/giana/pen/rNRzgRj
+*/
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+<link rel="stylesheet" href="chrome-extension://eae46c13-33f6-4939-bacb-210131a3e205/app/content-style.css"></head>
+
+<body translate="no">
+  <header class="site-header">
+    <h1 class="sr-only">Scrollnapping animations</h1>
+
+    <!-- Because Chrome crashes if an overflow is set on the fieldset while a named timeline is on a child element -->
+    <!-- ¯\_(ツ)_/¯ -->
+    <div class="fieldset-wrapper">
+      <fieldset>
+        <legend class="sr-only">Effects</legend>
+
+        <!-- radio buttons for each of the @keyframes above -->
+        <input type="radio" id="blink-effect" name="effect" value="blink" checked="" class="sr-only">
+        <label for="blink-effect">Blink</label>
+
+        <input type="radio" id="horizontal-scroll-effect" name="effect" value="horizontal-scroll" class="sr-only">
+        <label for="horizontal-scroll-effect">Horizontal scroll</label>
+
+        <input type="radio" id="backwards-scroll-effect" name="effect" value="backwards-scroll" class="sr-only">
+        <label for="backwards-scroll-effect">Backwards scroll</label>
+
+        <input type="radio" id="zoom-scroll-effect" name="effect" value="zoom-scroll" class="sr-only">
+        <label for="zoom-scroll-effect">Zoom scroll</label>
+      </fieldset>
+    </div>
+
+    <nav>
+      <ul class="indicator">
+        <li><a href="#snapping"><span class="sr-only">Snapping</span></a></li>
+        <li><a href="#scrolling"><span class="sr-only">Scrolling</span></a></li>
+        <li><a href="#layout"><span class="sr-only">Layout</span></a></li>
+        <li><a href="#transition"><span class="sr-only">Transition</span></a></li>
+        <li><a href="#caveats"><span class="sr-only">Caveats</span></a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="snapping" class="section">
+      <div class="content">
+        <h2><strong>First</strong>, we set up the <em>snapping</em> points</h2>
+
+        <div class="text">
+          <img src="https://assets.codepen.io/197359/flower-white.png" alt="">
+          <p>We set the scrolling element, in this case our <code class="selector">HTML</code> element, to forcibly snap to the Y axis by using <code class="property">scroll-snap-type: y mandatory</code>.</p>
+
+          <p>And then we set <code class="selector">section</code> as the snapping elements by using <code class="property">scroll-snap-align: start</code>.</p>
+        </div>
+      </div>
+    </section>
+    <section id="scrolling" class="section">
+      <div class="content">
+        <h2><strong>Next</strong>, we set up the <em>scrolling</em> animation</h2>
+
+        <div class="text">
+          <img src="https://assets.codepen.io/197359/flower-yellow.png" alt="">
+          <p>We track the <code class="property">view()</code> position of the <code class="selector">section</code> elements using the named timeline <code class="property">view-timeline: --section;</code>. We had previously set the <code class="property">timeline-scope: --section</code> up in our <code class="selector">HTML</code> element, so we can access it from anywhere in the document.</p>
+
+          <p>We animate the <code class="selector">.content</code> children using <code class="property">animation-timeline: --section;</code>. The <code class="selector">.content</code> element will now animate based on its parent <code class="selector">section</code>'s position. This is important due to how we're handling the layout in the next section.</p>
+        </div>
+      </div>
+    </section>
+    <section id="layout" class="section">
+      <div class="content">
+        <h2><strong>Then</strong>, we position a <em>fixed</em> layout</h2>
+
+        <div class="text">
+          <img src="https://assets.codepen.io/197359/flower-blue.png" alt="">
+          <p>We set the <code class="selector">.content</code> elements to <code class="property">position: fixed</code>, so they're removed from the normal document flow and stack on top of each other, giving them a solid background, so only one is visible at a time.</p>
+
+          <p>Their parent <code class="selector">section</code>s are positioned as normal in the layer below, taking up space, scroll-snapping, and powering the <code class="property">animation-timeline</code>.</p>
+        </div>
+      </div>
+    </section>
+    <section id="transition" class="section">
+      <div class="content">
+        <h2><strong>Finally</strong>, we create the <em>transition</em> effects</h2>
+
+        <div class="text">
+          <img src="https://assets.codepen.io/197359/flower-red.png" alt="">
+          <p>By setting the <code class="selector">.content</code> elements to <code class="property">position: fixed</code>, we can now transition between them without a visible scrolling movement.</p>
+
+          <p>We create a normal <code class="selector">@keyframe</code> animation to our liking to transition between them. Check the navigation menu to see different effects.</p>
+        </div>
+      </div>
+    </section>
+    <section id="caveats" class="section">
+      <div class="content">
+        <h2><strong>Caveats</strong></h2>
+
+        <div class="text">
+          <img src="https://assets.codepen.io/197359/flower-purple.png" alt="">
+          <ul>
+            <li>Scrolling animations are not currently available in Firefox. This demo is using a polyfill.</li>
+            <li>This layout is fragile due to the use of <code class="property">position: fixed</code>. You need to carefully manage stacking contexts.</li>
+            <li>Snapping points have their own caveats, such as content taller than the viewport becoming inaccessible, along with the general annoyance of scrolljacking.</li>
+            <li>The <code class="selector">blink</code> effect uses the <code class="property">contrast()</code> filter, which modifies the colors of the entire section. Thus, the background is set to black (or white), ensuring that it appears unchanged during transitions due to already being at maximum contrast.</li>
+            </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>That's it <span class="emoji">🌸</span></p>
+  </footer>
+  <script src="https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js"></script>
+  
+  
+
+
+
+<span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span></body></html>
+
+
+
+*/============================================================================================================================================================*/
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Legaisee – scrollfx</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blur Behind Example</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+      --black: #050509;
+      --black-soft: #0b0b12;
+      --gold: #f5c76a;
+      --gold-bright: #ffe4a1;
+      --gold-deep: #c89a3c;
+      --diamond: #f9f9ff;
+      --cosmic-violet: #3b2b5f;
+      --accent-gold: #ffe4a1;
+      --max-width: 1200px;
+      --gold-gradient: (to right, #EFAE27, #FEEC6C, #AD6C04);
+      --background-gold: (to right, #EFAE27, #FEEC6C, #AD6C04);
+    }
+
+@layer base, rhythm, layout, components, default, overwrites;
+
+html {
+  /* Create a snapping rule on the html element */
+  scroll-snap-type: y mandatory;
+
+  /* Create a timeline scope, so we can target any element on the page */
+  timeline-scope: --section, --main, --site-header;
+}
+
+/* We'll want to match these colors for the best melty effect */
+/* But play around with them (and add a color to section) to see happens */
+body,
+.content {
+  background-color: var(--color-background, black);
+  
+}
+
+main {
+  view-timeline: --main;
+}
+
+.section {
+  /* Creating a snapping rule on the section element */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+
+  /* Attach the timeline to the section element*/
+  view-timeline: --section;
+
+  /* Set each section to the full dynamic height of the viewport */
+  height: 100dvh;
+}
+
+.content {
+  /* Fix the content, so it doesn't scroll with the section */
+  overflow: hidden;
+  position: fixed;
+  inset: 0;
+
+  /* Animate the content based on the section scrolling */
+  --contrast: 4;
+  --blur: 0.5rem;
+
+  animation: blink ease-in-out both;
+  animation-timeline: --section;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    filter: blur(var(--blur)) contrast(var(--contrast));
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  50% {
+    filter: blur(0) contrast(1);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* 
+  This is a bit of a hack to get the indicator to work because I'm lazy.
+  We're translating the dot from the top to the bottom of its parent,
+  using the browser scroll position as the animation timeline.
+  It's not really matched up to the scrolling sections, only appears to be.
+*/
+.indicator::before {
+  animation: indicate linear both;
+  animation-timeline: --main;
+  animation-range: contain;
+}
+
+/* And we're manually setting the colors because see: lazy comment above */
+@keyframes indicate {
+  0% {
+    --color-indicator: var(--color-primary);
+    transform: translateY(0);
+  }
+
+  25% {
+    --color-indicator: var(--color-yellow);
+  }
+
+  50% {
+    --color-indicator: var(--color-secondary);
+  }
+
+  75% {
+    --color-indicator: var(--color-red);
+  }
+
+  100% {
+    --color-indicator: var(--color-purple);
+    transform: translateY(
+      calc(var(--indicator-total-height) - var(--indicator-size))
+    );
+  }
+}
+
+/* Remove gradient indicator on scroll-to-end (visible on small screens */
+
+.site-header label:last-of-type {
+  view-timeline: --site-header inline;
+}
+
+.site-header::after {
+  animation: fade-scroll ease-in-out both;
+  animation-timeline: --site-header;
+  animation-range: entry-crossing;
+}
+
+@keyframes fade-scroll {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Change animation based on radio checked */
+body:has([value="horizontal-scroll"]:checked) .content {
+  /* 
+    The only reason we're repeat these two properties instead of simply 
+    setting `animation-name` is so the polyfill will pick them up 
+    They're flaky though and tend to get stuck. You might need to
+    refresh the page and select an option before scrolling
+  */
+  animation: horizontal-scroll ease-in-out both;
+  animation-timeline: --section;
+}
+
+body:has([value="backwards-scroll"]:checked) .content {
+  animation: backwards-scroll ease-in-out both;
+  animation-timeline: --section;
+}
+
+body:has([value="zoom-scroll"]:checked) .content {
+  animation: zoom-scroll ease-in-out both;
+  animation-timeline: --section;
+}
+
+/* Alternative animations */
+/* Very cool, try it */
+@keyframes horizontal-scroll {
+  0% {
+    transform: translate3d(100%, 0%, 0);
+  }
+
+  50% {
+    transform: none;
+  }
+
+  100% {
+    transform: translate3d(-100%, 0%, 0);
+  }
+}
+
+/* Befuddling, try it */
+@keyframes backwards-scroll {
+  0% {
+    transform: translate3d(0%, -100%, 0);
+  }
+
+  50% {
+    transform: none;
+  }
+
+  100% {
+    transform: translate3d(0%, 100%, 0);
+  }
+}
+
+/* WIP */
+@keyframes zoom-scroll {
+  0% {
+    filter: blur(5rem);
+    transform: scale(0);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  50% {
+    filter: blur(0);
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    filter: blur(3rem);
+    transform: scale(1.5);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* 
+  The actual page styling is in a different stylesheet to not clutter
+  this pen with irrelevant or confusing code
+
+  https://codepen.io/giana/pen/rNRzgRj
+
+</style>
+</head>
+
+<body>
+ <header class="site-header">
+    <h1 class="sr-only">Scrollnapping animations</h1>
+
+    <!-- Because Chrome crashes if an overflow is set on the fieldset while a named timeline is on a child element -->
+    <!-- ¯\_(ツ)_/¯ -->
+    <div class="fieldset-wrapper">
+      <fieldset>
+        <legend class="sr-only">Effects</legend>
+
+        <!-- radio buttons for each of the @keyframes above -->
+        <input type="radio" id="blink-effect" name="effect" value="blink" checked class="sr-only">
+        <label for="blink-effect">Blink</label>
+
+        <input type="radio" id="horizontal-scroll-effect" name="effect" value="horizontal-scroll" class="sr-only">
+        <label for="horizontal-scroll-effect">Horizontal scroll</label>
+
+        <input type="radio" id="backwards-scroll-effect" name="effect" value="backwards-scroll" class="sr-only">
+        <label for="backwards-scroll-effect">Backwards scroll</label>
+
+        <input type="radio" id="zoom-scroll-effect" name="effect" value="zoom-scroll" class="sr-only">
+        <label for="zoom-scroll-effect">Zoom scroll</label>
+      </fieldset>
+    </div>
+
+    <nav>
+      <ul class="indicator">
+        <li><a href="#snapping"><span class="sr-only">Snapping</span></a></li>
+        <li><a href="#scrolling"><span class="sr-only">Scrolling</span></a></li>
+        <li><a href="#layout"><span class="sr-only">Layout</span></a></li>
+        <li><a href="#transition"><span class="sr-only">Transition</span></a></li>
+        <li><a href="#caveats"><span class="sr-only">Caveats</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="snapping" class="section">
+      <div class="content">
+        <h2><strong>First</strong>, we set up the <em>snapping</em> points</h2>
+
+        <div class="text">
+          <img src="https://assets.codepen.io/197359/flower-white.png" alt="">
+          <p>We set the scrolling element, in this case our <code class="selector">HTML</code> element, to forcibly snap to the Y axis by using <code class="property">scroll-snap-type: y mandatory</code>.</p>
+
+          <p>And then we set <code class="selector">section</code> as the snapping elements by using <code class="property">scroll-snap-align: start</code>.</p>
+        </div>
+      </div>
+    </section>
+    <section id="scrolling" class="section">
+      <div class="content">
+        <h2><strong>Next</strong>, we set up the <em>scrolling</em> animation</h2>
+
+        <div class="text">
+          <img src="https://assets.codepen.io/197359/flower-yellow.png" alt="">
+          <p>We track the <code class="property">view()</code> position of the <code class="selector">section</code> elements using the named timeline <code class="property">view-timeline: --section;</code>. We had previously set the <code class="property">timeline-scope: --section</code> up in our <code class="selector">HTML</code> element, so we can access it from anywhere in the document.</p>
+
+          <p>We animate the <code class="selector">.content</code> children using <code class="property">animation-timeline: --section;</code>. The <code class="selector">.content</code> element will now animate based on its parent <code class="selector">section</code>'s position. This is important due to how we're handling the layout in the next section.</p>
+        </div>
+      </div>
+    </section>
+    <section id="layout" class="section">
+      <div class="content">
+        <h2><strong>Then</strong>, we position a <em>fixed</em> layout</h2>
+
+        <div class="text">
+          <img src="https://assets.codepen.io/197359/flower-blue.png" alt="">
+          <p>We set the <code class="selector">.content</code> elements to <code class="property">position: fixed</code>, so they're removed from the normal document flow and stack on top of each other, giving them a solid background, so only one is visible at a time.</p>
+
+          <p>Their parent <code class="selector">section</code>s are positioned as normal in the layer below, taking up space, scroll-snapping, and powering the <code class="property">animation-timeline</code>.</p>
+        </div>
+      </div>
+    </section>
+    <section id="transition" class="section">
+      <div class="content">
+        <h2><strong>Finally</strong>, we create the <em>transition</em> effects</h2>
+
+        <div class="text">
+          <img src="https://assets.codepen.io/197359/flower-red.png" alt="">
+          <p>By setting the <code class="selector">.content</code> elements to <code class="property">position: fixed</code>, we can now transition between them without a visible scrolling movement.</p>
+
+          <p>We create a normal <code class="selector">@keyframe</code> animation to our liking to transition between them. Check the navigation menu to see different effects.</p>
+        </div>
+      </div>
+    </section>
+    <section id="caveats" class="section">
+      <div class="content">
+        <h2><strong>Caveats</strong></h2>
+
+        <div class="text">
+          <img src="https://assets.codepen.io/197359/flower-purple.png" alt="">
+          <ul>
+            <li>Scrolling animations are not currently available in Firefox. This demo is using a polyfill.</li>
+            <li>This layout is fragile due to the use of <code class="property">position: fixed</code>. You need to carefully manage stacking contexts.</li>
+            <li>Snapping points have their own caveats, such as content taller than the viewport becoming inaccessible, along with the general annoyance of scrolljacking.</li>
+            <li>The <code class="selector">blink</code> effect uses the <code class="property">contrast()</code> filter, which modifies the colors of the entire section. Thus, the background is set to black (or white), ensuring that it appears unchanged during transitions due to already being at maximum contrast.</li>
+            </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>That's it <span class="emoji">🌸</span></p>
+  </footer>
+  </body>
+</html>

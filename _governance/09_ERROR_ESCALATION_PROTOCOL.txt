@@ -1,0 +1,199 @@
+# LEGAiSEE — ERROR ESCALATION PROTOCOL
+### What Executors Do When They Hit a Wall
+### Last Updated: 2026-05-19
+
+---
+
+# PURPOSE
+
+When an executor (Windsurf, GPT, Kimi) hits a problem, confusion, or conflict,
+they must follow this protocol exactly.
+
+The default behavior is: STOP AND LOG.
+Not: improvise a solution.
+Not: make an architectural decision.
+Not: "fix" something adjacent to get unblocked.
+
+---
+
+# THE ESCALATION DECISION TREE
+
+When an executor hits a problem, ask these questions in order:
+
+---
+
+## QUESTION 1: Is this a simple syntax or logic error in my own new code?
+
+### YES → Fix it yourself.
+You introduced the bug, you fix it.
+Do not touch any other files while fixing.
+Log what you fixed in the completion report.
+
+### NO → Go to Question 2.
+
+---
+
+## QUESTION 2: Does fixing this require modifying a file NOT in the work order?
+
+### YES → STOP. Escalate to John.
+Log: "Blocked — need to modify [file] which is not in work order scope."
+John brings this to Claude.
+Do not touch that file.
+
+### NO → Go to Question 3.
+
+---
+
+## QUESTION 3: Does fixing this require an architectural decision?
+
+Examples of architectural decisions:
+- Adding a new table or column not specified
+- Changing how modules communicate
+- Changing routing behavior
+- Adding a new API pattern not in MASTER_SYSTEM_BIBLE
+- Changing how kernel_db() is called
+- Any change to shell.php, kernel_boot.php, module_registry.php
+
+### YES → STOP. Escalate to John → Claude.
+Log the exact decision needed.
+Do not guess.
+
+### NO → Go to Question 4.
+
+---
+
+## QUESTION 4: Is this a PHP fatal error or server error on the live system?
+
+### YES → STOP ALL EDITING IMMEDIATELY.
+1. Do not make any more changes
+2. Log the exact error message
+3. Log the last file you modified before the error appeared
+4. Escalate to John immediately
+John will initiate RECOVERY_PLAYBOOK.md procedures.
+
+### NO → Go to Question 5.
+
+---
+
+## QUESTION 5: Is this ambiguity — the work order didn't cover this situation?
+
+### YES → STOP. Log the exact ambiguity.
+Write in your completion report:
+"BLOCKER: Work order did not specify [exact situation].
+No assumption made. Awaiting clarification."
+John brings this to Claude for a corrected work order.
+
+### NO → You should be able to proceed. If still stuck, escalate anyway.
+
+---
+
+# ESCALATION LEVELS
+
+## LEVEL 1 — John Handles It
+Trigger: Simple clarification needed, file upload issue, cPanel access issue
+
+John resolves without Claude.
+
+Examples:
+- "I can't find the file at that path — which folder is it in?"
+- "The CSS file didn't save — how do I re-upload?"
+- "phpMyAdmin won't accept this SQL — is the syntax right?"
+
+---
+
+## LEVEL 2 — John Brings to Claude (next session or same session)
+Trigger: Ambiguity in work order, architectural decision needed
+
+John pastes to Claude:
+- SESSION_LOG entry describing the problem
+- The DAILY_WORK_ORDER.md that was being executed
+- The exact error or blocker
+
+Claude produces a corrected work order or specific fix.
+
+Examples:
+- "Work order said modify ingest_module.php but the embedding logic
+  needs a new helper function — where does it go?"
+- "The API endpoint returns correct JSON but the module isn't receiving
+  it — the work order didn't cover the JS side"
+
+---
+
+## LEVEL 3 — IMMEDIATE ESCALATION (emergency)
+Trigger: Live system is broken, fatal errors, users cannot access system
+
+John stops executor immediately.
+John opens RECOVERY_PLAYBOOK.md.
+John pastes error to Claude ASAP.
+Claude produces recovery instructions before any new work.
+
+Examples:
+- shell.php blank page after modification
+- Module registry corrupted — no modules load
+- Database connection failure
+- .htaccess broke routing — 500 errors sitewide
+
+---
+
+# WHAT THE EXECUTOR'S COMPLETION REPORT MUST CONTAIN
+
+Every executor session must end with this report handed to John:
+
+```
+## COMPLETION REPORT
+
+### STATUS: [COMPLETE / PARTIAL / BLOCKED / FAILED]
+
+### FILES MODIFIED:
+- [exact file paths]
+
+### FILES CREATED:
+- [exact file paths]
+
+### CHANGES SUMMARY:
+- [bullet list of what was done]
+
+### ARCHITECTURE VALIDATION:
+- No inline CSS added: [YES/NO]
+- No standalone pages created: [YES/NO]
+- No shell.php modifications: [YES/NO]
+- All AJAX through api/: [YES/NO]
+- kernel_db() used exclusively: [YES/NO]
+- Only approved files modified: [YES/NO]
+
+### BLOCKERS / INCOMPLETE ITEMS:
+- [Anything not completed and why]
+
+### THINGS JOHN SHOULD TEST:
+- [Specific things to check on live]
+
+### POSSIBLE REGRESSIONS TO CHECK:
+- [What adjacent things might have been affected]
+```
+
+John pastes this into SESSION_LOG.md and uploads.
+
+---
+
+# WHAT JOHN DOES WITH THE COMPLETION REPORT
+
+1. Read the STATUS line first
+2. If COMPLETE: run DEPLOYMENT_CHECKLIST.md manually on live site
+3. If PARTIAL or BLOCKED: paste report into SESSION_LOG and bring to Claude
+4. If FAILED: open RECOVERY_PLAYBOOK.md immediately, then bring to Claude
+
+---
+
+# THINGS EXECUTORS MUST NEVER DO WHEN BLOCKED
+
+NEVER:
+- Refactor adjacent code to work around the blocker
+- Create a temporary standalone page as a workaround
+- Modify a protected file without approval
+- Introduce a new pattern not in MASTER_SYSTEM_BIBLE
+- Continue building on top of broken code
+- Assume what John or Claude would want
+
+---
+
+# END ERROR ESCALATION PROTOCOL

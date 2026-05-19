@@ -1,0 +1,116 @@
+{
+    "id": "prospect_brad_moore_builders_1778497672",
+    "prospect_name": "Brad Moore Builders",
+    "created_at": "2026-05-11T11:07:52+00:00",
+    "ingest_number": 3,
+    "raw_input_length": 23127,
+    "signals": {
+        "ops_delay": {
+            "keywords": [
+                "delay",
+                "late",
+                "slow",
+                "backlog",
+                "behind",
+                "bottleneck"
+            ],
+            "label": "Operational Delays",
+            "priority": "HIGH"
+        },
+        "pricing_pressure": {
+            "keywords": [
+                "price",
+                "cost",
+                "expensive",
+                "cheap",
+                "budget",
+                "afford",
+                "rate"
+            ],
+            "label": "Pricing Friction",
+            "priority": "HIGH"
+        },
+        "lead_friction": {
+            "keywords": [
+                "lead",
+                "conversion",
+                "funnel",
+                "prospect",
+                "inquiry",
+                "traffic"
+            ],
+            "label": "Lead\/Conversion Weakness",
+            "priority": "HIGH"
+        },
+        "labor_issue": {
+            "keywords": [
+                "staff",
+                "employee",
+                "hire",
+                "turnover",
+                "team",
+                "understaffed"
+            ],
+            "label": "Workforce Strain",
+            "priority": "MEDIUM"
+        },
+        "brand_gap": {
+            "keywords": [
+                "brand",
+                "reputation",
+                "trust",
+                "credibility",
+                "authority",
+                "known"
+            ],
+            "label": "Authority\/Brand Gap",
+            "priority": "HIGH"
+        },
+        "growth_signal": {
+            "keywords": [
+                "grow",
+                "expand",
+                "scale",
+                "launch",
+                "new",
+                "opening",
+                "adding"
+            ],
+            "label": "Growth Signal",
+            "priority": "MEDIUM"
+        },
+        "market_shift": {
+            "keywords": [
+                "competition",
+                "competitor",
+                "market",
+                "industry",
+                "trend",
+                "shift"
+            ],
+            "label": "Market Shift Detected",
+            "priority": "MEDIUM"
+        },
+        "tech_gap": {
+            "keywords": [
+                "website",
+                "online",
+                "digital",
+                "social",
+                "seo",
+                "google",
+                "review"
+            ],
+            "label": "Digital\/Tech Gap",
+            "priority": "MEDIUM"
+        }
+    },
+    "authority_score": 98,
+    "opportunity_level": "STRONG",
+    "entity_data": {
+        "entities_extracted": 190,
+        "entities_stored": 190,
+        "relationships_stored": 28,
+        "source": "Brad Moore Builders"
+    }
+}

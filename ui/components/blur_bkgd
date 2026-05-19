@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blur Behind Example</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: url('https://picsum.photos/1200/800') no-repeat center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .blur-box {
+    width: 300px;
+    height: 200px;
+    background: rgba(10, 10, 10, 0.41); /* Transparent background */
+    backdrop-filter: blur(10px);          /* Apply blur to what's behind */
+    -webkit-backdrop-filter: blur(10px);  /* Safari support */
+    border-radius: 15px;
+    border: 1px solid rgba(255, 214, 100, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+</style>
+</head>
+<body>
+  <div class="blur-box">Blurred Background</div>
+</body>
+</html>

@@ -1,0 +1,436 @@
+<?php
+declare(strict_types=1);
+error_reporting(E_ALL);
+ini_set('display_errors', '0'); // we handle errors ourselves
+
+/* ============================================================
+   LEGAiSEE SYSTEM DIAGNOSTIC
+   READ ONLY — makes no changes to any file or database
+   Drop in /commandcenter/ and visit in browser
+   ============================================================ */
+
+$ROOT = __DIR__;
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+
+function ok($msg)   { return "<span class='ok'>✔ {$msg}</span>"; }
+function warn($msg) { return "<span class='warn'>⚠ {$msg}</span>"; }
+function err($msg)  { return "<span class='err'>✘ {$msg}</span>"; }
+function badge($txt, $color = 'gray') {
+    return "<span class='badge badge-{$color}'>{$txt}</span>";
+}
+
+function scan_php_for_string(string $dir, string $needle, int $depth = 0): array {
+    $hits = [];
+    if ($depth > 3 || !is_dir($dir)) return $hits;
+    foreach (scandir($dir) as $f) {
+        if ($f === '.' || $f === '..') continue;
+        $path = $dir . '/' . $f;
+        if (is_dir($path)) {
+            $hits = array_merge($hits, scan_php_for_string($path, $needle, $depth + 1));
+        } elseif (str_ends_with($f, '.php')) {
+            $src = @file_get_contents($path);
+            if ($src && str_contains($src, $needle)) {
+                $hits[] = str_replace($dir . '/', '', $path);
+            }
+        }
+    }
+    return $hits;
+}
+
+function count_json_files(string $dir): int {
+    if (!is_dir($dir)) return 0;
+    return count(array_filter(scandir($dir), fn($f) => str_ends_with($f, '.json')));
+}
+
+function try_sqlite(string $path): array {
+    if (!file_exists($path)) return ['exists' => false];
+    try {
+        $pdo = new PDO('sqlite:' . $path, '', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        $tables = $pdo->query("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name")->fetchAll(PDO::FETCH_COLUMN);
+        $counts = [];
+        foreach ($tables as $t) {
+            $n = $pdo->query("SELECT COUNT(*) FROM `{$t}`")->fetchColumn();
+            $counts[$t] = (int)$n;
+        }
+        return ['exists' => true, 'ok' => true, 'tables' => $counts, 'size' => filesize($path)];
+    } catch (Throwable $e) {
+        return ['exists' => true, 'ok' => false, 'error' => $e->getMessage()];
+    }
+}
+
+function try_mysql(): array {
+    // look for credentials in kernel_boot.php
+    $boot = __DIR__ . '/kernel/kernel_boot.php';
+    if (!file_exists($boot)) return ['ok' => false, 'error' => 'kernel_boot.php not found'];
+    $src = file_get_contents($boot);
+    // extract dsn, user, pass
+    preg_match('/dbname=([^;]+)/', $src, $db_m);
+    preg_match('/host=([^;]+)/', $src, $host_m);
+    preg_match('/kernel_db.*?new PDO.*?"([^"]+)"\s*,\s*"([^"]+)"\s*,\s*"([^"]+)"/s', $src, $cred_m);
+    // try a broader match
+    preg_match('/"mysql:host=([^;]+);dbname=([^;"]+)[^"]*"\s*,\s*"([^"]+)"\s*,\s*"([^"]+)"/s', $src, $m);
+    if (!$m) return ['ok' => false, 'error' => 'Could not parse credentials from kernel_boot.php'];
+    try {
+        $dsn = "mysql:host={$m[1]};dbname={$m[2]};charset=utf8mb4";
+        $pdo = new PDO($dsn, $m[3], $m[4], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+        $tables = $pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
+        $counts = [];
+        foreach ($tables as $t) {
+            $n = $pdo->query("SELECT COUNT(*) FROM `{$t}`")->fetchColumn();
+            $counts[$t] = (int)$n;
+        }
+        return ['ok' => true, 'host' => $m[1], 'db' => $m[2], 'tables' => $counts];
+    } catch (Throwable $e) {
+        return ['ok' => false, 'error' => $e->getMessage()];
+    }
+}
+
+/* ============================================================
+   RUN CHECKS
+   ============================================================ */
+
+// 1. SQLite files
+$sqlite1 = try_sqlite($ROOT . '/data/database.sqlite');
+$sqlite2 = try_sqlite($ROOT . '/data/legaisee.db');
+$sqlite3 = try_sqlite($ROOT . '/data/legaisee.db.bak');
+
+// 2. MySQL
+$mysql = try_mysql();
+
+// 3. Scan PHP files for database references
+$files_sqlite_old  = scan_php_for_string($ROOT, 'database.sqlite');
+$files_sqlite_new  = scan_php_for_string($ROOT, 'legaisee.db');
+$files_mysql       = scan_php_for_string($ROOT, 'mysql:');
+$files_kernel_db   = scan_php_for_string($ROOT, 'kernel_db()');
+
+// 4. JSON data counts
+$json_cases   = count_json_files($ROOT . '/data/cases');
+$json_clients = count_json_files($ROOT . '/data/clients');
+$json_network = count_json_files($ROOT . '/data/network');
+
+// 5. Kernel path check
+$kernel_paths = [
+    'kernel/kernel_boot.php'   => file_exists($ROOT . '/kernel/kernel_boot.php'),
+    'kernel/kernel_paths.php'  => file_exists($ROOT . '/kernel/kernel_paths.php'),
+    'kernel/kernel.php'        => file_exists($ROOT . '/kernel/kernel.php'),
+    'modules/utils/bootstrap.php' => file_exists($ROOT . '/modules/utils/bootstrap.php'),
+];
+
+// 6. Module check — what shell.php tries to load
+$shell_modules = [
+    'intelligence_dashboard',
+    'files',
+    'graph',
+    'clients',
+    'cases',
+    'excavation',
+    'report',
+    'search',
+    'ingest',
+    'dashboard',
+    'vault',
+    'recommendation',
+    'executive_dashboard',
+    'brain',
+    'predictive',
+];
+$module_status = [];
+foreach ($shell_modules as $m) {
+    $module_status[$m] = file_exists($ROOT . '/modules/' . $m . '_module.php');
+}
+
+// 7. Orphan files in data/
+$data_php_orphans = [];
+foreach (['db.php', 'graph_data.php'] as $f) {
+    if (file_exists($ROOT . '/data/' . $f)) $data_php_orphans[] = $f;
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LEGAiSEE — System Diagnostic</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#0a0a0c;color:#CDAD69;padding:40px 20px;line-height:1.6}
+.wrap{max-width:1100px;margin:auto}
+h1{font-size:28px;font-weight:300;color:#F4E185;letter-spacing:3px;margin-bottom:6px}
+.sub{font-size:12px;letter-spacing:2px;color:#89612B;text-transform:uppercase;margin-bottom:40px}
+h2{font-size:14px;letter-spacing:2px;text-transform:uppercase;color:#89612B;margin:32px 0 14px;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:8px}
+.card{background:rgba(24,24,26,0.85);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;margin-bottom:20px}
+.row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.row:last-child{border-bottom:none}
+.row-label{color:#89612B;font-size:13px;flex:0 0 260px}
+.row-value{color:#F4E185;font-size:13px;flex:1;text-align:right}
+.ok{color:#4ade80}
+.warn{color:#facc15}
+.err{color:#f87171}
+.badge{display:inline-block;font-size:11px;padding:2px 10px;border-radius:20px;margin-left:6px;font-weight:500}
+.badge-green{background:#085041;color:#9FE1CB}
+.badge-red{background:#4a1b0c;color:#f0997b}
+.badge-gray{background:#2C2C2A;color:#B4B2A9}
+.badge-yellow{background:#412402;color:#FAC775}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{color:#89612B;text-align:left;padding:8px 12px;font-weight:500;border-bottom:1px solid rgba(255,255,255,0.08)}
+td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.04);color:#CDAD69}
+td:last-child{text-align:right;color:#F4E185}
+.file-list{font-size:12px;color:#AC8B56;font-family:monospace;line-height:2}
+.file-list span{display:block;padding:2px 0}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:20px}
+.stat{background:rgba(24,24,26,0.85);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:20px;text-align:center}
+.stat-num{font-size:36px;font-weight:200;color:#F4E185;display:block}
+.stat-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#89612B;margin-top:4px}
+.none{color:#444;font-size:12px;font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>LEGAiSEE</h1>
+<div class="sub">System Diagnostic — Read Only — <?= date('Y-m-d H:i:s') ?></div>
+
+<!-- SUMMARY STATS -->
+<div class="summary">
+    <div class="stat">
+        <span class="stat-num"><?= $json_cases ?></span>
+        <span class="stat-label">Case JSON Files</span>
+    </div>
+    <div class="stat">
+        <span class="stat-num"><?= $json_clients ?></span>
+        <span class="stat-label">Client JSON Files</span>
+    </div>
+    <div class="stat">
+        <span class="stat-num"><?= $json_network ?></span>
+        <span class="stat-label">Network JSON Files</span>
+    </div>
+    <div class="stat">
+        <span class="stat-num"><?= count($files_mysql) ?></span>
+        <span class="stat-label">Files Using MySQL</span>
+    </div>
+    <div class="stat">
+        <span class="stat-num"><?= count($files_sqlite_old) + count($files_sqlite_new) ?></span>
+        <span class="stat-label">Files Still Using SQLite</span>
+    </div>
+    <div class="stat">
+        <span class="stat-num"><?= count(array_filter($module_status)) ?>/<?= count($module_status) ?></span>
+        <span class="stat-label">Modules Present</span>
+    </div>
+</div>
+
+<!-- DATABASE STATUS -->
+<h2>Database Status</h2>
+<div class="card">
+
+    <!-- MySQL -->
+    <div class="row">
+        <div class="row-label">MySQL (carrmulti_legaiseearchive)</div>
+        <div class="row-value">
+            <?php if ($mysql['ok']): ?>
+                <?= ok('Connected') ?>
+                <?= badge(count($mysql['tables']) . ' tables', 'green') ?>
+            <?php else: ?>
+                <?= err('Failed: ' . ($mysql['error'] ?? 'unknown')) ?>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <!-- SQLite database.sqlite -->
+    <div class="row">
+        <div class="row-label">SQLite — data/database.sqlite</div>
+        <div class="row-value">
+            <?php if (!$sqlite1['exists']): ?>
+                <?= badge('Not found', 'gray') ?>
+            <?php elseif ($sqlite1['ok']): ?>
+                <?= warn('Exists') ?>
+                <?= badge(count($sqlite1['tables']) . ' tables', 'yellow') ?>
+                <?= badge(round($sqlite1['size']/1024) . ' KB', 'gray') ?>
+            <?php else: ?>
+                <?= err($sqlite1['error']) ?>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <!-- SQLite legaisee.db -->
+    <div class="row">
+        <div class="row-label">SQLite — data/legaisee.db</div>
+        <div class="row-value">
+            <?php if (!$sqlite2['exists']): ?>
+                <?= badge('Not found', 'gray') ?>
+            <?php elseif ($sqlite2['ok']): ?>
+                <?= warn('Exists') ?>
+                <?= badge(count($sqlite2['tables']) . ' tables', 'yellow') ?>
+                <?= badge(round($sqlite2['size']/1024) . ' KB', 'gray') ?>
+            <?php else: ?>
+                <?= err($sqlite2['error']) ?>
+            <?php endif; ?>
+        </div>
+    </div>
+
+</div>
+
+<!-- MYSQL TABLE COUNTS -->
+<?php if ($mysql['ok'] && !empty($mysql['tables'])): ?>
+<h2>MySQL Tables — Row Counts</h2>
+<div class="card">
+    <table>
+        <tr><th>Table</th><th>Rows</th></tr>
+        <?php foreach ($mysql['tables'] as $t => $n): ?>
+        <tr>
+            <td><?= htmlspecialchars($t) ?></td>
+            <td><?= $n === 0 ? '<span class="warn">0 — empty</span>' : $n ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
+<?php endif; ?>
+
+<!-- SQLITE TABLE COUNTS -->
+<?php foreach ([
+    'database.sqlite' => $sqlite1,
+    'legaisee.db'     => $sqlite2,
+] as $label => $s): ?>
+<?php if ($s['exists'] && $s['ok'] && !empty($s['tables'])): ?>
+<h2>SQLite: <?= $label ?> — Table Contents</h2>
+<div class="card">
+    <table>
+        <tr><th>Table</th><th>Rows</th></tr>
+        <?php foreach ($s['tables'] as $t => $n): ?>
+        <tr>
+            <td><?= htmlspecialchars($t) ?></td>
+            <td><?= $n === 0 ? '<span class="none">0 — empty</span>' : "<span class='warn'>{$n} — may need migrating</span>" ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
+<?php endif; ?>
+<?php endforeach; ?>
+
+<!-- PHP FILES — WHICH DB DO THEY USE -->
+<h2>PHP Files — Database Usage</h2>
+<div class="card">
+
+    <div class="row">
+        <div class="row-label">Files using <code>kernel_db()</code> (correct)</div>
+        <div class="row-value"><?= badge(count($files_kernel_db), 'green') ?></div>
+    </div>
+    <?php if ($files_kernel_db): ?>
+    <div class="file-list" style="padding:10px 0 16px">
+        <?php foreach ($files_kernel_db as $f): ?>
+        <span><?= htmlspecialchars($f) ?></span>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+
+    <div class="row">
+        <div class="row-label">Files with direct MySQL connection</div>
+        <div class="row-value"><?= badge(count($files_mysql), count($files_mysql) > 0 ? 'yellow' : 'green') ?></div>
+    </div>
+    <?php if ($files_mysql): ?>
+    <div class="file-list" style="padding:10px 0 16px">
+        <?php foreach ($files_mysql as $f): ?>
+        <span><?= htmlspecialchars($f) ?></span>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+
+    <div class="row">
+        <div class="row-label">Files still referencing database.sqlite</div>
+        <div class="row-value"><?= count($files_sqlite_old) > 0 ? badge(count($files_sqlite_old), 'red') : badge('None', 'green') ?></div>
+    </div>
+    <?php if ($files_sqlite_old): ?>
+    <div class="file-list" style="padding:10px 0 16px">
+        <?php foreach ($files_sqlite_old as $f): ?>
+        <span class="err"><?= htmlspecialchars($f) ?></span>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+
+    <div class="row">
+        <div class="row-label">Files still referencing legaisee.db (SQLite)</div>
+        <div class="row-value"><?= count($files_sqlite_new) > 0 ? badge(count($files_sqlite_new), 'red') : badge('None', 'green') ?></div>
+    </div>
+    <?php if ($files_sqlite_new): ?>
+    <div class="file-list" style="padding:10px 0 16px">
+        <?php foreach ($files_sqlite_new as $f): ?>
+        <span class="err"><?= htmlspecialchars($f) ?></span>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+
+</div>
+
+<!-- KERNEL / BOOT CHECK -->
+<h2>Kernel Boot Chain</h2>
+<div class="card">
+    <?php foreach ($kernel_paths as $path => $exists): ?>
+    <div class="row">
+        <div class="row-label"><code><?= $path ?></code></div>
+        <div class="row-value"><?= $exists ? ok('Found') : err('MISSING') ?></div>
+    </div>
+    <?php endforeach; ?>
+</div>
+
+<!-- MODULE STATUS -->
+<h2>Module Status (shell.php loads these)</h2>
+<div class="card">
+    <?php foreach ($module_status as $name => $exists): ?>
+    <div class="row">
+        <div class="row-label"><code><?= $name ?>_module.php</code></div>
+        <div class="row-value"><?= $exists ? ok('Found') : err('MISSING') ?></div>
+    </div>
+    <?php endforeach; ?>
+</div>
+
+<!-- ORPHAN PHP FILES IN DATA/ -->
+<?php if ($data_php_orphans): ?>
+<h2>PHP Files Found Inside data/ (should be moved)</h2>
+<div class="card">
+    <?php foreach ($data_php_orphans as $f): ?>
+    <div class="row">
+        <div class="row-label"><code>data/<?= $f ?></code></div>
+        <div class="row-value"><?= warn('Should not be here') ?></div>
+    </div>
+    <?php endforeach; ?>
+</div>
+<?php endif; ?>
+
+<!-- JSON DATA SUMMARY -->
+<h2>JSON Flat File Data</h2>
+<div class="card">
+    <?php
+    $json_dirs = [
+        'data/cases'    => $ROOT . '/data/cases',
+        'data/clients'  => $ROOT . '/data/clients',
+        'data/network'  => $ROOT . '/data/network',
+        'data/memory'   => $ROOT . '/data/memory',
+        'data/goals'    => $ROOT . '/data/goals',
+        'data/graph'    => $ROOT . '/data/graph',
+        'data/brains'   => $ROOT . '/data/brains',
+    ];
+    foreach ($json_dirs as $label => $path): ?>
+    <div class="row">
+        <div class="row-label"><code><?= $label ?>/</code></div>
+        <div class="row-value">
+            <?php
+            $c = count_json_files($path);
+            if (!is_dir($path)) echo badge('Folder missing', 'red');
+            elseif ($c === 0) echo badge('Empty', 'gray');
+            else echo badge("{$c} JSON files", 'green');
+            ?>
+        </div>
+    </div>
+    <?php endforeach; ?>
+</div>
+
+<div style="margin-top:40px;font-size:11px;color:#444;text-align:center">
+    LEGAiSEE Diagnostic — Read Only — No files or databases were modified
+</div>
+
+</div>
+</body>
+</html>

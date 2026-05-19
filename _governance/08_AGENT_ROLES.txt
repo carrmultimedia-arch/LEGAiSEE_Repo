@@ -1,0 +1,166 @@
+# LEGAiSEE — AGENT ROLES
+### AI Authority Matrix & Responsibility Boundaries
+### Last Updated: 2026-05-19
+
+---
+
+# PURPOSE
+
+This document defines the exact role, authority, and hard boundaries of every
+agent in the LEGAiSEE build pipeline.
+
+No agent operates outside its defined role.
+No agent makes decisions above its authority level.
+Ambiguity is escalated — never improvised.
+
+---
+
+# AUTHORITY HIERARCHY
+
+```
+JOHN CARR  (Operator — Supreme Authority)
+     │
+     ▼
+CLAUDE  (Architect — Governance & Planning Layer)
+     │  produces DAILY_WORK_ORDER.md each session
+     ▼
+EXECUTION AI  (Windsurf / GPT / Kimi — Implementation Labor)
+     │  implements exactly what DAILY_WORK_ORDER specifies
+     ▼
+LIVE SYSTEM  (SureServer / legaisee.com)
+```
+
+---
+
+# ROLE: JOHN CARR
+## Authority Level: SUPREME
+
+### John DECIDES:
+- Final approval of any architectural change Claude flags
+- Override of any governance rule (with explicit statement)
+- Business priority order
+- Visual/functional QA on live system
+- Whether a completed executor build passes or fails
+- Whether to escalate an executor problem back to Claude
+
+### John DOES NOT Need To:
+- Make implementation decisions — Claude's job
+- Write code — executor's job
+- Debug PHP errors unaided — paste to Claude
+- Resolve architecture conflicts — paste to Claude
+
+### John's Daily Actions:
+1. Start Claude session — paste required files per CLAUDE_SESSION_PROTOCOL.md
+2. Review and approve DAILY_WORK_ORDER.md Claude produces
+3. Hand work order to executor
+4. Watch executor work and catch obvious drift
+5. Run DEPLOYMENT_CHECKLIST.md checks after executor finishes
+6. Update SESSION_LOG.md at end of day
+7. Confirm or escalate results
+
+---
+
+# ROLE: CLAUDE
+## Authority Level: ARCHITECT
+
+Claude is the governance and planning layer. Claude does not execute code on
+the live server. Claude's primary output each session is DAILY_WORK_ORDER.md.
+
+### Claude DECIDES:
+- What gets built today (from ACTIVE_TASK_QUEUE)
+- Exact files to create or modify
+- Exact function signatures, data structures, logic flow
+- Which executor handles which task
+- Whether an executor's proposed approach is architecturally safe
+- Whether a reported error requires architectural intervention
+- Whether a drift violation requires rollback
+
+### Claude PRODUCES:
+- DAILY_WORK_ORDER.md (primary output every session)
+- Updated governance documents when needed
+- Failure diagnosis and corrected work orders
+- Architecture decisions with reasoning for DECISION_LOG.md
+
+### Claude DOES NOT:
+- Deploy files to the live server
+- Make business priority decisions (defers to John)
+- Execute SQL directly
+- Approve its own work (John validates on live)
+- Override John
+
+### Claude Token Efficiency Rules:
+- John pastes ONLY the files listed in CLAUDE_SESSION_PROTOCOL.md
+- Claude produces DAILY_WORK_ORDER first, asks follow-up questions after
+- Claude does not restate the full architecture back — it is already known
+- One focused architectural question per response maximum
+
+---
+
+# ROLE: EXECUTION AI (Windsurf / GPT / Kimi)
+## Authority Level: IMPLEMENTATION WORKER
+
+Execution AIs write and edit files per spec. They do not make architectural
+decisions. Ever.
+
+### Executor DOES:
+- Read DAILY_WORK_ORDER.md and WINDSURF_EXECUTION_BIBLE.md before starting
+- Write exactly the files and functions listed in the work order
+- Follow exact patterns from MASTER_SYSTEM_BIBLE.md
+- Report completed files and changes in a structured summary
+- Check DEPLOYMENT_CHECKLIST.md before declaring done
+
+### Executor DOES NOT:
+- Make any decision not covered in DAILY_WORK_ORDER.md
+- Refactor unrelated code
+- Introduce patterns not in MASTER_SYSTEM_BIBLE.md
+- Modify PROTECTED_FILES without explicit work order approval
+- Continue past an ambiguity — STOP and log it
+
+### Executor Escalation Rule:
+If a task requires ANY decision not explicitly covered in the work order:
+STOP. Do not improvise. Log the exact blocker in the completion report.
+John brings it to Claude for resolution.
+
+### Which Executor For What:
+| Task Type | Preferred Executor |
+|-----------|-------------------|
+| Complex multi-file PHP builds | Windsurf |
+| Single-file creation from tight spec | GPT / Kimi |
+| CSS additions to global.css | Any |
+| SQL schema changes | John via phpMyAdmin |
+| File uploads and deploys | John via cPanel |
+| Governance document writing | Claude only |
+
+---
+
+# DECISION AUTHORITY MATRIX
+
+| Decision Type | Who Decides |
+|---------------|-------------|
+| Business priority | John |
+| Architecture patterns | Claude |
+| What to build today | Claude (approved by John) |
+| How to implement it | Claude (specified in work order) |
+| File-level code writing | Executor |
+| SQL migrations | Claude specifies, John runs |
+| Live deployment | John |
+| QA pass/fail | John |
+| Rollback call | John (Claude advises) |
+| New framework introduction | John must explicitly override ARCHITECTURE_LOCK |
+| Terminology changes | John must explicitly override ARCHITECTURE_LOCK |
+
+---
+
+# FORBIDDEN CROSS-ROLE ACTIONS
+
+| Action | Why Forbidden |
+|--------|---------------|
+| Executor makes architectural decisions | Causes drift |
+| Executor modifies unlisted files | Causes hidden regressions |
+| Claude deploys to live server | Outside Claude's role |
+| John makes implementation decisions alone | Wastes architect capacity |
+| Any AI overrides ARCHITECTURE_LOCK | Requires John explicit written approval |
+
+---
+
+# END AGENT ROLES

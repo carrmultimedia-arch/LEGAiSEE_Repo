@@ -1,0 +1,8 @@
+{
+    "client": "file_intelligence",
+    "session_id": "session_1777368112",
+    "query": "{\n    \"client\": \"\",\n    \"project\": \"server_sys_build_4-21-26\",\n    \"session\": \"\",\n    \"source\": \"Chat GPT\",\n    \"title\": \"Server sys build 4-21-26\",\n    \"entry_type\": \"raw\",\n    \"timestamp\": \"2026-04-22 01:59:14\"\n}",
+    "source_file": "clients\/server_sys_build_4-21-26\/raw\/20260422_015914_server_sys_build_4-21-26.md.json",
+    "created_at": "2026-04-28 09:21:52",
+    "status": "pending"
+}

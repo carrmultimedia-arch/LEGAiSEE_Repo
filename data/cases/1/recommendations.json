@@ -1,0 +1,10 @@
+[
+    {
+        "type": "strategic_action",
+        "title": "Balance Growth Against Risk Exposure",
+        "action": "Delay aggressive expansion OR implement risk mitigation strategies before scaling",
+        "priority": "high",
+        "source_insight": "risk_vs_growth",
+        "created_at": "2026-05-03T21:11:12-04:00"
+    }
+]

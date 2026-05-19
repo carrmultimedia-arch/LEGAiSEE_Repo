@@ -1,0 +1,12 @@
+[
+    {
+        "type": "risk_vs_growth",
+        "summary": "Growth opportunities are directly tied to identified market risks",
+        "clusters_involved": [
+            "market_risk",
+            "growth"
+        ],
+        "confidence": "high",
+        "created_at": "2026-05-03T21:11:12-04:00"
+    }
+]

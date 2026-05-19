@@ -1,0 +1,863 @@
+# FILE: _governance/BUILD_SPEC.md
+
+# LEGAiSEE — BUILD SPEC
+
+### ACTIVE BUILD CONTRACT
+
+### Status: TEMPLATE
+
+### Last Updated: 2026-05-19
+
+---
+
+# OBJECTIVE
+
+[REPLACE WITH CURRENT OBJECTIVE]
+
+Example:
+Implement embedding pipeline integration into ingest workflow while preserving LEGAiSEE module architecture.
+
+---
+
+# BUSINESS PURPOSE
+
+Describe:
+
+* why this task exists
+* what business capability it unlocks
+* what future systems depend on it
+
+Example:
+This enables semantic search, memory clustering, and future authority intelligence features.
+
+---
+
+# IMPLEMENTATION SCOPE
+
+## ALLOWED FILES TO MODIFY
+
+```text
+[List exact files]
+```
+
+Example:
+
+```text
+modules/ingest_module.php
+api/ingest_action.php
+engine/embedding_engine.php
+ui/global.css
+kernel/module_registry.php
+```
+
+---
+
+## ALLOWED FILES TO CREATE
+
+```text
+[List exact files]
+```
+
+Example:
+
+```text
+engine/embedding_engine.php
+api/embedding_action.php
+```
+
+---
+
+## FORBIDDEN FILES
+
+These files may NOT be modified unless explicitly approved.
+
+```text
+shell.php
+kernel/kernel_boot.php
+kernel/kernel_paths.php
+.htaccess
+portal/*
+```
+
+---
+
+# ARCHITECTURE REQUIREMENTS
+
+The following MUST remain true after implementation:
+
+* No standalone pages
+* No inline CSS
+* shell.php remains router only
+* All modules return fragments only
+* AJAX routes through api/
+* kernel_db() used exclusively
+* global.css remains sole stylesheet
+* Module registration preserved
+* Context separation preserved
+* Existing module naming conventions preserved
+* LEGAiSEE terminology preserved
+
+---
+
+# IMPLEMENTATION STRATEGY
+
+## PHASE 1 — PREPARATION
+
+Tasks:
+
+* review existing files
+* identify dependencies
+* identify affected modules
+* confirm routing compatibility
+
+Deliverable:
+
+* dependency map
+* risk assessment
+
+---
+
+## PHASE 2 — CORE IMPLEMENTATION
+
+Tasks:
+
+* create required engine logic
+* integrate into API layer
+* integrate into module layer
+* preserve existing flows
+
+Deliverable:
+
+* functioning feature
+* no regression
+
+---
+
+## PHASE 3 — UI/UX INTEGRATION
+
+Tasks:
+
+* add required interface elements
+* use existing CSS system
+* preserve gold/black theme
+
+Deliverable:
+
+* visually integrated functionality
+
+---
+
+## PHASE 4 — VALIDATION
+
+Tasks:
+
+* verify architecture integrity
+* verify routing
+* verify database operations
+* verify no drift introduced
+
+Deliverable:
+
+* completed VALIDATION_CHECKLIST.md
+
+---
+
+# EXECUTION RULES
+
+Implementation AI may ONLY:
+
+* modify approved files
+* perform scoped edits
+* preserve architecture exactly
+
+Implementation AI may NOT:
+
+* refactor unrelated systems
+* redesign architecture
+* introduce frameworks
+* reorganize folders
+* create helper abstractions unless requested
+
+---
+
+# CHANGE CONTROL
+
+If implementation requires:
+
+* additional files
+* additional architecture
+* routing changes
+* database schema changes
+* CSS system changes
+
+STOP and request approval before proceeding.
+
+---
+
+# VALIDATION REQUIREMENTS
+
+The implementation is NOT complete until:
+
+* all validation checks pass
+* no regression detected
+* no forbidden files modified
+* architecture preserved
+* manual testing completed
+
+---
+
+# REQUIRED MANUAL TESTS
+
+## Functional Tests
+
+* [ ] feature executes successfully
+* [ ] module loads correctly
+* [ ] no PHP fatal errors
+* [ ] no console errors
+* [ ] no AJAX failures
+* [ ] no broken routes
+
+---
+
+## Architecture Tests
+
+* [ ] no standalone pages created
+* [ ] no inline CSS added
+* [ ] no shell.php drift
+* [ ] no module contract violations
+* [ ] api/ endpoints working
+* [ ] global.css preserved
+
+---
+
+## UI Tests
+
+* [ ] gold/black theme preserved
+* [ ] responsive layout preserved
+* [ ] no broken cards
+* [ ] no overflow issues
+* [ ] no duplicated styling systems
+
+---
+
+# COMPLETION CRITERIA
+
+This build is complete ONLY IF:
+
+* objective achieved
+* architecture preserved
+* validation passed
+* no drift introduced
+* DAILY_STATE updated
+* ACTIVE_TASK_QUEUE updated
+
+---
+
+# ROLLBACK PLAN
+
+If implementation fails:
+
+1. Restore previous file versions
+2. Remove newly added files
+3. Verify shell routing
+4. Verify module registry
+5. Verify database integrity
+
+---
+
+# NEXT DEPENDENCY
+
+After completion, next likely task:
+
+```text
+[REPLACE]
+```
+
+---
+
+# END BUILD SPEC
+
+==================================================
+FILE: _governance/VALIDATION_CHECKLIST.md
+=========================================
+
+# LEGAiSEE — VALIDATION CHECKLIST
+
+### Mandatory Post-Implementation Verification
+
+### Last Updated: 2026-05-19
+
+---
+
+# CORE ARCHITECTURE VALIDATION
+
+## Routing Integrity
+
+* [ ] shell.php still acts as router only
+* [ ] modules still load through ?module=
+* [ ] renderModule() behavior preserved
+* [ ] no bypass routing introduced
+* [ ] no duplicate routing systems created
+
+---
+
+## Module Compliance
+
+* [ ] modules return fragments only
+* [ ] no DOCTYPE added
+* [ ] no html/head/body tags added
+* [ ] ob_start()/ob_get_clean() preserved
+* [ ] module naming convention preserved
+
+---
+
+## CSS Compliance
+
+* [ ] no inline CSS added
+* [ ] no style tags added
+* [ ] all styling added to global.css only
+* [ ] module-prefixed classes used
+* [ ] gold/black theme preserved
+
+---
+
+## API Compliance
+
+* [ ] AJAX endpoints routed through api/
+* [ ] no JSON returned through shell.php
+* [ ] JSON responses valid
+* [ ] API naming convention preserved
+
+---
+
+## Database Compliance
+
+* [ ] kernel_db() used exclusively
+* [ ] no raw PDO instantiation
+* [ ] no mysqli introduced
+* [ ] context separation preserved
+* [ ] SQL queries scoped correctly
+
+---
+
+## File Structure Compliance
+
+* [ ] no unauthorized files created
+* [ ] no unauthorized folders created
+* [ ] no framework structures introduced
+* [ ] no duplicate systems introduced
+
+---
+
+# SYSTEM INTEGRITY VALIDATION
+
+## Functional Integrity
+
+* [ ] feature works as intended
+* [ ] no fatal PHP errors
+* [ ] no warnings introduced
+* [ ] no broken navigation
+* [ ] no broken module loading
+* [ ] no broken APIs
+
+---
+
+## UI Integrity
+
+* [ ] Grand Lobby still works
+* [ ] cards render correctly
+* [ ] responsive layout preserved
+* [ ] buttons still function
+* [ ] theme consistency preserved
+
+---
+
+## Regression Validation
+
+* [ ] existing functionality preserved
+* [ ] unrelated modules still work
+* [ ] prior workflows preserved
+* [ ] no accidental removals
+
+---
+
+# GOVERNANCE VALIDATION
+
+## Scope Control
+
+* [ ] only approved files modified
+* [ ] no hidden refactors
+* [ ] no unrelated optimizations
+* [ ] no unauthorized architecture changes
+
+---
+
+## Terminology Validation
+
+* [ ] LEGAiSEE terminology preserved
+* [ ] no renamed systems
+* [ ] no conflicting concepts introduced
+
+---
+
+## Documentation Validation
+
+* [ ] DAILY_STATE updated
+* [ ] ACTIVE_TASK_QUEUE updated
+* [ ] CURRENT_OBJECTIVE updated if completed
+* [ ] BUILD_SPEC archived if completed
+
+---
+
+# MANUAL OPERATOR VALIDATION
+
+## John Must Verify
+
+* [ ] live server functionality
+* [ ] visual integrity
+* [ ] workflow continuity
+* [ ] expected feature behavior
+* [ ] no unexpected side effects
+
+---
+
+# FINAL STATUS
+
+## RESULT
+
+* [ ] PASSED
+* [ ] FAILED
+* [ ] NEEDS REVIEW
+
+---
+
+## VALIDATED BY
+
+```text
+[Name / AI / Date]
+```
+
+---
+
+## NOTES
+
+```text
+[Validation observations]
+```
+
+---
+
+# END VALIDATION CHECKLIST
+
+==================================================
+FILE: _governance/DAILY_STATE.md
+================================
+
+# LEGAiSEE — DAILY STATE
+
+### Operational Snapshot
+
+### Last Updated: 2026-05-19
+
+---
+
+# CURRENT SYSTEM STATUS
+
+## Environment
+
+* Hosting: SureServer Shared Hosting
+* Domain: legaisee.com
+* Main Path: /commandcenter/
+* Stack: PHP + MySQL + JSON
+* IDE Workflow: cPanel + Windsurf + Claude Governance
+* Primary Architecture Authority: Claude
+
+---
+
+# CURRENTLY WORKING
+
+## Core System
+
+* [x] shell.php routing
+* [x] module loading
+* [x] module registry
+* [x] global.css system
+* [x] JSON file loading
+* [x] kernel boot chain
+
+---
+
+## Working Modules
+
+* [x] search
+* [x] ingest
+* [x] files
+* [x] dashboard
+* [x] graph
+* [x] relations
+* [x] recommendation
+* [x] clients
+* [x] cases
+* [x] compare
+* [x] report
+* [x] brain
+
+---
+
+# PARTIALLY COMPLETE
+
+* [ ] excavation pipeline
+* [ ] report assembly
+* [ ] embedding pipeline
+* [ ] timeline engine
+* [ ] semantic search
+* [ ] entity population
+
+---
+
+# KNOWN ISSUES
+
+## Active Concerns
+
+* architecture drift risk from non-governed AI edits
+* embedding system not implemented
+* entities/relationships tables mostly empty
+* excavation module incomplete
+
+---
+
+# RECENTLY MODIFIED FILES
+
+```text
+[Update after each session]
+```
+
+---
+
+# CURRENT BLOCKERS
+
+```text
+[Update as needed]
+```
+
+---
+
+# CURRENT DEVELOPMENT PRIORITY
+
+```text
+[Single active priority]
+```
+
+---
+
+# LAST SUCCESSFUL BUILD
+
+```text
+[Describe latest stable implementation]
+```
+
+---
+
+# NEXT RECOMMENDED ACTION
+
+```text
+[Next highest-priority task]
+```
+
+---
+
+# END DAILY STATE
+
+==================================================
+FILE: _governance/CURRENT_OBJECTIVE.md
+======================================
+
+# LEGAiSEE — CURRENT OBJECTIVE
+
+### Single Active Objective Only
+
+### Last Updated: 2026-05-19
+
+---
+
+# ACTIVE OBJECTIVE
+
+```text
+[Replace with current objective]
+```
+
+Example:
+Implement embedding pipeline for semantic search preparation.
+
+---
+
+# BUSINESS PURPOSE
+
+```text
+[Why this matters]
+```
+
+---
+
+# ALLOWED FILES
+
+```text
+[List files]
+```
+
+---
+
+# FORBIDDEN FILES
+
+```text
+[List forbidden files]
+```
+
+---
+
+# SUCCESS CRITERIA
+
+* [ ] feature operational
+* [ ] architecture preserved
+* [ ] validation passed
+* [ ] no regressions
+* [ ] state docs updated
+
+---
+
+# KNOWN RISKS
+
+```text
+[List risks]
+```
+
+---
+
+# DEPENDENCIES
+
+```text
+[List prerequisite systems]
+```
+
+---
+
+# OUT OF SCOPE
+
+```text
+[List things NOT to touch]
+```
+
+---
+
+# END CURRENT OBJECTIVE
+
+==================================================
+FILE: _governance/ACTIVE_TASK_QUEUE.md
+======================================
+
+# LEGAiSEE — ACTIVE TASK QUEUE
+
+### Master Prioritization Pipeline
+
+### Last Updated: 2026-05-19
+
+---
+
+# CRITICAL
+
+## 1. Deploy Missing Core Files
+
+Status: Pending
+
+Tasks:
+
+* upload rebuilt modules
+* upload api endpoints
+* update global.css additions
+
+Dependencies:
+
+* SFTP stability
+
+Risk:
+
+* medium
+
+---
+
+# HIGH
+
+## 2. Run context_migration.sql
+
+Status: Pending
+
+Purpose:
+Add context separation to all major tables.
+
+Dependencies:
+
+* database backup
+
+Risk:
+
+* low
+
+---
+
+## 3. Add case_id to review_flags
+
+Status: Pending
+
+Purpose:
+Enable report assembly by client case.
+
+Dependencies:
+
+* dig review workflow
+
+Risk:
+
+* low
+
+---
+
+## 4. Build Embedding Pipeline
+
+Status: Pending
+
+Purpose:
+Enable semantic memory/search infrastructure.
+
+Dependencies:
+
+* ingest system
+* embeddings table
+
+Risk:
+
+* medium
+
+---
+
+# MEDIUM
+
+## 5. Populate Timeline Events
+
+Status: Planned
+
+## 6. Report Section Assembly
+
+Status: Planned
+
+## 7. Plain English Expansion
+
+Status: Planned
+
+---
+
+# LOW
+
+## 8. Client Portal
+
+Status: Future
+
+## 9. Appliance Architecture
+
+Status: Future
+
+---
+
+# FUTURE
+
+## Cross-client Intelligence
+
+## Autonomous Agents
+
+## Hybrid Sovereign Deployment
+
+---
+
+# END TASK QUEUE
+
+==================================================
+FILE: _governance/SESSION_HANDOFF.md
+====================================
+
+# LEGAiSEE — SESSION HANDOFF
+
+### AI-to-AI / Session Continuity Layer
+
+### Last Updated: 2026-05-19
+
+---
+
+# CURRENT STATUS SUMMARY
+
+```text
+[Summarize current state]
+```
+
+---
+
+# CURRENT OBJECTIVE
+
+```text
+[Single active objective]
+```
+
+---
+
+# LAST COMPLETED TASK
+
+```text
+[Most recent successful implementation]
+```
+
+---
+
+# CURRENT BLOCKER
+
+```text
+[If any]
+```
+
+---
+
+# FILES CURRENTLY IN PLAY
+
+```text
+[List active files]
+```
+
+---
+
+# KNOWN RISKS
+
+```text
+[List current concerns]
+```
+
+---
+
+# NEXT SAFE ACTION
+
+```text
+[Recommended next step]
+```
+
+---
+
+# RULE REMINDER
+
+Before making changes:
+
+1. Read MASTER_SYSTEM_BIBLE.md
+2. Read CURRENT_OBJECTIVE.md
+3. Read BUILD_SPEC.md
+4. Validate against VALIDATION_CHECKLIST.md
+
+Do NOT improvise architecture.
+
+---
+
+# END SESSION HANDOFF

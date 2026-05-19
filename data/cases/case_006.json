@@ -1,0 +1,8 @@
+{
+  "id": "case_006",
+  "client_id": "client_003",
+  "status": "open",
+  "analysis": {
+    "patterns": ["lead_drop", "pricing"]
+  }
+}

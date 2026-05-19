@@ -1,0 +1,250 @@
+<?php
+
+function clean($str) {
+    $str = strtolower(trim($str));
+    $str = preg_replace('/[^a-z0-9_\-]/', '_', $str);
+    return preg_replace('/_+/', '_', $str);
+}
+
+$message = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $mode = $_POST['mode'] ?? 'legaisee';
+    $title = trim($_POST['title'] ?? 'Untitled');
+    $source = trim($_POST['source'] ?? 'manual');
+    $content = "";
+
+    // HANDLE FILE UPLOAD
+    if (!empty($_FILES['file']['tmp_name'])) {
+        $content = file_get_contents($_FILES['file']['tmp_name']);
+    }
+
+    // HANDLE DIRECT PASTE
+    if (!empty($_POST['paste'])) {
+        $content = $_POST['paste'];
+    }
+
+    if (trim($content) === "") {
+        $message = "<div class='error'>No content provided</div>";
+    } else {
+
+        $timestamp = date("Ymd_His");
+        $safeTitle = clean($title);
+
+        // 🔹 LEGAISEE MODE
+        if ($mode === "legaisee") {
+
+            $client = clean($_POST['client'] ?? 'general');
+            $project = clean($_POST['project'] ?? 'default');
+            $session = clean($_POST['session'] ?? 'session');
+
+            $baseDir = $_SERVER['DOCUMENT_ROOT'] . "/commandcenter/clients/";
+            $targetDir = $baseDir . "$client/$project/$session/raw/";
+
+            if (!is_dir($targetDir)) {
+                mkdir($targetDir, 0755, true);
+            }
+
+            $filename = $timestamp . "_" . $safeTitle . ".md";
+            $fullPath = $targetDir . $filename;
+
+            file_put_contents($fullPath, $content);
+
+            $meta = [
+                "client" => $client,
+                "project" => $project,
+                "session" => $session,
+                "source" => $source,
+                "title" => $title,
+                "entry_type" => "raw",
+                "timestamp" => date("Y-m-d H:i:s")
+            ];
+
+            file_put_contents($fullPath . ".json", json_encode($meta, JSON_PRETTY_PRINT));
+
+        }
+
+        // 🔹 GENERAL STORAGE MODE
+        else {
+
+            $baseDir = $_SERVER['DOCUMENT_ROOT'] . "/commandcenter/library/";
+            if (!is_dir($baseDir)) {
+                mkdir($baseDir, 0755, true);
+            }
+
+            $filename = $timestamp . "_" . $safeTitle . ".md";
+            $fullPath = $baseDir . $filename;
+
+            file_put_contents($fullPath, $content);
+
+            $meta = [
+                "source" => $source,
+                "title" => $title,
+                "entry_type" => "library",
+                "timestamp" => date("Y-m-d H:i:s")
+            ];
+
+            file_put_contents($fullPath . ".json", json_encode($meta, JSON_PRETTY_PRINT));
+        }
+
+        // 🔹 NORMALIZED COPY (FOR SEARCH)
+        $normalizedDir = __DIR__ . "/normalized/";
+        if (!is_dir($normalizedDir)) {
+            mkdir($normalizedDir, 0755, true);
+        }
+
+        $normFile = $normalizedDir . $filename;
+        file_put_contents($normFile, strtolower($content));
+        file_put_contents($normFile . ".json", json_encode($meta, JSON_PRETTY_PRINT));
+
+        $message = "<div class='success'>✓ Ingested Successfully</div>";
+    }
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ingest - LEGAiSEE</title>
+
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+    color:#e0e0e0;
+}
+
+.header {
+    background: rgba(0,0,0,0.7);
+    border-bottom: 2px solid #FFD700;
+    padding: 15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo-img { height:50px; }
+
+.nav {
+    display:flex;
+    gap:10px;
+}
+
+.nav a {
+    color:#FFD700;
+    text-decoration:none;
+    padding:8px 16px;
+    border:1px solid #FFD700;
+    border-radius:20px;
+    font-size:13px;
+}
+
+.container {
+    max-width:900px;
+    margin:auto;
+    padding:40px;
+}
+
+h1 {
+    color:#FFD700;
+    margin-bottom:20px;
+}
+
+input, select, textarea {
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+    background:#111;
+    border:1px solid #FFD700;
+    color:#fff;
+}
+
+textarea {
+    height:200px;
+}
+
+button {
+    padding:12px;
+    background:#FFD700;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+    width:100%;
+}
+
+.success {
+    background: green;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.error {
+    background: red;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <img src="https://www.legaisee.com/Images/Legaisee-sm-300.png" class="logo-img">
+
+    <div class="nav">
+        <a href="index.php">Dashboard</a>
+        <a href="excavation.php">Excavation</a>
+        <a href="search.php">Archive</a>
+        <a href="ingest.php">Ingest</a>
+        <a href="files.php">Files</a>
+    </div>
+</div>
+
+<div class="container">
+
+<h1>Ingest</h1>
+
+<?= $message ?>
+
+<form method="POST" enctype="multipart/form-data">
+
+Mode:
+<select name="mode">
+    <option value="legaisee">Legaisee System</option>
+    <option value="library">General Storage</option>
+</select>
+
+Client (Legaisee only):
+<input type="text" name="client">
+
+Project:
+<input type="text" name="project">
+
+Session:
+<input type="text" name="session">
+
+Title:
+<input type="text" name="title">
+
+Source:
+<input type="text" name="source" placeholder="chatgpt, kimi, notes, etc">
+
+Upload File:
+<input type="file" name="file">
+
+OR Paste Text:
+<textarea name="paste" placeholder="Paste anything here... chats, notes, docs..."></textarea>
+
+<button type="submit">Ingest</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

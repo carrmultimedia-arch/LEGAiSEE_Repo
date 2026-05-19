@@ -1,0 +1,43 @@
+{
+  "node_added": [
+    {
+      "chain_id": "fast_eval",
+      "priority": 1,
+      "steps": [
+        { "action": "analyze_node_strength", "weight": 1 },
+        { "action": "evaluate_network_impact", "weight": 1 },
+        { "action": "emit_decision_event", "weight": 1 }
+      ]
+    },
+    {
+      "chain_id": "deep_eval",
+      "priority": 2,
+      "steps": [
+        { "action": "analyze_node_strength", "weight": 2 },
+        { "action": "evaluate_network_impact", "weight": 2 },
+        { "action": "determine_risk_state", "weight": 2 },
+        { "action": "emit_decision_event", "weight": 1 }
+      ]
+    }
+  ],
+
+  "anomaly_detected": [
+    {
+      "chain_id": "quick_triage",
+      "priority": 1,
+      "steps": [
+        { "action": "cluster_anomaly_check", "weight": 1 },
+        { "action": "risk_classification", "weight": 1 }
+      ]
+    },
+    {
+      "chain_id": "forensic_analysis",
+      "priority": 2,
+      "steps": [
+        { "action": "cluster_anomaly_check", "weight": 2 },
+        { "action": "compare_historical_anomalies", "weight": 2 },
+        { "action": "risk_classification", "weight": 1 }
+      ]
+    }
+  ]
+}

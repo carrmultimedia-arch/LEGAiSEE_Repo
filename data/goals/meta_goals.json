@@ -1,0 +1,20 @@
+[
+  {
+    "meta_goal_id": "optimize_decision_accuracy",
+    "priority": 10,
+    "description": "Increase correctness of system decisions over time",
+    "status": "active"
+  },
+  {
+    "meta_goal_id": "reduce_false_escalations",
+    "priority": 8,
+    "description": "Minimize unnecessary ESCALATE decisions",
+    "status": "active"
+  },
+  {
+    "meta_goal_id": "increase_signal_quality",
+    "priority": 9,
+    "description": "Improve signal-to-noise ratio of event interpretation",
+    "status": "active"
+  }
+]

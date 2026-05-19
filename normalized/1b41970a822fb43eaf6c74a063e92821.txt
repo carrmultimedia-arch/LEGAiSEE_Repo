@@ -1,0 +1,8 @@
+{
+    "client": "file_intelligence",
+    "session_id": "session_1778038730",
+    "query": "<?php\n\ndefine('OPENAI_API_KEY', 'PASTE_YOUR_KEY_HERE');",
+    "source_file": "config.php",
+    "created_at": "2026-05-06 03:38:50",
+    "status": "pending"
+}

@@ -1,0 +1,130 @@
+<?php
+declare(strict_types=1);
+error_reporting(E_ALL);
+ini_set('display_errors', '0');
+
+/* ============================================================
+   LEGAiSEE — SQLite Records Viewer
+   READ ONLY — shows what is in the old SQLite databases
+   Drop in /commandcenter/ and visit in browser
+   Delete after review
+   ============================================================ */
+
+function try_sqlite(string $path): array {
+    if (!file_exists($path)) return ['exists' => false];
+    try {
+        $pdo = new PDO('sqlite:' . $path, '', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+        $tables = $pdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name != 'sqlite_sequence' ORDER BY name")->fetchAll(PDO::FETCH_COLUMN);
+        $data = [];
+        foreach ($tables as $t) {
+            $rows = $pdo->query("SELECT * FROM `{$t}` LIMIT 100")->fetchAll();
+            $data[$t] = $rows;
+        }
+        return ['exists' => true, 'ok' => true, 'data' => $data, 'size' => filesize($path)];
+    } catch (Throwable $e) {
+        return ['exists' => true, 'ok' => false, 'error' => $e->getMessage()];
+    }
+}
+
+$root   = __DIR__;
+$files  = [
+    'data/database.sqlite' => $root . '/data/database.sqlite',
+    'data/legaisee.db'     => $root . '/data/legaisee.db',
+];
+$results = [];
+foreach ($files as $label => $path) {
+    $results[$label] = try_sqlite($path);
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LEGAiSEE — SQLite Viewer</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#0a0a0c;color:#CDAD69;padding:40px 20px;line-height:1.6}
+.wrap{max-width:1100px;margin:auto}
+h1{font-size:24px;font-weight:300;color:#F4E185;letter-spacing:3px;margin-bottom:4px}
+.sub{font-size:11px;letter-spacing:2px;color:#89612B;text-transform:uppercase;margin-bottom:32px}
+h2{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#89612B;margin:28px 0 12px;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:8px}
+h3{font-size:14px;color:#F4E185;margin:20px 0 10px;font-weight:400}
+.card{background:rgba(24,24,26,0.85);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:20px;margin-bottom:20px}
+.verdict{padding:14px 18px;border-radius:10px;font-size:14px;margin-bottom:16px}
+.verdict.safe{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);color:#86efac}
+.verdict.warn{background:rgba(250,204,21,0.08);border:1px solid rgba(250,204,21,0.2);color:#fde68a}
+.verdict.empty{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);color:#89612B}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px}
+th{color:#89612B;text-align:left;padding:8px 10px;font-weight:500;border-bottom:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.02);font-size:11px;text-transform:uppercase;letter-spacing:1px}
+td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.04);color:#CDAD69;vertical-align:top;word-break:break-word;max-width:300px}
+tr:last-child td{border-bottom:none}
+.empty-table{color:#444;font-style:italic;font-size:13px;padding:10px 0}
+.note{font-size:12px;color:#89612B;margin-top:20px;padding:12px 16px;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid rgba(255,255,255,0.04)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>LEGAiSEE</h1>
+<div class="sub">SQLite Records Viewer — Read Only</div>
+
+<?php foreach ($results as $label => $r): ?>
+<h2><?= htmlspecialchars($label) ?></h2>
+
+<?php if (!$r['exists']): ?>
+<div class="card"><div class="verdict empty">File not found — already deleted or moved</div></div>
+
+<?php elseif (!$r['ok']): ?>
+<div class="card"><div class="verdict warn">Could not open: <?= htmlspecialchars($r['error']) ?></div></div>
+
+<?php else: ?>
+<div class="card">
+
+    <?php
+    $total_rows = array_sum(array_map('count', $r['data']));
+    if ($total_rows === 0):
+    ?>
+    <div class="verdict safe">✔ All tables empty — safe to delete, no data will be lost</div>
+    <?php else: ?>
+    <div class="verdict warn">⚠ Contains <?= $total_rows ?> row(s) — review below before deleting</div>
+    <?php endif; ?>
+
+    <?php foreach ($r['data'] as $table => $rows): ?>
+    <h3>Table: <?= htmlspecialchars($table) ?> — <?= count($rows) ?> row(s)</h3>
+
+    <?php if (empty($rows)): ?>
+        <div class="empty-table">Empty table — no data</div>
+    <?php else: ?>
+        <table>
+            <tr>
+                <?php foreach (array_keys($rows[0]) as $col): ?>
+                <th><?= htmlspecialchars($col) ?></th>
+                <?php endforeach; ?>
+            </tr>
+            <?php foreach ($rows as $row): ?>
+            <tr>
+                <?php foreach ($row as $val): ?>
+                <td><?php
+                    if ($val === null) echo '<span style="color:#444">null</span>';
+                    elseif (strlen((string)$val) > 200) echo htmlspecialchars(substr((string)$val, 0, 200)) . '<span style="color:#444">…</span>';
+                    else echo htmlspecialchars((string)$val);
+                ?></td>
+                <?php endforeach; ?>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
+    <?php endforeach; ?>
+
+</div>
+<?php endif; ?>
+<?php endforeach; ?>
+
+<div class="note">
+    This file is read-only. Nothing was changed. Delete this file from your server after you have reviewed the data above.
+</div>
+
+</div>
+</body>
+</html>

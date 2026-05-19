@@ -1,0 +1,485 @@
+{
+    "nodes": [
+        {
+            "id": "n_69f6b8b358250",
+            "type": "signal",
+            "strength": 8.1,
+            "content": "docial media engagement declined in june 20205. but posting increased in jan 2026",
+            "created_at": "2026-05-03 02:53:39"
+        },
+        {
+            "id": "n_69f6b8d848036",
+            "type": "signal",
+            "strength": 8.1,
+            "content": "docial media engagement declined in june 20205. but posting increased in jan 2026",
+            "created_at": "2026-05-03 02:54:16"
+        },
+        {
+            "id": "n_69f6b8e0c76d6",
+            "type": "signal",
+            "strength": 8.1,
+            "content": "social media engagement declined in june 20205. but posting increased in jan 2026",
+            "created_at": "2026-05-03 02:54:24"
+        },
+        {
+            "id": "n_69f6b9c34f58a",
+            "type": "signal",
+            "strength": 8.1,
+            "content": "social media engagement declined in june 20205. but posting increased in jan 2026",
+            "created_at": "2026-05-03 02:58:11"
+        },
+        {
+            "id": "n_69f6b9cf9f521",
+            "type": "signal",
+            "strength": 8.1,
+            "content": "social media engagement declined in june 20205. but posting increased in jan 2026",
+            "created_at": "2026-05-03 02:58:23"
+        },
+        {
+            "id": "n_69f6b9d25d3e8",
+            "type": "signal",
+            "strength": 8.1,
+            "content": "social media engagement declined in june 20205. but posting increased in jan 2026",
+            "created_at": "2026-05-03 02:58:26"
+        },
+        {
+            "id": "n_69f6b9e47ac38",
+            "type": "signal",
+            "strength": 8.1,
+            "content": "social media engagement declined in june 20205. but posting increased in jan 2026",
+            "created_at": "2026-05-03 02:58:44"
+        },
+        {
+            "id": "n_69f6b9eb16c68",
+            "type": "signal",
+            "strength": 8.1,
+            "content": "social media engagement declined in june 20205. but posting increased in jan 2026",
+            "created_at": "2026-05-03 02:58:51"
+        },
+        {
+            "id": "n_69f6bbd1eb658",
+            "type": "signal",
+            "strength": 8.1,
+            "content": "social media engagement declined in june 20205. but posting increased in jan 2026",
+            "created_at": "2026-05-03 03:06:57"
+        },
+        {
+            "id": "n_69f6bbd80d018",
+            "type": "signal",
+            "strength": 19.3,
+            "content": "Window World's franchise marketing policies",
+            "created_at": "2026-05-03 03:07:04"
+        },
+        {
+            "content": "social engagement fell in june 2025. in jan 2026 posting increased with no viewable results",
+            "timestamp": 1777777862,
+            "strength": 1
+        },
+        {
+            "content": "Engagement dropped after increased posting frequency",
+            "timestamp": 1777778216,
+            "strength": 1
+        },
+        {
+            "content": "falling engagement despite posting increase in jan 20206",
+            "timestamp": 1777779675,
+            "strength": 1
+        },
+        {
+            "content": "social media engagement declined despite posting increase in jan2026",
+            "time": 1777780760
+        }
+    ],
+    "edges": [
+        {
+            "from": "n_69f6b8b358250",
+            "to": "n_69f6b8d848036",
+            "type": "weak_relation",
+            "strength": 50
+        },
+        {
+            "from": "n_69f6b8b358250",
+            "to": "n_69f6b8e0c76d6",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8b358250",
+            "to": "n_69f6b9c34f58a",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8b358250",
+            "to": "n_69f6b9cf9f521",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8b358250",
+            "to": "n_69f6b9d25d3e8",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8b358250",
+            "to": "n_69f6b9e47ac38",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8b358250",
+            "to": "n_69f6b9eb16c68",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8b358250",
+            "to": "n_69f6bbd1eb658",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8b358250",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 33.72093023255814
+        },
+        {
+            "from": "n_69f6b8b358250",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 35.03649635036496
+        },
+        {
+            "from": "n_69f6b8b358250",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 41.61073825503356
+        },
+        {
+            "from": "n_69f6b8d848036",
+            "to": "n_69f6b8e0c76d6",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8d848036",
+            "to": "n_69f6b9c34f58a",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8d848036",
+            "to": "n_69f6b9cf9f521",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8d848036",
+            "to": "n_69f6b9d25d3e8",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8d848036",
+            "to": "n_69f6b9e47ac38",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8d848036",
+            "to": "n_69f6b9eb16c68",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8d848036",
+            "to": "n_69f6bbd1eb658",
+            "type": "weak_relation",
+            "strength": 49.382716049382715
+        },
+        {
+            "from": "n_69f6b8d848036",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 33.72093023255814
+        },
+        {
+            "from": "n_69f6b8d848036",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 35.03649635036496
+        },
+        {
+            "from": "n_69f6b8d848036",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 41.61073825503356
+        },
+        {
+            "from": "n_69f6b8e0c76d6",
+            "to": "n_69f6b9c34f58a",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b8e0c76d6",
+            "to": "n_69f6b9cf9f521",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b8e0c76d6",
+            "to": "n_69f6b9d25d3e8",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b8e0c76d6",
+            "to": "n_69f6b9e47ac38",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b8e0c76d6",
+            "to": "n_69f6b9eb16c68",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b8e0c76d6",
+            "to": "n_69f6bbd1eb658",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b8e0c76d6",
+            "to": null,
+            "type": "related",
+            "strength": 59.30232558139535
+        },
+        {
+            "from": "n_69f6b8e0c76d6",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 35.03649635036496
+        },
+        {
+            "from": "n_69f6b8e0c76d6",
+            "to": null,
+            "type": "related",
+            "strength": 67.28187919463087
+        },
+        {
+            "from": "n_69f6b9c34f58a",
+            "to": "n_69f6b9cf9f521",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9c34f58a",
+            "to": "n_69f6b9d25d3e8",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9c34f58a",
+            "to": "n_69f6b9e47ac38",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9c34f58a",
+            "to": "n_69f6b9eb16c68",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9c34f58a",
+            "to": "n_69f6bbd1eb658",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9c34f58a",
+            "to": null,
+            "type": "related",
+            "strength": 59.30232558139535
+        },
+        {
+            "from": "n_69f6b9c34f58a",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 35.03649635036496
+        },
+        {
+            "from": "n_69f6b9c34f58a",
+            "to": null,
+            "type": "related",
+            "strength": 67.28187919463087
+        },
+        {
+            "from": "n_69f6b9cf9f521",
+            "to": "n_69f6b9d25d3e8",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9cf9f521",
+            "to": "n_69f6b9e47ac38",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9cf9f521",
+            "to": "n_69f6b9eb16c68",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9cf9f521",
+            "to": "n_69f6bbd1eb658",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9cf9f521",
+            "to": null,
+            "type": "related",
+            "strength": 59.30232558139535
+        },
+        {
+            "from": "n_69f6b9cf9f521",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 35.03649635036496
+        },
+        {
+            "from": "n_69f6b9cf9f521",
+            "to": null,
+            "type": "related",
+            "strength": 67.28187919463087
+        },
+        {
+            "from": "n_69f6b9d25d3e8",
+            "to": "n_69f6b9e47ac38",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9d25d3e8",
+            "to": "n_69f6b9eb16c68",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9d25d3e8",
+            "to": "n_69f6bbd1eb658",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9d25d3e8",
+            "to": null,
+            "type": "related",
+            "strength": 59.30232558139535
+        },
+        {
+            "from": "n_69f6b9d25d3e8",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 35.03649635036496
+        },
+        {
+            "from": "n_69f6b9d25d3e8",
+            "to": null,
+            "type": "related",
+            "strength": 67.28187919463087
+        },
+        {
+            "from": "n_69f6b9e47ac38",
+            "to": "n_69f6b9eb16c68",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9e47ac38",
+            "to": "n_69f6bbd1eb658",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9e47ac38",
+            "to": null,
+            "type": "related",
+            "strength": 59.30232558139535
+        },
+        {
+            "from": "n_69f6b9e47ac38",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 35.03649635036496
+        },
+        {
+            "from": "n_69f6b9e47ac38",
+            "to": null,
+            "type": "related",
+            "strength": 67.28187919463087
+        },
+        {
+            "from": "n_69f6b9eb16c68",
+            "to": "n_69f6bbd1eb658",
+            "type": "related",
+            "strength": 75
+        },
+        {
+            "from": "n_69f6b9eb16c68",
+            "to": null,
+            "type": "related",
+            "strength": 59.30232558139535
+        },
+        {
+            "from": "n_69f6b9eb16c68",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 35.03649635036496
+        },
+        {
+            "from": "n_69f6b9eb16c68",
+            "to": null,
+            "type": "related",
+            "strength": 67.28187919463087
+        },
+        {
+            "from": "n_69f6bbd1eb658",
+            "to": null,
+            "type": "related",
+            "strength": 59.30232558139535
+        },
+        {
+            "from": "n_69f6bbd1eb658",
+            "to": null,
+            "type": "weak_relation",
+            "strength": 35.03649635036496
+        },
+        {
+            "from": "n_69f6bbd1eb658",
+            "to": null,
+            "type": "related",
+            "strength": 67.28187919463087
+        },
+        {
+            "from": null,
+            "to": null,
+            "type": "related",
+            "strength": 53.93081761006289
+        },
+        {
+            "from": null,
+            "to": null,
+            "type": "weak_relation",
+            "strength": 40.32258064516129
+        }
+    ]
+}

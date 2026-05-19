@@ -1,0 +1,8 @@
+{
+    "client": "file_intelligence",
+    "session_id": "session_1778038745",
+    "query": "<?php\nrequire_once __DIR__ . \"\/bootstrap.php\";\n\n$clusterId = $_GET['id'] ?? 0;\n\n$pageTitle = \"Cluster Intelligence\";\n$pageDesc  = \"Theme deep dive\";\n\n$contentFile = __DIR__ . \"\/modules\/cluster_module.php\";\n\ninclude __DIR__ . \"\/shell.php\";",
+    "source_file": "cluster.php",
+    "created_at": "2026-05-06 03:39:05",
+    "status": "pending"
+}

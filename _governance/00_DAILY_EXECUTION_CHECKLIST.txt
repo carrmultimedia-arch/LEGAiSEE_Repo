@@ -1,0 +1,231 @@
+# LEGAiSEE — DAILY EXECUTION CHECKLIST
+### The Mindless Step-By-Step
+### Last Updated: 2026-05-19
+
+---
+
+# GOVERNANCE FILE NUMBERING (rename these on server)
+
+Files are numbered by when you touch them in the daily workflow.
+
+```
+DAILY USE — touch every single day:
+01_SESSION_LOG.txt
+02_DAILY_STATE.txt
+03_ACTIVE_TASK_QUEUE.txt
+04_CURRENT_OBJECTIVE.txt
+05_DAILY_WORK_ORDER.txt
+
+EXECUTOR PACKAGE — hand these to Windsurf/GPT with every task:
+06_WINDSURF_EXECUTION_BIBLE.txt
+07_MASTER_SYSTEM_BIBLE.txt
+08_AGENT_ROLES.txt
+09_ERROR_ESCALATION_PROTOCOL.txt
+
+POST-BUILD CHECKS — after executor finishes:
+10_VALIDATION_CHECKLIST.txt
+11_DEPLOYMENT_CHECKLIST.txt
+
+PLANNING — only when designing a new feature:
+12_BUILD_SPEC.txt
+13_ARCHITECTURE_LOCK.txt
+14_PROTECTED_FILES.txt
+15_CHANGE_IMPACT_MATRIX.txt
+16_DRIFT_PATTERNS.txt
+
+BREAK GLASS — only when something breaks:
+17_RECOVERY_PLAYBOOK.txt
+18_DECISION_LOG.txt
+
+REFERENCE — rarely needed:
+19_BUILD_HISTORY.txt
+20_MODULE_INDEX.txt
+21_CLAUDE_SESSION_PROTOCOL.txt
+22_SAFE_EXECUTION_PROMPT.txt
+23_SESSION_HANDOFF.txt
+```
+
+---
+
+# THE DAILY ROUTINE
+
+---
+
+## MORNING — START YOUR SESSION WITH CLAUDE
+### (~5 minutes)
+
+**Step 1.** Open a new Claude chat at claude.ai
+
+**Step 2.** Type this message and send it:
+
+```
+Good morning. Please read these and produce today's DAILY_WORK_ORDER:
+
+legaisee.com/commandcenter/_governance/01_SESSION_LOG.txt
+legaisee.com/commandcenter/_governance/02_DAILY_STATE.txt
+legaisee.com/commandcenter/_governance/03_ACTIVE_TASK_QUEUE.txt
+```
+
+**Step 3.** Wait. Claude reads the files and produces DAILY_WORK_ORDER.
+
+**Step 4.** Read the work order top to bottom before doing anything.
+If something looks wrong, ask Claude before proceeding.
+
+**Step 5.** If Claude flagged decisions needing your input, answer them.
+Claude will then finalize the work order.
+
+**Step 6.** Download the DAILY_WORK_ORDER.txt Claude produces.
+Upload it to _governance/ on server (replaces previous one).
+
+---
+
+## MIDDAY — EXECUTE THE WORK ORDER
+### (time varies)
+
+**Step 7.** Open Windsurf (or GPT/Kimi depending on task type).
+
+**Step 8.** Paste this at the start of the executor session:
+
+```
+Before starting, read these files:
+legaisee.com/commandcenter/_governance/05_DAILY_WORK_ORDER.txt
+legaisee.com/commandcenter/_governance/06_WINDSURF_EXECUTION_BIBLE.txt
+legaisee.com/commandcenter/_governance/07_MASTER_SYSTEM_BIBLE.txt
+legaisee.com/commandcenter/_governance/08_AGENT_ROLES.txt
+legaisee.com/commandcenter/_governance/09_ERROR_ESCALATION_PROTOCOL.txt
+
+Summarize the task, list files you will modify, confirm architecture
+compliance, then wait for my approval before editing anything.
+```
+
+**Step 9.** Review executor's pre-edit summary.
+If anything looks wrong, stop them and ask Claude.
+If it looks right, say "Approved. Proceed."
+
+**Step 10.** Watch executor work.
+If it tries to modify a file NOT in the work order: stop it immediately.
+If it hits an error it can't resolve: stop it, copy the error, go to Step 14.
+
+**Step 11.** When executor says it's done, ask it for the completion report:
+
+```
+Provide your completion report per ERROR_ESCALATION_PROTOCOL.
+List every file modified, architecture validation answers,
+blockers, and what I should test.
+```
+
+---
+
+## AFTERNOON — VALIDATE AND CLOSE
+### (~15 minutes)
+
+**Step 12.** Open legaisee.com/commandcenter/ in your browser.
+Run through this quick check:
+- [ ] shell.php loads (Grand Lobby shows)
+- [ ] The module that was just built/changed loads correctly
+- [ ] No blank pages or PHP errors
+- [ ] No broken layout
+- [ ] Any new AJAX/buttons work
+
+**Step 13.** Open 10_VALIDATION_CHECKLIST.txt and 11_DEPLOYMENT_CHECKLIST.txt.
+Tick through the relevant items for today's build.
+
+**Step 14 — IF SOMETHING IS BROKEN:**
+- Stop all editing immediately
+- Open 17_RECOVERY_PLAYBOOK.txt and follow it
+- If you can't resolve it: go to Claude, paste the error
+- Type: "Build failed. Here is the error: [paste error]
+  Here is today's work order: [paste or link 05_DAILY_WORK_ORDER.txt]"
+- Claude will diagnose and produce fix instructions
+
+**Step 15 — IF EVERYTHING LOOKS GOOD:**
+Proceed to end of day.
+
+---
+
+## END OF DAY — UPDATE AND CLOSE
+### (~10 minutes)
+
+**Step 16.** Open 01_SESSION_LOG.txt on the server (cPanel editor).
+Append today's entry at the top using this format:
+
+```
+## YYYY-MM-DD — SESSION ###
+Status: COMPLETE / PARTIAL / FAILED
+Work Order: WO-###
+Executor: Windsurf / GPT / John
+Files Modified: [list them]
+Completed: [what got done]
+Blockers: [anything unfinished and why]
+Notes: [anything Claude should know tomorrow]
+```
+
+**Step 17.** Open 02_DAILY_STATE.txt on the server.
+Update any status changes:
+- Did a module go from partial → working?
+- Did a new blocker appear?
+- Did a DB migration run?
+Change those lines. Save.
+
+**Step 18.** Save and close. You're done for the day.
+
+---
+
+# SPECIAL SITUATIONS
+
+---
+
+## IF YOU WANT TO PLAN A NEW FEATURE
+### (use instead of standard morning session)
+
+Tell Claude:
+```
+I want to plan a new feature: [describe it].
+Read these first:
+legaisee.com/commandcenter/_governance/07_MASTER_SYSTEM_BIBLE.txt
+legaisee.com/commandcenter/_governance/13_ARCHITECTURE_LOCK.txt
+legaisee.com/commandcenter/_governance/03_ACTIVE_TASK_QUEUE.txt
+
+Produce a BUILD_SPEC and tell me where it fits in the queue.
+```
+
+Claude produces the BUILD_SPEC.
+You upload it as 12_BUILD_SPEC.txt.
+Next standard session, Claude writes the work order for it.
+
+---
+
+## IF EXECUTOR GOES OFF THE RAILS
+
+Signs it's going off the rails:
+- It starts modifying files not in the work order
+- It suggests "while I'm here I'll also fix..."
+- It creates a new file you didn't ask for
+- It introduces a pattern not in the System Bible
+
+Action: Stop it immediately. Type "Stop. Do not save that."
+Copy what it was about to do.
+Bring it to Claude: "Executor was about to do this — is it okay or not?"
+
+---
+
+## IF YOU SKIP A DAY
+
+No problem. SESSION_LOG is the memory.
+Just start the next session as normal.
+Claude will read the log and pick up exactly where you left off.
+
+---
+
+# THE ONE RULE TO REMEMBER
+
+```
+Claude thinks.
+Executor builds.
+John approves.
+Nobody improvises.
+```
+
+---
+
+# END DAILY EXECUTION CHECKLIST

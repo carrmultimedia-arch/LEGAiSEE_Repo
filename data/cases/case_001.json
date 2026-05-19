@@ -1,0 +1,7 @@
+{
+   "id": 1,
+    "title": "Ad Campaign Signal Drift",
+    "executive": {
+      "signal_strength": 90,
+      "confidence_score": 20
+}

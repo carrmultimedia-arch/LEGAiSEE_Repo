@@ -1,0 +1,36 @@
+<?php
+
+return [
+
+    // CORE
+    'alert'                  => 'alert_module.php',
+    'anomaly_engine'         => 'anomaly_engine_module.php',
+    'brain'                  => 'brain_module.php',
+    'cases'                  => 'cases_module.php',
+    'clients'                => 'clients_module.php',
+    'cluster'                => 'cluster_module.php',
+    'compare'                => 'compare_module.php',
+    'cross_case_engine'      => 'cross_case_engine.php',
+    'dashboard'              => 'dashboard_module.php',
+    'decision'               => 'decision_module.php',
+    'entity_resolution'      => 'entity_resolution_module.php',
+    'excavation'             => 'excavation_module.php',
+    'executive'              => 'executive_dashboard_module.php',
+    'files'                  => 'files_module.php',
+    'graph'                  => 'graph_module.php',
+    'insight'                => 'insight_module.php',
+    'ingest'                 => 'ingest_module.php',
+    'ingest_view'            => 'ingest_view_module.php',
+    'intelligence_dashboard' => 'intelligence_dashboard_module.php',
+    'predictive'             => 'predictive_link_module_v1.php',
+    'recommendation'         => 'recommendation_module.php',
+    'relations'              => 'relations_module.php',
+    'report'                 => 'report_module.php',
+    'root_cause'             => 'root_cause_graph_module.php',
+    'search'                 => 'search_module.php',
+    'semantic_cluster'       => 'semantic_cluster_module.php',
+    'time_intelligence'      => 'time_intelligence_module.php',
+    'vault'                  => 'vault_module.php',
+    'view'                   => 'view_module.php',
+
+];

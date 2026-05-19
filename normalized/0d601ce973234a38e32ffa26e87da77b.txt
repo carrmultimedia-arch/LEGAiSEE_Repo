@@ -1,0 +1,8 @@
+{
+    "client": "file_intelligence",
+    "session_id": "session_1778491310",
+    "query": "Dompdf\n======\n\n[![Build Status](https:\/\/github.com\/dompdf\/dompdf\/actions\/workflows\/test.yml\/badge.svg)](https:\/\/github.com\/dompdf\/dompdf\/actions\/workflows\/test.yml)\n[![PHP Versions Supported](https:\/\/poser.pugx.org\/dompdf\/dompdf\/require\/php)](https:\/\/packagist.org\/packages\/dompdf\/dompdf)\n[![Latest Release](https:\/\/poser.pugx.org\/dompdf\/dompdf\/v)](https:\/\/packagist.org\/packages\/dompdf\/dompdf)\n[![Total Downloads](https:\/\/poser.pugx.org\/dompdf\/dompdf\/downloads)](https:\/\/packagist.org\/packages\/dompdf\/dompdf)\n[![License](https:\/\/poser.pugx.org\/dompdf\/dompdf\/license)](https:\/\/packagist.org\/packages\/dompdf\/dompdf)\n \n**Dompdf is an HTML to PDF converter**\n\nAt its heart, dompdf is (mostly) a [CSS 2.1](http:\/\/www.w3.org\/TR\/CSS2\/) compliant\nHTML layout and rendering engine written in PHP. It is a style-driven renderer:\nit will download and read external stylesheets, inline style tags, and the style\nattributes of individual HTML elements. It also supports most presentational\nHTML attributes.\n\n*Thi",
+    "source_file": "README.md",
+    "created_at": "2026-05-11 09:21:50",
+    "status": "pending"
+}

@@ -1,0 +1,8 @@
+{
+    "client": "file_intelligence",
+    "session_id": "session_1778038750",
+    "query": "<?php\n$page = $_GET['page'] ?? 'home';\n\n$routes = [\n    \"home\" => \"pages\/home.php\",\n    \"search\" => \"pages\/search.php\"\n];\nrequire_once __DIR__ . '\/lib\/semantic_diff_engine.php';\n\n$contentFile = $routes[$page] ?? $routes['home'];\n?>\n\n<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<title>LEGAiSEE<\/title>\n\n<style>\n\n\/* ===== BASE ===== *\/\n\/* ===== BASE ===== *\/\nbody {\n    margin:0;\n    font-family:Segoe UI, Arial;\n    background:#0a0a0f;\n    color:#FFD700;\n}\n* {\n    max-width:100%;\n}\n\/* ===== TOP BAR ===== *\/\n.topbar {\n    height:50px;\n    display:flex;\n    align-items:center;\n    padding:0 20px;\n    border-bottom:1px solid #222;\n    background:#05050a;\n    font-size:14px;\n}\n\n\/* ===== LINKS ===== *\/\na {\n    color:#4da3ff;\n    text-decoration:none;\n    margin-right:12px;\n}\n\na:hover {\n    text-decoration:underline;\n}\n\na:visited {\n    color:#b28dff;\n}\n\n\/* ===== LAYOUT ===== *\/\n.layout {\n    display:flex;\n    height:calc(100vh - 50px);\n}\n\n\/* ===== SIDEBAR ===== *\/\n.sidebar {\n    width:22",
+    "source_file": "dashboard.php",
+    "created_at": "2026-05-06 03:39:10",
+    "status": "pending"
+}

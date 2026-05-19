@@ -1,0 +1,44 @@
+{
+  "id": "case_001",
+  "type": "case",
+  "client_id": "client_001",
+
+  "title": "Declining engagement despite increased posting",
+  "status": "open",
+
+  "timeline": [
+    {
+      "date": "2026-01-10",
+      "event": "posting frequency increased"
+    },
+    {
+      "date": "2026-03-01",
+      "event": "engagement decline detected"
+    }
+  ],
+
+  "signals": [
+    "social engagement dropping despite higher posting volume",
+    "content fatigue suspected"
+  ],
+
+  "analysis": {
+    "root_hypotheses": [
+      "content saturation",
+      "audience mismatch",
+      "loss of historical voice"
+    ]
+  },
+
+  "linked_clients": [
+    "client_001"
+  ],
+
+  "resolution": {
+    "status": "unresolved",
+    "recommended_actions": [
+      "audit historical top-performing posts",
+      "rebuild content archetype model"
+    ]
+  }
+}
