@@ -1835,3 +1835,10 @@ select option {
     .lobby-title { font-size: 32px; }
     .module-view-title { font-size: 24px; }
 }
+
+/* PM module status badges */
+.badge-backlog      { background: #2a2a2e; color: #9a9a9a; }
+.badge-architecting { background: #1a2a4a; color: #8db4f5; }
+.badge-building     { background: #412402; color: #FAC775; }
+.badge-review       { background: #3a1a4a; color: #c79bf0; }
+.badge-blocked      { background: #4a1a1a; color: #f08a8a; }

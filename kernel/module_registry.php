@@ -22,6 +22,7 @@ return [
     'ingest'                 => 'ingest_module.php',
     'ingest_view'            => 'ingest_view_module.php',
     'intelligence_dashboard' => 'intelligence_dashboard_module.php',
+    'pm'                     => 'pm_module.php',
     'predictive'             => 'predictive_link_module_v1.php',
     'recommendation'         => 'recommendation_module.php',
     'relations'              => 'relations_module.php',

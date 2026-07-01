@@ -1,0 +1,154 @@
+
+01_SESSION_LOG_2026-06-17.txt
+
+Page
+1
+/
+1
+100%
+# LEGAiSEE — SESSION HANDOFF
+## Session ending: 2026-06-17
+## Status: PARTIAL — diagnostic session, documents need v2 revision
+
+---
+
+## WHAT THIS SESSION WAS
+
+Started as a single-file bug fix (network_add_node.php double-write/double-echo).
+Expanded into building two governing documents (Master System Law v1, Execution
+Checklist v1) from a PARTIAL view of the system. Ended with discovery of three
+prior governance documents (Master System Bible, AI Governance Protocol, Windsurf
+Sovereign Build Operations Manual) that document a MUCH larger, already-built
+system neither new document accounted for.
+
+**Net result: the two new documents are accurate but incomplete. They need a v2
+merge pass against the documents discovered at the end of this session — not a
+restart, a reconciliation.**
+
+---
+
+## CONFIRMED FACTS (do not re-derive these next session)
+
+1. **Two separate systems, one domain, no overlap:**
+   - `www/www/(website)/` — public marketing site. 7 static HTML pages
+     (index, archaeology, method, serve, architect, commissions, registry)
+     + legaisee.css / legaisee-patches.css / legaisee-global-fixes.css.
+   - `www/www/commandcenter/` — the entire PHP backend. ~250 files. modules/,
+     kernel/, engine/, core/, agents/, api/, data/, ui/. MySQL db
+     `carrmulti_legaiseearchive`. Only John uses this; not public-facing.
+
+2. **The D: drive Windsurf mirror is a 1:1 copy of the live commandcenter/
+   server.** Nothing in it is a template or abandoned experiment. John built
+   every file in cPanel directly, BEFORE installing Windsurf. Windsurf itself
+   has NEVER been used to execute anything — John installed it, looked at the
+   mirrored files, and stopped. No Windsurf session has ever run.
+
+3. **network_add_node.php (api/v8/) was fixed this session** — single
+   write, single echo, full field validation on client_id/case_id/content.
+   Delivered as complete replacement file. NOT YET confirmed deployed/tested
+   live by John.
+
+4. **The Brain pipeline's missing-client-identity bug was diagnosed but not
+   fixed.** None of the brain_*.php files carry client/case identity across
+   stages — they only know `file` and `brain_id`. Fix designed (session-stored
+   identity, brain_start.php persists it, downstream stages read from session)
+   but not built.
+
+5. **Three governance documents exist with REAL content and must be treated
+   as authoritative for the commandcenter/ backend:**
+   - `MASTER_SYSTEM_BIBLE.md` (May 17) — architecture rules, module pattern,
+     full DB schema, folder structure, terminology. THIS IS THE REAL SOURCE
+     OF TRUTH for the backend, more authoritative than anything in this
+     session's two new documents.
+   - `claude_instructions.txt` (AI Governance & Execution Orchestration
+     Protocol v1.0) — defines Claude's role as architect/governance layer,
+     the 6-stage execution pipeline, the persistent document set
+     (DAILY_STATE, CURRENT_OBJECTIVE, ACTIVE_TASK_QUEUE, BUILD_SPEC,
+     VALIDATION_CHECKLIST).
+   - `windsurf instructions.txt` (Sovereign Build Operations Manual) —
+     Git/GitHub-backed recovery workflow, Windsurf safety rules, the
+     daily execution loop (Claude plans -> Windsurf executes -> validate
+     -> commit -> push). References a GitHub repo:
+     github.com/legaisee26-netizen/LEGAiSEE_Repo, branch main.
+
+6. **A separate, later "Project Bible" (May 29 session) documents the PUBLIC
+   SITE only** — design system (Cinzel Decorative + Inter, obsidian/gold,
+   confirmed NO Cormorant Garamond despite earlier sessions), the Exhibit
+   pricing ladder (matches what's in this session's Master Law Part VIII),
+   6 built CSS/HTML patches not yet applied live, and a full Carr Multimedia
+   institutional excavation (3 broadcast eras) intended for architect.html /
+   practitioner.html.
+
+7. **Two competing identity schemes still unreconciled:**
+   - This session's Master Law Part II proposed a new `tree_nodes` table
+     (unlimited-depth parent/child) as the universal identity layer.
+     NOT YET BUILT.
+   - The real commandcenter/ system already has a LIVE pattern:
+     `data/clients/{client_id}/cases/{case_id}/...` JSON folders, plus
+     MySQL `cases`, `clients` tables. This already exists and has real
+     data in it (Brad Moore Builders, Faust Hotel, Cowboy Plumbing).
+   - **These were never reconciled this session.** Next session must decide:
+     does tree_nodes REPLACE the existing client/case folder pattern, or
+     does it need to be redesigned to wrap/extend it instead of competing
+     with it?
+
+8. **MySQL schema is real and documented** (from Master System Bible) —
+   tables include cases, clients, documents, entities, entity_aliases,
+   relationships, review_flags, embeddings (planned), memory_domains,
+   memory_ingest, projects, context column on major tables with values
+   `legaisee` / `memory` / `general`. This entire schema was UNKNOWN to
+   this session's Master Law document and must be folded in.
+
+9. **There is a human-verification loop already designed and partially
+   built that this session's documents never mentioned:** the Dig Review
+   Interface (`dig_review_module.php`, `review_flags` table). AI extracts
+   findings -> John confirms/rejects/flags needs-more-info -> only confirmed
+   findings flow into reports. This is described as "the competitive moat."
+   Must be added to whichever document covers the Brain/excavation pipeline.
+
+---
+
+## DOCUMENTS PRODUCED THIS SESSION (need v2 revision, not replacement)
+
+- `LEGAiSEE-Master-System-Law-v1.docx` — business definition, gemstone
+  metaphor, tree-node identity layer (Part II), Operation Ladder, Brain
+  pipeline fix design, public site architecture, partial Command Center
+  rules. ACCURATE for what it covers. MISSING: real MySQL schema, modules/
+  kernel/engine depth, Dig Review loop, governance protocol, Git workflow.
+
+- `LEGAiSEE-Execution-Checklist-v1.docx` — file-by-file build order,
+  [OPEN]/[BLOCKED]/[DONE] status tags, highlight-to-complete workflow.
+  ACCURATE for the ~9 Brain files and tree API it covers. MISSING: the
+  ~13+ actual brain-adjacent files found in the real tree (brain_commit,
+  case_memory, case_agent, case_tick, case_scheduler), the entire
+  engine/kernel/cli layer, and the public-site patch deployment queue
+  (6 patches built, not yet applied — Patches 1-6 from the May 29 Bible).
+
+---
+
+## NEXT SESSION — START HERE
+
+1. Open with this handoff file.
+2. Paste the three real governance documents if not already in memory:
+   MASTER_SYSTEM_BIBLE.md, claude_instructions.txt (AI Governance Protocol),
+   windsurf instructions.txt (Sovereign Build Operations Manual).
+3. Ask Claude to produce a v2 Master Law + v2 Execution Checklist that
+   MERGES this session's work with the real governance documents — not
+   a restart. Priority unresolved decision: reconcile tree_nodes (proposed)
+   vs. the existing client/case JSON folder + MySQL pattern (live).
+4. Confirm deployment status of network_add_node.php fix before building
+   anything else in the Brain pipeline.
+5. Do NOT touch the engine/kernel/cli layer (decision_governor, goal_engine,
+   autonomous_run, graph_engine, etc.) until its actual current build state
+   is established — last known status unclear, last confirmed real activity
+   was the May 8-17 module work.
+
+---
+
+## THE ONE RULE (still true, still the point of all of this)
+
+Claude thinks. The executor builds. John approves. Nobody improvises.
+Displaying 01_SESSION_LOG_2026-06-17.txt.
+
+
+========================================================================

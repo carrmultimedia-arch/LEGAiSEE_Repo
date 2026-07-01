@@ -29,27 +29,20 @@ function renderModule(string $name, array $registry): string {
         $result = require $file;
         $buffer = ob_get_clean();
 
-        // If module echoed HTML directly, use that
         if (!empty(trim($buffer))) return $buffer;
 
-        // If module returned a string
         if (is_string($result)) return $result;
 
-        // If module returned UIC array
         if (is_array($result)) {
-            // Array of UIC packets
             if (isset($result[0]) && is_array($result[0]) && isset($result[0]['type'])) {
                 $html = '';
                 foreach ($result as $item) $html .= uic_render($item);
                 return $html;
             }
-            // Single UIC packet
             if (isset($result['type'])) return uic_render($result);
-            // Inspector style (brain module)
             if (isset($result['title']) && isset($result['items'])) {
                 return render_inspector($result);
             }
-            // Key/value fallback
             $html = "<div class='exec-panel'>";
             foreach ($result as $k => $v) {
                 if (is_array($v)) $v = count($v) . ' records';
@@ -68,7 +61,6 @@ function renderModule(string $name, array $registry): string {
     }
 }
 
-// ── INSPECTOR RENDERER (for brain-style modules) ───────────────────────────
 function render_inspector(array $data): string {
     $html = "<div class='inspector'>";
     foreach ($data['items'] as $item) {
@@ -82,7 +74,6 @@ function render_inspector(array $data): string {
 }
 
 // ── DASHBOARD CARDS (shown when no ?module) ───────────────────────────────────
-// Groups with their modules and display labels
 $dashboardGroups = [
     [
         'label'   => 'Command',
@@ -90,6 +81,12 @@ $dashboardGroups = [
             ['module' => 'dashboard',              'title' => 'System Dashboard',      'desc' => 'Case & client overview'],
             ['module' => 'intelligence_dashboard', 'title' => 'Intel Dashboard',       'desc' => 'Executive intelligence overview'],
             ['module' => 'brain',                  'title' => 'Brain',                 'desc' => 'System intelligence & module registry'],
+        ]
+    ],
+    [
+        'label'   => 'Planning',
+        'cards'   => [
+            ['module' => 'pm', 'title' => 'Project Board', 'desc' => 'Tasks by project — Backlog to Done'],
         ]
     ],
     [
@@ -145,7 +142,9 @@ $dashboardGroups = [
 // ── NAV LINKS (always visible) ────────────────────────────────────────────────
 $navLinks = [
     ''          => 'Lobby',
+   'governance' => 'Governance',
     'dashboard' => 'Dashboard',
+    'pm'        => 'Tasks',
     'brain'     => '🧠 Brain',
     'clients'   => 'Clients',
     'cases'     => 'Cases',
@@ -156,7 +155,6 @@ $navLinks = [
 // Prospect Dig is a standalone workaround — links out
 $standaloneLinks = [
     '/commandcenter/prospect.php' => '⛏ Prospect Dig',
-    '/commandcenter/ingest.php'   => 'Ingest',
 ];
 
 ?>
@@ -172,7 +170,6 @@ $standaloneLinks = [
 
 <div class="app-shell">
 
-    <!-- ── TOPBAR ── -->
     <div class="top-nav">
         <div class="top-nav-brand">
             <span class="top-nav-title">LEGAiSEE</span>
@@ -191,12 +188,10 @@ $standaloneLinks = [
         </div>
     </div>
 
-    <!-- ── CONTENT ── -->
     <div class="app-body">
 
         <?php if ($requestedModule): ?>
 
-            <!-- ── SINGLE MODULE VIEW ── -->
             <div class="module-view">
                 <div class="module-view-header">
                     <a class="module-back" href="/commandcenter/shell.php">← Grand Lobby</a>
@@ -209,7 +204,6 @@ $standaloneLinks = [
 
         <?php else: ?>
 
-            <!-- ── GRAND LOBBY DASHBOARD ── -->
             <div class="lobby-hero">
                 <div class="lobby-label">Sovereign Intelligence Environment</div>
                 <h1 class="lobby-title">Grand Lobby</h1>
