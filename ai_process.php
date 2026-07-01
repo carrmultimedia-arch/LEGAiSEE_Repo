@@ -14,7 +14,7 @@ $input = $data['website_history']."\n".$data['reviews']."\n".$data['social'];
 
 $prompt = getPrompt($task, $input);
 
-// CALL YOUR EXISTING AI LAYER
+// CALL YOUR EXISTING AIs LAYER
 $output = process_ai($prompt); // <- this should already exist in your system
 
 // STORE TASK OUTPUT

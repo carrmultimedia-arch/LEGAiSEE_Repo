@@ -6,3 +6,4 @@ try {
 } catch (Exception $e) {
     die("DB ERROR: " . $e->getMessage());
 }
+// test upload
