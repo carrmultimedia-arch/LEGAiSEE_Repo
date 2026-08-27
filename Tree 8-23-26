@@ -1,0 +1,1028 @@
+| | | | | |____composer.json
+| | | | | |____CHANGELOG.md
+| | | |____masterminds
+| | | | |____html5
+| | | | | |____LICENSE.txt
+| | | | | |____src
+| | | | | | |____HTML5
+| | | | | | | |____Serializer
+| | | | | | | | |____README.md
+| | | | | | | | |____HTML5Entities.php
+| | | | | | | | |____RulesInterface.php
+| | | | | | | | |____Traverser.php
+| | | | | | | | |____OutputRules.php
+| | | | | | | |____InstructionProcessor.php
+| | | | | | | |____Entities.php
+| | | | | | | |____Parser
+| | | | | | | | |____README.md
+| | | | | | | | |____TreeBuildingRules.php
+| | | | | | | | |____EventHandler.php
+| | | | | | | | |____ParseError.php
+| | | | | | | | |____UTF8Utils.php
+| | | | | | | | |____CharacterReference.php
+| | | | | | | | |____InputStream.php
+| | | | | | | | |____Scanner.php
+| | | | | | | | |____Tokenizer.php
+| | | | | | | | |____DOMTreeBuilder.php
+| | | | | | | | |____StringInputStream.php
+| | | | | | | | |____FileInputStream.php
+| | | | | | | |____Exception.php
+| | | | | | | |____Elements.php
+| | | | | | |____HTML5.php
+| | | | | |____README.md
+| | | | | |____RELEASE.md
+| | | | | |____composer.json
+| | | | | |____bin
+| | | | | | |____entities.php
+| | | | | |____UPGRADING.md
+| | | | | |____CREDITS
+| | | |____composer
+| | | | |____autoload_static.php
+| | | | |____autoload_classmap.php
+| | | | |____LICENSE
+| | | | |____ClassLoader.php
+| | | | |____installed.php
+| | | | |____InstalledVersions.php
+| | | | |____autoload_psr4.php
+| | | | |____autoload_real.php
+| | | | |____installed.json
+| | | | |____platform_check.php
+| | | | |____autoload_namespaces.php
+| | | |____autoload.php
+| | |____AUTHORS.md
+| | |____LICENSE.LGPL
+| | |____autoload.inc.php
+| | |____VERSION
+| |____semantic_diff_engine.php
+| |____vendor
+| | |____stripe
+| | | |____stripe-php
+| | | | |____.git
+| | | | | |____logs
+| | | | | | |____HEAD
+| | | | | | |____refs
+| | | | | | | |____remotes
+| | | | | | | | |____origin
+| | | | | | | | | |____HEAD
+| | | | | | | |____heads
+| | | | | | | | |____master
+| | | | | |____info
+| | | | | | |____exclude
+| | | | | | |____refs
+| | | | | |____HEAD
+| | | | | |____index
+| | | | | |____refs
+| | | | | | |____remotes
+| | | | | | | |____origin
+| | | | | | | | |____HEAD
+| | | | | | |____heads
+| | | | | | | |____master
+| | | | | | |____tags
+| | | | | |____ORIG_HEAD
+| | | | | |____config
+| | | | | |____description
+| | | | | |____hooks
+| | | | | | |____pre-applypatch.sample
+| | | | | | |____pre-receive.sample
+| | | | | | |____post-update.sample
+| | | | | | |____commit-msg.sample
+| | | | | | |____sendemail-validate.sample
+| | | | | | |____pre-push.sample
+| | | | | | |____prepare-commit-msg.sample
+| | | | | | |____push-to-checkout.sample
+| | | | | | |____applypatch-msg.sample
+| | | | | | |____fsmonitor-watchman.sample
+| | | | | | |____pre-rebase.sample
+| | | | | | |____pre-commit.sample
+| | | | | | |____pre-merge-commit.sample
+| | | | | | |____update.sample
+| | | | | |____objects
+| | | | | | |____info
+| | | | | | | |____packs
+| | | | | | |____pack
+| | | | | | | |____pack-5218c6bb5baffb6c1f1632bc3674cc73c4e8dd70.idx
+| | | | | | | |____pack-5218c6bb5baffb6c1f1632bc3674cc73c4e8dd70.pack
+| | | | | | | |____pack-5218c6bb5baffb6c1f1632bc3674cc73c4e8dd70.rev
+| | | | | |____packed-refs
+| | | | |____.php-cs-fixer.php
+| | | | |____README.md
+| | | | |____.gitignore
+| | | | |____.github
+| | | | | |____workflows
+| | | | | | |____ci.yml
+| | | | | |____ISSUE_TEMPLATE
+| | | | | | |____feature_request.yml
+| | | | | | |____config.yml
+| | | | | | |____bug_report.yml
+| | | | |____phpdoc.dist.xml
+| | | | |____.vscode
+| | | | | |____extensions.json
+| | | | | |____settings.json
+| | | | |____.gitattributes
+| | | | |____LICENSE
+| | | | |____Makefile
+| | | | |____composer.json
+| | | | |____CHANGELOG.md
+| | | | |____build.php
+| | | | |____CODE_OF_CONDUCT.md
+| | | | |____update_certs.php
+| | | | |____phpunit.xml
+| | | | |____.editorconfig
+| | | | |____data
+| | | | | |____ca-certificates.crt
+| | | | |____examples
+| | | | | |____oauth.php
+| | | | |____phpstan-baseline.neon
+| | | | |____OPENAPI_VERSION
+| | | | |____phpunit.no_autoload.xml
+| | | | |____lib
+| | | | | |____ShippingRate.php
+| | | | | |____CustomerBalanceTransaction.php
+| | | | | |____ReserveTransaction.php
+| | | | | |____BankAccount.php
+| | | | | |____File.php
+| | | | | |____FundingInstructions.php
+| | | | | |____BaseStripeClientInterface.php
+| | | | | |____Token.php
+| | | | | |____StripeClientInterface.php
+| | | | | |____StripeClient.php
+| | | | | |____ConnectCollectionTransfer.php
+| | | | | |____RecipientTransfer.php
+| | | | | |____Plan.php
+| | | | | |____Treasury
+| | | | | | |____Transaction.php
+| | | | | | |____FinancialAccountFeatures.php
+| | | | | | |____OutboundPayment.php
+| | | | | | |____InboundTransfer.php
+| | | | | | |____ReceivedCredit.php
+| | | | | | |____CreditReversal.php
+| | | | | | |____FinancialAccount.php
+| | | | | | |____OutboundTransfer.php
+| | | | | | |____DebitReversal.php
+| | | | | | |____TransactionEntry.php
+| | | | | | |____ReceivedDebit.php
+| | | | | |____TransferReversal.php
+| | | | | |____Quote.php
+| | | | | |____TaxDeductedAtSource.php
+| | | | | |____TaxRate.php
+| | | | | |____CountrySpec.php
+| | | | | |____Event.php
+| | | | | |____Product.php
+| | | | | |____Util
+| | | | | | |____LoggerInterface.php
+| | | | | | |____RandomGenerator.php
+| | | | | | |____DefaultLogger.php
+| | | | | | |____ApiVersion.php
+| | | | | | |____RequestOptions.php
+| | | | | | |____ObjectTypes.php
+| | | | | | |____CaseInsensitiveArray.php
+| | | | | | |____Set.php
+| | | | | | |____Util.php
+| | | | | |____ApplicationFeeRefund.php
+| | | | | |____Payout.php
+| | | | | |____Mandate.php
+| | | | | |____SourceMandateNotification.php
+| | | | | |____SubscriptionSchedule.php
+| | | | | |____OAuthErrorObject.php
+| | | | | |____SetupIntent.php
+| | | | | |____ApplePayDomain.php
+| | | | | |____WebhookEndpoint.php
+| | | | | |____Account.php
+| | | | | |____Person.php
+| | | | | |____UsageRecordSummary.php
+| | | | | |____Apps
+| | | | | | |____Secret.php
+| | | | | |____Climate
+| | | | | | |____Product.php
+| | | | | | |____Supplier.php
+| | | | | | |____Order.php
+| | | | | |____LineItem.php
+| | | | | |____Checkout
+| | | | | | |____Session.php
+| | | | | |____CustomerSession.php
+| | | | | |____ApiRequestor.php
+| | | | | |____PaymentMethodConfiguration.php
+| | | | | |____ConfirmationToken.php
+| | | | | |____Issuing
+| | | | | | |____Token.php
+| | | | | | |____Transaction.php
+| | | | | | |____Authorization.php
+| | | | | | |____PersonalizationDesign.php
+| | | | | | |____Card.php
+| | | | | | |____Cardholder.php
+| | | | | | |____Dispute.php
+| | | | | | |____PhysicalBundle.php
+| | | | | | |____CardDetails.php
+| | | | | |____Balance.php
+| | | | | |____CreditNote.php
+| | | | | |____AccountSession.php
+| | | | | |____Refund.php
+| | | | | |____Application.php
+| | | | | |____SourceTransaction.php
+| | | | | |____EphemeralKey.php
+| | | | | |____ApiOperations
+| | | | | | |____Retrieve.php
+| | | | | | |____Create.php
+| | | | | | |____Delete.php
+| | | | | | |____Update.php
+| | | | | | |____Search.php
+| | | | | | |____Request.php
+| | | | | | |____All.php
+| | | | | | |____NestedResource.php
+| | | | | | |____SingletonRetrieve.php
+| | | | | |____AccountLink.php
+| | | | | |____BillingPortal
+| | | | | | |____Configuration.php
+| | | | | | |____Session.php
+| | | | | |____ApplicationFee.php
+| | | | | |____PaymentLink.php
+| | | | | |____Charge.php
+| | | | | |____WebhookSignature.php
+| | | | | |____Identity
+| | | | | | |____VerificationSession.php
+| | | | | | |____VerificationReport.php
+| | | | | |____CashBalance.php
+| | | | | |____Card.php
+| | | | | |____StripeObject.php
+| | | | | |____Transfer.php
+| | | | | |____SubscriptionItem.php
+| | | | | |____BalanceTransaction.php
+| | | | | |____PaymentMethod.php
+| | | | | |____SingletonApiResource.php
+| | | | | |____Dispute.php
+| | | | | |____Customer.php
+| | | | | |____PaymentMethodDomain.php
+| | | | | |____PlatformTaxFee.php
+| | | | | |____StripeStreamingClientInterface.php
+| | | | | |____UsageRecord.php
+| | | | | |____SearchResult.php
+| | | | | |____Collection.php
+| | | | | |____Billing
+| | | | | | |____Meter.php
+| | | | | | |____MeterEventSummary.php
+| | | | | | |____MeterEventAdjustment.php
+| | | | | | |____MeterEvent.php
+| | | | | |____Discount.php
+| | | | | |____FileLink.php
+| | | | | |____Reporting
+| | | | | | |____ReportType.php
+| | | | | | |____ReportRun.php
+| | | | | |____SetupAttempt.php
+| | | | | |____Tax
+| | | | | | |____Registration.php
+| | | | | | |____TransactionLineItem.php
+| | | | | | |____Transaction.php
+| | | | | | |____Calculation.php
+| | | | | | |____Settings.php
+| | | | | | |____CalculationLineItem.php
+| | | | | |____Subscription.php
+| | | | | |____CreditNoteLineItem.php
+| | | | | |____ApiResource.php
+| | | | | |____Coupon.php
+| | | | | |____ProductFeature.php
+| | | | | |____Forwarding
+| | | | | | |____Request.php
+| | | | | |____ApiResponse.php
+| | | | | |____RequestTelemetry.php
+| | | | | |____LoginLink.php
+| | | | | |____PromotionCode.php
+| | | | | |____Exception
+| | | | | | |____BadMethodCallException.php
+| | | | | | |____RateLimitException.php
+| | | | | | |____InvalidArgumentException.php
+| | | | | | |____OAuth
+| | | | | | | |____InvalidClientException.php
+| | | | | | | |____OAuthErrorException.php
+| | | | | | | |____UnsupportedGrantTypeException.php
+| | | | | | | |____UnsupportedResponseTypeException.php
+| | | | | | | |____InvalidGrantException.php
+| | | | | | | |____InvalidRequestException.php
+| | | | | | | |____UnknownOAuthErrorException.php
+| | | | | | | |____InvalidScopeException.php
+| | | | | | | |____ExceptionInterface.php
+| | | | | | |____PermissionException.php
+| | | | | | |____UnexpectedValueException.php
+| | | | | | |____SignatureVerificationException.php
+| | | | | | |____UnknownApiErrorException.php
+| | | | | | |____ApiConnectionException.php
+| | | | | | |____CardException.php
+| | | | | | |____AuthenticationException.php
+| | | | | | |____IdempotencyException.php
+| | | | | | |____InvalidRequestException.php
+| | | | | | |____ApiErrorException.php
+| | | | | | |____ExceptionInterface.php
+| | | | | |____OAuth.php
+| | | | | |____TaxCode.php
+| | | | | |____HttpClient
+| | | | | | |____ClientInterface.php
+| | | | | | |____StreamingClientInterface.php
+| | | | | | |____CurlClient.php
+| | | | | |____Sigma
+| | | | | | |____ScheduledQueryRun.php
+| | | | | |____Entitlements
+| | | | | | |____ActiveEntitlement.php
+| | | | | | |____Feature.php
+| | | | | |____FinancialConnections
+| | | | | | |____Transaction.php
+| | | | | | |____Session.php
+| | | | | | |____Account.php
+| | | | | | |____AccountOwner.php
+| | | | | | |____AccountOwnership.php
+| | | | | |____Review.php
+| | | | | |____CustomerCashBalanceTransaction.php
+| | | | | |____Source.php
+| | | | | |____Price.php
+| | | | | |____BaseStripeClient.php
+| | | | | |____Stripe.php
+| | | | | |____ExchangeRate.php
+| | | | | |____ErrorObject.php
+| | | | | |____Topup.php
+| | | | | |____TestHelpers
+| | | | | | |____TestClock.php
+| | | | | |____InvoiceLineItem.php
+| | | | | |____Invoice.php
+| | | | | |____Capability.php
+| | | | | |____TaxId.php
+| | | | | |____InvoiceItem.php
+| | | | | |____PaymentIntent.php
+| | | | | |____Radar
+| | | | | | |____ValueListItem.php
+| | | | | | |____EarlyFraudWarning.php
+| | | | | | |____ValueList.php
+| | | | | |____Service
+| | | | | | |____AccountService.php
+| | | | | | |____TopupService.php
+| | | | | | |____CoreServiceFactory.php
+| | | | | | |____ShippingRateService.php
+| | | | | | |____BalanceTransactionService.php
+| | | | | | |____WebhookEndpointService.php
+| | | | | | |____SetupAttemptService.php
+| | | | | | |____TaxRateService.php
+| | | | | | |____PromotionCodeService.php
+| | | | | | |____InvoiceService.php
+| | | | | | |____Treasury
+| | | | | | | |____TransactionEntryService.php
+| | | | | | | |____ReceivedCreditService.php
+| | | | | | | |____FinancialAccountService.php
+| | | | | | | |____CreditReversalService.php
+| | | | | | | |____TreasuryServiceFactory.php
+| | | | | | | |____DebitReversalService.php
+| | | | | | | |____TransactionService.php
+| | | | | | | |____OutboundTransferService.php
+| | | | | | | |____ReceivedDebitService.php
+| | | | | | | |____InboundTransferService.php
+| | | | | | | |____OutboundPaymentService.php
+| | | | | | |____PaymentMethodConfigurationService.php
+| | | | | | |____TransferService.php
+| | | | | | |____AbstractServiceFactory.php
+| | | | | | |____EventService.php
+| | | | | | |____Apps
+| | | | | | | |____AppsServiceFactory.php
+| | | | | | | |____SecretService.php
+| | | | | | |____Climate
+| | | | | | | |____OrderService.php
+| | | | | | | |____SupplierService.php
+| | | | | | | |____ProductService.php
+| | | | | | | |____ClimateServiceFactory.php
+| | | | | | |____ExchangeRateService.php
+| | | | | | |____SubscriptionScheduleService.php
+| | | | | | |____Checkout
+| | | | | | | |____CheckoutServiceFactory.php
+| | | | | | | |____SessionService.php
+| | | | | | |____ChargeService.php
+| | | | | | |____Issuing
+| | | | | | | |____IssuingServiceFactory.php
+| | | | | | | |____PersonalizationDesignService.php
+| | | | | | | |____CardholderService.php
+| | | | | | | |____AuthorizationService.php
+| | | | | | | |____TokenService.php
+| | | | | | | |____PhysicalBundleService.php
+| | | | | | | |____TransactionService.php
+| | | | | | | |____DisputeService.php
+| | | | | | | |____CardService.php
+| | | | | | |____QuoteService.php
+| | | | | | |____TaxIdService.php
+| | | | | | |____RefundService.php
+| | | | | | |____EphemeralKeyService.php
+| | | | | | |____SetupIntentService.php
+| | | | | | |____BillingPortal
+| | | | | | | |____BillingPortalServiceFactory.php
+| | | | | | | |____ConfigurationService.php
+| | | | | | | |____SessionService.php
+| | | | | | |____Identity
+| | | | | | | |____VerificationReportService.php
+| | | | | | | |____VerificationSessionService.php
+| | | | | | | |____IdentityServiceFactory.php
+| | | | | | |____AbstractService.php
+| | | | | | |____ReviewService.php
+| | | | | | |____PlanService.php
+| | | | | | |____PaymentIntentService.php
+| | | | | | |____TaxCodeService.php
+| | | | | | |____InvoiceItemService.php
+| | | | | | |____TokenService.php
+| | | | | | |____SourceService.php
+| | | | | | |____ProductService.php
+| | | | | | |____PaymentMethodService.php
+| | | | | | |____Billing
+| | | | | | | |____MeterEventAdjustmentService.php
+| | | | | | | |____MeterEventService.php
+| | | | | | | |____MeterService.php
+| | | | | | | |____BillingServiceFactory.php
+| | | | | | |____AccountLinkService.php
+| | | | | | |____ApplicationFeeService.php
+| | | | | | |____PayoutService.php
+| | | | | | |____MandateService.php
+| | | | | | |____Reporting
+| | | | | | | |____ReportingServiceFactory.php
+| | | | | | | |____ReportRunService.php
+| | | | | | | |____ReportTypeService.php
+| | | | | | |____Tax
+| | | | | | | |____SettingsService.php
+| | | | | | | |____RegistrationService.php
+| | | | | | | |____TaxServiceFactory.php
+| | | | | | | |____TransactionService.php
+| | | | | | | |____CalculationService.php
+| | | | | | |____FileLinkService.php
+| | | | | | |____CouponService.php
+| | | | | | |____ConfirmationTokenService.php
+| | | | | | |____CustomerService.php
+| | | | | | |____CustomerSessionService.php
+| | | | | | |____Forwarding
+| | | | | | | |____ForwardingServiceFactory.php
+| | | | | | | |____RequestService.php
+| | | | | | |____PaymentLinkService.php
+| | | | | | |____ApplePayDomainService.php
+| | | | | | |____CreditNoteService.php
+| | | | | | |____PriceService.php
+| | | | | | |____Sigma
+| | | | | | | |____ScheduledQueryRunService.php
+| | | | | | | |____SigmaServiceFactory.php
+| | | | | | |____PaymentMethodDomainService.php
+| | | | | | |____Entitlements
+| | | | | | | |____FeatureService.php
+| | | | | | | |____EntitlementsServiceFactory.php
+| | | | | | | |____ActiveEntitlementService.php
+| | | | | | |____FinancialConnections
+| | | | | | | |____AccountService.php
+| | | | | | | |____FinancialConnectionsServiceFactory.php
+| | | | | | | |____SessionService.php
+| | | | | | | |____TransactionService.php
+| | | | | | |____FileService.php
+| | | | | | |____DisputeService.php
+| | | | | | |____TestHelpers
+| | | | | | | |____Treasury
+| | | | | | | | |____ReceivedCreditService.php
+| | | | | | | | |____TreasuryServiceFactory.php
+| | | | | | | | |____OutboundTransferService.php
+| | | | | | | | |____ReceivedDebitService.php
+| | | | | | | | |____InboundTransferService.php
+| | | | | | | | |____OutboundPaymentService.php
+| | | | | | | |____Issuing
+| | | | | | | | |____IssuingServiceFactory.php
+| | | | | | | | |____PersonalizationDesignService.php
+| | | | | | | | |____AuthorizationService.php
+| | | | | | | | |____TransactionService.php
+| | | | | | | | |____CardService.php
+| | | | | | | |____RefundService.php
+| | | | | | | |____ConfirmationTokenService.php
+| | | | | | | |____CustomerService.php
+| | | | | | | |____TestClockService.php
+| | | | | | | |____TestHelpersServiceFactory.php
+| | | | | | | |____Terminal
+| | | | | | | | |____ReaderService.php
+| | | | | | | | |____TerminalServiceFactory.php
+| | | | | | |____OAuthService.php
+| | | | | | |____CountrySpecService.php
+| | | | | | |____BalanceService.php
+| | | | | | |____SubscriptionItemService.php
+| | | | | | |____SubscriptionService.php
+| | | | | | |____Radar
+| | | | | | | |____EarlyFraudWarningService.php
+| | | | | | | |____ValueListItemService.php
+| | | | | | | |____ValueListService.php
+| | | | | | | |____RadarServiceFactory.php
+| | | | | | |____Terminal
+| | | | | | | |____ReaderService.php
+| | | | | | | |____ConnectionTokenService.php
+| | | | | | | |____LocationService.php
+| | | | | | | |____ConfigurationService.php
+| | | | | | | |____TerminalServiceFactory.php
+| | | | | | |____AccountSessionService.php
+| | | | | |____Terminal
+| | | | | | |____Configuration.php
+| | | | | | |____Reader.php
+| | | | | | |____ConnectionToken.php
+| | | | | | |____Location.php
+| | | | | |____Webhook.php
+| | | | |____init.php
+| | | | |____VERSION
+| | | | |____phpstan.neon.dist
+| | | | |____tests
+| | | | | |____TestCase.php
+| | | | | |____TestHelper.php
+| | | | | |____Stripe
+| | | | | | |____DisputeTest.php
+| | | | | | |____StripeObjectTest.php
+| | | | | | |____EventTest.php
+| | | | | | |____TaxRateTest.php
+| | | | | | |____WebhookTest.php
+| | | | | | |____ApplicationFeeTest.php
+| | | | | | |____ApplePayDomainTest.php
+| | | | | | |____PersonTest.php
+| | | | | | |____StripeTelemetryTest.php
+| | | | | | |____PaymentIntentTest.php
+| | | | | | |____PlanTest.php
+| | | | | | |____PromotionCodeTest.php
+| | | | | | |____Util
+| | | | | | | |____ObjectTypesTest.php
+| | | | | | | |____UtilTest.php
+| | | | | | | |____DefaultLoggerTest.php
+| | | | | | | |____RequestOptionsTest.php
+| | | | | | | |____CaseInsensitiveArrayTest.php
+| | | | | | |____PriceTest.php
+| | | | | | |____SetupIntentTest.php
+| | | | | | |____CustomerBalanceTransactionTest.php
+| | | | | | |____EphemeralKeyTest.php
+| | | | | | |____QuoteTest.php
+| | | | | | |____WebhookEndpointTest.php
+| | | | | | |____CardTest.php
+| | | | | | |____TopupTest.php
+| | | | | | |____StripeTest.php
+| | | | | | |____ExchangeRateTest.php
+| | | | | | |____Checkout
+| | | | | | | |____SessionTest.php
+| | | | | | |____Issuing
+| | | | | | | |____DisputeTest.php
+| | | | | | | |____CardTest.php
+| | | | | | | |____AuthorizationTest.php
+| | | | | | | |____CardholderTest.php
+| | | | | | | |____TransactionTest.php
+| | | | | | |____GeneratedExamplesTest.php
+| | | | | | |____OAuthErrorObjectTest.php
+| | | | | | |____BillingPortal
+| | | | | | | |____SessionTest.php
+| | | | | | |____SearchResultTest.php
+| | | | | | |____PayoutTest.php
+| | | | | | |____PaymentMethodTest.php
+| | | | | | |____Identity
+| | | | | | | |____VerificationSessionTest.php
+| | | | | | | |____VerificationReportTest.php
+| | | | | | |____TokenTest.php
+| | | | | | |____CouponTest.php
+| | | | | | |____StripeClientTest.php
+| | | | | | |____CustomerTest.php
+| | | | | | |____CountrySpecTest.php
+| | | | | | |____MandateTest.php
+| | | | | | |____AccountTest.php
+| | | | | | |____SubscriptionScheduleTest.php
+| | | | | | |____BalanceTransactionTest.php
+| | | | | | |____FileTest.php
+| | | | | | |____TransferReversalTest.php
+| | | | | | |____SetupAttemptTest.php
+| | | | | | |____TransferTest.php
+| | | | | | |____AccountLinkTest.php
+| | | | | | |____InvoiceItemTest.php
+| | | | | | |____FileCreationTest.php
+| | | | | | |____ApiResourceTest.php
+| | | | | | |____SubscriptionItemTest.php
+| | | | | | |____Reporting
+| | | | | | | |____ReportTypeTest.php
+| | | | | | | |____ReportRunTest.php
+| | | | | | |____Tax
+| | | | | | | |____SettingsTest.php
+| | | | | | |____CreditNoteTest.php
+| | | | | | |____BalanceTest.php
+| | | | | | |____ApiRequestorTest.php
+| | | | | | |____Exception
+| | | | | | | |____OAuth
+| | | | | | | | |____OAuthErrorExceptionTest.php
+| | | | | | | |____ApiErrorExceptionTest.php
+| | | | | | | |____SignatureVerificationExceptionTest.php
+| | | | | | |____ChargeTest.php
+| | | | | | |____HttpClient
+| | | | | | | |____CurlClientTest.php
+| | | | | | |____Sigma
+| | | | | | | |____ScheduledQueryRunTest.php
+| | | | | | |____ReviewTest.php
+| | | | | | |____ApplicationFeeRefundTest.php
+| | | | | | |____OAuthTest.php
+| | | | | | |____BaseStripeClientTest.php
+| | | | | | |____ProductTest.php
+| | | | | | |____SourceTest.php
+| | | | | | |____TaxCodeTest.php
+| | | | | | |____FileLinkTest.php
+| | | | | | |____TaxIdTest.php
+| | | | | | |____SubscriptionTest.php
+| | | | | | |____CapabilityTest.php
+| | | | | | |____Radar
+| | | | | | | |____EarlyFraudWarningTest.php
+| | | | | | | |____ValueListTest.php
+| | | | | | | |____ValueListItemTest.php
+| | | | | | |____CollectionTest.php
+| | | | | | |____Service
+| | | | | | | |____MandateServiceTest.php
+| | | | | | | |____OAuthServiceTest.php
+| | | | | | | |____TransferServiceTest.php
+| | | | | | | |____TokenServiceTest.php
+| | | | | | | |____PaymentIntentServiceTest.php
+| | | | | | | |____AbstractServiceTest.php
+| | | | | | | |____PromotionCodeServiceTest.php
+| | | | | | | |____TopupServiceTest.php
+| | | | | | | |____FileLinkServiceTest.php
+| | | | | | | |____EventServiceTest.php
+| | | | | | | |____BalanceTransactionServiceTest.php
+| | | | | | | |____InvoiceServiceTest.php
+| | | | | | | |____ChargeServiceTest.php
+| | | | | | | |____Checkout
+| | | | | | | | |____SessionServiceTest.php
+| | | | | | | |____SubscriptionItemServiceTest.php
+| | | | | | | |____QuoteServiceTest.php
+| | | | | | | |____Issuing
+| | | | | | | | |____TransactionServiceTest.php
+| | | | | | | | |____DisputeServiceTest.php
+| | | | | | | | |____AuthorizationServiceTest.php
+| | | | | | | | |____CardholderServiceTest.php
+| | | | | | | | |____CardServiceTest.php
+| | | | | | | |____SetupAttemptServiceTest.php
+| | | | | | | |____SubscriptionScheduleServiceTest.php
+| | | | | | | |____InvoiceItemServiceTest.php
+| | | | | | | |____ApplePayDomainServiceTest.php
+| | | | | | | |____DisputeServiceTest.php
+| | | | | | | |____CreditNoteServiceTest.php
+| | | | | | | |____CustomerServiceTest.php
+| | | | | | | |____BillingPortal
+| | | | | | | | |____SessionServiceTest.php
+| | | | | | | | |____ConfigurationServiceTest.php
+| | | | | | | |____SetupIntentServiceTest.php
+| | | | | | | |____Identity
+| | | | | | | | |____VerificationReportServiceTest.php
+| | | | | | | | |____VerificationSessionServiceTest.php
+| | | | | | | |____PriceServiceTest.php
+| | | | | | | |____SubscriptionServiceTest.php
+| | | | | | | |____BalanceServiceTest.php
+| | | | | | | |____AccountLinkServiceTest.php
+| | | | | | | |____Reporting
+| | | | | | | | |____ReportRunServiceTest.php
+| | | | | | | | |____ReportTypeServiceTest.php
+| | | | | | | |____ProductServiceTest.php
+| | | | | | | |____PlanServiceTest.php
+| | | | | | | |____WebhookEndpointServiceTest.php
+| | | | | | | |____CouponServiceTest.php
+| | | | | | | |____EphemeralKeyServiceTest.php
+| | | | | | | |____CoreServiceFactoryTest.php
+| | | | | | | |____CountrySpecServiceTest.php
+| | | | | | | |____ReviewServiceTest.php
+| | | | | | | |____Sigma
+| | | | | | | | |____ScheduledQueryRunServiceTest.php
+| | | | | | | |____FileServiceTest.php
+| | | | | | | |____PayoutServiceTest.php
+| | | | | | | |____RefundServiceTest.php
+| | | | | | | |____TaxRateServiceTest.php
+| | | | | | | |____AccountServiceTest.php
+| | | | | | | |____TestHelpers
+| | | | | | | | |____Terminal
+| | | | | | | | | |____ReaderServiceTest.php
+| | | | | | | |____ExchangeRateServiceTest.php
+| | | | | | | |____ApplicationFeeServiceTest.php
+| | | | | | | |____PaymentMethodServiceTest.php
+| | | | | | | |____SourceServiceTest.php
+| | | | | | | |____Radar
+| | | | | | | | |____ValueListServiceTest.php
+| | | | | | | | |____EarlyFraudWarningServiceTest.php
+| | | | | | | | |____ValueListItemServiceTest.php
+| | | | | | | |____Terminal
+| | | | | | | | |____LocationServiceTest.php
+| | | | | | | | |____ConnectionTokenServiceTest.php
+| | | | | | | | |____ReaderServiceTest.php
+| | | | | | | |____TaxCodeServiceTest.php
+| | | | | | |____InvoiceTest.php
+| | | | | | |____RefundTest.php
+| | | | | | |____Terminal
+| | | | | | | |____LocationTest.php
+| | | | | | | |____ReaderTest.php
+| | | | | | | |____ConnectionTokenTest.php
+| | | | | | |____BankAccountTest.php
+| | | | | | |____ErrorObjectTest.php
+| | | | | |____bootstrap.php
+| | | | | |____data
+| | | | | | |____test.png
+| | | | | |____bootstrap.no_autoload.php
+| | | | | |____openapi
+| | | | | | |____README.md
+| | | | | |____TestServer.php
+| | |____phpmailer
+| | | |____phpmailer
+| | | | |____SECURITY.md
+| | | | |____.git
+| | | | | |____logs
+| | | | | | |____HEAD
+| | | | | | |____refs
+| | | | | | | |____remotes
+| | | | | | | | |____origin
+| | | | | | | | | |____HEAD
+| | | | | | | |____heads
+| | | | | | | | |____master
+| | | | | |____info
+| | | | | | |____exclude
+| | | | | | |____refs
+| | | | | |____HEAD
+| | | | | |____index
+| | | | | |____refs
+| | | | | | |____remotes
+| | | | | | | |____origin
+| | | | | | | | |____HEAD
+| | | | | | |____heads
+| | | | | | | |____master
+| | | | | | |____tags
+| | | | | |____ORIG_HEAD
+| | | | | |____config
+| | | | | |____description
+| | | | | |____hooks
+| | | | | | |____pre-applypatch.sample
+| | | | | | |____pre-receive.sample
+| | | | | | |____post-update.sample
+| | | | | | |____commit-msg.sample
+| | | | | | |____sendemail-validate.sample
+| | | | | | |____pre-push.sample
+| | | | | | |____prepare-commit-msg.sample
+| | | | | | |____push-to-checkout.sample
+| | | | | | |____applypatch-msg.sample
+| | | | | | |____fsmonitor-watchman.sample
+| | | | | | |____pre-rebase.sample
+| | | | | | |____pre-commit.sample
+| | | | | | |____pre-merge-commit.sample
+| | | | | | |____update.sample
+| | | | | |____objects
+| | | | | | |____info
+| | | | | | | |____packs
+| | | | | | |____pack
+| | | | | | | |____pack-236c82b3bbed71a5b49651e9dee2cc0493daf388.idx
+| | | | | | | |____pack-236c82b3bbed71a5b49651e9dee2cc0493daf388.rev
+| | | | | | | |____pack-236c82b3bbed71a5b49651e9dee2cc0493daf388.pack
+| | | | | |____packed-refs
+| | | | |____src
+| | | | | |____PHPMailer.php
+| | | | | |____SMTP.php
+| | | | | |____POP3.php
+| | | | | |____DSNConfigurator.php
+| | | | | |____OAuth.php
+| | | | | |____OAuthTokenProvider.php
+| | | | | |____Exception.php
+| | | | |____README.md
+| | | | |____language
+| | | | | |____phpmailer.lang-pl.php
+| | | | | |____phpmailer.lang-ro.php
+| | | | | |____phpmailer.lang-fa.php
+| | | | | |____phpmailer.lang-tr.php
+| | | | | |____phpmailer.lang-pt_br.php
+| | | | | |____phpmailer.lang-vi.php
+| | | | | |____phpmailer.lang-sk.php
+| | | | | |____phpmailer.lang-fr.php
+| | | | | |____phpmailer.lang-lv.php
+| | | | | |____phpmailer.lang-mg.php
+| | | | | |____phpmailer.lang-he.php
+| | | | | |____phpmailer.lang-nb.php
+| | | | | |____phpmailer.lang-uk.php
+| | | | | |____phpmailer.lang-lt.php
+| | | | | |____phpmailer.lang-ko.php
+| | | | | |____phpmailer.lang-fi.php
+| | | | | |____phpmailer.lang-be.php
+| | | | | |____phpmailer.lang-id.php
+| | | | | |____phpmailer.lang-ka.php
+| | | | | |____phpmailer.lang-as.php
+| | | | | |____phpmailer.lang-ms.php
+| | | | | |____phpmailer.lang-it.php
+| | | | | |____phpmailer.lang-sr.php
+| | | | | |____phpmailer.lang-nl.php
+| | | | | |____phpmailer.lang-sl.php
+| | | | | |____phpmailer.lang-fo.php
+| | | | | |____phpmailer.lang-bn.php
+| | | | | |____phpmailer.lang-si.php
+| | | | | |____phpmailer.lang-da.php
+| | | | | |____phpmailer.lang-zh.php
+| | | | | |____phpmailer.lang-ku.php
+| | | | | |____phpmailer.lang-et.php
+| | | | | |____phpmailer.lang-gl.php
+| | | | | |____phpmailer.lang-zh_cn.php
+| | | | | |____phpmailer.lang-az.php
+| | | | | |____phpmailer.lang-es.php
+| | | | | |____phpmailer.lang-af.php
+| | | | | |____phpmailer.lang-sr_latn.php
+| | | | | |____phpmailer.lang-pt.php
+| | | | | |____phpmailer.lang-bg.php
+| | | | | |____phpmailer.lang-ca.php
+| | | | | |____phpmailer.lang-hy.php
+| | | | | |____phpmailer.lang-cs.php
+| | | | | |____phpmailer.lang-ur.php
+| | | | | |____phpmailer.lang-tl.php
+| | | | | |____phpmailer.lang-el.php
+| | | | | |____phpmailer.lang-sv.php
+| | | | | |____phpmailer.lang-de.php
+| | | | | |____phpmailer.lang-hu.php
+| | | | | |____phpmailer.lang-hi.php
+| | | | | |____phpmailer.lang-ar.php
+| | | | | |____phpmailer.lang-ru.php
+| | | | | |____phpmailer.lang-mn.php
+| | | | | |____phpmailer.lang-ja.php
+| | | | | |____phpmailer.lang-eo.php
+| | | | | |____phpmailer.lang-ba.php
+| | | | | |____phpmailer.lang-hr.php
+| | | | |____.gitignore
+| | | | |____.github
+| | | | | |____workflows
+| | | | | | |____tests.yml
+| | | | | | |____scorecards.yml
+| | | | | | |____docs.yaml
+| | | | | |____dependabot.yml
+| | | | | |____actions
+| | | | | | |____build-docs
+| | | | | | | |____entrypoint.sh
+| | | | | | | |____Dockerfile
+| | | | | |____FUNDING.yml
+| | | | | |____ISSUE_TEMPLATE
+| | | | | | |____bug_report.md
+| | | | |____phpdoc.dist.xml
+| | | | |____get_oauth_token.php
+| | | | |____.gitattributes
+| | | | |____LICENSE
+| | | | |____composer.json
+| | | | |____COMMITMENT
+| | | | |____.phan
+| | | | | |____config.php
+| | | | |____.editorconfig
+| | | | |____phpunit.xml.dist
+| | | | |____test
+| | | | | |____TestCase.php
+| | | | | |____fakesendmail.sh
+| | | | | |____PreSendTestCase.php
+| | | | | |____SendTestCase.php
+| | | | | |____OAuth
+| | | | | | |____OAuthTest.php
+| | | | | |____runfakepopserver.sh
+| | | | | |____Language
+| | | | | | |____TranslationCompletenessTest.php
+| | | | | |____validators.php
+| | | | | |____DebugLogTestListener.php
+| | | | | |____POP3
+| | | | | | |____PopBeforeSmtpTest.php
+| | | | | |____Fixtures
+| | | | | | |____FileIsAccessibleTest
+| | | | | | | |____accessible.txt
+| | | | | | | |____inaccessible.txt
+| | | | | | |____LocalizationTest
+| | | | | | | |____phpmailer.lang-xa_scri_cc.php
+| | | | | | | |____phpmailer.lang-xc_cc.php
+| | | | | | | |____phpmailer.lang-xd_cc.php
+| | | | | | | |____phpmailer.lang-fr.php
+| | | | | | | |____phpmailer.lang-xx.php
+| | | | | | | |____phpmailer.lang-nl.php
+| | | | | | | |____phpmailer.lang-yy.php
+| | | | | | | |____phpmailer.lang-xd_scri.php
+| | | | | | | |____phpmailer.lang-xb_scri.php
+| | | | | | | |____phpmailer.lang-xe.php
+| | | | | | | |____phpmailer.lang-zz.php
+| | | | | |____PHPMailer
+| | | | | | |____AddrFormatTest.php
+| | | | | | |____Html2TextTest.php
+| | | | | | |____FilenameToTypeTest.php
+| | | | | | |____GetLastMessageIDTest.php
+| | | | | | |____SetWordWrapTest.php
+| | | | | | |____AddStringAttachmentTest.php
+| | | | | | |____EncodeQTest.php
+| | | | | | |____SetErrorTest.php
+| | | | | | |____XMailerTest.php
+| | | | | | |____Utf8CharBoundaryTest.php
+| | | | | | |____ICalTest.php
+| | | | | | |____ReplyToGetSetClearTest.php
+| | | | | | |____PunyencodeAddressTest.php
+| | | | | | |____WrapTextTest.php
+| | | | | | |____MailTransportTest.php
+| | | | | | |____AddEmbeddedImageTest.php
+| | | | | | |____SetFromTest.php
+| | | | | | |____SetTest.php
+| | | | | | |____ParseAddressesTest.php
+| | | | | | |____MbPathinfoTest.php
+| | | | | | |____MimeTypesTest.php
+| | | | | | |____AuthCRAMMD5Test.php
+| | | | | | |____DSNConfiguratorTest.php
+| | | | | | |____DKIMTest.php
+| | | | | | |____GenerateIdTest.php
+| | | | | | |____ValidateAddressCustomValidatorTest.php
+| | | | | | |____NormalizeBreaksTest.php
+| | | | | | |____FileIsAccessibleTest.php
+| | | | | | |____AddStringEmbeddedImageTest.php
+| | | | | | |____EncodeStringTest.php
+| | | | | | |____DKIMWithoutExceptionsTest.php
+| | | | | | |____IsValidHostTest.php
+| | | | | | |____CustomHeaderTest.php
+| | | | | | |____LocalizationTest.php
+| | | | | | |____ValidateAddressTest.php
+| | | | | | |____HasLineLongerThanMaxTest.php
+| | | | | | |____QuotedStringTest.php
+| | | | | | |____IsPermittedPathTest.php
+| | | | | | |____PHPMailerTest.php
+| | | | | |____fakepopserver.sh
+| | | | | |____testbootstrap-dist.php
+| | | | | |____Security
+| | | | | | |____DenialOfServiceVectorsTest.php
+| | | | |____phpcs.xml.dist
+| | | | |____.codecov.yml
+| | | | |____changelog.md
+| | | | |____SMTPUTF8.md
+| | | | |____UPGRADING.md
+| | | | |____examples
+| | | | | |____ssl_options.phps
+| | | | | |____images
+| | | | | | |____phpmailer_mini.png
+| | | | | | |____phpmailer.png
+| | | | | | |____PHPMailer card logo.png
+| | | | | | |____PHPMailer card logo.svg
+| | | | | | |____PHPMailer card logo.afdesign
+| | | | | |____smime_signed_mail.phps
+| | | | | |____README.md
+| | | | | |____DKIM_gen_keys.phps
+| | | | | |____smtp_check.phps
+| | | | | |____mailing_list.phps
+| | | | | |____mail.phps
+| | | | | |____azure_xoauth2.phps
+| | | | | |____pop_before_smtp.phps
+| | | | | |____sendoauth2.phps
+| | | | | |____sendmail.phps
+| | | | | |____send_file_upload.phps
+| | | | | |____contactform.phps
+| | | | | |____callback.phps
+| | | | | |____smtp_low_memory.phps
+| | | | | |____contents.html
+| | | | | |____gmail.phps
+| | | | | |____extending.phps
+| | | | | |____simple_contact_form.phps
+| | | | | |____smtp_no_auth.phps
+| | | | | |____gmail_xoauth.phps
+| | | | | |____send_multiple_file_upload.phps
+| | | | | |____exceptions.phps
+| | | | | |____contentsutf8.html
+| | | | | |____contactform-ajax.phps
+| | | | | |____DKIM_sign.phps
+| | | | | |____smtp.phps
+| | | | |____docs
+| | | | | |____README.md
+| | | | |____VERSION
+| | |____composer
+| | | |____autoload_static.php
+| | | |____autoload_classmap.php
+| | | |____LICENSE
+| | | |____ClassLoader.php
+| | | |____installed.php
+| | | |____InstalledVersions.php
+| | | |____autoload_psr4.php
+| | | |____autoload_real.php
+| | | |____installed.json
+| | | |____platform_check.php
+| | | |____autoload_namespaces.php
+| | |____autoload.php
+| |____archive_search.php
+|____normalized
+| |____671b5458b291529a79b1b49a3680e3de.txt
+| |____0d601ce973234a38e32ffa26e87da77b.txt
+| |____6fe9e24ed7e7cad9aac43a7aa1a3d4a6.txt
+| |____7727e38e2d8c6c90d15529a523c361b9.txt
+| |____37c40dad0e9e264726c271e778de2268.txt
+| |____8d22626e4b21fe3832550938c8604e33.txt
+| |____769d6a7022bb3d2f417f09cb6a4dff2c.txt
+| |____test.md
+| |____test.md.json
+| |____general
+| |____9e421ae3e39e39b23cbc95e7251dbe8e.txt
+| |____2068ae61307086e8de56adfcc68b4208.txt
+| |_____state_s_69e83e696108b.json
+| |_____state_s_69e83ddc6794c.json
+| |____49f6afc2932a71a7883888a4f12df4fe.txt
+| |____239c59b98aefe4a9bb1b9e0a3a05a048.txt
+| |____d98c33e2461a2a180889967b84d644a0.txt
+| |____20260422_015914_server_sys_build_4-21-26.md
+| |____1b41970a822fb43eaf6c74a063e92821.txt
+| |____feb77ed7a1db3c8fb68a1d5970b3a3a2.txt
+| |____c3578eb92771b983b80098145e580850.txt
+| |____0427483c24eb657b685eaf0a1ef99bea.txt
+| |____1e6525d9d9c8398fc66beecc4445dc2e.txt
+| |____b4e00a49f6a0e602be8a8117c8565d6f.txt
+| |____c14fb342c0d3ca88aa4a626a870ac66d.txt
+| |____index_meta.json
+| |____legaisee
+| | |____Carr_Multimedia
+| | | |____20260426_224234_Test_Title.txt
+| | |____acme_test
+| | | |____20260426_224641_pricing_audit.txt
+| |____20260422_015914_server_sys_build_4-21-26.md.json
+| |____b71b11bbf2318b12b591776ef5d9baea.txt
+| |_____state_s_69e83d41012c9.json
+| |____8cdd9251de98033ed09d415a1bc68584.txt
+| |____a9791612870c9d93dfc7eaeff122c2f1.txt
+| |____72810ab3f5d11b4d37dca1b08a7bb329.txt
+| |____da559865f1c37e8289002cd75e108b45.txt
+| |____3dc3883878bc265b1a1463014dc76eb9.txt
+| |____9ec5a42c90fb7ba25f45250bb6f1bfdf.txt
+|____session.php
+|____view_ingest.php
+|____job prompt2.docx
+|____archive

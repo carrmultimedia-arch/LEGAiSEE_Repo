@@ -9,6 +9,7 @@ return [
     'cases'                  => 'cases_module.php',
     'clients'                => 'clients_module.php',
     'cluster'                => 'cluster_module.php',
+    'cockpit'                => 'cockpit_module.php',
     'compare'                => 'compare_module.php',
     'cross_case_engine'      => 'cross_case_engine.php',
     'dashboard'              => 'dashboard_module.php',
@@ -23,7 +24,8 @@ return [
     'ingest_view'            => 'ingest_view_module.php',
     'intelligence_dashboard' => 'intelligence_dashboard_module.php',
     'pm'                     => 'pm_module.php',
-    'predictive'             => 'predictive_link_module_v1.php',
+    'predictive'             => 'predictive_module.php',
+    'predictive_link_module_v1' => 'predictive_link_module_v1.php',
     'recommendation'         => 'recommendation_module.php',
     'relations'              => 'relations_module.php',
     'report'                 => 'report_module.php',
@@ -33,5 +35,7 @@ return [
     'time_intelligence'      => 'time_intelligence_module.php',
     'vault'                  => 'vault_module.php',
     'view'                   => 'view_module.php',
+    'payment'                => 'payment_module.php',
+    'dig_review'             => 'dig_review_module.php',
 
 ];

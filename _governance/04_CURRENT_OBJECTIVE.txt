@@ -1,0 +1,16 @@
+# LEGAiSEE — CURRENT OBJECTIVE
+### Last Updated: 2026-05-19
+
+## ACTIVE OBJECTIVE
+WO-001: Complete governance setup, audit server state, run DB migrations.
+
+## BUSINESS PURPOSE
+Nothing can be safely built until we know exactly what is deployed and the
+database has the correct schema. This is foundational.
+
+## SUCCESS CRITERIA
+- [ ] All governance files live in _governance/
+- [ ] Server audit complete — known state of every pending file
+- [ ] context column confirmed present on all major tables
+- [ ] case_id column added to review_flags
+- [ ] SESSION_LOG.md updated with results

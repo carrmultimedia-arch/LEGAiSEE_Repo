@@ -1,0 +1,348 @@
+# 0607 — SERIES 600 NAVIGATION
+
+## LEGAiSEE COMMANDCENTER KNOWLEDGE SYSTEM
+
+Version: 1.0
+Status: ACTIVE GOVERNANCE STANDARD
+
+---
+
+# PURPOSE
+
+The Navigation subsystem defines how operators move throughout the LEGAiSEE CommandCenter.
+
+Navigation is responsible for providing clear, predictable, and efficient access to every system capability, regardless of system size or complexity.
+
+Its purpose is to minimize cognitive effort while maximizing operational efficiency.
+
+Operators should always know:
+
+* where they are
+* how they got there
+* what they can do next
+* how to return
+* how to reach any other area of the system
+
+Navigation is a core operational function, not merely a user interface feature.
+
+---
+
+# CORE PRINCIPLE
+
+The operator should never have to search for the system.
+
+The system should always guide the operator.
+
+Navigation should feel intuitive, consistent, and purpose-driven, allowing users to focus on their work rather than on finding tools.
+
+---
+
+# OBJECTIVES
+
+The Navigation subsystem shall:
+
+* provide consistent movement throughout the system
+* expose all authorized capabilities
+* minimize unnecessary clicks
+* reduce cognitive load
+* support multiple navigation methods
+* preserve operational context
+* scale as the system grows
+* remain fully governed
+
+---
+
+# NAVIGATION ARCHITECTURE
+
+Navigation is organized into multiple layers.
+
+```text id="607nav01"
+Global Navigation
+        │
+        ▼
+Section Navigation
+        │
+        ▼
+Workspace Navigation
+        │
+        ▼
+Context Navigation
+        │
+        ▼
+Object Navigation
+```
+
+Each layer provides increasingly specific access while preserving orientation.
+
+---
+
+# GLOBAL NAVIGATION
+
+Global Navigation provides access to the major areas of CommandCenter.
+
+Examples include:
+
+* Dashboard
+* Excavation
+* Investigations
+* Projects
+* Clients
+* Cases
+* Knowledge Graph
+* Intelligence
+* Reports
+* Administration
+* Settings
+
+Global Navigation remains available throughout the system.
+
+---
+
+# SECTION NAVIGATION
+
+Section Navigation provides movement within a major functional area.
+
+Examples include:
+
+Within Excavation:
+
+* Active Excavations
+* New Excavation
+* Completed Jobs
+* Sources
+* Pipelines
+* Reports
+
+Within Investigations:
+
+* Active Investigations
+* Evidence
+* Entities
+* Timelines
+* Dossiers
+
+Section Navigation adapts to the active workspace.
+
+---
+
+# WORKSPACE NAVIGATION
+
+Each workspace provides navigation specific to its operational purpose.
+
+Examples include:
+
+* tabs
+* split views
+* docked panels
+* collapsible sidebars
+* inspector panels
+* detail views
+
+Workspace navigation should reduce unnecessary context switching.
+
+---
+
+# CONTEXT NAVIGATION
+
+Context Navigation provides direct movement between related information.
+
+Examples:
+
+* Client → Cases
+* Case → Evidence
+* Evidence → Artifact
+* Artifact → Entity
+* Entity → Relationships
+* Relationship → Timeline
+* Timeline → Dossier
+
+Context Navigation reflects the system's knowledge graph.
+
+---
+
+# OBJECT NAVIGATION
+
+Every major object should provide direct access to related objects.
+
+Objects may include:
+
+* Clients
+* Cases
+* Projects
+* Artifacts
+* Documents
+* Entities
+* Reports
+* Tasks
+* Workflows
+
+Relationships should be immediately discoverable.
+
+---
+
+# SEARCH
+
+Search is a primary navigation mechanism.
+
+Operators should be able to locate:
+
+* clients
+* projects
+* investigations
+* entities
+* artifacts
+* documents
+* workflows
+* reports
+* commands
+
+Search should support both structured and natural-language queries where available.
+
+---
+
+# BREADCRUMBS
+
+Breadcrumbs provide continuous orientation.
+
+They should display the operator's current location within the system hierarchy.
+
+Example:
+
+```text id="607nav02"
+Dashboard
+   >
+Clients
+   >
+Acme Corporation
+   >
+Investigation
+   >
+Timeline
+```
+
+Breadcrumbs support rapid navigation without losing context.
+
+---
+
+# QUICK ACCESS
+
+Frequently used destinations may be accessed through:
+
+* Favorites
+* Recent Items
+* Pinned Projects
+* Active Investigations
+* Quick Commands
+* Saved Searches
+
+Quick Access should adapt to operator activity.
+
+---
+
+# SHORTCUTS
+
+The Navigation subsystem should support:
+
+* keyboard shortcuts
+* command palette
+* contextual menus
+* quick launch
+* voice navigation
+* bookmarks
+
+Alternative navigation methods improve operational efficiency.
+
+---
+
+# STATE PRESERVATION
+
+Navigation should preserve:
+
+* filters
+* search results
+* workspace layout
+* selected objects
+* panel positions
+* investigation context
+
+Returning to a workspace should restore the previous operational state whenever appropriate.
+
+---
+
+# PERMISSIONS
+
+Navigation reflects authorization.
+
+Operators shall only see navigation options for resources they are permitted to access.
+
+Restricted functionality should remain hidden or appropriately disabled.
+
+Navigation never bypasses security.
+
+---
+
+# SCALABILITY
+
+The Navigation architecture must support continued expansion without restructuring.
+
+New modules, engines, workspaces, and tools should integrate into the existing navigation hierarchy without disrupting established workflows.
+
+---
+
+# GOVERNANCE
+
+Navigation shall never:
+
+* expose unauthorized resources
+* bypass validation
+* circumvent security
+* create hidden execution paths
+* misrepresent system structure
+
+Every navigation path must remain governed, predictable, and auditable.
+
+---
+
+# RELATIONSHIP TO OTHER SERIES
+
+### Series 200
+
+Provides routing and system infrastructure.
+
+### Series 300
+
+Provides excavation workflows accessible through navigation.
+
+### Series 400
+
+Provides graph-based relationships that enable contextual navigation.
+
+### Series 500
+
+Provides interaction models, voice interfaces, and operational workflows.
+
+### Series 600
+
+Defines the complete user experience through structured navigation, dashboards, workspaces, and interface components.
+
+---
+
+# SYSTEM ROLE
+
+The Navigation subsystem functions as the connective framework of the LEGAiSEE CommandCenter.
+
+It links every subsystem, workspace, investigation, project, and intelligence asset into a coherent operational experience.
+
+Effective navigation transforms a collection of modules into a unified Intelligence Operating System.
+
+---
+
+# GUIDING PRINCIPLE
+
+> **Every destination should be easy to find.
+> Every relationship should be easy to follow.
+> Every operator should always know where they are, where they can go, and how every part of the CommandCenter connects.**
+
+---
+
+## END OF FILE

@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 
-// Use kernel_db() — replaces $pdo check
+require_once __DIR__ . '/../kernel/db.php';
+
 try {
     $pdo = kernel_db();
 } catch (Throwable $e) {
@@ -10,6 +11,7 @@ try {
 
 $action   = $_GET['action'] ?? 'status';
 $entityId = isset($_GET['id']) ? (int)$_GET['id'] : null;
+$case_id = $_GET['case_id'] ?? null;
 
 function normalize(string $text): string {
     return preg_replace('/\s+/', ' ', strtolower(trim($text)));
@@ -56,18 +58,87 @@ function runResolutionScan(PDO $pdo): array {
     $entities    = $pdo->query("SELECT * FROM entities ORDER BY created_at DESC LIMIT 500")->fetchAll(PDO::FETCH_ASSOC);
     $mergeCount  = 0;
     $comparisons = 0;
+    $insights    = [];
+    
     for ($i = 0; $i < count($entities); $i++) {
         for ($j = $i + 1; $j < count($entities); $j++) {
             $comparisons++;
             $eval = evaluateMerge($entities[$i], $entities[$j]);
-            if ($eval['should_merge']) { $mergeCount++; break 2; }
+            if ($eval['should_merge']) { 
+                $mergeCount++;
+                $insights[] = [
+                    'type' => 'entity_merge',
+                    'summary' => "Potential merge: {$entities[$i]['canonical_name']} ↔ {$entities[$j]['canonical_name']}",
+                    'confidence' => $eval['score'] >= 0.9 ? 'high' : ($eval['score'] >= 0.8 ? 'medium' : 'low'),
+                    'created_at' => date('c')
+                ];
+                break 2;
+            }
         }
     }
+    
     return [
         'status'           => 'complete',
         'entities_scanned' => count($entities),
         'comparisons'      => $comparisons,
-        'merges_executed'  => $mergeCount
+        'merges_executed'  => $mergeCount,
+        'insights'         => $insights
+    ];
+}
+
+function writeInsights(array $insights, string $case_id): bool {
+    if (!$case_id) return false;
+    
+    // Find case directory
+    $caseDir = null;
+    $clientsDir = __DIR__ . '/../data/clients';
+    
+    foreach (glob($clientsDir . '/*/cases/*', GLOB_ONLYDIR) as $dir) {
+        if (basename($dir) === $case_id) {
+            $caseDir = $dir;
+            break;
+        }
+    }
+    
+    if (!$caseDir) return false;
+    
+    $insightsFile = $caseDir . '/insights.json';
+    $existingInsights = file_exists($insightsFile) ? json_decode(file_get_contents($insightsFile), true) : [];
+    
+    // Merge new insights with existing
+    $mergedInsights = array_merge($existingInsights, $insights);
+    
+    return file_put_contents($insightsFile, json_encode($mergedInsights, JSON_PRETTY_PRINT)) !== false;
+}
+
+// Handle actions
+if ($action === 'scan') {
+    $result = runResolutionScan($pdo);
+    if ($case_id && !empty($result['insights'])) {
+        writeInsights($result['insights'], $case_id);
+    }
+    return $result;
+}
+
+if ($action === 'analyze' && $entityId) {
+    $entity = getEntity($pdo, $entityId);
+    if (!$entity) return ['status' => 'error', 'message' => 'entity_not_found'];
+    
+    $candidates = findCandidates($pdo, $entity['canonical_name']);
+    $evaluations = [];
+    foreach ($candidates as $c) {
+        if ($c['id'] !== $entityId) {
+            $evaluations[] = [
+                'candidate' => $c,
+                'evaluation' => evaluateMerge($entity, $c)
+            ];
+        }
+    }
+    
+    return [
+        'status' => 'analyzed',
+        'entity' => $entity,
+        'candidates' => $evaluations
     ];
 }
 

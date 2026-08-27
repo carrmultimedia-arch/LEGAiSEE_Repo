@@ -1,0 +1,299 @@
+# 0604 — SERIES 600 INVESTIGATION WORKSPACE
+
+## LEGAiSEE COMMANDCENTER KNOWLEDGE SYSTEM
+
+Version: 1.0
+Status: ACTIVE GOVERNANCE STANDARD
+
+---
+
+# PURPOSE
+
+The Investigation Workspace is the primary analytical environment within the LEGAiSEE CommandCenter.
+
+It is designed for investigators, analysts, researchers, consultants, and operators who need to explore evidence, validate findings, reconstruct historical events, discover relationships, and develop actionable intelligence.
+
+Unlike the Dashboard, which summarizes activity, the Investigation Workspace is where detailed analytical work is performed.
+
+It answers one fundamental question:
+
+> **"What does the evidence actually tell us?"**
+
+---
+
+# CORE PRINCIPLE
+
+Every conclusion must originate from evidence.
+
+Every relationship must be explainable.
+
+Every discovery must remain traceable.
+
+The Investigation Workspace exists to support disciplined investigation rather than assumption or speculation.
+
+---
+
+# PRIMARY RESPONSIBILITIES
+
+The Investigation Workspace provides tools for:
+
+* evidence review
+* artifact exploration
+* entity investigation
+* relationship analysis
+* timeline reconstruction
+* graph exploration
+* pattern recognition
+* hypothesis development
+* intelligence validation
+* dossier preparation
+
+---
+
+# INVESTIGATION LIFECYCLE
+
+A standard investigation progresses through structured phases.
+
+```text
+Evidence Collection
+        │
+        ▼
+Evidence Review
+        │
+        ▼
+Artifact Analysis
+        │
+        ▼
+Entity Identification
+        │
+        ▼
+Relationship Discovery
+        │
+        ▼
+Timeline Reconstruction
+        │
+        ▼
+Pattern Analysis
+        │
+        ▼
+Hypothesis Development
+        │
+        ▼
+Validation
+        │
+        ▼
+Findings
+        │
+        ▼
+Recommendations
+        │
+        ▼
+Dossier
+```
+
+Each phase builds upon validated information from the previous stage.
+
+---
+
+# WORKSPACE LAYOUT
+
+The Investigation Workspace is composed of interconnected analytical panels including:
+
+* Investigation Summary
+* Evidence Browser
+* Artifact Viewer
+* Entity Explorer
+* Relationship Graph
+* Timeline Viewer
+* Notes Panel
+* Hypothesis Tracker
+* Recommendation Panel
+* Dossier Builder
+
+Panels may be rearranged without altering analytical integrity.
+
+---
+
+# EVIDENCE MANAGEMENT
+
+Investigators may examine:
+
+* documents
+* presentations
+* spreadsheets
+* websites
+* emails
+* images
+* audio
+* video
+* reports
+* databases
+* manually entered observations
+
+Original evidence remains immutable.
+
+Analysis is performed through references rather than modification.
+
+---
+
+# ENTITY EXPLORATION
+
+The workspace enables investigation of identified entities including:
+
+* people
+* organizations
+* brands
+* locations
+* products
+* campaigns
+* documents
+* events
+* technologies
+
+Each entity links directly to its supporting evidence and relationships.
+
+---
+
+# RELATIONSHIP ANALYSIS
+
+Operators may examine:
+
+* direct relationships
+* indirect relationships
+* relationship strength
+* relationship history
+* relationship evolution
+* supporting evidence
+* graph connectivity
+
+All relationships remain evidence-based and explainable.
+
+---
+
+# TIMELINE ANALYSIS
+
+Timeline tools allow investigators to:
+
+* reconstruct historical sequences
+* identify missing events
+* compare parallel timelines
+* detect causal chains
+* analyze progression over time
+
+Timelines are synchronized with graph intelligence and memory.
+
+---
+
+# HYPOTHESIS MANAGEMENT
+
+Investigators may create and manage analytical hypotheses.
+
+Each hypothesis includes:
+
+* description
+* supporting evidence
+* contradicting evidence
+* confidence assessment
+* validation status
+* related entities
+* related investigations
+
+Hypotheses remain separate from verified findings until validated.
+
+---
+
+# NOTES AND OBSERVATIONS
+
+Investigators may record:
+
+* observations
+* questions
+* theories
+* references
+* decisions
+* follow-up actions
+
+Notes become part of the permanent investigation record.
+
+---
+
+# DOSSIER DEVELOPMENT
+
+Validated findings may be assembled into structured dossiers.
+
+The workspace supports:
+
+* evidence selection
+* narrative organization
+* supporting documentation
+* recommendations
+* appendices
+* export preparation
+
+Every statement within a dossier should be traceable to evidence.
+
+---
+
+# GOVERNANCE
+
+The Investigation Workspace shall never:
+
+* alter original evidence
+* fabricate relationships
+* suppress contradictory information
+* bypass validation procedures
+* generate unsupported conclusions
+
+Analytical integrity is mandatory.
+
+---
+
+# RELATIONSHIP TO OTHER SERIES
+
+### Series 300
+
+Provides excavation outputs and recovered artifacts.
+
+### Series 400
+
+Provides graph intelligence, memory, reasoning, and prediction.
+
+### Series 500
+
+Provides planning, mentoring, teaching, project management, and operational guidance.
+
+### 0601 Dashboard
+
+Provides operational awareness.
+
+### 0602 Excavation Command
+
+Initiates and manages excavation workflows.
+
+### 0603 Executive Dashboard
+
+Provides executive-level summaries derived from investigative findings.
+
+---
+
+# SYSTEM ROLE
+
+The Investigation Workspace is the analytical heart of the LEGAiSEE CommandCenter.
+
+It provides a governed environment for transforming evidence into validated intelligence through structured investigation, relationship analysis, timeline reconstruction, and evidence-based reasoning.
+
+It is where raw information becomes organizational understanding.
+
+---
+
+# GUIDING PRINCIPLE
+
+> **Evidence becomes artifacts.
+> Artifacts reveal relationships.
+> Relationships establish context.
+> Context produces understanding.
+> Understanding becomes intelligence.**
+
+---
+
+## END OF FILE

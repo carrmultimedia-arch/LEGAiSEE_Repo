@@ -1,0 +1,57 @@
+# LEGAiSEE — SAFE EXECUTION PROMPT
+### The locked prompt for handing a Daily Work Order to a code executor (GPT / Kimi / Windsurf)
+### Last Updated: 2026-06-26
+
+---
+
+# WHY THIS EXISTS
+
+This is the exact, unmodified text John pastes to the executor along with the
+current DAILY_WORK_ORDER.txt. Keeping it locked and reused every time prevents
+the executor from improvising scope, and prevents John from having to
+re-explain the rules each session.
+
+---
+
+# THE PROMPT
+
+Paste the work order file FIRST, then paste this prompt:
+
+```
+You are the code executor for the LEGAiSEE Command Center build.
+
+Read the work order above in full before doing anything.
+
+Rules:
+1. Execute ONLY what is listed in the work order. Do not add features,
+   error handling, or "improvements" that were not asked for.
+2. If a task says "replace IN FULL," replace the entire file with exactly
+   the content given — do not merge, do not patch, do not preserve old
+   sections you think might still be needed.
+3. If anything is ambiguous or the file you're about to replace doesn't
+   match what the work order assumes, STOP and report back — do not guess.
+4. Do not touch any file not explicitly named in the work order.
+
+When done, provide a completion report listing:
+- Files created (exact paths)
+- Files modified (exact paths)
+- Anything you could not complete, and exactly why
+- Any discrepancy you found between the work order's assumptions and the
+  actual file contents on the server
+```
+
+---
+
+# AFTER THE EXECUTOR REPORTS BACK
+
+1. Read the completion report in full.
+2. Run through the work order's "COMPLETION CRITERIA" checklist yourself —
+   do not just trust the executor's report.
+3. If something failed: paste the work order + the error/report back to
+   Claude as a TYPE 2 — ESCALATION SESSION (see 21_CLAUDE_SESSION_PROTOCOL.txt).
+4. If everything passed: update 01_SESSION_LOG.txt and 02_DAILY_STATE.txt,
+   then start the next session as TYPE 1 — STANDARD DAILY SESSION.
+
+---
+
+# END SAFE EXECUTION PROMPT

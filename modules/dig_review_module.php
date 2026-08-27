@@ -19,6 +19,7 @@ if (!defined('KERNEL_ROOT')) {
     die('Direct access not permitted.');
 }
 
+require_once __DIR__ . '/../kernel/db.php';
 $db = kernel_db();
 
 // ── Ensure review_flags table exists ─────────────────────────────────────────
@@ -26,18 +27,15 @@ $db = kernel_db();
 try {
     $db->exec("
         CREATE TABLE IF NOT EXISTS review_flags (
-            id           INT AUTO_INCREMENT PRIMARY KEY,
-            source_table VARCHAR(64)  NOT NULL COMMENT 'entities | relationships | documents | artifacts',
-            source_id    INT          NOT NULL,
-            context      VARCHAR(32)  DEFAULT NULL,
-            status       ENUM('pending','confirmed','rejected','needs_more_info') NOT NULL DEFAULT 'pending',
-            operator_note TEXT        DEFAULT NULL,
-            reviewed_at  DATETIME     DEFAULT NULL,
-            created_at   DATETIME     DEFAULT CURRENT_TIMESTAMP,
-            INDEX idx_rf_source (source_table, source_id),
-            INDEX idx_rf_status (status),
-            INDEX idx_rf_context (context)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+            id           INT PRIMARY KEY AUTO_INCREMENT,
+            source_table TEXT NOT NULL,
+            source_id    INTEGER NOT NULL,
+            context      TEXT DEFAULT NULL,
+            status       TEXT NOT NULL DEFAULT 'pending',
+            operator_note TEXT DEFAULT NULL,
+            reviewed_at  DATETIME NULL,
+            created_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )
     ");
 } catch (Exception $e) { /* table likely already exists */ }
 
@@ -59,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['review_action'])) {
                 UPDATE review_flags
                 SET status = :status,
                     operator_note = :note,
-                    reviewed_at = NOW()
+                    reviewed_at = CURRENT_TIMESTAMP
                 WHERE id = :id
             ");
             $stmt->execute([':status' => $status, ':note' => $note, ':id' => $flag_id]);
@@ -117,7 +115,80 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['review_action'])) {
     exit;
 }
 
-// ── Load review queue ─────────────────────────────────────────────────────────
+// ── Load WO-D findings from case analysis files ─────────────────────────────
+
+$clientsDir = __DIR__ . '/../data/clients';
+$caseFindings = [];
+
+if (is_dir($clientsDir)) {
+    foreach (glob($clientsDir . '/*/cases/*/meta.json') as $metaFile) {
+        $caseDir = dirname($metaFile);
+        $caseId = basename($caseDir);
+        $clientId = basename(dirname(dirname($caseDir)));
+        
+        $meta = json_decode(file_get_contents($metaFile), true);
+        if ($meta) {
+            // Load insights.json
+            $insightsFile = $caseDir . '/insights.json';
+            if (file_exists($insightsFile)) {
+                $insights = json_decode(file_get_contents($insightsFile), true);
+                if ($insights) {
+                    foreach ($insights as $insight) {
+                        $caseFindings[] = [
+                            'source_table' => 'insight',
+                            'source_id' => $caseId,
+                            'context' => $clientId,
+                            'status' => 'pending',
+                            'label' => $insight['summary'] ?? 'Unknown insight',
+                            'detail' => "Type: {$insight['type']}, Confidence: {$insight['confidence']}",
+                            'type_display' => 'Insight'
+                        ];
+                    }
+                }
+            }
+            
+            // Load clusters.json
+            $clustersFile = $caseDir . '/clusters.json';
+            if (file_exists($clustersFile)) {
+                $clusters = json_decode(file_get_contents($clustersFile), true);
+                if ($clusters) {
+                    foreach ($clusters as $clusterName => $members) {
+                        $caseFindings[] = [
+                            'source_table' => 'cluster',
+                            'source_id' => $caseId,
+                            'context' => $clientId,
+                            'status' => 'pending',
+                            'label' => $clusterName,
+                            'detail' => count($members) . ' members',
+                            'type_display' => 'Cluster'
+                        ];
+                    }
+                }
+            }
+            
+            // Load network.json
+            $networkFile = $caseDir . '/network.json';
+            if (file_exists($networkFile)) {
+                $network = json_decode(file_get_contents($networkFile), true);
+                if ($network && isset($network['nodes'])) {
+                    foreach ($network['nodes'] as $node) {
+                        $caseFindings[] = [
+                            'source_table' => 'network_node',
+                            'source_id' => $node['id'],
+                            'context' => $clientId,
+                            'status' => 'pending',
+                            'label' => $node['content'] ?? $node['id'],
+                            'detail' => "Type: {$node['type']}, Strength: {$node['strength']}",
+                            'type_display' => 'Network Node'
+                        ];
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ── Load review queue from database ───────────────────────────────────────────
 
 $filter_status  = $_GET['status_filter'] ?? 'pending';
 $filter_context = $_GET['context_filter'] ?? '';
@@ -153,32 +224,37 @@ try {
     $flags = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {}
 
+// Merge case findings with database flags
+$mergedFlags = array_merge($caseFindings, $flags);
+
 // ── Hydrate flags with source data ───────────────────────────────────────────
 
-foreach ($flags as &$flag) {
-    $flag['label']   = '—';
-    $flag['detail']  = '';
-    $flag['type_display'] = ucfirst(str_replace('_', ' ', $flag['source_table']));
+foreach ($mergedFlags as &$flag) {
+    if (!isset($flag['label'])) {
+        $flag['label']   = '—';
+        $flag['detail']  = '';
+        $flag['type_display'] = ucfirst(str_replace('_', ' ', $flag['source_table']));
+    }
 
     try {
         if ($flag['source_table'] === 'entities') {
-            $row = $db->query("SELECT name, type, confidence FROM entities WHERE id = {$flag['source_id']}")->fetch();
+            $row = $db->query("SELECT canonical_name, entity_type, confidence FROM entities WHERE id = {$flag['source_id']}")->fetch();
             if ($row) {
-                $flag['label']  = $row['name'];
-                $flag['detail'] = "Type: {$row['type']}  |  Confidence: " . round($row['confidence'] * 100) . '%';
+                $flag['label']  = $row['canonical_name'];
+                $flag['detail'] = "Type: {$row['entity_type']}  |  Confidence: " . round($row['confidence'] * 100) . '%';
             }
         } elseif ($flag['source_table'] === 'relationships') {
             $row = $db->query("
-                SELECT r.type, r.confidence,
-                       e1.name AS entity_a, e2.name AS entity_b
+                SELECT r.relation_type, r.strength,
+                       e1.canonical_name AS entity_a, e2.canonical_name AS entity_b
                 FROM relationships r
-                LEFT JOIN entities e1 ON e1.id = r.entity_a_id
-                LEFT JOIN entities e2 ON e2.id = r.entity_b_id
+                LEFT JOIN entities e1 ON e1.id = r.from_entity
+                LEFT JOIN entities e2 ON e2.id = r.to_entity
                 WHERE r.id = {$flag['source_id']}
             ")->fetch();
             if ($row) {
-                $flag['label']  = "{$row['entity_a']} → {$row['type']} → {$row['entity_b']}";
-                $flag['detail'] = 'Confidence: ' . round($row['confidence'] * 100) . '%';
+                $flag['label']  = "{$row['entity_a']} → {$row['relation_type']} → {$row['entity_b']}";
+                $flag['detail'] = 'Strength: ' . round($row['strength'] * 100) . '%';
             }
         } elseif ($flag['source_table'] === 'documents') {
             $row = $db->query("SELECT title, source FROM documents WHERE id = {$flag['source_id']}")->fetch();
@@ -194,12 +270,14 @@ unset($flag);
 // ── Counts for status bar ─────────────────────────────────────────────────────
 
 $counts = ['pending' => 0, 'confirmed' => 0, 'rejected' => 0, 'needs_more_info' => 0];
-try {
-    $rows = $db->query("SELECT status, COUNT(*) AS n FROM review_flags GROUP BY status")->fetchAll();
-    foreach ($rows as $r) {
-        if (isset($counts[$r['status']])) $counts[$r['status']] = $r['n'];
+
+// Count from merged flags (case patterns + database)
+foreach ($mergedFlags as $f) {
+    $status = $f['status'] ?? 'pending';
+    if (isset($counts[$status])) {
+        $counts[$status]++;
     }
-} catch (Exception $e) {}
+}
 
 // ── Render ────────────────────────────────────────────────────────────────────
 ob_start();
@@ -254,22 +332,22 @@ ob_start();
     </div>
 
     <!-- Review Queue -->
-    <?php if (empty($flags)): ?>
+    <?php if (empty($mergedFlags)): ?>
         <div class="review-empty">
             <?php if ($filter_status === 'pending'): ?>
-                <p>Nothing in the review queue. Click <strong>Queue New Findings</strong> to pull in unreviewed entities and relationships.</p>
+                <p>Nothing in the review queue. Case patterns from WO-D analysis are loaded automatically.</p>
             <?php else: ?>
                 <p>No items with status: <strong><?= htmlspecialchars($filter_status) ?></strong></p>
             <?php endif; ?>
         </div>
     <?php else: ?>
         <div class="review-list" id="review-list">
-            <?php foreach ($flags as $flag): ?>
-                <div class="review-card review-card--<?= $flag['status'] ?>" id="rfcard-<?= $flag['id'] ?>">
+            <?php foreach ($mergedFlags as $index => $flag): ?>
+                <div class="review-card review-card--<?= $flag['status'] ?>" id="rfcard-<?= $flag['id'] ?? 'case_' . $index ?>">
                     <div class="review-card__meta">
                         <span class="review-card__type"><?= htmlspecialchars($flag['type_display']) ?></span>
                         <span class="review-card__context"><?= htmlspecialchars($flag['context'] ?: 'untagged') ?></span>
-                        <span class="review-card__date"><?= htmlspecialchars(substr($flag['created_at'], 0, 10)) ?></span>
+                        <span class="review-card__date"><?= htmlspecialchars(substr($flag['created_at'] ?? date('Y-m-d'), 0, 10)) ?></span>
                     </div>
                     <div class="review-card__label"><?= htmlspecialchars($flag['label']) ?></div>
                     <?php if ($flag['detail']): ?>
@@ -282,15 +360,19 @@ ob_start();
 
                     <!-- Action buttons -->
                     <div class="review-card__actions">
-                        <button class="review-btn review-btn--confirm"
-                            onclick="leeUpdateFlag(<?= $flag['id'] ?>, 'confirmed')">✓ Confirm</button>
-                        <button class="review-btn review-btn--needs"
-                            onclick="leeUpdateFlagWithNote(<?= $flag['id'] ?>, 'needs_more_info')">? Needs Info</button>
-                        <button class="review-btn review-btn--reject"
-                            onclick="leeUpdateFlag(<?= $flag['id'] ?>, 'rejected')">✗ Reject</button>
-                        <?php if ($flag['status'] !== 'pending'): ?>
-                            <button class="review-btn review-btn--reset"
-                                onclick="leeUpdateFlag(<?= $flag['id'] ?>, 'pending')">↺ Reset</button>
+                        <?php if (isset($flag['id'])): ?>
+                            <button class="review-btn review-btn--confirm"
+                                onclick="leeUpdateFlag(<?= $flag['id'] ?>, 'confirmed')">✓ Confirm</button>
+                            <button class="review-btn review-btn--needs"
+                                onclick="leeUpdateFlagWithNote(<?= $flag['id'] ?>, 'needs_more_info')">? Needs Info</button>
+                            <button class="review-btn review-btn--reject"
+                                onclick="leeUpdateFlag(<?= $flag['id'] ?>, 'rejected')">✗ Reject</button>
+                            <?php if ($flag['status'] !== 'pending'): ?>
+                                <button class="review-btn review-btn--reset"
+                                    onclick="leeUpdateFlag(<?= $flag['id'] ?>, 'pending')">↺ Reset</button>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <span class="review-card__note">Case pattern (auto-loaded)</span>
                         <?php endif; ?>
                     </div>
 

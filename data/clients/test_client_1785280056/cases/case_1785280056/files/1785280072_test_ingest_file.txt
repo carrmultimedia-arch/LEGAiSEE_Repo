@@ -1,0 +1,19 @@
+This is a test document for WO-C ingest pipeline verification.
+
+Test Case: WO-C Test Case - Real Data Ingest
+Client: test_client_1785280056
+Case ID: case_1785280056
+
+This document should be uploaded through the shell ingest module, stored in:
+1. data/cases/test_client_1785280056/cases/case_1785280056/files/
+2. normalized/ (with hash-based filename)
+3. Registered in the files table with case_id
+4. Added as a node to the case network.json
+
+Content for analysis:
+- This represents a real document that would be part of a legal case
+- Contains case-relevant information
+- Should be processed by the ingestion pipeline
+- Should be linked to the correct case identity
+
+End of test document.

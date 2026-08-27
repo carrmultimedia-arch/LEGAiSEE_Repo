@@ -1,0 +1,380 @@
+# LEGAiSEE — GOVERNANCE INFRASTRUCTURE MASTER PLAN
+### Where Everything Lives + The 25 Governance Files + Daily Execution
+### Last Updated: 2026-05-21
+
+---
+
+# PART 1 — WHERE EVERYTHING LIVES
+
+---
+
+## THE THREE LOCATIONS
+
+```
+A) LOCAL MACHINE           B) SERVER/_governance/        C) SERVER/commandcenter/
+   (Windsurf workspace)       (legaisee.com)                (live PHP app)
+   ──────────────────         ──────────────────            ──────────────────
+   Where code is written      Where Claude reads            Where code runs
+   Where you edit docs        Where executors read          ARCHITECTURE_LOCK
+   Staging gate               Single source of truth        Never reorganized
+   Full operations archive    Small, curated, current
+```
+
+---
+
+## LOCATION ASSIGNMENTS
+
+### LIVES ON SERVER ONLY — _governance/
+These files are the read source for all AI agents.
+Infrequently changed. Always current. Always accessible by URL.
+
+```
+All 25 governance files (00-24)
+```
+
+Claude reads these via URL.
+Windsurf reads these via URL.
+You upload a new version only when a rule changes.
+That is rare — maybe once a week at most.
+
+---
+
+### LIVES ON SERVER — _operations/ (small subset)
+These are the files Claude reads at the start of EVERY session.
+They change daily. They must be on the server so Claude can fetch them.
+
+```
+_operations/daily/TODAY.txt              ← today's work order
+_operations/daily/PRIORITIES.txt         ← current priority stack
+_operations/logs/SESSION_LOG.txt         ← Claude's memory (most important)
+_operations/tasks/ACTIVE_TASKS.txt       ← what's in the queue
+_operations/tasks/BLOCKERS.txt           ← current blockers
+```
+
+These 5 files are what you upload at end of each day.
+That is your only daily server maintenance obligation.
+Everything else on this list is local.
+
+---
+
+### LIVES LOCAL ONLY — full operations archive
+These do not need to be on the server. They are your own records.
+
+```
+_operations/logs/ERROR_LOG.txt
+_operations/logs/CHANGE_LOG.txt
+_operations/logs/AI_ACTIVITY_LOG.txt
+_operations/tasks/BACKLOG.txt
+_operations/tasks/FUTURE_TASKS.txt
+_operations/tasks/DEPENDENCIES.txt
+_operations/handoffs/             ← all handoff records
+_operations/reports/              ← weekly/monthly reports
+_operations/sprints/              ← sprint archives
+_operations/validation/           ← drift check reports
+```
+
+---
+
+### LIVES LOCAL ONLY — generated code staging
+This is the staging gate. Code never goes directly to live server.
+It passes through this gate first.
+
+```
+_generated/
+    /review/          ← executor drops output here
+    /approved/        ← you review and approve
+    /rejected/        ← rejected with reason noted
+    /deployed/        ← confirmed live on server
+    /archive/         ← old deployments
+```
+
+---
+
+### LIVES LOCAL ONLY — prompts
+Reusable prompt templates for each AI and task type.
+Windsurf references these locally.
+
+```
+_prompts/
+    /governance/
+    /builders/
+    /validation/
+    /analysis/
+```
+
+---
+
+### LIVES LOCAL — commandcenter/ mirror
+A local copy of the live server's PHP application.
+This is what Windsurf edits.
+You then upload the changed files to the live server via cPanel.
+
+```
+commandcenter/        ← exact mirror of live server
+```
+
+RULE: The live server is always the deployed truth.
+The local mirror is always the working copy.
+Never edit directly on the live server (exception: urgent hotfixes only).
+
+---
+
+## THE COMPLETE LOCAL WORKSPACE STRUCTURE
+
+```
+LEGAiSEE/                               ← root of local workspace
+│
+├── _governance/                        ← LOCAL COPY of server governance
+│   └── [25 files — see Part 2]         upload to server when changed
+│
+├── _operations/                        ← operational records
+│   ├── /daily/
+│   │   ├── TODAY.txt                   ← UPLOAD DAILY
+│   │   └── PRIORITIES.txt              ← upload when changed
+│   ├── /logs/
+│   │   ├── SESSION_LOG.txt             ← UPLOAD DAILY
+│   │   ├── ERROR_LOG.txt               ← local only
+│   │   ├── CHANGE_LOG.txt              ← local only
+│   │   └── AI_ACTIVITY_LOG.txt         ← local only
+│   ├── /tasks/
+│   │   ├── ACTIVE_TASKS.txt            ← upload when changed
+│   │   ├── BACKLOG.txt                 ← local only
+│   │   ├── BLOCKERS.txt                ← upload when changed
+│   │   └── FUTURE_TASKS.txt            ← local only
+│   ├── /handoffs/                      ← local only
+│   ├── /reports/                       ← local only
+│   ├── /sprints/                       ← local only
+│   └── /validation/                    ← local only
+│
+├── _generated/                         ← staging gate (local only)
+│   ├── /review/
+│   ├── /approved/
+│   ├── /rejected/
+│   ├── /deployed/
+│   └── /archive/
+│
+├── _prompts/                           ← local only
+│   ├── /governance/
+│   ├── /builders/
+│   └── /validation/
+│
+└── commandcenter/                      ← local mirror of live server
+    └── [exact live structure]
+```
+
+---
+
+# PART 2 — THE 25 GOVERNANCE FILES
+
+Numbered in order of how often they are read.
+00-10 are read most frequently by Claude and executors.
+11-24 are reference — read when planning or fixing things.
+
+---
+
+```
+CORE IDENTITY (read every planning session)
+00_SYSTEM_VISION.txt        What LEGAiSEE is, why it exists, the mission
+01_DOCTRINE.txt             Non-negotiable operating principles + system boundaries
+02_ARCHITECTURE_MASTER.txt  Full tech stack, folder structure, patterns, DB schema
+03_BUILD_ORDER.txt          What gets built in what sequence — the master roadmap
+04_SYSTEM_IDENTITY.txt      Brand, terminology, voice, canonical naming
+
+FREEZE ZONES (executors read before touching anything)
+05_FREEZE_ZONES.txt         Files and patterns that cannot be modified without approval
+06_MODULE_STANDARDS.txt     Exact module pattern — the template every module follows
+07_NAMING_CONVENTIONS.txt   File, class, function, CSS class naming rules
+08_API_STANDARDS.txt        API endpoint patterns, JSON standards, AJAX rules
+09_DATA_SCHEMA_DOCTRINE.txt Database standards, kernel_db(), context separation, patterns
+
+OPERATIONS (Claude reads every session)
+10_EXECUTION_PIPELINE.txt   The Claude→Executor→John workflow — how every day runs
+11_AGENT_ROLE_DEFINITIONS.txt  Who does what, authority matrix, escalation rules
+12_AI_PROVIDER_POLICY.txt   Which AI for which task, token economy, free tier rules
+
+BUSINESS (read during planning sessions)
+13_REVENUE_ACTIVATION_PLAN.txt  Path to first paying client — what must be built
+14_CLIENT_LIFECYCLE.txt         Prospect → dig → review → report → subscription flow
+15_MONETIZATION_MODEL.txt       Pricing, tiers, revenue model, upsell paths
+16_SYSTEM_TIERS.txt             Product tiers — Dossier / Full Report / Living Vault
+17_MASTER_ROADMAP.txt           Phases 1-5 with milestones and dependencies
+
+CONTROL (read when approving changes)
+18_CHANGE_CONTROL.txt       How changes get proposed, reviewed, and approved
+19_VALIDATION_STANDARDS.txt What "done" means — acceptance criteria for every build
+20_DRIFT_DETECTION.txt      Drift patterns, detection rules, correction procedures
+
+INFRASTRUCTURE (read during incidents or major upgrades)
+21_SECURITY_POLICY.txt      Credentials, access control, protection rules
+22_BACKUP_POLICY.txt        What gets backed up, when, how
+23_DISASTER_RECOVERY.txt    Recovery procedures for every failure type
+24_EXPANSION_POLICY.txt     Rules for adding new modules, tables, AI providers
+```
+
+---
+
+# PART 3 — DAILY EXECUTION (THE REAL ROUTINE)
+
+---
+
+## MORNING — 10 minutes max
+
+**Step 1.** Open Claude. Paste this message:
+
+```
+Good morning. Read these and produce TODAY.txt (the work order):
+
+legaisee.com/commandcenter/_governance/_operations/daily/SESSION_LOG.txt
+legaisee.com/commandcenter/_governance/_operations/daily/PRIORITIES.txt
+legaisee.com/commandcenter/_governance/_operations/tasks/ACTIVE_TASKS.txt
+legaisee.com/commandcenter/_governance/_operations/tasks/BLOCKERS.txt
+```
+
+**Step 2.** Claude fetches the files, reads them, produces TODAY.txt.
+
+**Step 3.** Read TODAY.txt. If something looks wrong, ask Claude before proceeding.
+If it looks right, say "Approved."
+
+**Step 4.** Save TODAY.txt to your local _operations/daily/ folder.
+Upload TODAY.txt to server at:
+legaisee.com/commandcenter/_governance/_operations/daily/TODAY.txt
+
+Done. Morning session complete.
+
+---
+
+## MIDDAY — execution time (varies)
+
+**Step 5.** Open Windsurf. Paste this at the start:
+
+```
+Read these files before doing anything:
+
+legaisee.com/commandcenter/_governance/_operations/daily/TODAY.txt
+legaisee.com/commandcenter/_governance/10_EXECUTION_PIPELINE.txt
+legaisee.com/commandcenter/_governance/06_MODULE_STANDARDS.txt
+legaisee.com/commandcenter/_governance/05_FREEZE_ZONES.txt
+
+Summarize the task, list files you will modify,
+confirm no frozen files are touched, then wait for approval.
+```
+
+**Step 6.** Review Windsurf's pre-edit summary.
+If correct: "Approved. Proceed."
+If wrong: "Stop." — bring the conflict to Claude.
+
+**Step 7.** Windsurf works. You watch.
+Red flags that mean STOP IMMEDIATELY:
+- It mentions a file not in TODAY.txt
+- It says "while I'm here I'll also..."
+- It creates a file you didn't ask for
+- It suggests a framework or pattern not in the system
+
+**Step 8.** When Windsurf finishes, it gives you a completion report.
+Copy the changed files from local commandcenter/ mirror into _generated/review/
+
+**Step 9.** Glance at what's in _generated/review/
+Does it look reasonable? Move it to _generated/approved/
+
+**Step 10.** Upload the approved files to the live server via cPanel.
+Move them to _generated/deployed/ on local once uploaded.
+
+---
+
+## AFTERNOON — 15 minutes
+
+**Step 11.** Open legaisee.com/commandcenter/ in browser.
+Quick check:
+- [ ] Grand Lobby loads
+- [ ] The module you just changed loads
+- [ ] No PHP errors on screen
+- [ ] No broken layout
+- [ ] Buttons/AJAX work
+
+**Step 12.** If something is broken:
+Stop. Do not touch anything.
+Open local ERROR_LOG.txt and write down the exact error.
+Go to Claude: "Build failed. Error: [paste it]. Work order was: [link TODAY.txt]"
+Follow Claude's recovery instructions.
+
+**Step 13.** If everything works:
+Celebrate. Move on to end of day.
+
+---
+
+## END OF DAY — 10 minutes
+
+**Step 14.** Open local SESSION_LOG.txt.
+Add today's entry at the TOP:
+
+```
+## YYYY-MM-DD — WO-###
+Status: COMPLETE / PARTIAL / FAILED
+Built: [what was completed]
+Files deployed: [exact paths]
+Blockers: [anything unfinished]
+Notes for Claude: [anything unusual Claude should know]
+```
+
+**Step 15.** Update ACTIVE_TASKS.txt — mark completed items done,
+move anything unfinished to BLOCKERS.txt if it's blocking next build.
+
+**Step 16.** Upload these files to server:
+
+```
+SESSION_LOG.txt     → _operations/logs/
+ACTIVE_TASKS.txt    → _operations/tasks/    (if changed)
+BLOCKERS.txt        → _operations/tasks/    (if changed)
+```
+
+**Step 17.** Close everything. Done.
+
+---
+
+## TOTAL DAILY TIME
+
+| Phase | Time |
+|-------|------|
+| Morning Claude session | ~10 min |
+| Executor session | varies (30-90 min) |
+| Browser QA check | ~10 min |
+| End of day log update | ~10 min |
+| **Total overhead** | **~30 min** |
+
+The rest of the time is watching the executor work —
+which you should do with one eye, not full attention.
+
+---
+
+## WHAT YOU NEVER DO
+
+- Never edit governance files in cPanel directly (edit local, upload)
+- Never let executor run without reading TODAY.txt first
+- Never skip the SESSION_LOG update (Claude is blind next session if you do)
+- Never deploy code that hasn't been through _generated/review/
+- Never ask Claude to also write the code (Claude plans, executor builds)
+
+---
+
+## FILES YOU UPLOAD TO SERVER
+
+Daily (always):
+- SESSION_LOG.txt
+
+When changed (not always daily):
+- TODAY.txt (after Claude produces it)
+- ACTIVE_TASKS.txt
+- BLOCKERS.txt
+- PRIORITIES.txt
+
+Rarely (when governance changes):
+- Any of the 25 governance files
+
+Never:
+- _generated/ contents (local staging only)
+- _prompts/ (local only)
+- ERROR_LOG, CHANGE_LOG (local archive only)
+
+---
+
+# END GOVERNANCE INFRASTRUCTURE MASTER PLAN

@@ -1,7 +1,14 @@
 <?php
 header('Content-Type: application/json');
 
-$brain_id = $_GET['brain_id'] ?? '';
+session_start();
+
+$brain_id = $_GET['brain_id'] ?? $_SESSION['brain_id'] ?? '';
+
+if(!$brain_id){
+    echo json_encode(["error"=>"brain_id not found in session or input"]);
+    exit;
+}
 
 $file = __DIR__."/../data/brains/".$brain_id.".json";
 
@@ -29,6 +36,7 @@ $pass = match(true){
 $chunk = [
     "step"=>$step,
     "pass"=>$pass,
+    "node_id"=>$session['node_id'] ?? null,
     "insight"=>"[$pass] extracted patterns from document segment",
     "signals"=>[
         "density"=>rand(1,100),

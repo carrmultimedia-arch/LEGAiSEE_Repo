@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../kernel/kernel_boot.php';
+
 kernel_validate_runtime();
 require_once __DIR__ . '/../ui/ui_engine.php';
 require_once __DIR__ . '/../kernel/nav_engine.php';

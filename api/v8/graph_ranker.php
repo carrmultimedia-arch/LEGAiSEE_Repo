@@ -1,20 +1,24 @@
 <?php
 
-require_once __DIR__ . '/../db.php';
-require_once __DIR__ . '/_response.php';
+require_once __DIR__ . '/../../kernel/db.php';
+require_once __DIR__ . '/../../response.php';
 
-$case_id = intval($_GET['case_id'] ?? 1);
+$case_id = $_GET['case_id'] ?? null;
 
-$path = __DIR__ . "/../../data/network/net_case_$case_id.json";
+if (empty($case_id)) {
+    json_error("case_id is required.", 400);
+    exit;
+}
 
-$graph = json_decode(file_get_contents($path), true);
-
-$nodes = $graph['nodes'] ?? [];
-
-usort($nodes, function($a, $b){
-    return ($b['strength'] ?? 0) <=> ($a['strength'] ?? 0);
-});
-
-json_response([
-    "top_nodes" => array_slice($nodes, 0, 10)
-]);
+try {
+    $pdo = kernel_db();
+    $stmt = $pdo->prepare("
+        SELECT canonical_name, entity_type, confidence, strength
+        FROM entities
+        WHERE context = ? ORDER BY strength DESC, confidence DESC LIMIT 10
+    ");
+    $stmt->execute([$case_id]);
+    json_response(['top_nodes' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+} catch (Exception $e) {
+    json_error("Database error: " . $e->getMessage(), 500);
+}

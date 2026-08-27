@@ -64,19 +64,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($_FILES['upload_file']['tmp_name']) && $_FILES['upload_file']['error'] === UPLOAD_ERR_OK) {
             $orig_name  = basename($_FILES['upload_file']['name']);
             $safe_name  = preg_replace('/[^a-zA-Z0-9._-]/', '_', $orig_name);
-            $target_dir = DATA_ROOT . 'files/';
+            $case_id    = trim($_POST['case_id'] ?? '');
+            
+            // Determine target directory based on case selection
+            if ($case_id && is_dir(__DIR__ . '/../data/cases/' . $case_id)) {
+                $target_dir = __DIR__ . '/../data/cases/' . $case_id . '/files/';
+            } else {
+                $target_dir = DATA_ROOT . 'files/';
+            }
+            
             if (!is_dir($target_dir)) mkdir($target_dir, 0755, true);
             $target = $target_dir . time() . '_' . $safe_name;
+            
             if (move_uploaded_file($_FILES['upload_file']['tmp_name'], $target)) {
+                // Also copy to normalized/ for processing
+                $normalized_dir = __DIR__ . '/../normalized/';
+                if (!is_dir($normalized_dir)) mkdir($normalized_dir, 0755, true);
+                $normalized_target = $normalized_dir . md5_file($target) . '.' . strtolower(pathinfo($safe_name, PATHINFO_EXTENSION));
+                copy($target, $normalized_target);
+                
                 try {
-                    $stmt = $db->prepare("INSERT INTO files (filename, filepath, filetype, filesize, context, created_at)
-                        VALUES (:fn, :fp, :ft, :fs, 'legaisee', NOW())");
+                    $stmt = $db->prepare("INSERT INTO files (filename, filepath, filetype, filesize, context, case_id, created_at)
+                        VALUES (:fn, :fp, :ft, :fs, 'legaisee', :cid, datetime('now'))");
                     $stmt->execute([':fn' => $safe_name, ':fp' => $target,
-                        ':ft' => strtolower(pathinfo($safe_name, PATHINFO_EXTENSION)), ':fs' => filesize($target)]);
+                        ':ft' => strtolower(pathinfo($safe_name, PATHINFO_EXTENSION)), ':fs' => filesize($target), ':cid' => $case_id]);
+                    
+                    // If case_id provided, add node to case network via ingestion pipeline
+                    if ($case_id) {
+                        require_once __DIR__ . '/../kernel/ingestion_pipeline.php';
+                        $network_file = __DIR__ . '/../data/cases/' . $case_id . '/network.json';
+                        $content = file_get_contents($target);
+                        ingestToNode($case_id, "File uploaded: {$safe_name}", $network_file);
+                    }
                 } catch (Exception $e) {}
-                $flash = ['type' => 'ok', 'msg' => "'{$safe_name}' uploaded successfully."];
+                $flash = ['type' => 'ok', 'msg' => "'{$safe_name}' uploaded successfully." . ($case_id ? " Linked to case {$case_id}." : '')];
             } else {
-                $flash = ['type' => 'error', 'msg' => 'Upload failed — check permissions on data/files/'];
+                $flash = ['type' => 'error', 'msg' => 'Upload failed — check permissions.'];
             }
         } else {
             $flash = ['type' => 'error', 'msg' => 'No file received or upload error.'];
@@ -106,9 +129,21 @@ try { $stat_docs     = $db->query("SELECT COUNT(*) FROM documents")->fetchColumn
 
 // ── Dropdowns ─────────────────────────────────────────────────────────────────
 
-$projects = []; $domains = [];
+$projects = []; $domains = []; $cases = [];
 try { $projects = $db->query("SELECT id, name FROM projects ORDER BY name")->fetchAll(PDO::FETCH_ASSOC); } catch (Exception $e) {}
 try { $domains  = $db->query("SELECT id, name FROM memory_domains ORDER BY name")->fetchAll(PDO::FETCH_ASSOC); } catch (Exception $e) {}
+
+// Load cases from filesystem
+$cases = [];
+$casesDir = __DIR__ . '/../data/cases';
+if (is_dir($casesDir)) {
+    foreach (glob($casesDir . '/*/meta.json') as $metaFile) {
+        $meta = json_decode(file_get_contents($metaFile), true);
+        if ($meta) {
+            $cases[] = $meta;
+        }
+    }
+}
 
 // ── Recent sessions ───────────────────────────────────────────────────────────
 
@@ -212,9 +247,18 @@ ob_start();
     <form class="ingest-form" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="ingest_action" value="upload_file">
         <div class="ingest-row">
+            <label class="ingest-label">Select Case (Optional)</label>
+            <select class="ingest-select" name="case_id">
+                <option value="">— No Case (General Storage) —</option>
+                <?php foreach ($cases as $c): ?>
+                    <option value="<?= htmlspecialchars($c['id']) ?>"><?= htmlspecialchars($c['name'] ?? $c['id']) ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="ingest-row">
             <label class="ingest-label">Select File to Upload</label>
             <p class="ingest-hint">PDF, DOCX, TXT, JSON, images, and most other formats.
-               Stored in <code>data/files/</code> and registered in the files table.</p>
+               <?php if (!empty($cases)): ?>If a case is selected, files are stored in <code>data/cases/[case_id]/files/</code> and linked to the case network.<?php else: ?>Stored in <code>data/files/</code>.<?php endif; ?></p>
             <input class="ingest-file-input" type="file" name="upload_file">
         </div>
         <button class="ingest-submit" type="submit">Upload</button>

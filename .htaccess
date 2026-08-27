@@ -6,3 +6,9 @@
 <IfModule mod_security2.c>
     SecRuleEngine Off
 </IfModule>
+
+# Protect configuration files from web access
+<FilesMatch "^(config\.php|\.env|\.gitignore)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

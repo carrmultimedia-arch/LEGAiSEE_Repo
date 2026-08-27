@@ -1,0 +1,14 @@
+Build Rule Validation
+
+Status: ⬜ Pending
+
+Validation checks:
+
+ Batch workflow defined
+ Documentation-first rule defined
+ Approval-before-code rule defined
+ Database creation rules defined
+ API creation rules defined
+ Test requirements defined
+ Acceptance criteria defined
+ Build status update requirements defined

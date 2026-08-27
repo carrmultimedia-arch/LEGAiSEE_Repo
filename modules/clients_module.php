@@ -13,6 +13,7 @@ try {
 
     $stmt = $db->query("
         SELECT
+            id,
             client_uid,
             name,
             industry,
@@ -60,6 +61,8 @@ $items = [];
 foreach ($clients as $client) {
 
     $items[] = [
+
+        'link' => '/commandcenter/shell.php?module=client_view&id=' . $client['id'],
 
         'title' => $client['name'] ?: 'Unnamed Client',
 

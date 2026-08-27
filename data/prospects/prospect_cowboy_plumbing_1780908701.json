@@ -1,0 +1,16 @@
+{
+    "id": "prospect_cowboy_plumbing_1780908701",
+    "prospect_name": "Cowboy plumbing",
+    "created_at": "2026-06-08T08:51:41+00:00",
+    "ingest_number": 1,
+    "raw_input_length": 29,
+    "signals": [],
+    "authority_score": 30,
+    "opportunity_level": "LOW",
+    "entity_data": {
+        "entities_extracted": 0,
+        "entities_stored": 0,
+        "relationships_stored": 0,
+        "source": "Cowboy plumbing"
+    }
+}

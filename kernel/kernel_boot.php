@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/db.php';
+
 require_once __DIR__ . '/kernel_paths.php';
 
 if (file_exists(__DIR__ . '/../ui/ui_bootstrap.php')) {
@@ -9,27 +11,6 @@ if (file_exists(__DIR__ . '/../ui/ui_bootstrap.php')) {
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-}
-
-/* -----------------------------------------------
-   KERNEL DB — SINGLE AUTHORITY
------------------------------------------------ */
-
-function kernel_db(): PDO
-{
-    static $pdo;
-    if (!$pdo) {
-        $pdo = new PDO(
-            "mysql:host=localhost;dbname=carrmulti_legaiseearchive;charset=utf8mb4",
-            "legaiseeuser",
-            "Jmc6253277$",
-            [
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-            ]
-        );
-    }
-    return $pdo;
 }
 
 /* -----------------------------------------------

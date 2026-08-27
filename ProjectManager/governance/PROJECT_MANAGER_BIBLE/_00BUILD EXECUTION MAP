@@ -1,0 +1,632 @@
+# LEGAiSEE PROJECT MANAGER
+
+# MASTER BUILD EXECUTION MAP
+
+Version: 1.0
+Purpose: Prevent architecture drift by mapping every Bible chapter batch to its owned production artifacts.
+
+---
+
+# BUILD RULE
+
+Every batch follows:
+
+1. Complete Bible chapters
+2. Approval
+3. Lock chapters
+4. Generate owned files only
+5. Create database objects only if owned
+6. Create API only if owned
+7. Create tests only if owned
+8. Acceptance test
+9. Update BUILD_STATUS.md
+10. Update CURRENT_BUILD_TARGET.md
+
+No file may exist unless listed in this document or authorized by the Canonical File Registry.
+
+---
+
+# BATCH 1 — GOVERNANCE FOUNDATION
+
+## Bible Files
+
+```
+0000_PROJECT_MANAGER_MANIFEST.md
+0005_PROJECT_GOVERNANCE.md
+0010_DESIGN_PRINCIPLES.md
+```
+
+## Owned Production Files
+
+```
+NONE
+```
+
+## Database
+
+```
+NONE
+```
+
+## API
+
+```
+NONE
+```
+
+## Tests
+
+```
+NONE
+```
+
+---
+
+# BATCH 2 — OWNERSHIP AND BUILD CONTROL
+
+## Bible Files
+
+```
+0015_FILE_OWNERSHIP.md
+0020_BUILD_RULES.md
+0030_GLOSSARY.md
+```
+
+## Owned Production Files
+
+```
+NONE
+```
+
+## Database
+
+```
+NONE
+```
+
+## API
+
+```
+NONE
+```
+
+## Tests
+
+```
+Governance validation
+File ownership validation
+Build rule validation
+```
+
+---
+
+# BATCH 3 — PRODUCT DEFINITION
+
+## Bible Files
+
+```
+0100_PRODUCT_OVERVIEW.md
+0110_FEATURE_MATRIX.md
+0120_USER_ROLES.md
+0130_PERMISSION_MODEL.md
+```
+
+## Owned Production Files
+
+```
+permissions.php
+
+app/Policies/*
+app/Models/User.php
+app/Models/Role.php
+app/Models/Permission.php
+
+app/Services/AuthorizationService.php
+
+app/Controllers/AuthController.php
+```
+
+## Database
+
+```
+users
+roles
+permissions
+role_permissions
+user_roles
+```
+
+## API
+
+```
+/api/auth/*
+/api/users/*
+/api/permissions/*
+```
+
+## Tests
+
+```
+Permission tests
+Role tests
+Authorization tests
+Authentication tests
+```
+
+---
+
+# BATCH 4 — DATABASE FOUNDATION
+
+## Bible Files
+
+```
+0300_DATABASE_ARCHITECTURE.md
+0310_DATABASE_SCHEMA.md
+0320_RELATIONSHIP_MODEL.md
+0330_ATTACHMENT_MODEL.md
+0340_ACTIVITY_LOG.md
+```
+
+## Owned Production Files
+
+```
+database/connection.php
+database/migration.php
+database/schema.php
+
+app/Core/Database.php
+
+app/Models/*
+app/Repositories/*
+```
+
+## Database
+
+```
+core database tables
+relationships
+attachments
+activity log
+audit tables
+```
+
+## API
+
+```
+NONE
+```
+
+## Tests
+
+```
+Database connection tests
+Migration tests
+Relationship tests
+Repository tests
+```
+
+---
+
+# BATCH 5 — APPLICATION RUNTIME
+
+## Bible Files
+
+```
+0910_CANONICAL_FILE_REGISTRY.md
+0920_BUILD_ORDER.md
+```
+
+## Owned Production Files
+
+```
+bootstrap.php
+config.php
+router.php
+index.php
+
+app/Core/Application.php
+app/Core/Router.php
+app/Core/Request.php
+app/Core/Response.php
+app/Core/Container.php
+app/Core/Dispatcher.php
+app/Core/ExceptionHandler.php
+```
+
+## Database
+
+```
+NONE
+```
+
+## API
+
+```
+API routing foundation
+```
+
+## Tests
+
+```
+Bootstrap tests
+Router tests
+Request tests
+Response tests
+Exception tests
+```
+
+---
+
+# BATCH 6 — UI SYSTEM
+
+## Bible Files
+
+```
+0400_UI_DESIGN_LANGUAGE.md
+0410_LAYOUT_SYSTEM.md
+0420_COMPONENT_LIBRARY.md
+0430_FORM_STANDARDS.md
+0440_TABLE_STANDARDS.md
+0450_MODAL_STANDARDS.md
+```
+
+## Owned Production Files
+
+```
+assets/css/*
+assets/js/*
+
+app/Views/*
+app/Components/*
+
+app/Helpers/ViewHelper.php
+```
+
+## Database
+
+```
+NONE
+```
+
+## API
+
+```
+NONE
+```
+
+## Tests
+
+```
+Component tests
+UI rendering tests
+Form validation tests
+```
+
+---
+
+# BATCH 7 — PROJECT WORKSPACE
+
+## Bible Files
+
+```
+0500_PROJECT_WORKSPACE.md
+0510_OVERVIEW_PAGE.md
+0520_TASKS_PAGE.md
+0530_TASK_DETAIL.md
+0540_KANBAN_BOARD.md
+0550_CALENDAR.md
+0560_TIMELINE.md
+0570_FILES.md
+0580_NOTES.md
+0590_ACTIVITY.md
+0600_PROJECT_SETTINGS.md
+```
+
+## Owned Production Files
+
+```
+app/Models/Project.php
+app/Models/Task.php
+app/Models/Milestone.php
+
+app/Services/ProjectService.php
+app/Services/TaskService.php
+
+app/Controllers/ProjectController.php
+app/Controllers/TaskController.php
+
+app/Views/projects/*
+app/Views/tasks/*
+```
+
+## Database
+
+```
+projects
+tasks
+milestones
+comments
+notes
+project_activity
+```
+
+## API
+
+```
+/api/projects/*
+/api/tasks/*
+/api/milestones/*
+```
+
+## Tests
+
+```
+Project CRUD
+Task CRUD
+Workspace workflow
+Permission filtering
+```
+
+---
+
+# BATCH 8 — ADVANCED PROJECT FEATURES
+
+## Bible Files
+
+```
+0610_CUSTOM_FIELDS.md
+0620_LABELS.md
+0630_MILESTONES.md
+0640_DEPENDENCIES.md
+0650_AUTOMATIONS.md
+```
+
+## Owned Production Files
+
+```
+app/Models/CustomField.php
+app/Models/Label.php
+app/Models/Dependency.php
+app/Models/Automation.php
+
+app/Services/AutomationService.php
+
+app/Controllers/AutomationController.php
+```
+
+## Database
+
+```
+custom_fields
+custom_field_values
+labels
+task_labels
+dependencies
+automations
+```
+
+## API
+
+```
+/api/custom-fields/*
+/api/labels/*
+/api/dependencies/*
+/api/automations/*
+```
+
+## Tests
+
+```
+Automation tests
+Dependency tests
+Custom field tests
+```
+
+---
+
+# BATCH 9 — LEGAiSEE INTEGRATIONS
+
+## Bible Files
+
+```
+0700_SYSTEM_INTEGRATIONS.md
+0710_INGEST_LIBRARY.md
+0720_CLIENTS.md
+0730_CASES.md
+0740_GRAPH_ENGINE.md
+0750_INTELLIGENCE_ENGINE.md
+0760_SEARCH.md
+0770_REPORTS.md
+```
+
+## Owned Production Files
+
+```
+app/Integrations/*
+
+app/Services/IngestService.php
+app/Services/SearchService.php
+app/Services/ReportService.php
+
+app/Controllers/IntegrationController.php
+```
+
+## Database
+
+```
+integration_connections
+ingested_documents
+graph_links
+search_index
+reports
+```
+
+## API
+
+```
+/api/integrations/*
+/api/search/*
+/api/reports/*
+```
+
+## Tests
+
+```
+Integration tests
+Search tests
+Report tests
+Ingest tests
+```
+
+---
+
+# BATCH 10 — PORTAL AND SHARING
+
+## Bible Files
+
+```
+0800_CLIENT_PORTAL.md
+0810_PERMISSION_FILTERING.md
+0820_SHARED_PROJECTS.md
+```
+
+## Owned Production Files
+
+```
+app/Controllers/PortalController.php
+
+app/Services/SharingService.php
+
+app/Policies/PortalPolicy.php
+```
+
+## Database
+
+```
+shared_projects
+portal_users
+external_access_tokens
+```
+
+## API
+
+```
+/api/portal/*
+/api/sharing/*
+```
+
+## Tests
+
+```
+Portal tests
+Sharing tests
+External permission tests
+```
+
+---
+
+# BATCH 11 — API FINALIZATION
+
+## Bible Files
+
+```
+0900_API_SPECIFICATION.md
+```
+
+## Owned Production Files
+
+```
+api/index.php
+
+api/routes/*
+api/controllers/*
+api/middleware/*
+```
+
+## Database
+
+```
+NONE
+```
+
+## API
+
+```
+All finalized endpoints
+```
+
+## Tests
+
+```
+API contract tests
+Authentication tests
+Authorization tests
+Response tests
+```
+
+---
+
+# BATCH 12 — TESTING AND RELEASE
+
+## Bible Files
+
+```
+0930_TEST_PLAN.md
+0999_SESSION_HANDOFF.md
+```
+
+## Owned Production Files
+
+```
+tests/*
+
+README.md
+
+CHANGELOG.md
+```
+
+## Database
+
+```
+Final migration validation
+```
+
+## API
+
+```
+Final endpoint verification
+```
+
+## Tests
+
+```
+Full acceptance suite
+Regression suite
+Deployment validation
+```
+
+---
+
+# CURRENT BUILD POSITION
+
+Completed:
+
+```
+0000_PROJECT_MANAGER_MANIFEST.md
+0005_PROJECT_GOVERNANCE.md
+0010_DESIGN_PRINCIPLES.md
+```
+
+Current Target:
+
+```
+0015_FILE_OWNERSHIP.md
+```
+
+Next Owned Production Files:
+
+```
+NONE
+```
+
+Production generation begins only when a batch explicitly owns files.

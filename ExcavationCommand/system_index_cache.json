@@ -1,0 +1,1718 @@
+{
+    "modules": [
+        {
+            "type": "file",
+            "name": "alert_module.php",
+            "path": "modules\/alert_module.php"
+        },
+        {
+            "type": "file",
+            "name": "anomaly_engine_module.php",
+            "path": "modules\/anomaly_engine_module.php"
+        },
+        {
+            "type": "file",
+            "name": "brain_module.php",
+            "path": "modules\/brain_module.php"
+        },
+        {
+            "type": "file",
+            "name": "cases_module.php",
+            "path": "modules\/cases_module.php"
+        },
+        {
+            "type": "file",
+            "name": "clients_module.php",
+            "path": "modules\/clients_module.php"
+        },
+        {
+            "type": "file",
+            "name": "clients_module.phpbak",
+            "path": "modules\/clients_module.phpbak"
+        },
+        {
+            "type": "file",
+            "name": "cluster_module.php",
+            "path": "modules\/cluster_module.php"
+        },
+        {
+            "type": "file",
+            "name": "cockpit_module.php",
+            "path": "modules\/cockpit_module.php"
+        },
+        {
+            "type": "file",
+            "name": "compare_module.php",
+            "path": "modules\/compare_module.php"
+        },
+        {
+            "type": "file",
+            "name": "cross_case_engine.php",
+            "path": "modules\/cross_case_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "dashboard_module.php",
+            "path": "modules\/dashboard_module.php"
+        },
+        {
+            "type": "file",
+            "name": "decision_module.php",
+            "path": "modules\/decision_module.php"
+        },
+        {
+            "type": "file",
+            "name": "dig_review_module.php",
+            "path": "modules\/dig_review_module.php"
+        },
+        {
+            "type": "file",
+            "name": "entity_resolution_module.php",
+            "path": "modules\/entity_resolution_module.php"
+        },
+        {
+            "type": "file",
+            "name": "excavation_module.php",
+            "path": "modules\/excavation_module.php"
+        },
+        {
+            "type": "file",
+            "name": "executive_dashboard_module.php",
+            "path": "modules\/executive_dashboard_module.php"
+        },
+        {
+            "type": "file",
+            "name": "files_module.php",
+            "path": "modules\/files_module.php"
+        },
+        {
+            "type": "file",
+            "name": "governance_module.php",
+            "path": "modules\/governance_module.php"
+        },
+        {
+            "type": "file",
+            "name": "graph_module.php",
+            "path": "modules\/graph_module.php"
+        },
+        {
+            "type": "file",
+            "name": "ingest_module.php",
+            "path": "modules\/ingest_module.php"
+        },
+        {
+            "type": "file",
+            "name": "ingest_view_module.php",
+            "path": "modules\/ingest_view_module.php"
+        },
+        {
+            "type": "file",
+            "name": "insight_module.php",
+            "path": "modules\/insight_module.php"
+        },
+        {
+            "type": "file",
+            "name": "intelligence_dashboard_module.php",
+            "path": "modules\/intelligence_dashboard_module.php"
+        },
+        {
+            "type": "file",
+            "name": "pm_module.php",
+            "path": "modules\/pm_module.php"
+        },
+        {
+            "type": "file",
+            "name": "predictive_link_module_v1.php",
+            "path": "modules\/predictive_link_module_v1.php"
+        },
+        {
+            "type": "file",
+            "name": "predictive_module.php",
+            "path": "modules\/predictive_module.php"
+        },
+        {
+            "type": "file",
+            "name": "recommendation_module.php",
+            "path": "modules\/recommendation_module.php"
+        },
+        {
+            "type": "file",
+            "name": "relations_module.php",
+            "path": "modules\/relations_module.php"
+        },
+        {
+            "type": "file",
+            "name": "report_module.php",
+            "path": "modules\/report_module.php"
+        },
+        {
+            "type": "file",
+            "name": "root_cause_graph_module.php",
+            "path": "modules\/root_cause_graph_module.php"
+        },
+        {
+            "type": "file",
+            "name": "search_module.php",
+            "path": "modules\/search_module.php"
+        },
+        {
+            "type": "file",
+            "name": "semantic_cluster_module.php",
+            "path": "modules\/semantic_cluster_module.php"
+        },
+        {
+            "type": "file",
+            "name": "time_intelligence_module.php",
+            "path": "modules\/time_intelligence_module.php"
+        },
+        {
+            "type": "folder",
+            "name": "utils",
+            "path": "modules\/utils",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "bootstrap.php",
+                    "path": "modules\/utils\/bootstrap.php"
+                },
+                {
+                    "type": "file",
+                    "name": "debug_helpers.php",
+                    "path": "modules\/utils\/debug_helpers.php"
+                },
+                {
+                    "type": "file",
+                    "name": "file_helpers.php",
+                    "path": "modules\/utils\/file_helpers.php"
+                },
+                {
+                    "type": "file",
+                    "name": "json_helpers.php",
+                    "path": "modules\/utils\/json_helpers.php"
+                },
+                {
+                    "type": "file",
+                    "name": "uic_v1.php",
+                    "path": "modules\/utils\/uic_v1.php"
+                },
+                {
+                    "type": "file",
+                    "name": "uic_v2.php",
+                    "path": "modules\/utils\/uic_v2.php"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "name": "vault_module.php",
+            "path": "modules\/vault_module.php"
+        },
+        {
+            "type": "file",
+            "name": "view_module.php",
+            "path": "modules\/view_module.php"
+        }
+    ],
+    "engine": [
+        {
+            "type": "file",
+            "name": "case_manager.php",
+            "path": "engine\/case_manager.php"
+        },
+        {
+            "type": "file",
+            "name": "client_manager.php",
+            "path": "engine\/client_manager.php"
+        },
+        {
+            "type": "file",
+            "name": "closed_loop.js",
+            "path": "engine\/closed_loop.js"
+        },
+        {
+            "type": "file",
+            "name": "cluster_engine.php",
+            "path": "engine\/cluster_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "cross_case_engine.php",
+            "path": "engine\/cross_case_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "cross_case_learning_compiler.php",
+            "path": "engine\/cross_case_learning_compiler.php"
+        },
+        {
+            "type": "file",
+            "name": "dashboard_engine.php",
+            "path": "engine\/dashboard_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "decision_engine_v2.php",
+            "path": "engine\/decision_engine_v2.php"
+        },
+        {
+            "type": "file",
+            "name": "decision_governor.php",
+            "path": "engine\/decision_governor.php"
+        },
+        {
+            "type": "file",
+            "name": "entity_extraction_engine.php",
+            "path": "engine\/entity_extraction_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "execution_feedback_engine.php",
+            "path": "engine\/execution_feedback_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "execution_router.php",
+            "path": "engine\/execution_router.php"
+        },
+        {
+            "type": "file",
+            "name": "executive_dashboard_engine.php",
+            "path": "engine\/executive_dashboard_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "goal_alignment.php",
+            "path": "engine\/goal_alignment.php"
+        },
+        {
+            "type": "file",
+            "name": "goal_arbitration_engine.php",
+            "path": "engine\/goal_arbitration_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "goal_conflict_resolver.php",
+            "path": "engine\/goal_conflict_resolver.php"
+        },
+        {
+            "type": "file",
+            "name": "goal_engine.php",
+            "path": "engine\/goal_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "goal_generator.php",
+            "path": "engine\/goal_generator.php"
+        },
+        {
+            "type": "file",
+            "name": "governance_policy_engine.php",
+            "path": "engine\/governance_policy_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "graph_data.php",
+            "path": "engine\/graph_data.php"
+        },
+        {
+            "type": "file",
+            "name": "graph_mutation_engine.php",
+            "path": "engine\/graph_mutation_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "insight_mutator.php",
+            "path": "engine\/insight_mutator.php"
+        },
+        {
+            "type": "file",
+            "name": "long_horizon_planner.php",
+            "path": "engine\/long_horizon_planner.php"
+        },
+        {
+            "type": "file",
+            "name": "memory_evolution_engine.php",
+            "path": "engine\/memory_evolution_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "pattern_stability.php",
+            "path": "engine\/pattern_stability.php"
+        },
+        {
+            "type": "file",
+            "name": "pipeline_adapters.php",
+            "path": "engine\/pipeline_adapters.php"
+        },
+        {
+            "type": "file",
+            "name": "plain_english_helper.php",
+            "path": "engine\/plain_english_helper.php"
+        },
+        {
+            "type": "file",
+            "name": "policy_enforcement_engine.php",
+            "path": "engine\/policy_enforcement_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "portfolio_engine.php",
+            "path": "engine\/portfolio_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "predictive_intelligence_engine.php",
+            "path": "engine\/predictive_intelligence_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "reasoning_engine.php",
+            "path": "engine\/reasoning_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "recommendation_engine.php",
+            "path": "engine\/recommendation_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "semantic_cluster_engine.php",
+            "path": "engine\/semantic_cluster_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "system_behavior_spec.php",
+            "path": "engine\/system_behavior_spec.php"
+        },
+        {
+            "type": "file",
+            "name": "system_insight_engine.php",
+            "path": "engine\/system_insight_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "system_recommendation_engine.php",
+            "path": "engine\/system_recommendation_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "temporal_memory_engine.php",
+            "path": "engine\/temporal_memory_engine.php"
+        }
+    ],
+    "kernel": [
+        {
+            "type": "file",
+            "name": "bootstrap.php",
+            "path": "kernel\/bootstrap.php"
+        },
+        {
+            "type": "file",
+            "name": "cluster_intelligence.php",
+            "path": "kernel\/cluster_intelligence.php"
+        },
+        {
+            "type": "file",
+            "name": "db.php",
+            "path": "kernel\/db.php"
+        },
+        {
+            "type": "file",
+            "name": "engine_bindings.php",
+            "path": "kernel\/engine_bindings.php"
+        },
+        {
+            "type": "file",
+            "name": "folder_engine.php",
+            "path": "kernel\/folder_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "graph_auto_builder.php",
+            "path": "kernel\/graph_auto_builder.php"
+        },
+        {
+            "type": "file",
+            "name": "graph_engine.php",
+            "path": "kernel\/graph_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "guard.php",
+            "path": "kernel\/guard.php"
+        },
+        {
+            "type": "file",
+            "name": "ingestion_pipeline.php",
+            "path": "kernel\/ingestion_pipeline.php"
+        },
+        {
+            "type": "file",
+            "name": "insight_generator.php",
+            "path": "kernel\/insight_generator.php"
+        },
+        {
+            "type": "file",
+            "name": "kernel.php",
+            "path": "kernel\/kernel.php"
+        },
+        {
+            "type": "file",
+            "name": "kernel_boot.php",
+            "path": "kernel\/kernel_boot.php"
+        },
+        {
+            "type": "file",
+            "name": "kernel_contract.php",
+            "path": "kernel\/kernel_contract.php"
+        },
+        {
+            "type": "file",
+            "name": "kernel_paths.php",
+            "path": "kernel\/kernel_paths.php"
+        },
+        {
+            "type": "folder",
+            "name": "model",
+            "path": "kernel\/model",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "page_model.php",
+                    "path": "kernel\/model\/page_model.php"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "name": "module_contract.php",
+            "path": "kernel\/module_contract.php"
+        },
+        {
+            "type": "file",
+            "name": "module_registry.php",
+            "path": "kernel\/module_registry.php"
+        },
+        {
+            "type": "file",
+            "name": "nav_engine.php",
+            "path": "kernel\/nav_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "recommendation_engine.php",
+            "path": "kernel\/recommendation_engine.php"
+        },
+        {
+            "type": "file",
+            "name": "system_health.php",
+            "path": "kernel\/system_health.php"
+        },
+        {
+            "type": "file",
+            "name": "task_generator.php",
+            "path": "kernel\/task_generator.php"
+        }
+    ],
+    "api": [
+        {
+            "type": "file",
+            "name": "agency_create.php",
+            "path": "api\/agency_create.php"
+        },
+        {
+            "type": "file",
+            "name": "agency_dashboard.php",
+            "path": "api\/agency_dashboard.php"
+        },
+        {
+            "type": "file",
+            "name": "agency_dispatch.php",
+            "path": "api\/agency_dispatch.php"
+        },
+        {
+            "type": "file",
+            "name": "agency_synthesis.php",
+            "path": "api\/agency_synthesis.php"
+        },
+        {
+            "type": "file",
+            "name": "agent_spawn.php",
+            "path": "api\/agent_spawn.php"
+        },
+        {
+            "type": "file",
+            "name": "agent_tick.php",
+            "path": "api\/agent_tick.php"
+        },
+        {
+            "type": "file",
+            "name": "anomaly_detector.php",
+            "path": "api\/anomaly_detector.php"
+        },
+        {
+            "type": "file",
+            "name": "brain_commit.php",
+            "path": "api\/brain_commit.php"
+        },
+        {
+            "type": "file",
+            "name": "brain_dossier.php",
+            "path": "api\/brain_dossier.php"
+        },
+        {
+            "type": "file",
+            "name": "brain_memory_graph.php",
+            "path": "api\/brain_memory_graph.php"
+        },
+        {
+            "type": "file",
+            "name": "brain_orchestrator.php",
+            "path": "api\/brain_orchestrator.php"
+        },
+        {
+            "type": "file",
+            "name": "brain_start.php",
+            "path": "api\/brain_start.php"
+        },
+        {
+            "type": "file",
+            "name": "brain_state.php",
+            "path": "api\/brain_state.php"
+        },
+        {
+            "type": "file",
+            "name": "brain_stream.php",
+            "path": "api\/brain_stream.php"
+        },
+        {
+            "type": "file",
+            "name": "brain_stream_v4.php",
+            "path": "api\/brain_stream_v4.php"
+        },
+        {
+            "type": "file",
+            "name": "brain_synthesis.php",
+            "path": "api\/brain_synthesis.php"
+        },
+        {
+            "type": "file",
+            "name": "case_agent.php",
+            "path": "api\/case_agent.php"
+        },
+        {
+            "type": "file",
+            "name": "case_create.php",
+            "path": "api\/case_create.php"
+        },
+        {
+            "type": "file",
+            "name": "case_memory.php",
+            "path": "api\/case_memory.php"
+        },
+        {
+            "type": "file",
+            "name": "case_scheduler.php",
+            "path": "api\/case_scheduler.php"
+        },
+        {
+            "type": "file",
+            "name": "case_tick.php",
+            "path": "api\/case_tick.php"
+        },
+        {
+            "type": "file",
+            "name": "dossier.php",
+            "path": "api\/dossier.php"
+        },
+        {
+            "type": "file",
+            "name": "excavate.php",
+            "path": "api\/excavate.php"
+        },
+        {
+            "type": "file",
+            "name": "excavation_run.php",
+            "path": "api\/excavation_run.php"
+        },
+        {
+            "type": "file",
+            "name": "file.php",
+            "path": "api\/file.php"
+        },
+        {
+            "type": "file",
+            "name": "file_tree.php",
+            "path": "api\/file_tree.php"
+        },
+        {
+            "type": "file",
+            "name": "files_action.php",
+            "path": "api\/files_action.php"
+        },
+        {
+            "type": "file",
+            "name": "graph_synthesizer.php",
+            "path": "api\/graph_synthesizer.php"
+        },
+        {
+            "type": "file",
+            "name": "intel_cache.php",
+            "path": "api\/intel_cache.php"
+        },
+        {
+            "type": "file",
+            "name": "model_router.php",
+            "path": "api\/model_router.php"
+        },
+        {
+            "type": "file",
+            "name": "network_boot.php",
+            "path": "api\/network_boot.php"
+        },
+        {
+            "type": "file",
+            "name": "network_tick.php",
+            "path": "api\/network_tick.php"
+        },
+        {
+            "type": "file",
+            "name": "node_builder.php",
+            "path": "api\/node_builder.php"
+        },
+        {
+            "type": "file",
+            "name": "recommendations_generate.php",
+            "path": "api\/recommendations_generate.php"
+        },
+        {
+            "type": "file",
+            "name": "search.php",
+            "path": "api\/search.php"
+        },
+        {
+            "type": "file",
+            "name": "search_load.php",
+            "path": "api\/search_load.php"
+        },
+        {
+            "type": "folder",
+            "name": "v8",
+            "path": "api\/v8",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "_response.php",
+                    "path": "api\/v8\/_response.php"
+                },
+                {
+                    "type": "file",
+                    "name": "agent.php",
+                    "path": "api\/v8\/agent.php"
+                },
+                {
+                    "type": "file",
+                    "name": "alerts.php",
+                    "path": "api\/v8\/alerts.php"
+                },
+                {
+                    "type": "file",
+                    "name": "autonomous_engine.php",
+                    "path": "api\/v8\/autonomous_engine.php"
+                },
+                {
+                    "type": "file",
+                    "name": "build_edges.php",
+                    "path": "api\/v8\/build_edges.php"
+                },
+                {
+                    "type": "file",
+                    "name": "build_graph.php",
+                    "path": "api\/v8\/build_graph.php"
+                },
+                {
+                    "type": "file",
+                    "name": "cases.php",
+                    "path": "api\/v8\/cases.php"
+                },
+                {
+                    "type": "file",
+                    "name": "cluster_insights.php",
+                    "path": "api\/v8\/cluster_insights.php"
+                },
+                {
+                    "type": "file",
+                    "name": "compare_networks.php",
+                    "path": "api\/v8\/compare_networks.php"
+                },
+                {
+                    "type": "file",
+                    "name": "compressor.php",
+                    "path": "api\/v8\/compressor.php"
+                },
+                {
+                    "type": "file",
+                    "name": "create_network.php",
+                    "path": "api\/v8\/create_network.php"
+                },
+                {
+                    "type": "file",
+                    "name": "dashboard.php",
+                    "path": "api\/v8\/dashboard.php"
+                },
+                {
+                    "type": "file",
+                    "name": "debug_queue.php",
+                    "path": "api\/v8\/debug_queue.php"
+                },
+                {
+                    "type": "file",
+                    "name": "debug_tasks.php",
+                    "path": "api\/v8\/debug_tasks.php"
+                },
+                {
+                    "type": "file",
+                    "name": "dossier.php",
+                    "path": "api\/v8\/dossier.php"
+                },
+                {
+                    "type": "file",
+                    "name": "dossier_v2.php",
+                    "path": "api\/v8\/dossier_v2.php"
+                },
+                {
+                    "type": "file",
+                    "name": "event_emit.php",
+                    "path": "api\/v8\/event_emit.php"
+                },
+                {
+                    "type": "file",
+                    "name": "feedback.php",
+                    "path": "api\/v8\/feedback.php"
+                },
+                {
+                    "type": "file",
+                    "name": "forecast.php",
+                    "path": "api\/v8\/forecast.php"
+                },
+                {
+                    "type": "file",
+                    "name": "generate_tasks.php",
+                    "path": "api\/v8\/generate_tasks.php"
+                },
+                {
+                    "type": "file",
+                    "name": "get_cases.php",
+                    "path": "api\/v8\/get_cases.php"
+                },
+                {
+                    "type": "file",
+                    "name": "get_clients.php",
+                    "path": "api\/v8\/get_clients.php"
+                },
+                {
+                    "type": "file",
+                    "name": "graph_debug.txt",
+                    "path": "api\/v8\/graph_debug.txt"
+                },
+                {
+                    "type": "file",
+                    "name": "graph_ranker.php",
+                    "path": "api\/v8\/graph_ranker.php"
+                },
+                {
+                    "type": "file",
+                    "name": "insights.php",
+                    "path": "api\/v8\/insights.php"
+                },
+                {
+                    "type": "file",
+                    "name": "insights_generate.php",
+                    "path": "api\/v8\/insights_generate.php"
+                },
+                {
+                    "type": "file",
+                    "name": "investigator.php",
+                    "path": "api\/v8\/investigator.php"
+                },
+                {
+                    "type": "file",
+                    "name": "learn.php",
+                    "path": "api\/v8\/learn.php"
+                },
+                {
+                    "type": "file",
+                    "name": "memory_store.php",
+                    "path": "api\/v8\/memory_store.php"
+                },
+                {
+                    "type": "file",
+                    "name": "memory_weight.php",
+                    "path": "api\/v8\/memory_weight.php"
+                },
+                {
+                    "type": "file",
+                    "name": "mesh.php",
+                    "path": "api\/v8\/mesh.php"
+                },
+                {
+                    "type": "file",
+                    "name": "network_add_node.php",
+                    "path": "api\/v8\/network_add_node.php"
+                },
+                {
+                    "type": "file",
+                    "name": "patterns.php",
+                    "path": "api\/v8\/patterns.php"
+                },
+                {
+                    "type": "file",
+                    "name": "predictor.php",
+                    "path": "api\/v8\/predictor.php"
+                },
+                {
+                    "type": "file",
+                    "name": "recommendations.php",
+                    "path": "api\/v8\/recommendations.php"
+                },
+                {
+                    "type": "file",
+                    "name": "recommendations_generate.php",
+                    "path": "api\/v8\/recommendations_generate.php"
+                },
+                {
+                    "type": "file",
+                    "name": "rule file",
+                    "path": "api\/v8\/rule file"
+                },
+                {
+                    "type": "file",
+                    "name": "run_worker.php",
+                    "path": "api\/v8\/run_worker.php"
+                },
+                {
+                    "type": "file",
+                    "name": "summary.php",
+                    "path": "api\/v8\/summary.php"
+                },
+                {
+                    "type": "file",
+                    "name": "widget_registry.php",
+                    "path": "api\/v8\/widget_registry.php"
+                }
+            ]
+        }
+    ],
+    "pages": [
+        {
+            "type": "file",
+            "name": "goals.php",
+            "path": "pages\/goals.php"
+        },
+        {
+            "type": "file",
+            "name": "home.php",
+            "path": "pages\/home.php"
+        },
+        {
+            "type": "file",
+            "name": "logs.php",
+            "path": "pages\/logs.php"
+        },
+        {
+            "type": "file",
+            "name": "network_view.php",
+            "path": "pages\/network_view.php"
+        },
+        {
+            "type": "file",
+            "name": "networks.php",
+            "path": "pages\/networks.php"
+        },
+        {
+            "type": "file",
+            "name": "reasoning.php",
+            "path": "pages\/reasoning.php"
+        },
+        {
+            "type": "file",
+            "name": "search.php",
+            "path": "pages\/search.php"
+        },
+        {
+            "type": "file",
+            "name": "shell_template.php",
+            "path": "pages\/shell_template.php"
+        },
+        {
+            "type": "folder",
+            "name": "test",
+            "path": "pages\/test",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "shell_module_test.php",
+                    "path": "pages\/test\/shell_module_test.php"
+                }
+            ]
+        }
+    ],
+    "data": [
+        {
+            "type": "folder",
+            "name": "agency",
+            "path": "data\/agency",
+            "children": []
+        },
+        {
+            "type": "folder",
+            "name": "agents",
+            "path": "data\/agents",
+            "children": []
+        },
+        {
+            "type": "folder",
+            "name": "auto_log",
+            "path": "data\/auto_log",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "run_1777269244.json",
+                    "path": "data\/auto_log\/run_1777269244.json"
+                },
+                {
+                    "type": "file",
+                    "name": "run_1777269518.json",
+                    "path": "data\/auto_log\/run_1777269518.json"
+                }
+            ]
+        },
+        {
+            "type": "folder",
+            "name": "brains",
+            "path": "data\/brains",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "brain_69f649ac20a6f5.22973107.json",
+                    "path": "data\/brains\/brain_69f649ac20a6f5.22973107.json"
+                },
+                {
+                    "type": "file",
+                    "name": "brain_69f6ca66861f71.73553194.json",
+                    "path": "data\/brains\/brain_69f6ca66861f71.73553194.json"
+                },
+                {
+                    "type": "file",
+                    "name": "graph.json",
+                    "path": "data\/brains\/graph.json"
+                }
+            ]
+        },
+        {
+            "type": "folder",
+            "name": "cases",
+            "path": "data\/cases",
+            "children": [
+                {
+                    "type": "folder",
+                    "name": "1",
+                    "path": "data\/cases\/1",
+                    "children": [
+                        {
+                            "type": "folder",
+                            "name": "artifacts",
+                            "path": "data\/cases\/1\/artifacts",
+                            "children": [
+                                {
+                                    "type": "folder",
+                                    "name": "extracted",
+                                    "path": "data\/cases\/1\/artifacts\/extracted",
+                                    "children": []
+                                },
+                                {
+                                    "type": "folder",
+                                    "name": "reports",
+                                    "path": "data\/cases\/1\/artifacts\/reports",
+                                    "children": []
+                                },
+                                {
+                                    "type": "folder",
+                                    "name": "uploads",
+                                    "path": "data\/cases\/1\/artifacts\/uploads",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "type": "file",
+                            "name": "case.json",
+                            "path": "data\/cases\/1\/case.json"
+                        },
+                        {
+                            "type": "file",
+                            "name": "clusters.json",
+                            "path": "data\/cases\/1\/clusters.json"
+                        },
+                        {
+                            "type": "folder",
+                            "name": "goals",
+                            "path": "data\/cases\/1\/goals",
+                            "children": [
+                                {
+                                    "type": "file",
+                                    "name": "active.json",
+                                    "path": "data\/cases\/1\/goals\/active.json"
+                                },
+                                {
+                                    "type": "file",
+                                    "name": "proposals.json",
+                                    "path": "data\/cases\/1\/goals\/proposals.json"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "file",
+                            "name": "insights.json",
+                            "path": "data\/cases\/1\/insights.json"
+                        },
+                        {
+                            "type": "folder",
+                            "name": "logs",
+                            "path": "data\/cases\/1\/logs",
+                            "children": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "memory",
+                            "path": "data\/cases\/1\/memory",
+                            "children": [
+                                {
+                                    "type": "file",
+                                    "name": "snapshots.json",
+                                    "path": "data\/cases\/1\/memory\/snapshots.json"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "file",
+                            "name": "network.json",
+                            "path": "data\/cases\/1\/network.json"
+                        },
+                        {
+                            "type": "file",
+                            "name": "recommendations.json",
+                            "path": "data\/cases\/1\/recommendations.json"
+                        },
+                        {
+                            "type": "file",
+                            "name": "strategy_plan.json",
+                            "path": "data\/cases\/1\/strategy_plan.json"
+                        },
+                        {
+                            "type": "folder",
+                            "name": "tasks",
+                            "path": "data\/cases\/1\/tasks",
+                            "children": [
+                                {
+                                    "type": "file",
+                                    "name": "history.json",
+                                    "path": "data\/cases\/1\/tasks\/history.json"
+                                },
+                                {
+                                    "type": "file",
+                                    "name": "queue.json",
+                                    "path": "data\/cases\/1\/tasks\/queue.json"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "file",
+                    "name": "CASE JSON SCHEMA",
+                    "path": "data\/cases\/CASE JSON SCHEMA"
+                },
+                {
+                    "type": "file",
+                    "name": "case_001.json",
+                    "path": "data\/cases\/case_001.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_002.json",
+                    "path": "data\/cases\/case_002.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_003.json",
+                    "path": "data\/cases\/case_003.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_004.json",
+                    "path": "data\/cases\/case_004.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_005.json",
+                    "path": "data\/cases\/case_005.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_006.json",
+                    "path": "data\/cases\/case_006.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_007.json",
+                    "path": "data\/cases\/case_007.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_008.json",
+                    "path": "data\/cases\/case_008.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_009.json",
+                    "path": "data\/cases\/case_009.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_010.json",
+                    "path": "data\/cases\/case_010.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_011.json",
+                    "path": "data\/cases\/case_011.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_012.json",
+                    "path": "data\/cases\/case_012.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_013.json",
+                    "path": "data\/cases\/case_013.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_014.json",
+                    "path": "data\/cases\/case_014.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_015.json",
+                    "path": "data\/cases\/case_015.json"
+                },
+                {
+                    "type": "file",
+                    "name": "case_{id}.json",
+                    "path": "data\/cases\/case_{id}.json"
+                },
+                {
+                    "type": "file",
+                    "name": "test_case.json",
+                    "path": "data\/cases\/test_case.json"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "name": "cases.json",
+            "path": "data\/cases.json"
+        },
+        {
+            "type": "file",
+            "name": "causal_memory.json",
+            "path": "data\/causal_memory.json"
+        },
+        {
+            "type": "folder",
+            "name": "chains",
+            "path": "data\/chains",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "chain_genome.json",
+                    "path": "data\/chains\/chain_genome.json"
+                },
+                {
+                    "type": "file",
+                    "name": "chain_performance.json",
+                    "path": "data\/chains\/chain_performance.json"
+                },
+                {
+                    "type": "file",
+                    "name": "chain_templates.json",
+                    "path": "data\/chains\/chain_templates.json"
+                }
+            ]
+        },
+        {
+            "type": "folder",
+            "name": "clients",
+            "path": "data\/clients",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "CLIENT DIRECTORY STRUCTURE.md",
+                    "path": "data\/clients\/CLIENT DIRECTORY STRUCTURE.md"
+                },
+                {
+                    "type": "folder",
+                    "name": "CLIENT JSON SCHEMA",
+                    "path": "data\/clients\/CLIENT JSON SCHEMA",
+                    "children": [
+                        {
+                            "type": "folder",
+                            "name": "cases",
+                            "path": "data\/clients\/CLIENT JSON SCHEMA\/cases",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "type": "file",
+                    "name": "CLIENT JSON SCHEMA.md",
+                    "path": "data\/clients\/CLIENT JSON SCHEMA.md"
+                },
+                {
+                    "type": "folder",
+                    "name": "artifacts",
+                    "path": "data\/clients\/artifacts",
+                    "children": [
+                        {
+                            "type": "folder",
+                            "name": "metadata",
+                            "path": "data\/clients\/artifacts\/metadata",
+                            "children": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "processed",
+                            "path": "data\/clients\/artifacts\/processed",
+                            "children": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "raw",
+                            "path": "data\/clients\/artifacts\/raw",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "type": "folder",
+                    "name": "cases",
+                    "path": "data\/clients\/cases",
+                    "children": []
+                },
+                {
+                    "type": "file",
+                    "name": "client_001.json",
+                    "path": "data\/clients\/client_001.json"
+                },
+                {
+                    "type": "file",
+                    "name": "client_002.json",
+                    "path": "data\/clients\/client_002.json"
+                },
+                {
+                    "type": "folder",
+                    "name": "client_1777858282",
+                    "path": "data\/clients\/client_1777858282",
+                    "children": [
+                        {
+                            "type": "folder",
+                            "name": "cases",
+                            "path": "data\/clients\/client_1777858282\/cases",
+                            "children": [
+                                {
+                                    "type": "folder",
+                                    "name": "case_1777858282",
+                                    "path": "data\/clients\/client_1777858282\/cases\/case_1777858282",
+                                    "children": [
+                                        {
+                                            "type": "file",
+                                            "name": "meta.json",
+                                            "path": "data\/clients\/client_1777858282\/cases\/case_1777858282\/meta.json"
+                                        },
+                                        {
+                                            "type": "file",
+                                            "name": "network.json",
+                                            "path": "data\/clients\/client_1777858282\/cases\/case_1777858282\/network.json"
+                                        },
+                                        {
+                                            "type": "file",
+                                            "name": "recommendations.json",
+                                            "path": "data\/clients\/client_1777858282\/cases\/case_1777858282\/recommendations.json"
+                                        },
+                                        {
+                                            "type": "folder",
+                                            "name": "tasks",
+                                            "path": "data\/clients\/client_1777858282\/cases\/case_1777858282\/tasks",
+                                            "children": [
+                                                {
+                                                    "type": "file",
+                                                    "name": "queue.json",
+                                                    "path": "data\/clients\/client_1777858282\/cases\/case_1777858282\/tasks\/queue.json"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "file",
+                            "name": "profile.json",
+                            "path": "data\/clients\/client_1777858282\/profile.json"
+                        }
+                    ]
+                },
+                {
+                    "type": "file",
+                    "name": "client_3.json",
+                    "path": "data\/clients\/client_3.json"
+                },
+                {
+                    "type": "file",
+                    "name": "client_4.json",
+                    "path": "data\/clients\/client_4.json"
+                },
+                {
+                    "type": "file",
+                    "name": "client_5.json",
+                    "path": "data\/clients\/client_5.json"
+                }
+            ]
+        },
+        {
+            "type": "folder",
+            "name": "compressed",
+            "path": "data\/compressed",
+            "children": []
+        },
+        {
+            "type": "folder",
+            "name": "events",
+            "path": "data\/events",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "event_queue.json",
+                    "path": "data\/events\/event_queue.json"
+                }
+            ]
+        },
+        {
+            "type": "folder",
+            "name": "files",
+            "path": "data\/files",
+            "children": []
+        },
+        {
+            "type": "folder",
+            "name": "goal_log",
+            "path": "data\/goal_log",
+            "children": []
+        },
+        {
+            "type": "folder",
+            "name": "goals",
+            "path": "data\/goals",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "goals.json",
+                    "path": "data\/goals\/goals.json"
+                },
+                {
+                    "type": "file",
+                    "name": "meta_goals.json",
+                    "path": "data\/goals\/meta_goals.json"
+                }
+            ]
+        },
+        {
+            "type": "folder",
+            "name": "graph",
+            "path": "data\/graph",
+            "children": []
+        },
+        {
+            "type": "file",
+            "name": "learning.json",
+            "path": "data\/learning.json"
+        },
+        {
+            "type": "file",
+            "name": "learning_memory.json",
+            "path": "data\/learning_memory.json"
+        },
+        {
+            "type": "folder",
+            "name": "memory",
+            "path": "data\/memory",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "memory.json",
+                    "path": "data\/memory\/memory.json"
+                }
+            ]
+        },
+        {
+            "type": "folder",
+            "name": "mesh",
+            "path": "data\/mesh",
+            "children": []
+        },
+        {
+            "type": "folder",
+            "name": "network",
+            "path": "data\/network",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "net_69eee12e374d30_99173905.json",
+                    "path": "data\/network\/net_69eee12e374d30_99173905.json"
+                },
+                {
+                    "type": "file",
+                    "name": "net_69eee660177a30_98660286.json",
+                    "path": "data\/network\/net_69eee660177a30_98660286.json"
+                },
+                {
+                    "type": "file",
+                    "name": "net_69eee6639380f1_13878764.json",
+                    "path": "data\/network\/net_69eee6639380f1_13878764.json"
+                },
+                {
+                    "type": "file",
+                    "name": "net_69f2f944df0b9.json",
+                    "path": "data\/network\/net_69f2f944df0b9.json"
+                },
+                {
+                    "type": "file",
+                    "name": "net_69f5206b2fc8f.json",
+                    "path": "data\/network\/net_69f5206b2fc8f.json"
+                },
+                {
+                    "type": "file",
+                    "name": "net_69f522a0038d2.json",
+                    "path": "data\/network\/net_69f522a0038d2.json"
+                },
+                {
+                    "type": "file",
+                    "name": "net_69f5936dd3a71.json",
+                    "path": "data\/network\/net_69f5936dd3a71.json"
+                },
+                {
+                    "type": "file",
+                    "name": "net_6a004c7f40e22.json",
+                    "path": "data\/network\/net_6a004c7f40e22.json"
+                },
+                {
+                    "type": "file",
+                    "name": "net_case_1.json",
+                    "path": "data\/network\/net_case_1.json"
+                }
+            ]
+        },
+        {
+            "type": "folder",
+            "name": "portfolio",
+            "path": "data\/portfolio",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "_debug_predictive.log",
+                    "path": "data\/portfolio\/_debug_predictive.log"
+                },
+                {
+                    "type": "file",
+                    "name": "cross_case_clusters.json",
+                    "path": "data\/portfolio\/cross_case_clusters.json"
+                },
+                {
+                    "type": "file",
+                    "name": "global_graph.json",
+                    "path": "data\/portfolio\/global_graph.json"
+                },
+                {
+                    "type": "file",
+                    "name": "predictive_insights.json",
+                    "path": "data\/portfolio\/predictive_insights.json"
+                },
+                {
+                    "type": "file",
+                    "name": "system_insights.json",
+                    "path": "data\/portfolio\/system_insights.json"
+                }
+            ]
+        },
+        {
+            "type": "folder",
+            "name": "predictions",
+            "path": "data\/predictions",
+            "children": []
+        },
+        {
+            "type": "folder",
+            "name": "prospects",
+            "path": "data\/prospects",
+            "children": [
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778493544.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778493544.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778495288.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778495288.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778497591.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778497591.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778497672.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778497672.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778497747.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778497747.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778497805.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778497805.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778499448.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778499448.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778499479.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778499479.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778499547.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778499547.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778520713.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778520713.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778522981.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778522981.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778523034.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778523034.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778621791.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778621791.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778622981.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778622981.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778623516.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778623516.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_brad_moore_builders_1778623690.json",
+                    "path": "data\/prospects\/prospect_brad_moore_builders_1778623690.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_cowboy_plumbing_1780908701.json",
+                    "path": "data\/prospects\/prospect_cowboy_plumbing_1780908701.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_cowboy_plumbing_1780909049.json",
+                    "path": "data\/prospects\/prospect_cowboy_plumbing_1780909049.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_cowboy_plumbing_1780924415.json",
+                    "path": "data\/prospects\/prospect_cowboy_plumbing_1780924415.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_cowboy_plumbing_1782020554.json",
+                    "path": "data\/prospects\/prospect_cowboy_plumbing_1782020554.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_cowboy_plumbing_1782020672.json",
+                    "path": "data\/prospects\/prospect_cowboy_plumbing_1782020672.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_cowboy_plumbing_1782195941.json",
+                    "path": "data\/prospects\/prospect_cowboy_plumbing_1782195941.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_faust_hotel_1778624355.json",
+                    "path": "data\/prospects\/prospect_faust_hotel_1778624355.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_good_ol_rockin_therapy_pllc_1782694373.json",
+                    "path": "data\/prospects\/prospect_good_ol_rockin_therapy_pllc_1782694373.json"
+                },
+                {
+                    "type": "file",
+                    "name": "prospect_good_ol_rockin_therapy_pllc_1782707194.json",
+                    "path": "data\/prospects\/prospect_good_ol_rockin_therapy_pllc_1782707194.json"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "name": "records.json",
+            "path": "data\/records.json"
+        },
+        {
+            "type": "file",
+            "name": "state_s_69e83d41012c9.json",
+            "path": "data\/state_s_69e83d41012c9.json"
+        },
+        {
+            "type": "file",
+            "name": "state_s_69e83ddc6794c.json",
+            "path": "data\/state_s_69e83ddc6794c.json"
+        },
+        {
+            "type": "file",
+            "name": "state_s_69e83e696108b.json",
+            "path": "data\/state_s_69e83e696108b.json"
+        }
+    ]
+}

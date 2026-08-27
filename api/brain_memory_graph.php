@@ -1,10 +1,13 @@
 <?php
 header('Content-Type: application/json');
 
+session_start();
+
 $input = json_decode(file_get_contents("php://input"), true);
 
 $file = $input['file'] ?? '';
 $node = $input['node'] ?? [];
+$node_id = $_SESSION['brain_node_id'] ?? null;
 
 $dir = __DIR__."/../data/brains/";
 
@@ -20,6 +23,7 @@ $graph = file_exists($path)
 
 $graph[] = [
     "file"=>$file,
+    "node_id"=>$node_id,
     "node"=>$node,
     "timestamp"=>date("Y-m-d H:i:s")
 ];

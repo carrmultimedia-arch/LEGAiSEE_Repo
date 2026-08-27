@@ -1,8 +1,10 @@
 <?php
-require_once "db.php";
+require_once __DIR__ . '/kernel/db.php';
+require_once __DIR__ . '/lib/semantic_diff_engine.php';
 
 $workspaceId = $_GET['workspace_id'] ?? null;
-require_once __DIR__ . '/lib/semantic_diff_engine.php';
+$pdo = kernel_db();
+
 if (!$workspaceId) {
     die("Workspace required.");
 }

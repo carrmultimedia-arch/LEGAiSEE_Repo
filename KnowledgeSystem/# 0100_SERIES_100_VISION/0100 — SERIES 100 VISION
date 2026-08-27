@@ -1,0 +1,120 @@
+PLACEMENT INSTRUCTIONS
+
+Create this file exactly at the path above.
+
+This document defines the purpose and scope of Series 100 (Vision Layer) within the Knowledge System numbering architecture.
+
+It establishes what Series 100 represents, how it is used, and how future Vision documents MUST behave.
+
+0100 — SERIES 100 VISION
+LEGAiSEE COMMANDCENTER KNOWLEDGE SYSTEM
+
+Version: 1.0
+Status: ACTIVE GOVERNANCE STANDARD
+Scope: /commandcenter/governance/KnowledgeSystem/
+
+1. PURPOSE
+
+Series 100 defines the Vision Layer of the Knowledge System.
+
+This layer exists to capture:
+
+system intent at a macro level
+long-term directional architecture principles
+structural philosophy of the CommandCenter
+evolution constraints across future system growth
+
+It does NOT define implementation details.
+
+2. SERIES DEFINITION
+2.1 Series Number Meaning
+0001–0099 → Core Governance and Operational Standards
+0100–0199 → Vision Layer (this series)
+0200+ → Future expansion layers (to be defined by governance rules)
+
+Series 100 specifically begins at:
+
+0100_SERIES_100_*.md
+3. FUNCTIONAL ROLE OF VISION LAYER
+
+The Vision Layer serves as:
+
+a directional compass for system evolution
+a constraint boundary for future architecture decisions
+a long-horizon consistency framework
+a reference anchor for all lower-level system behavior
+
+It is NOT executable.
+
+It is interpretive and directive.
+
+4. RELATIONSHIP TO OTHER LAYERS
+4.1 Relationship to Core Governance (0001–0099)
+
+Vision Layer:
+
+DOES NOT override governance rules
+DOES NOT modify structural constraints
+MUST remain consistent with foundational standards
+
+Core governance always has priority.
+
+4.2 Relationship to Operational System
+
+Vision Layer:
+
+informs design direction
+does NOT affect runtime execution
+acts as a constraint reference only
+4.3 Relationship to Knowledge System
+
+Vision Layer is part of Knowledge System and:
+
+expands interpretive scope
+introduces long-term system framing
+provides semantic direction for documentation evolution
+5. CONTENT REQUIREMENTS FOR SERIES 100 FILES
+
+All Vision Layer documents MUST:
+
+describe system intent at macro scale
+avoid implementation specifics
+remain abstract but structured
+align with governance constraints
+avoid introducing new architecture
+6. FORBIDDEN CONTENT TYPES
+
+Series 100 documents MUST NOT include:
+
+code-level specifications
+system file definitions
+folder restructuring instructions
+execution logic
+engine-level behavior details
+
+Violation = INVALID DOCUMENT STATE.
+
+7. VISION CONSISTENCY RULE
+
+All Series 100 documents MUST maintain:
+
+alignment with existing governance (0001–0009)
+consistency across all Vision files
+non-contradictory long-term direction
+
+Any contradiction with governance layers is resolved in favor of governance.
+
+8. SYSTEM ROLE OF SERIES 100
+
+Series 100 functions as:
+
+strategic abstraction layer
+long-term system identity anchor
+interpretive framework for CommandCenter evolution
+constraint system for future design decisions
+
+It does NOT execute logic.
+
+It defines direction.
+
+END OF FILE

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/../kernel/db.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -12,10 +12,9 @@ require_once __DIR__ . '/../db.php';
 
 function semantic_diff(int $a_id, int $b_id): array
 {
-    global $pdo;
-
-    $a = fetch_entity($a_id);
-    $b = fetch_entity($b_id);
+    $pdo = kernel_db();
+    $a = fetch_entity($pdo, $a_id);
+    $b = fetch_entity($pdo, $b_id);
 
     if (!$a || !$b) {
         return [
@@ -120,10 +119,8 @@ function semantic_diff(int $a_id, int $b_id): array
 /* -----------------------------
        7. Dif Engine
     ----------------------------- */
-function fetch_entity(int $id): ?array
+function fetch_entity(PDO $pdo, int $id): ?array
 {
-    global $pdo;
-
     $stmt = $pdo->prepare("
         SELECT 
             id,

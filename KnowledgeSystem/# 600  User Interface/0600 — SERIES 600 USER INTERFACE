@@ -1,0 +1,266 @@
+# 0600 — SERIES 600 USER INTERFACE
+
+## LEGAiSEE COMMANDCENTER KNOWLEDGE SYSTEM
+
+Version: 1.0
+Status: ACTIVE GOVERNANCE STANDARD
+Scope: `/commandcenter/governance/KnowledgeSystem/`
+
+---
+
+# PURPOSE
+
+Series 600 defines the complete Human Interface Layer of the LEGAiSEE CommandCenter.
+
+This series governs how operators interact with the system through visual, conversational, and interactive interfaces.
+
+It serves as the architectural bridge between the Intelligence Operating System and the human operator.
+
+Series 600 does **not** define business logic, intelligence generation, or execution engines.
+
+It defines **how those systems are presented and controlled**.
+
+---
+
+# OBJECTIVES
+
+Series 600 exists to ensure that every interface within CommandCenter is:
+
+* Consistent
+* Discoverable
+* Explainable
+* Governed
+* Modular
+* Accessible
+* Extensible
+* Operationally focused
+
+Every user interaction shall originate within this series.
+
+---
+
+# CORE PRINCIPLES
+
+The User Interface shall:
+
+* expose system intelligence without distortion
+* simplify complexity without hiding capability
+* prioritize operator awareness
+* minimize unnecessary navigation
+* remain consistent across all modules
+* accurately represent real system state
+* never bypass governance
+
+The interface is an operational tool, not a decorative layer.
+
+---
+
+# SERIES STRUCTURE
+
+The User Interface Series is organized into specialized interface domains.
+
+---
+
+## 0600 — User Interface (Index)
+
+Defines the architecture and organization of the User Interface Series.
+
+---
+
+## 0601 — Dashboard
+
+Defines the primary operational workspace.
+
+Provides high-level visibility into the entire CommandCenter.
+
+---
+
+## 0602 — Excavation Command
+
+Defines the primary interface for initiating and monitoring excavation workflows.
+
+---
+
+## 0603 — Executive Dashboard
+
+Defines executive-level reporting and business intelligence views.
+
+Focused on strategic awareness rather than operational detail.
+
+---
+
+## 0604 — Investigation Workspace
+
+Defines the analyst workspace for deep investigation of clients, artifacts, timelines, entities, relationships, and intelligence graphs.
+
+---
+
+## 0605 — Visualization
+
+Defines standards for presenting data through graphs, charts, maps, timelines, relationship diagrams, and other visual representations.
+
+---
+
+## 0606 — Widgets
+
+Defines reusable interface components used throughout CommandCenter.
+
+Widgets are modular interface elements that present specific operational information or controls.
+
+---
+
+## 0607 — Navigation
+
+Defines global navigation standards including menus, breadcrumbs, shortcuts, contextual navigation, and interface hierarchy.
+
+---
+
+# USER INTERFACE HIERARCHY
+
+The User Interface is organized as follows:
+
+```text
+Operator
+      │
+      ▼
+Navigation
+      │
+      ▼
+Workspace
+      │
+      ▼
+Dashboard
+      │
+      ▼
+Modules
+      │
+      ▼
+Views
+      │
+      ▼
+Widgets
+      │
+      ▼
+System Intelligence
+```
+
+Every interface should fit within this hierarchy.
+
+---
+
+# DESIGN PHILOSOPHY
+
+The interface should communicate:
+
+* clarity over decoration
+* information over aesthetics
+* confidence over complexity
+* speed over unnecessary interaction
+
+Visual design must reinforce operational understanding.
+
+---
+
+# INFORMATION HIERARCHY
+
+Information should be presented in decreasing order of importance.
+
+Priority should generally follow:
+
+1. Critical alerts
+2. Active operations
+3. System health
+4. Current project status
+5. Intelligence summaries
+6. Recommendations
+7. Historical information
+
+Operators should immediately understand the current operational state.
+
+---
+
+# INTERFACE CONSISTENCY
+
+All interfaces shall maintain consistency in:
+
+* terminology
+* navigation
+* interaction patterns
+* layouts
+* status indicators
+* iconography
+* color usage
+* feedback mechanisms
+
+Consistency reduces operator cognitive load.
+
+---
+
+# GOVERNANCE
+
+No interface may:
+
+* expose unauthorized information
+* execute privileged actions without validation
+* misrepresent system status
+* conceal failures
+* bypass Command Engine validation
+* bypass Governance rules
+
+The interface reflects the system.
+
+It does not redefine it.
+
+---
+
+# RELATIONSHIP TO OTHER SERIES
+
+### Series 200
+
+Provides infrastructure and runtime services.
+
+### Series 300
+
+Provides excavation workflows and intelligence.
+
+### Series 400
+
+Provides graph intelligence and reasoning.
+
+### Series 500
+
+Provides human interaction behaviors and operational assistance.
+
+### Series 600
+
+Provides the visual and interactive environment through which operators access all system capabilities.
+
+---
+
+# SYSTEM ROLE
+
+Series 600 functions as the Human Interface Architecture for CommandCenter.
+
+It defines:
+
+* operational workspaces
+* dashboards
+* navigation systems
+* visualization standards
+* reusable interface components
+* interaction models
+
+It transforms system capability into operator experience while preserving governance, accuracy, and operational clarity.
+
+---
+
+# GUIDING PRINCIPLE
+
+> **The Intelligence System performs the work.
+> The User Interface reveals the work.
+> The Operator understands the work.
+> Understanding enables effective decisions.**
+
+---
+
+## END OF FILE

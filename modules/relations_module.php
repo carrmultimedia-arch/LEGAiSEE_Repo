@@ -11,6 +11,8 @@ require_once __DIR__ . '/utils/bootstrap.php';
 $cases   = load_json_dir(__DIR__ . '/../data/cases');
 $clients = load_json_dir(__DIR__ . '/../data/clients');
 
+$case_id = $_GET['case_id'] ?? null;
+
 /*
 |--------------------------------------------------------------------------
 | BUILD CLIENT INDEX
@@ -104,6 +106,57 @@ foreach ($cases as $case) {
             $patternLinks[$b][$a]++;
         }
     }
+}
+
+/*
+|--------------------------------------------------------------------------
+| WRITE INSIGHTS TO CASE FILE
+|--------------------------------------------------------------------------
+*/
+
+function writeRelationsInsights(array $patternLinks, string $case_id): bool {
+    if (!$case_id) return false;
+    
+    // Find case directory
+    $caseDir = null;
+    $clientsDir = __DIR__ . '/../data/clients';
+    
+    foreach (glob($clientsDir . '/*/cases/*', GLOB_ONLYDIR) as $dir) {
+        if (basename($dir) === $case_id) {
+            $caseDir = $dir;
+            break;
+        }
+    }
+    
+    if (!$caseDir) return false;
+    
+    $insightsFile = $caseDir . '/insights.json';
+    $existingInsights = file_exists($insightsFile) ? json_decode(file_get_contents($insightsFile), true) : [];
+    
+    // Generate insights from pattern links
+    $newInsights = [];
+    foreach ($patternLinks as $pattern => $links) {
+        if (!empty($links)) {
+            $linkedPatterns = array_keys($links);
+            $newInsights[] = [
+                'type' => 'pattern_co_occurrence',
+                'summary' => "Pattern '{$pattern}' co-occurs with: " . implode(', ', $linkedPatterns),
+                'clusters_involved' => [$pattern, ...$linkedPatterns],
+                'confidence' => 'medium',
+                'created_at' => date('c')
+            ];
+        }
+    }
+    
+    // Merge new insights with existing
+    $mergedInsights = array_merge($existingInsights, $newInsights);
+    
+    return file_put_contents($insightsFile, json_encode($mergedInsights, JSON_PRETTY_PRINT)) !== false;
+}
+
+// Write insights if case_id provided
+if ($case_id && !empty($patternLinks)) {
+    writeRelationsInsights($patternLinks, $case_id);
 }
 
 /*

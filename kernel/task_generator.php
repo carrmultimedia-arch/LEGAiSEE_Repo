@@ -26,7 +26,7 @@ function createTasksFromRecommendations($case_id, $network_file, $conn) {
             $stmt->execute();
 
             // Add to processing queue
-            $task_id = $stmt->insert_id;
+            $task_id = $pdo->lastInsertId();
 
             $conn->query("
                 INSERT INTO processing_queue (task_id, status, created_at)

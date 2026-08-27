@@ -113,6 +113,86 @@ body {
 .app-body {
     flex: 1;
     padding: 28px 32px 60px;
+    display: flex;
+    gap: 24px;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, rgba(24,24,26,0.85), rgba(10,10,12,0.75));
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04);
+    overflow-y: auto;
+    max-height: calc(100vh - 140px);
+}
+
+.sidebar-header {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #89612B;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.sidebar-group {
+    margin-bottom: 20px;
+}
+
+.sidebar-group-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #89612B;
+    margin-bottom: 10px;
+}
+
+.sidebar-link {
+    display: block;
+    color: #CDAD69;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    margin-bottom: 4px;
+}
+
+.sidebar-link:hover {
+    color: #F4E185;
+    background: rgba(230, 194, 86, 0.08);
+    border-color: rgba(230, 194, 86, 0.2);
+}
+
+.sidebar-link-active {
+    color: #F4E185;
+    background: rgba(230, 194, 86, 0.12);
+    border-color: rgba(230, 194, 86, 0.3);
+    font-weight: 500;
+}
+
+.sidebar-link-broken {
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.sidebar-link-broken:hover {
+    color: #666;
+    background: transparent;
+}
+
+/* ── MAIN CONTENT ── */
+.main-content {
+    flex: 1;
+    min-width: 0;
 }
 
 /* ── GRAND LOBBY HERO ── */

@@ -1,0 +1,52 @@
+# LEGAiSEE — ACTIVE TASK QUEUE
+### Last Updated: 2026-06-26
+
+---
+
+## IN PROGRESS
+- **WO-002 — Project Manager (PM) Module**
+  Task board per project, optional link to memory_ingest sessions.
+  See 05_DAILY_WORK_ORDER.txt. Status: ISSUED, awaiting executor + John's
+  validation against the completion checklist.
+
+---
+
+## NEXT UP (not yet work-ordered)
+1. **Drop superseded tables** — tree_nodes, node_attributes, chat_ingest were
+   created mid-session before realizing memory_ingest's `processed` column
+   already covers the same job. Low effort, low risk, just cleanup.
+2. **Visual unification pass** — modules built before today's .card/.grid-2
+   system existed (most of the Intelligence Engines / Graph & Entities groups)
+   still use the older .ui-card/.field patterns. Not broken, just visually
+   inconsistent with ingest/pm. Worth a dedicated pass once core features
+   are done, not before.
+3. **Wire excavation_module.php** — currently shows {}, pipeline not connected.
+4. **brain_*.php pipeline** — 9-file family (api/brain_start through
+   brain_dossier) is real in-progress work, confirmed disconnected (nothing
+   calls brain_start currently). Needs a session deciding how it connects to
+   the live system (it runs on flat-JSON data/brains/, separate from MySQL).
+5. **report_module.php** — connected but section assembly not built.
+
+---
+
+## BACKLOG (known, not prioritized yet)
+- File-upload styling pass for ingest's Upload File tab (Choose File button
+  styling — small CSS fix, low priority)
+- Lighter/client-facing redesign of the whole visual system — explicitly
+  deferred by John until functional pieces (PM, brain pipeline) are further
+  along. Treat as its own dedicated project when started, not a patch.
+- search_module.php / files_module.php / dig_review_module.php / 
+  api/search_load.php / api/files_action.php / engine/plain_english_helper.php
+  — status unknown, not audited this session.
+
+---
+
+## INSTRUCTIONS
+This file reflects priority, not just a backlog. Claude reads this at the
+start of every TYPE 1 or TYPE 3 session to know what's next. Update it
+whenever priority shifts — move completed items out, add new ones as they
+surface, keep "IN PROGRESS" to one item at a time where possible.
+
+---
+
+# END ACTIVE TASK QUEUE

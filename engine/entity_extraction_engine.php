@@ -172,7 +172,7 @@ function lee_upsert_entity(PDO $db, string $canonicalName, string $type, float $
 
     $stmt = $db->prepare("
         INSERT INTO entities (entity_type, canonical_name, normalized_hash, confidence, created_at)
-        VALUES (?, ?, ?, ?, NOW())
+        VALUES (?, ?, ?, ?, datetime('now'))
     ");
     $stmt->execute([$type, $canonicalName, $hash, $confidence]);
     return (int)$db->lastInsertId();
@@ -189,8 +189,8 @@ function lee_insert_alias(PDO $db, int $entityId, string $alias, string $sourceT
     if ($stmt->fetch()) return;
 
     $stmt = $db->prepare("
-        INSERT INTO entity_aliases (entity_id, alias, source_type, confidence)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO entity_aliases (entity_id, alias, source_type, confidence, created_at)
+        VALUES (?, ?, ?, ?, datetime('now'))
     ");
     $stmt->execute([$entityId, $alias, $sourceType, $confidence]);
 }
@@ -252,8 +252,8 @@ function lee_upsert_relationship(
 
     $stmt = $db->prepare("
         INSERT INTO relationships
-            (from_entity, to_entity, relation_type, strength, context, from_entity_id, to_entity_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+            (from_entity, to_entity, relation_type, strength, source_context, from_entity_id, to_entity_id, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
     ");
     $stmt->execute([
         substr($fromName, 0, 64),

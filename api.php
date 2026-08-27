@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 error_reporting(0);
 ini_set('display_errors', 0);
 
-require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/kernel/db.php';
 
 $action = $_GET['action'] ?? '';
 $case_id = isset($_POST['case_id']) ? intval($_POST['case_id']) : 0;
@@ -104,13 +104,13 @@ case "enqueue_task":
         respond("error", [], "Missing task_type or case_id");
     }
 
-    $stmt = $conn->prepare("
+    $pdo = kernel_db();
+    $stmt = $pdo->prepare("
         INSERT INTO processing_queue (case_id, task_type, status)
         VALUES (?, ?, 'pending')
     ");
 
-    $stmt->bind_param("is", $case_id, $task_type);
-    $stmt->execute();
+    $stmt->execute([$case_id, $task_type]);
 
     respond("ok", [
         "queued" => true,

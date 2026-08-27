@@ -1,36 +1,26 @@
 <?php
 
-require_once __DIR__ . '/../db.php';
-require_once __DIR__ . '/_response.php';
+require_once __DIR__ . '/../../engine/semantic_cluster_engine.php';
+require_once __DIR__ . '/../../kernel/db.php';
+require_once __DIR__ . '/../../response.php';
 
 try {
-
-    $case_id = intval($_GET['case_id'] ?? 0);
+    $case_id = $_GET['case_id'] ?? null;
 
     if (!$case_id) {
-        json_error("missing case_id", 400);
+        json_error("case_id is required.", 400);
     }
 
-    $result = $conn->query("
-        SELECT * FROM processing_queue
-        WHERE case_id=$case_id AND task_type='cluster'
-        ORDER BY id DESC
-        LIMIT 20
+    $pdo = kernel_db();
+    $stmt = $pdo->prepare("
+        SELECT content FROM entities WHERE context = ?
     ");
+    $stmt->execute([$case_id]);
+    $nodes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $clusters = [];
-
-    while ($row = $result->fetch_assoc()) {
-        $clusters[] = $row;
-    }
-
-    json_response([
-        "cluster_count" => count($clusters),
-        "clusters" => $clusters
-    ]);
+    $clusters = buildSemanticClusters($nodes);
+    json_response(['cluster_count' => count($clusters), 'clusters' => $clusters]);
 
 } catch (Throwable $e) {
-    json_error("cluster failed", 500, [
-        "exception" => $e->getMessage()
-    ]);
+    json_error("cluster insights failed: " . $e->getMessage(), 500);
 }

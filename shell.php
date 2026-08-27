@@ -7,6 +7,21 @@ require_once __DIR__ . '/kernel/kernel_boot.php';
 require_once __DIR__ . '/modules/utils/bootstrap.php';
 require_once __DIR__ . '/modules/utils/uic_v1.php';
 
+// ── EARLY INTERCEPTS FOR FILE DOWNLOADS ──────────────────────────────────────
+// These must run before any HTML is output to prevent "headers already sent" errors.
+
+// Report Generation (from report_module.php)
+if (isset($_GET['module']) && $_GET['module'] === 'report' && isset($_POST['generate_report'])) {
+    require __DIR__ . '/modules/report_module.php';
+    exit;
+}
+
+// Vault Download (from vault_module.php)
+if (isset($_GET['module']) && $_GET['module'] === 'vault' && isset($_GET['action']) && $_GET['action'] === 'download') {
+    require __DIR__ . '/modules/vault_module.php';
+    exit;
+}
+
 // ── MODULE REGISTRY ───────────────────────────────────────────────────────────
 $registry = require __DIR__ . '/kernel/module_registry.php';
 
@@ -96,6 +111,7 @@ $dashboardGroups = [
             ['module' => 'cases',     'title' => 'Cases',           'desc' => 'Case archive & status'],
             ['module' => 'vault',     'title' => 'Vault',           'desc' => 'Secure artifact storage'],
             ['module' => 'report',    'title' => 'Reports',         'desc' => 'Generated authority reports'],
+            ['module' => 'payment',   'title' => 'Payments',        'desc' => 'Stripe checkout & billing'],
         ]
     ],
     [
@@ -142,7 +158,6 @@ $dashboardGroups = [
 // ── NAV LINKS (always visible) ────────────────────────────────────────────────
 $navLinks = [
     ''          => 'Lobby',
-   'governance' => 'Governance',
     'dashboard' => 'Dashboard',
     'pm'        => 'Tasks',
     'brain'     => '🧠 Brain',
@@ -150,6 +165,79 @@ $navLinks = [
     'cases'     => 'Cases',
     'excavation'=> 'Excavation',
     'search'    => 'Search',
+];
+
+// ── SIDEBAR MODULES (all modules from WO-A audit) ─────────────────────────────
+$sidebarModules = [
+    [
+        'label' => 'Command',
+        'modules' => [
+            ['key' => 'dashboard', 'title' => 'System Dashboard', 'status' => 'working'],
+            ['key' => 'intelligence_dashboard', 'title' => 'Intel Dashboard', 'status' => 'working'],
+            ['key' => 'executive', 'title' => 'Executive Dashboard', 'status' => 'working'],
+            ['key' => 'brain', 'title' => 'Brain', 'status' => 'working'],
+            ['key' => 'cockpit', 'title' => 'Cockpit', 'status' => 'working'],
+        ]
+    ],
+    [
+        'label' => 'Planning',
+        'modules' => [
+            ['key' => 'pm', 'title' => 'Project Board', 'status' => 'working'],
+        ]
+    ],
+    [
+        'label' => 'Clients & Cases',
+        'modules' => [
+            ['key' => 'clients', 'title' => 'Client Vault', 'status' => 'working'],
+            ['key' => 'cases', 'title' => 'Cases', 'status' => 'working'],
+            ['key' => 'vault', 'title' => 'Vault', 'status' => 'working'],
+            ['key' => 'report', 'title' => 'Reports', 'status' => 'working'],
+            ['key' => 'payment', 'title' => 'Payments', 'status' => 'working'],
+        ]
+    ],
+    [
+        'label' => 'Excavation',
+        'modules' => [
+            ['key' => 'excavation', 'title' => 'Excavation', 'status' => 'working'],
+            ['key' => 'ingest', 'title' => 'Memory Ingest', 'status' => 'working'],
+            ['key' => 'ingest_view', 'title' => 'Ingest View', 'status' => 'working'],
+            ['key' => 'files', 'title' => 'Files', 'status' => 'working'],
+            ['key' => 'search', 'title' => 'Search', 'status' => 'working'],
+            ['key' => 'dig_review', 'title' => 'Dig Review', 'status' => 'working'],
+        ]
+    ],
+    [
+        'label' => 'Intelligence Engines',
+        'modules' => [
+            ['key' => 'anomaly_engine', 'title' => 'Anomaly Engine', 'status' => 'working'],
+            ['key' => 'insight', 'title' => 'Insight', 'status' => 'working'],
+            ['key' => 'recommendation', 'title' => 'Recommendation', 'status' => 'working'],
+            ['key' => 'decision', 'title' => 'Decision Engine', 'status' => 'working'],
+            ['key' => 'predictive', 'title' => 'Predictive', 'status' => 'working'],
+            ['key' => 'predictive_link_module_v1', 'title' => 'Predictive Link V1', 'status' => 'working'],
+            ['key' => 'time_intelligence', 'title' => 'Time Intelligence', 'status' => 'working'],
+        ]
+    ],
+    [
+        'label' => 'Graph & Entities',
+        'modules' => [
+            ['key' => 'graph', 'title' => 'Network Graph', 'status' => 'working'],
+            ['key' => 'entity_resolution', 'title' => 'Entity Resolution', 'status' => 'working'],
+            ['key' => 'relations', 'title' => 'Relations', 'status' => 'working'],
+            ['key' => 'root_cause', 'title' => 'Root Cause', 'status' => 'working'],
+            ['key' => 'cluster', 'title' => 'Clusters', 'status' => 'working'],
+            ['key' => 'semantic_cluster', 'title' => 'Semantic Cluster', 'status' => 'working'],
+            ['key' => 'cross_case_engine', 'title' => 'Cross-Case Engine', 'status' => 'working'],
+        ]
+    ],
+    [
+        'label' => 'Tools',
+        'modules' => [
+            ['key' => 'compare', 'title' => 'Compare', 'status' => 'working'],
+            ['key' => 'view', 'title' => 'View', 'status' => 'working'],
+            ['key' => 'alert', 'title' => 'Alert', 'status' => 'working'],
+        ]
+    ],
 ];
 
 // Prospect Dig is a standalone workaround — links out
@@ -190,41 +278,99 @@ $standaloneLinks = [
 
     <div class="app-body">
 
-        <?php if ($requestedModule): ?>
-
-            <div class="module-view">
-                <div class="module-view-header">
-                    <a class="module-back" href="/commandcenter/shell.php">← Grand Lobby</a>
-                    <h1 class="module-view-title"><?= htmlspecialchars(ucwords(str_replace('_', ' ', $requestedModule))) ?></h1>
-                </div>
-                <div class="module-view-body">
-                    <?= renderModule($requestedModule, $registry) ?>
-                </div>
-            </div>
-
-        <?php else: ?>
-
-            <div class="lobby-hero">
-                <div class="lobby-label">Sovereign Intelligence Environment</div>
-                <h1 class="lobby-title">Grand Lobby</h1>
-                <p class="lobby-text">Select a module to begin. Click any card to open the full module view.</p>
-            </div>
-
-            <?php foreach ($dashboardGroups as $group): ?>
-            <div class="dashboard-group">
-                <div class="dashboard-group-label"><?= htmlspecialchars($group['label']) ?></div>
-                <div class="layout-grid">
-                    <?php foreach ($group['cards'] as $card): ?>
-                    <a class="ui-card ui-card-link" href="/commandcenter/shell.php?module=<?= urlencode($card['module']) ?>">
-                        <div class="ui-card-title"><?= htmlspecialchars($card['title']) ?></div>
-                        <div class="ui-card-body"><?= htmlspecialchars($card['desc']) ?></div>
-                    </a>
+        <div class="sidebar">
+            <div class="sidebar-header">All Modules</div>
+            <?php foreach ($sidebarModules as $group): ?>
+                <div class="sidebar-group">
+                    <div class="sidebar-group-label"><?= htmlspecialchars($group['label']) ?></div>
+                    <?php foreach ($group['modules'] as $mod): ?>
+                        <?php
+                            $isWorking = ($mod['status'] === 'working');
+                            $isRegistered = isset($registry[$mod['key']]);
+                            $statusClass = $isWorking && $isRegistered ? 'sidebar-link' : 'sidebar-link sidebar-link-broken';
+                            $statusText = ($isWorking && $isRegistered) ? '' : ' (Not Yet Working)';
+                            
+                            // Preserve session/case context
+                            $queryParams = ['module' => $mod['key']];
+                            if (!empty($_GET['client'])) $queryParams['client'] = $_GET['client'];
+                            if (!empty($_GET['session'])) $queryParams['session'] = $_GET['session'];
+                            if (!empty($_GET['case'])) $queryParams['case'] = $_GET['case'];
+                            
+                            $href = ($isWorking && $isRegistered) ? '/commandcenter/shell.php?' . http_build_query($queryParams) : '#';
+                        ?>
+                        <a href="<?= $href ?>" class="<?= $statusClass ?><?= ($requestedModule === $mod['key']) ? ' sidebar-link-active' : '' ?>" <?= (!$isWorking || !$isRegistered) ? 'onclick="return false;"' : '' ?>>
+                            <?= htmlspecialchars($mod['title']) ?><?= $statusText ?>
+                        </a>
                     <?php endforeach; ?>
                 </div>
-            </div>
             <?php endforeach; ?>
+        </div>
 
-        <?php endif; ?>
+        <div class="main-content">
+            <?php if ($requestedModule): ?>
+
+                <div class="module-view">
+                    <div class="module-view-header">
+                        <a class="module-back" href="/commandcenter/shell.php">← Grand Lobby</a>
+                        <h1 class="module-view-title"><?= htmlspecialchars(ucwords(str_replace('_', ' ', $requestedModule))) ?></h1>
+                    </div>
+                    <div class="module-view-body">
+                        <?php if ($requestedModule === 'ingest'): ?>
+                            <div class="layout-grid-three-col">
+                                <div class="grid-col-main">
+                                    <h2 class="module-view-subtitle">Ingest New Data</h2>
+                                    <?= renderModule('ingest', $registry) ?>
+                                </div>
+                                <div class="grid-col-side">
+                                    <h2 class="module-view-subtitle">Browse Files</h2>
+                                    <?= renderModule('files', $registry) ?>
+                                </div>
+                                <div class="grid-col-side">
+                                    <h2 class="module-view-subtitle">Search Archive</h2>
+                                    <?= renderModule('search', $registry) ?>
+                                </div>
+                            </div>
+                        <?php elseif ($requestedModule === 'excavation'): ?>
+                            <div class="layout-grid-uneven">
+                                <div class="grid-col-main">
+                                    <h2 class="module-view-subtitle">Browse Files</h2>
+                                    <?= renderModule('files', $registry) ?>
+                                </div>
+                                <div class="grid-col-side">
+                                    <h2 class="module-view-subtitle">Search Archive</h2>
+                                    <?= renderModule('search', $registry) ?>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <?= renderModule($requestedModule, $registry, ['registry' => $registry]) ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+            <?php else: ?>
+
+                <div class="lobby-hero">
+                    <div class="lobby-label">Sovereign Intelligence Environment</div>
+                    <h1 class="lobby-title">Grand Lobby</h1>
+                    <p class="lobby-text">Select a module to begin. Click any card to open the full module view, or use the sidebar to navigate all modules.</p>
+                </div>
+
+                <?php foreach ($dashboardGroups as $group): ?>
+                <div class="dashboard-group">
+                    <div class="dashboard-group-label"><?= htmlspecialchars($group['label']) ?></div>
+                    <div class="layout-grid">
+                        <?php foreach ($group['cards'] as $card): ?>
+                        <a class="ui-card ui-card-link" href="/commandcenter/shell.php?module=<?= urlencode($card['module']) ?>">
+                            <div class="ui-card-title"><?= htmlspecialchars($card['title']) ?></div>
+                            <div class="ui-card-body"><?= htmlspecialchars($card['desc']) ?></div>
+                        </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+
+            <?php endif; ?>
+        </div>
 
     </div>
 

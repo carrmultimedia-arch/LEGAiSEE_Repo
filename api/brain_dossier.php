@@ -1,7 +1,14 @@
 <?php
 header('Content-Type: application/json');
 
-$brain_id = $_GET['brain_id'] ?? '';
+session_start();
+
+$brain_id = $_GET['brain_id'] ?? $_SESSION['brain_id'] ?? '';
+
+if(!$brain_id){
+    echo json_encode(["error"=>"brain_id not found in session or input"]);
+    exit;
+}
 
 $file = __DIR__."/../data/brains/".$brain_id.".json";
 
@@ -16,6 +23,7 @@ $steps = $session['steps'] ?? [];
 
 $dossier = [
     "FILE"=>$session['file'],
+    "NODE_ID"=>$session['node_id'] ?? null,
     "BRAIN_ID"=>$brain_id,
     "STATUS"=>$session['status'],
     "STEP_COUNT"=>count($steps),

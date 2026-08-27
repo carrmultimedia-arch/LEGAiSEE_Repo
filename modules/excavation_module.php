@@ -24,6 +24,7 @@ $clusters = [];
 $clients = is_dir($clientsRoot) ? scandir($clientsRoot) : [];
 
 require_once __DIR__ . '/../engine/entity_extraction_engine.php';
+require_once __DIR__ . '/../kernel/db.php';
 $db = kernel_db();
 $extractionLog = [];
 
@@ -31,45 +32,75 @@ foreach ($clients as $cid) {
 
     if ($cid === '.' || $cid === '..') continue;
 
+    // Load from case files (WO-C structure)
+    $casesDir = $clientsRoot . "/$cid/cases";
+    
+    if (is_dir($casesDir)) {
+        foreach (glob($casesDir . '/*/files/*') as $file) {
+            if (!is_file($file)) continue;
+            
+            $rawText = file_get_contents($file);
+            if (!$rawText) continue;
+            
+            $allArtifacts[] = [
+                'client_id' => $cid,
+                'file'      => basename($file),
+                'text'      => strtolower($rawText),
+                'timestamp' => date('c')
+            ];
+            
+            // --- ENTITY EXTRACTION ---
+            if ($db && strlen($rawText) > 5) {
+                $extractionLog[] = lee_extract_and_store(
+                    $db,
+                    $rawText,
+                    'case_file',
+                    $cid,
+                    basename($file)
+                );
+            }
+        }
+    }
+    
+    // Also load from legacy artifacts/metadata if exists
     $artifactDir = $clientsRoot . "/$cid/artifacts/metadata";
+    if (is_dir($artifactDir)) {
+        $files = scandir($artifactDir);
 
-    if (!is_dir($artifactDir)) continue;
+        foreach ($files as $file) {
 
-    $files = scandir($artifactDir);
+            if (!str_ends_with($file, '.json')) continue;
 
-    foreach ($files as $file) {
-
-        if (!str_ends_with($file, '.json')) continue;
-
-        $meta = json_decode(
-            file_get_contents($artifactDir . '/' . $file),
-            true
-        );
-
-        if (!$meta) continue;
-
-        // Read actual file content if available (not just filename)
-        $rawText = $meta['file'] ?? '';
-        if (!empty($meta['content'])) $rawText .= ' ' . $meta['content'];
-        if (!empty($meta['summary'])) $rawText .= ' ' . $meta['summary'];
-        if (!empty($meta['text']))    $rawText .= ' ' . $meta['text'];
-
-        $allArtifacts[] = [
-            'client_id' => $cid,
-            'file'      => $meta['file'] ?? null,
-            'text'      => strtolower($rawText),
-            'timestamp' => $meta['created_at'] ?? date('c')
-        ];
-
-        // --- ENTITY EXTRACTION ---
-        if ($db && strlen($rawText) > 5) {
-            $extractionLog[] = lee_extract_and_store(
-                $db,
-                $rawText,
-                'artifact_metadata',
-                $cid,
-                $file
+            $meta = json_decode(
+                file_get_contents($artifactDir . '/' . $file),
+                true
             );
+
+            if (!$meta) continue;
+
+            // Read actual file content if available (not just filename)
+            $rawText = $meta['file'] ?? '';
+            if (!empty($meta['content'])) $rawText .= ' ' . $meta['content'];
+            if (!empty($meta['summary'])) $rawText .= ' ' . $meta['summary'];
+            if (!empty($meta['text']))    $rawText .= ' ' . $meta['text'];
+
+            $allArtifacts[] = [
+                'client_id' => $cid,
+                'file'      => $meta['file'] ?? null,
+                'text'      => strtolower($rawText),
+                'timestamp' => $meta['created_at'] ?? date('c')
+            ];
+
+            // --- ENTITY EXTRACTION ---
+            if ($db && strlen($rawText) > 5) {
+                $extractionLog[] = lee_extract_and_store(
+                    $db,
+                    $rawText,
+                    'artifact_metadata',
+                    $cid,
+                    $file
+                );
+            }
         }
     }
 }

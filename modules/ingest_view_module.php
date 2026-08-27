@@ -10,8 +10,8 @@ if (!$db) {
 }
 
 $rows = $db->query("
-    SELECT id, session_title, source_ai, created_at
-    FROM memory_ingests
+    SELECT id, session_label, platform, created_at
+    FROM memory_ingest
     ORDER BY id DESC
     LIMIT 20
 ")->fetchAll();
@@ -20,8 +20,8 @@ $items = [];
 
 foreach ($rows as $r) {
     $items[] = [
-        'title' => $r['session_title'] ?: 'Untitled',
-        'meta' => $r['source_ai'] . ' • ' . $r['created_at']
+        'title' => $r['session_label'] ?: 'Untitled',
+        'meta' => $r['platform'] . ' • ' . $r['created_at']
     ];
 }
 

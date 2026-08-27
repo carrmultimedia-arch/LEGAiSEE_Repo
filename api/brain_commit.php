@@ -1,10 +1,17 @@
 <?php
 header('Content-Type: application/json');
 
+session_start();
+
 $input = json_decode(file_get_contents("php://input"), true);
 
-$brain_id = $input['brain_id'] ?? '';
+$brain_id = $input['brain_id'] ?? $_SESSION['brain_id'] ?? '';
 $note = $input['note'] ?? '';
+
+if(!$brain_id){
+    echo json_encode(["error"=>"brain_id not found in session or input"]);
+    exit;
+}
 
 $file = __DIR__."/../data/brains/".$brain_id.".json";
 

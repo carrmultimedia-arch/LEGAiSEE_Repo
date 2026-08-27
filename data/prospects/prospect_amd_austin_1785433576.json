@@ -1,0 +1,52 @@
+{
+    "id": "prospect_amd_austin_1785433576",
+    "prospect_name": "AMD Austin",
+    "created_at": "2026-07-30T17:46:16+00:00",
+    "ingest_number": 1,
+    "raw_input_length": 2016,
+    "signals": {
+        "pricing_pressure": {
+            "keywords": [
+                "price",
+                "cost",
+                "expensive",
+                "cheap",
+                "budget",
+                "afford",
+                "rate",
+                "overpriced",
+                "quote",
+                "bid"
+            ],
+            "label": "Pricing Friction",
+            "priority": "HIGH",
+            "confidence": 0.3333333333333333,
+            "hits": 2
+        },
+        "lead_friction": {
+            "keywords": [
+                "lead",
+                "conversion",
+                "funnel",
+                "prospect",
+                "inquiry",
+                "traffic",
+                "referral",
+                "close",
+                "sales"
+            ],
+            "label": "Lead\/Conversion Weakness",
+            "priority": "HIGH",
+            "confidence": 0.3333333333333333,
+            "hits": 2
+        }
+    },
+    "authority_score": 42,
+    "opportunity_level": "LOW",
+    "entity_data": {
+        "entities_extracted": 18,
+        "entities_stored": 18,
+        "relationships_stored": 25,
+        "source": "AMD Austin"
+    }
+}

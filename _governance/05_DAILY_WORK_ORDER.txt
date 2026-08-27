@@ -1,344 +1,150 @@
-# LEGAiSEE — DAILY WORK ORDER
-### WO-001 — Governance Completion + Server Audit + Database Migrations
-### Issued By: Claude (Architect)
-### Date: 2026-05-19
-### Executor: JOHN (manual tasks — no code executor needed for this order)
-### Priority: CRITICAL — nothing else can build on top of an incomplete foundation
-
----
-
-# OBJECTIVE
-
-Three things must be true before any code build can proceed safely:
-
-1. The governance system is complete and live on the server
-2. We know exactly what is and is not deployed in commandcenter/
-3. The database schema has the required columns
-
-This work order accomplishes all three.
-
----
-
-# TASK 1 — COMPLETE THE GOVERNANCE FOLDER
-## Executor: John (manual cPanel upload)
-## Risk: None — adding files only, no code changes
-
-### 1A — Upload New Governance Files
-
-Upload these files (produced by Claude today) to:
-```
-commandcenter/_governance/
-```
-
-| File | Source |
-|------|--------|
-| AGENT_ROLES.md | Download from Claude session |
-| CLAUDE_SESSION_PROTOCOL.md | Download from Claude session |
-| ERROR_ESCALATION_PROTOCOL.md | Download from Claude session |
-| DAILY_WORK_ORDER.md | This file |
-
----
-
-### 1B — Upload Previously Written But Missing Governance Files
-
-These files were written but never uploaded to the server.
-You have the content from our session today.
-Upload each one to commandcenter/_governance/:
-
-| File | Content Source |
-|------|---------------|
-| DECISION_LOG.md | Paste content from today's session |
-| PROTECTED_FILES.md | Paste content from today's session |
-| CHANGE_IMPACT_MATRIX.md | Paste content from today's session |
-| RECOVERY_PLAYBOOK.md | Paste content from today's session |
-| DEPLOYMENT_CHECKLIST.md | Paste content from today's session |
-| MODULE_INDEX.md | Paste content from today's session |
-| BUILD_HISTORY.md | Paste content from today's session |
-| DRIFT_PATTERNS.md | Paste content from today's session |
-| SAFE_EXECUTION_PROMPT.md | Paste content from today's session |
-| ACTIVE_TASK_QUEUE.md | Paste content from today's session |
-| SESSION_HANDOFF.md | Paste content from today's session |
-
-Method: cPanel File Manager → open each empty/missing file → paste content → save.
-
----
+LEGAiSEE — DAILY WORK ORDER
 
-### 1C — Fill In The Empty Files
-
-These files exist on server but are 0 bytes. Fill them now:
-
-#### DAILY_STATE.md — Paste this content:
-
-```markdown
-# LEGAiSEE — DAILY STATE
-### Last Updated: 2026-05-19
-
-## Environment
-- Hosting: SureServer — s413.sureserver.com
-- User: carrmulti
-- Live URL: https://www.legaisee.com/commandcenter/
-- Stack: PHP 8+, MySQL, flat JSON
-- Main Entry: shell.php
-
-## Currently Confirmed Working (from prior sessions)
-- shell.php routing
-- module loading system
-- module_registry.php
-- global.css system
-- kernel boot chain
-
-## Working Modules (reported working as of 2026-05-17)
-- intelligence_dashboard, dashboard, graph, clients, cases
-- brain, anomaly_engine, cluster, compare, decision
-- entity_resolution, insight, predictive, recommendation
-- relations, report (connected, assembly not built)
-- root_cause, time_intelligence, vault, cross_case
-
-## Modules With Known Issues
-- excavation_module.php — shows {} — pipeline not wired
-- report_module.php — connected but section assembly not built
-
-## Pending Deploy Verification (UNKNOWN IF LIVE)
-- modules/search_module.php
-- modules/files_module.php
-- modules/ingest_module.php
-- modules/dig_review_module.php
-- api/search_load.php
-- api/files_action.php
-- engine/plain_english_helper.php
-- CSS additions (ingest_and_files_css, search_module_css) → global.css
-
-## Database Status
-- context_migration.sql: STATUS UNKNOWN — verify in WO-001
-- review_flags.case_id column: NOT YET ADDED
-- embeddings table: NOT yet implemented
-- entities/relationships tables: Empty — needs excavation pipeline
-
-## Current Blockers
-- Server audit not yet completed (WO-001 in progress)
-
-## Last Successful Build
-- Governance system creation: 2026-05-19
-
-## Current Development Priority
-- WO-001: Governance + Audit + DB migrations
-```
-
----
-
-#### CURRENT_OBJECTIVE.md — Paste this content:
-
-```markdown
-# LEGAiSEE — CURRENT OBJECTIVE
-### Last Updated: 2026-05-19
-
-## ACTIVE OBJECTIVE
-WO-001: Complete governance setup, audit server state, run DB migrations.
-
-## BUSINESS PURPOSE
-Nothing can be safely built until we know exactly what is deployed and the
-database has the correct schema. This is foundational.
-
-## SUCCESS CRITERIA
-- [ ] All governance files live in _governance/
-- [ ] Server audit complete — known state of every pending file
-- [ ] context column confirmed present on all major tables
-- [ ] case_id column added to review_flags
-- [ ] SESSION_LOG.md updated with results
-
-## NEXT OBJECTIVE AFTER THIS
-WO-002: Deploy any missing modules/APIs confirmed absent in audit,
-then begin embedding pipeline.
-```
-
----
-
-#### SESSION_LOG.md — Paste this content:
-
-```markdown
-# LEGAiSEE — SESSION LOG
-### Running Build History
-### Format: DATE | STATUS | SUMMARY | BLOCKERS
-
----
-
-## 2026-05-19 — SESSION 001
-### Status: IN PROGRESS
-### Objective: WO-001 — Governance completion + server audit + DB migrations
-### Claude Role: Produced AGENT_ROLES, CLAUDE_SESSION_PROTOCOL,
-###              ERROR_ESCALATION_PROTOCOL, DAILY_WORK_ORDER WO-001
-### Executor: John (manual tasks)
-### Result: [UPDATE WHEN COMPLETE]
-### Files Modified: [LIST WHEN DONE]
-### Blockers Found: [LIST IF ANY]
-### Notes: Governance folder had 11 files missing or empty on server.
-###        No code builds possible until WO-001 complete.
+WO-003
 
----
+Date: 2026-05-20 (assign actual date on issue)
 
-## INSTRUCTIONS
-After each session, append a new entry:
-- Date and session number
-- Objective and work order number
-- Who executed (John / Windsurf / GPT / Kimi)
-- Result: COMPLETE / PARTIAL / FAILED
-- Files modified (exact paths)
-- Blockers found
-- Notes
+Claude Role: Architect (design, spec, file replacements)
 
-This file is pasted to Claude at the start of every new session.
-It is Claude's memory. Keep it current.
-```
+Executor: Windsurf / GPT / Kimi (per governance model)
 
----
+Approval Required Before Execution: John
 
-#### VALIDATION_CHECKLIST.md
 
-This file was produced in your earlier governance docs.
-Paste that full content (from what you sent Claude today) into this file.
+OBJECTIVE
 
----
+Two scoped upgrades to the Command Center:
 
-### 1D — Verify .htaccess in _governance/
-
-The .htaccess in _governance/ is 22 bytes.
-Open it in cPanel and confirm it contains exactly:
-```
-Deny from all
-```
-or similar deny directive.
-
-This is CORRECT behavior. Governance files should NOT be publicly accessible.
-Do NOT remove this protection.
-This is why Claude reads them from John's pastes, not from the web.
-
----
-
-# TASK 2 — SERVER AUDIT
-## Executor: John (manual cPanel file check)
-## Risk: None — read-only audit, no file changes
 
-### 2A — Check These Files Exist and Are Not Empty
-
-Go to cPanel File Manager. For each file below, confirm:
-- File exists at the listed path
-- File size is greater than 0 bytes
-
-```
-commandcenter/modules/search_module.php
-commandcenter/modules/files_module.php
-commandcenter/modules/ingest_module.php
-commandcenter/modules/dig_review_module.php
-commandcenter/api/search_load.php
-commandcenter/api/files_action.php
-commandcenter/engine/plain_english_helper.php
-commandcenter/engine/entity_extraction_engine.php
-commandcenter/ui/global.css
-```
+PM Module — Project Creation
+Add the ability to create and manage Projects as a parent container above Tasks. Currently pm_tasks (built in WO-002) has no project association — tasks are flat. This adds a pm_projects table, a project-creation UI in pm_module.php, and a project_id foreign key linking tasks to projects.
+Ingest Linking — Multiple Sessions Per Task
+Currently ingest linking assumes a 1:1 relationship between an ingest/session record and a task. This upgrade replaces that with a join structure so one task can accumulate multiple ingest sessions over time (e.g. a task that spans several excavation sessions), without losing the existing single-session records already in production.
 
-### 2B — Record Audit Results
 
-For each file, note: EXISTS / MISSING / EMPTY
+Both upgrades follow architecture-locked rules: kernel_db() is the sole DB access pattern, shell.php is the sole routing entry point, ui/global.css is the sole permitted stylesheet, and all deliverables are complete replacement files — no patches, no snippets.
 
-Paste these results into SESSION_LOG.md for today's entry.
-Also paste to Claude at next session if any files are missing.
 
----
+PART 1 — PM MODULE: PROJECT CREATION
 
-# TASK 3 — DATABASE MIGRATIONS
-## Executor: John (phpMyAdmin)
-## Risk: LOW — additive schema changes only, no data modification
+1.1 Database — New Table
 
-### 3A — Verify context_migration.sql Was Run
+Run in phpMyAdmin (SQL tab, database-level, on carrmulti_legaiseearchive):
 
-In phpMyAdmin, run this query:
-```sql
-SHOW COLUMNS FROM entities LIKE 'context';
-```
+sqlCREATE TABLE pm_projects (
+  project_id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  status ENUM('active','on_hold','completed','archived') DEFAULT 'active',
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
 
-If it returns a row: context column exists — migration already ran. ✓
-If it returns nothing: migration has NOT been run.
+1.2 Database — Link Tasks to Projects
 
-If not run, run context_migration.sql now.
-(You have this file from prior sessions.)
+Verify whether pm_tasks.project_id already exists before running (SESSION_LOG should confirm — if unknown, check via phpMyAdmin structure tab first):
 
-Repeat this check for: artifacts, cases, documents, files, memory_ingest,
-relationships, reports, review_flags.
+sqlALTER TABLE pm_tasks
+  ADD COLUMN project_id INT NULL AFTER task_id,
+  ADD CONSTRAINT fk_pm_tasks_project
+    FOREIGN KEY (project_id) REFERENCES pm_projects(project_id)
+    ON DELETE SET NULL;
 
----
+project_id is nullable — existing tasks remain valid as unassigned/backlog tasks after migration.
 
-### 3B — Add case_id to review_flags
+1.3 File: modules/pm_module.php (complete replacement)
 
-Check if column already exists:
-```sql
-SHOW COLUMNS FROM review_flags LIKE 'case_id';
-```
+Requirements:
 
-If it returns nothing, run:
-```sql
-ALTER TABLE review_flags
-ADD COLUMN case_id INT NULL DEFAULT NULL AFTER context,
-ADD INDEX idx_review_flags_case_id (case_id);
-```
 
-This is required for report assembly to tie confirmed findings to specific
-client cases. Nothing in the report pipeline works without this.
+Add a "Projects" tab/view alongside the existing Tasks view (same module, ?module=pm with a view=projects or view=tasks sub-param — do not create a new module entry).
+Project list view: name, status badge (reuse existing badge classes from WO-002: badge-backlog, badge-architecting, badge-building, badge-review, badge-blocked — map project status to nearest existing badge class rather than inventing new CSS unless genuinely needed), task count per project.
+"New Project" form: name (required), description (optional), status (default active).
+Task list view: add a project filter dropdown; task creation form gains an optional "Project" select populated from pm_projects.
+All queries through kernel_db(). No direct mysqli/PDO instantiation inside the module.
+No inline <style> blocks — any new classes go in ui/global.css (see 1.4).
 
----
 
-### 3C — Verify embeddings Table
+1.4 File: ui/global.css (append only, then provide full file back as replacement)
 
-```sql
-SHOW TABLES LIKE 'embeddings';
-```
+Add only what's structurally required for the project cards/list (reuse .card, .grid-2 primitives already established — do not duplicate them). If existing primitives cover this, state so in the completion report and add nothing.
 
-If it doesn't exist, run:
-```sql
-CREATE TABLE embeddings (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    source_table VARCHAR(64) NOT NULL,
-    source_id INT NOT NULL,
-    context VARCHAR(32) NOT NULL DEFAULT 'legaisee',
-    embedding_model VARCHAR(64) NOT NULL DEFAULT 'text-embedding-3-small',
-    vector_data MEDIUMTEXT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_embeddings_source (source_table, source_id),
-    INDEX idx_embeddings_context (context)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-```
+1.5 File: kernel/module_registry.php
 
-Note: This table will remain empty until the embedding pipeline is built
-in WO-002. Creating the schema now prevents migration blockers later.
+No new entry required — pm already registered in WO-002. Confirm no accidental duplicate entry was introduced.
 
----
 
-# COMPLETION CRITERIA FOR WO-001
+PART 2 — INGEST LINKING: MULTIPLE SESSIONS PER TASK
 
-This work order is COMPLETE when:
+2.1 Current State (confirm before building)
 
-- [ ] All governance files uploaded to _governance/
-- [ ] DAILY_STATE, CURRENT_OBJECTIVE, SESSION_LOG, VALIDATION_CHECKLIST filled
-- [ ] .htaccess in _governance/ confirmed correct
-- [ ] Server audit complete — every file status known
-- [ ] context columns confirmed present (or migration run)
-- [ ] case_id added to review_flags
-- [ ] embeddings table confirmed present (or created)
-- [ ] SESSION_LOG.md updated with all results
+Executor must confirm via live audit (Ctrl+F on the deployed file, per standing verification method) how the current ingest→task link is stored — expected to be a single task_id column on the ingest/session record itself (1:1). Report the exact column/table name found before proceeding, since the migration in 2.2 depends on it.
 
----
+2.2 Database — Join Table
 
-# WHAT COMES NEXT (WO-002 Preview)
+sqlCREATE TABLE task_sessions (
+  link_id INT AUTO_INCREMENT PRIMARY KEY,
+  task_id INT NOT NULL,
+  session_id VARCHAR(64) NOT NULL,
+  linked_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  notes TEXT,
+  FOREIGN KEY (task_id) REFERENCES pm_tasks(task_id) ON DELETE CASCADE,
+  UNIQUE KEY unique_task_session (task_id, session_id)
+);
 
-After WO-001 is confirmed complete, the next work order will cover:
+session_id type is VARCHAR(64) as a placeholder — adjust to match whatever the actual ingest/session identifier type is once 2.1 is confirmed (could be an INT FK instead).
 
-IF any pending files were MISSING in the audit:
-→ WO-002 will be: deploy missing modules/APIs (Windsurf executes)
+2.3 Migration of Existing Single-Link Records
 
-IF all pending files were present:
-→ WO-002 will be: build lee_embed() embedding function + wire into ingest
+Once the existing 1:1 column is confirmed (2.1), write a one-time migration INSERT INTO task_sessions (task_id, session_id) SELECT ... FROM <existing table> WHERE <existing link column> IS NOT NULL so no historical links are lost. Do not drop the old column in this work order — mark it deprecated in code comments only. Column removal is a separate future work order after a verification period.
 
-Claude will produce WO-002 at the next session after John reports WO-001 results.
+2.4 File: Ingest module (complete replacement — exact filename per 2.1 finding, expected modules/ingest_module.php)
 
----
+Requirements:
 
-# END WORK ORDER WO-001
+
+Task association UI changes from a single-select to a multi-select / "add another session link" pattern.
+On save, write to task_sessions rather than the old single column.
+Display: when viewing a task, show all linked sessions (timestamp + notes) rather than one.
+Preserve existing styling conventions (.card, .grid-2 from global.css — no new stylesheet).
+
+
+2.5 File: Any API endpoint handling ingest linking (e.g. api/*.php if one exists)
+
+Confirm during audit whether linking logic lives in the module file directly or in a separate api/ JSON endpoint (per the architecture note that AJAX must call api/ directly, not through shell.php). Update whichever is authoritative. Report which pattern was found.
+
+
+VERIFICATION CHECKLIST
+
+
+ pm_projects table exists and accepts inserts
+ pm_tasks.project_id exists, nullable, FK valid
+ shell.php?module=pm loads Projects view with no errors
+ New project creatable end-to-end through UI
+ Existing tasks (pre-migration) still load correctly with project_id = NULL
+ task_sessions table exists
+ Existing single-session links migrated with zero row loss (row count check: old links vs. new task_sessions rows)
+ A task can be linked to 2+ sessions and all display correctly
+ No duplicate module_registry entries introduced
+ Live file Ctrl+F verification performed on all modified files (per standing deployment verification method) before marking COMPLETE
+
+
+
+COULD-NOT-COMPLETE / DISCREPANCY REPORTING
+
+Executor completion report must include, per standing format:
+
+
+Files created (exact paths)
+Files modified (exact paths)
+Could not complete (with reason — flag anything requiring phpMyAdmin/manual DB access same as WO-002 Task 1)
+Any discrepancy between this work order's assumptions and actual server state (especially the 2.1 confirmation)
+Verification results against the checklist above
+
+
+
+NOTES FOR NEXT SESSION
+
+
+If 2.1 reveals the existing link is more deeply embedded (e.g. referenced in multiple modules beyond ingest), stop and flag for John's decision before proceeding — do not silently expand scope.
+Project → Task cascade behavior (what happens to tasks when a project is archived) is intentionally left as "no automatic action" in this WO. Revisit as its own decision if John wants archived-project tasks to auto-lock.

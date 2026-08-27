@@ -1,9 +1,12 @@
 <?php
 header('Content-Type: application/json');
 
+session_start();
+
 $input = json_decode(file_get_contents("php://input"), true);
 
 $data = $input['data'] ?? [];
+$node_id = $_SESSION['brain_node_id'] ?? null;
 
 if(!$data){
     echo json_encode(["error"=>"no model data"]);
@@ -18,6 +21,7 @@ $weights = [
 ];
 
 $synthesis = [
+    "node_id"=>$node_id,
     "core_insight"=>"",
     "confidence"=>0,
     "contradictions"=>[],

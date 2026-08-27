@@ -1,10 +1,17 @@
 <?php
 header('Content-Type: application/json');
 
+session_start();
+
 $input = json_decode(file_get_contents("php://input"), true);
 
 $file = $input['file'] ?? '';
-$brain_id = uniqid("brain_", true);
+$node_id = $input['node_id'] ?? '';
+
+if(!$node_id){
+    echo json_encode(["error"=>"node_id is required"]);
+    exit;
+}
 
 $path = __DIR__ . "/../normalized/" . $file;
 
@@ -13,8 +20,15 @@ if(!file_exists($path)){
     exit;
 }
 
+$brain_id = uniqid("brain_", true);
+
+// Store node_id in session for other brain files to access
+$_SESSION['brain_node_id'] = $node_id;
+$_SESSION['brain_id'] = $brain_id;
+
 $session = [
     "brain_id"=>$brain_id,
+    "node_id"=>$node_id,
     "file"=>$file,
     "steps"=>[],
     "created_at"=>date("Y-m-d H:i:s"),

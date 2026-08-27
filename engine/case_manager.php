@@ -13,8 +13,6 @@ function createCase($client_id, $name){
         "edges" => []
     ], JSON_PRETTY_PRINT));
 
-    file_put_contents($path . "tasks/queue.json", json_encode([], JSON_PRETTY_PRINT));
-
     $meta = [
         "id" => $case_id,
         "name" => $name,

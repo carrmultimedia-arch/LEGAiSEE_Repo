@@ -10,10 +10,9 @@ $basePath = __DIR__ . "/data/";
 $portfolioPath = $basePath . "portfolio/";
 $clientsPath = $basePath . "clients/";
 
-
 /*
 ================================================
-HELPERSss
+HELPERr
 ================================================
 */
 

@@ -1,0 +1,265 @@
+{
+    "nodes": [
+        {
+            "id": 4,
+            "type": "case",
+            "strength": 100,
+            "content": 4,
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": 5,
+            "type": "case",
+            "strength": 100,
+            "content": 5,
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "case_006",
+            "type": "case",
+            "strength": 100,
+            "content": "case_006",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "client_003",
+            "type": "client",
+            "strength": 100,
+            "content": "client_003",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "pattern_lead_drop",
+            "type": "pattern",
+            "strength": 100,
+            "content": "lead_drop",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "pattern_pricing",
+            "type": "pattern",
+            "strength": 100,
+            "content": "pricing",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": 7,
+            "type": "case",
+            "strength": 100,
+            "content": 7,
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": 8,
+            "type": "case",
+            "strength": 100,
+            "content": 8,
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": 9,
+            "type": "case",
+            "strength": 100,
+            "content": 9,
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": 11,
+            "type": "case",
+            "strength": 100,
+            "content": 11,
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "case_011",
+            "type": "case",
+            "strength": 100,
+            "content": "case_011",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "client_001",
+            "type": "client",
+            "strength": 100,
+            "content": "client_001",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "pattern_delay",
+            "type": "pattern",
+            "strength": 100,
+            "content": "delay",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "pattern_inventory",
+            "type": "pattern",
+            "strength": 100,
+            "content": "inventory",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": 12,
+            "type": "case",
+            "strength": 100,
+            "content": 12,
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "case_014",
+            "type": "case",
+            "strength": 100,
+            "content": "case_014",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "client_004",
+            "type": "client",
+            "strength": 100,
+            "content": "client_004",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "pattern_logistics",
+            "type": "pattern",
+            "strength": 100,
+            "content": "logistics",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "case_015",
+            "type": "case",
+            "strength": 100,
+            "content": "case_015",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "client_005",
+            "type": "client",
+            "strength": 100,
+            "content": "client_005",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "pattern_marketing",
+            "type": "pattern",
+            "strength": 100,
+            "content": "marketing",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        },
+        {
+            "id": "case_001",
+            "type": "case",
+            "strength": 100,
+            "content": "case_001",
+            "created_at": "2026-08-04T07:15:04+02:00"
+        }
+    ],
+    "edges": [
+        {
+            "from": "case_006",
+            "to": "client_003",
+            "weight": 1
+        },
+        {
+            "from": "case_006",
+            "to": "pattern_lead_drop",
+            "weight": 1
+        },
+        {
+            "from": "case_006",
+            "to": "pattern_pricing",
+            "weight": 1
+        },
+        {
+            "from": "pattern_lead_drop",
+            "to": "pattern_pricing",
+            "weight": 1
+        },
+        {
+            "from": "pattern_pricing",
+            "to": "pattern_lead_drop",
+            "weight": 1
+        },
+        {
+            "from": "case_011",
+            "to": "client_001",
+            "weight": 1
+        },
+        {
+            "from": "case_011",
+            "to": "pattern_delay",
+            "weight": 1
+        },
+        {
+            "from": "case_011",
+            "to": "pattern_inventory",
+            "weight": 1
+        },
+        {
+            "from": "pattern_delay",
+            "to": "pattern_inventory",
+            "weight": 1
+        },
+        {
+            "from": "pattern_inventory",
+            "to": "pattern_delay",
+            "weight": 1
+        },
+        {
+            "from": "case_014",
+            "to": "client_004",
+            "weight": 1
+        },
+        {
+            "from": "case_014",
+            "to": "pattern_logistics",
+            "weight": 1
+        },
+        {
+            "from": "case_014",
+            "to": "pattern_delay",
+            "weight": 1
+        },
+        {
+            "from": "pattern_logistics",
+            "to": "pattern_delay",
+            "weight": 1
+        },
+        {
+            "from": "pattern_delay",
+            "to": "pattern_logistics",
+            "weight": 1
+        },
+        {
+            "from": "case_015",
+            "to": "client_005",
+            "weight": 1
+        },
+        {
+            "from": "case_015",
+            "to": "pattern_marketing",
+            "weight": 1
+        },
+        {
+            "from": "case_015",
+            "to": "pattern_lead_drop",
+            "weight": 1
+        },
+        {
+            "from": "pattern_marketing",
+            "to": "pattern_lead_drop",
+            "weight": 1
+        },
+        {
+            "from": "pattern_lead_drop",
+            "to": "pattern_marketing",
+            "weight": 1
+        },
+        {
+            "from": "case_001",
+            "to": "client_001",
+            "weight": 1
+        }
+    ]
+}

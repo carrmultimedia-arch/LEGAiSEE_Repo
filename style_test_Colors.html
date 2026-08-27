@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LEGAiSEE — True Cool Blue-Grey Preview</title>
+<style>
+:root{
+  /* STRICTLY COOL PALETTE — NO GREEN, NO TEAL */
+  --bg0: #181b21ff;
+  --bg1: #1d2025ff;
+  --bg2: #191a1eff;
+  --surface: #1c1e20ff;
+  --surface2: #1b1e23ff;
+  --surface3: #30363eff;
+  --white: #f4f1e9;
+  --pearl: #d7d8d6;
+  --muted: #8993a2;
+  --gold0: #fff8d6;
+  --gold1: #efd98b;
+  --gold2: #c7a957;
+  --gold3: #8b6c2f;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;padding:48px;
+ font-family:"Segoe UI",Inter,Arial,sans-serif;color:var(--pearl);
+ background:
+   radial-gradient(850px 450px at 82% -12%,rgba(125, 136, 156, 0.21),transparent 68%),
+   radial-gradient(700px 500px at 12% 105%,rgba(70, 77, 87, 0.19),transparent 70%),
+   linear-gradient(135deg,#04060a 0%, #11141aff 48%, #0e1116ff 100%);
+}
+.wrap{max-width:1080px;margin:auto}
+.kicker{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#9c8a5d;margin-bottom:12px}
+h1{margin:0;color:var(--white);font-size:30px;font-weight:500}
+.sub{margin:8px 0 32px;color:#7f8998;font-size:13px}
+.shell{
+ padding:30px;border-radius:18px;
+ border:1px solid rgba(205,214,226,.075);
+ background:
+   radial-gradient(600px 200px at 78% 0%,rgba(61, 72, 88, 0.07),transparent 72%),
+   linear-gradient(145deg,#1a222e 0%,#121923 52%,#0f151f 100%);
+ box-shadow:0 30px 70px rgba(0,0,0,.55),inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.header{display:flex;justify-content:space-between;align-items:center}
+.title{font-size:18px;color:var(--white);font-weight:500}
+.meta{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#7f8998}
+.line{
+ height:1px;margin:23px 0;
+ background:linear-gradient(90deg,transparent,rgba(178,190,207,.13),rgba(199,169,87,.25),rgba(178,190,207,.13),transparent);
+}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{
+ padding:25px;min-height:205px;border-radius:13px;
+ border:1px solid rgba(121, 127, 135, 0.07);
+ background:linear-gradient(150deg,#202a38 0%,#18212d 48%,#131b26 100%);
+ box-shadow:0 16px 34px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.035);
+}
+.label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#7f8998;margin-bottom:16px}
+.card h2{margin:0 0 10px;color:var(--white);font-size:20px;font-weight:500}
+.card p{margin:0;color:#a0a8b3;font-size:13px;line-height:1.7}
+.controls{display:flex;gap:13px;margin-top:25px;align-items:center}
+.gold{
+ border:1px solid rgba(255,248,214,.62);border-radius:9px;padding:12px 20px;
+ color:#17140d;font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;
+ background:
+  radial-gradient(100px 18px at 50% -2%, #ffffff,transparent 70%),
+  linear-gradient(180deg,var(--gold0) 0%,var(--gold1) 36%,var(--gold2) 70%,var(--gold3) 100%);
+ box-shadow:0 0 22px rgba(199,169,87,.14),0 8px 20px rgba(0,0,0,.35),inset 0 1px 0 #fffdeb;
+}
+.ghost{
+ border:1px solid rgba(185,196,211,.14);border-radius:9px;padding:11px 16px;
+ color:#aab2bd;background:rgba(255,255,255,.015);font-size:11px;
+}
+.callout{
+ margin-top:20px;padding:13px 15px;
+ border-left:2px solid rgba(199,169,87,.58);
+ background:rgba(199,169,87,.025);color:#9ea7b2;font-size:12px;line-height:1.6;
+}
+.palette{display:flex;gap:8px;margin-top:22px}
+.sw{height:28px;flex:1;border-radius:6px;border:1px solid rgba(255,255,255,.06)}
+@media(max-width:720px){body{padding:20px}.cards{grid-template-columns:1fr}.header{align-items:flex-start;gap:15px;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div class="kicker">LEGAiSEE · Palette Correction v3</div>
+ <h1>Moonlit Blue-Grey / Warm Champagne</h1>
+ <div class="sub">The cool environment is now intentionally dominant. Gold is isolated to the moments that should attract attention.</div>
+
+ <section class="shell">
+  <div class="header">
+   <div class="title">Business Intelligence Workspace</div>
+   <div class="meta">Calm operating environment</div>
+  </div>
+  <div class="line"></div>
+
+  <div class="cards">
+   <article class="card">
+    <div class="label">Cool Working Surface</div>
+    <h2>Blue-grey, not green-grey</h2>
+    <p>The neutral axis is pushed toward steel/slate blue. There are no olive, emerald, teal, or green undertones in the surfaces or background.</p>
+    <div class="controls">
+     <button class="gold">Execute Analysis</button>
+     <button class="ghost">View Details</button>
+    </div>
+   </article>
+
+   <article class="card">
+    <div class="label">Warm Interaction</div>
+    <h2>Champagne as reflected light</h2>
+    <p>Gold appears only where interaction or importance warrants it. The bright upper reflection is tiny; the surrounding glow is deliberately restrained.</p>
+    <div class="callout">Think cool moonlight everywhere, with occasional warm patio light catching polished gold.</div>
+   </article>
+  </div>
+
+  <div class="palette">
+   <div class="sw" style="background: #05070c"></div>
+   <div class="sw" style="background: #15191fff"></div>
+   <div class="sw" style="background: #181c24ff"></div>
+   <div class="sw" style="background: #282e37ff"></div>
+   <div class="sw" style="background: #d7d8d6"></div>
+   <div class="sw" style="background: #efd98b"></div>
+  </div>
+ </section>
+</div>
+</body>
+</html>

@@ -1,90 +1,44 @@
 <?php
+session_start();
+require_once __DIR__ . '/../../kernel/db.php';
+require_once __DIR__ . '/../../response.php';
 
-header('Content-Type: application/json');
+// 🔹 Get input
+$input = json_decode(file_get_contents('php://input'), true);
 
-$client_id = $_POST['client_id'] ?? '';
-$case_id   = $_POST['case_id'] ?? '';
-$content   = $_POST['content'] ?? '';
+// 🔹 Get Identity from Session
+$node_id = $_SESSION['brain_node_id'] ?? null;
 
-file_put_contents(
-"/home/carrmulti/www/www/commandcenter/debug_trace.log",
-json_encode([
-    "time" => date("c"),
-    "client_id" => $client_id ?? null,
-    "case_id" => $case_id ?? null,
-    "content" => $content ?? null,
-    "target_path" => "/home/carrmulti/www/www/commandcenter/data/clients/$client_id/cases/$case_id/tasks/queue.json"
-]) . PHP_EOL,
-FILE_APPEND
-);
+// 🔹 Get Payload Data
+$content = $input['content'] ?? null;
+$type = $input['type'] ?? 'note';
+$name = $input['name'] ?? 'New Node';
 
-if(!$client_id || !$case_id || !$content){
-    echo json_encode(["status"=>"error","message"=>"missing data"]);
+// 🔹 Validate input
+if (empty($content)) {
+    json_error("Content is required.", 400);
     exit;
 }
 
-$queueFile = "/home/carrmulti/www/www/commandcenter/data/clients/$client_id/cases/$case_id/tasks/queue.json";
-
-$queueFile = "/home/carrmulti/www/www/commandcenter/data/clients/$client_id/cases/$case_id/tasks/queue.json";
-
-/* HARD CHECK */
-if(!file_exists(dirname($queueFile))){
-    mkdir(dirname($queueFile), 0777, true);
+if (empty($node_id)) {
+    json_error("Node ID (from session) is required for identity.", 400);
+    exit;
 }
 
-$queue = [];
+try {
+    $pdo = kernel_db();
 
-if(file_exists($queueFile)){
-    $queue = json_decode(file_get_contents($queueFile), true);
+    // 🔹 Insert the new node as a child of the session's node
+    $stmt = $pdo->prepare("
+        INSERT INTO tree_nodes (parent_id, name, type, metadata) 
+        VALUES (?, ?, ?, ?)
+    ");
+    $metadata = json_encode(['content' => $content]);
+    $stmt->execute([$node_id, $name, $type, $metadata]);
+
+    $new_node_id = $pdo->lastInsertId();
+
+    json_response(['id' => $new_node_id, 'parent_id' => $node_id]);
+} catch (Exception $e) {
+    json_error("Database error: " . $e->getMessage(), 500);
 }
-
-if(!is_array($queue)){
-    $queue = [];
-}
-
-$task = [
-    "type" => "add_node",
-    "content" => $content,
-    "time" => date("c")
-];
-
-$queue[] = $task;
-
-/* HARD WRITE CHECK */
-$write_result = file_put_contents($queueFile, json_encode($queue, JSON_PRETTY_PRINT));
-
-file_put_contents(
-"/home/carrmulti/www/www/commandcenter/debug_write.log",
-json_encode([
-    "file" => $queueFile,
-    "write_result" => $write_result,
-    "final_queue_size" => count($queue),
-    "task" => $task
-]) . PHP_EOL,
-FILE_APPEND
-);
-
-echo json_encode([
-    "status" => "ok",
-    "written" => $write_result !== false,
-    "queue_count" => count($queue)
-]);
-
-if(file_exists($queueFile)){
-    $queue = json_decode(file_get_contents($queueFile), true);
-}
-
-$task = [
-    "type" => "add_node",
-    "content" => $content,
-    "time" => date("c")
-];
-
-$queue[] = $task;
-
-file_put_contents($queueFile, json_encode($queue, JSON_PRETTY_PRINT));
-
-echo json_encode([
-    "status"=>"ok",
-    "queue_count"=>count($queue)
-]);

@@ -1,36 +1,18 @@
 <?php
 
-require_once __DIR__ . '/../db.php';
-require_once __DIR__ . '/_response.php';
+require_once __DIR__ . '/../../engine/recommendation_engine.php';
+require_once __DIR__ . '/../../response.php';
 
 try {
-
-    $case_id = intval($_GET['case_id'] ?? 0);
+    $case_id = $_GET['case_id'] ?? null;
 
     if (!$case_id) {
-        json_error("missing case_id", 400);
+        json_error("case_id is required.", 400);
     }
 
-    $result = $conn->query("
-        SELECT * FROM processing_queue
-        WHERE case_id=$case_id AND task_type='recommendation'
-        ORDER BY id DESC
-        LIMIT 20
-    ");
-
-    $recs = [];
-
-    while ($row = $result->fetch_assoc()) {
-        $recs[] = $row;
-    }
-
-    json_response([
-        "recommendation_count" => count($recs),
-        "recommendations" => $recs
-    ]);
+    $recommendations = generate_recommendations_for_case($case_id);
+    json_response($recommendations);
 
 } catch (Throwable $e) {
-    json_error("recommendations failed", 500, [
-        "exception" => $e->getMessage()
-    ]);
+    json_error("recommendations failed: " . $e->getMessage(), 500);
 }

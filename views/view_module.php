@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__ . '/../kernel/kernel_boot.php';
 require_once __DIR__ . '/../lib/legaisee_model.php';
 require_once __DIR__ . '/../kernel/nav_engine.php';
 

@@ -1,0 +1,1029 @@
+| |____kernel_paths.php
+| |____model
+| | |____page_model.php
+| |____recommendation_engine.php
+| |____db.php
+| |____engine_bindings.php
+| |____system_health.php
+| |____ingestion_pipeline.php
+|____data
+| |____network
+| | |____net_69eee6639380f1_13878764.json
+| | |____net_case_1.json
+| | |____net_69eee12e374d30_99173905.json
+| | |____net_69f5936dd3a71.json
+| | |____net_69f5206b2fc8f.json
+| | |____net_69f2f944df0b9.json
+| | |____net_69f522a0038d2.json
+| | |____net_69eee660177a30_98660286.json
+| | |____net_6a004c7f40e22.json
+| |____state_s_69e83e696108b.json
+| |____agents
+| |____state_s_69e83d41012c9.json
+| |____brains
+| | |____brain_69f6ca66861f71.73553194.json
+| | |____brain_69f649ac20a6f5.22973107.json
+| | |____graph.json
+| |____goals
+| | |____goals.json
+| | |____meta_goals.json
+| |____events
+| | |____event_queue.json
+| |____goal_log
+| |____graph
+| |____learning_memory.json
+| |____cases
+| | |____case_006.json
+| | |____case_{id}.json
+| | |____1
+| | | |____network.json
+| | | |____logs
+| | | |____tasks
+| | | | |____history.json
+| | | | |____queue.json
+| | | |____goals
+| | | | |____active.json
+| | | | |____proposals.json
+| | | |____insights.json
+| | | |____artifacts
+| | | | |____reports
+| | | | |____uploads
+| | | | |____extracted
+| | | |____memory
+| | | | |____snapshots.json
+| | | |____strategy_plan.json
+| | | |____clusters.json
+| | | |____recommendations.json
+| | | |____case.json
+| | |____case_009.json
+| | |____test_case.json
+| | |____case_008.json
+| | |____case_011.json
+| | |____case_014.json
+| | |____case_015.json
+| | |____case_003.json
+| | |____case_005.json
+| | |____case_010.json
+| | |____CASE JSON SCHEMA
+| | |____case_013.json
+| | |____case_004.json
+| | |____case_007.json
+| | |____case_012.json
+| | |____case_001.json
+| | |____case_002.json
+| |____prospects
+| | |____prospect_brad_moore_builders_1778623516.json
+| | |____prospect_cowboy_plumbing_1782020554.json
+| | |____prospect_cowboy_plumbing_1782195941.json
+| | |____prospect_brad_moore_builders_1778497805.json
+| | |____prospect_brad_moore_builders_1778497747.json
+| | |____prospect_brad_moore_builders_1778495288.json
+| | |____prospect_brad_moore_builders_1778622981.json
+| | |____prospect_brad_moore_builders_1778621791.json
+| | |____prospect_faust_hotel_1778624355.json
+| | |____prospect_good_ol_rockin_therapy_pllc_1782707194.json
+| | |____prospect_cowboy_plumbing_1782020672.json
+| | |____prospect_good_ol_rockin_therapy_pllc_1782694373.json
+| | |____prospect_brad_moore_builders_1778499547.json
+| | |____prospect_brad_moore_builders_1778493544.json
+| | |____prospect_brad_moore_builders_1778520713.json
+| | |____prospect_brad_moore_builders_1778523034.json
+| | |____prospect_brad_moore_builders_1778623690.json
+| | |____prospect_cowboy_plumbing_1780909049.json
+| | |____prospect_brad_moore_builders_1778497591.json
+| | |____prospect_cowboy_plumbing_1780908701.json
+| | |____prospect_brad_moore_builders_1778499479.json
+| | |____prospect_cowboy_plumbing_1780924415.json
+| | |____prospect_brad_moore_builders_1778497672.json
+| | |____prospect_brad_moore_builders_1778499448.json
+| | |____prospect_brad_moore_builders_1778522981.json
+| |____portfolio
+| | |____system_insights.json
+| | |_____debug_predictive.log
+| | |____global_graph.json
+| | |____cross_case_clusters.json
+| | |____predictive_insights.json
+| |____compressed
+| |____clients
+| | |____client_1777858282
+| | | |____cases
+| | | | |____case_1777858282
+| | | | | |____network.json
+| | | | | |____tasks
+| | | | | | |____queue.json
+| | | | | |____meta.json
+| | | | | |____recommendations.json
+| | | |____profile.json
+| | |____client_002.json
+| | |____client_001.json
+| | |____client_3.json
+| | |____cases
+| | |____CLIENT JSON SCHEMA.md
+| | |____CLIENT JSON SCHEMA
+| | | |____cases
+| | |____artifacts
+| | | |____processed
+| | | |____metadata
+| | | |____raw
+| | |____CLIENT DIRECTORY STRUCTURE.md
+| | |____client_4.json
+| | |____client_5.json
+| |____cases.json
+| |____auto_log
+| | |____run_1777269518.json
+| | |____run_1777269244.json
+| |____memory
+| | |____memory.json
+| |____mesh
+| |____agency
+| |____records.json
+| |____predictions
+| |____causal_memory.json
+| |____files
+| |____state_s_69e83ddc6794c.json
+| |____chains
+| | |____chain_genome.json
+| | |____chain_performance.json
+| | |____chain_templates.json
+| |____learning.json
+|____load_sets.php
+|____engine
+| |____predictive_intelligence_engine.php
+| |____cross_case_learning_compiler.php
+| |____case_manager.php
+| |____graph_mutation_engine.php
+| |____policy_enforcement_engine.php
+| |____pipeline_adapters.php
+| |____temporal_memory_engine.php
+| |____memory_evolution_engine.php
+| |____system_behavior_spec.php
+| |____semantic_cluster_engine.php
+| |____reasoning_engine.php
+| |____goal_alignment.php
+| |____pattern_stability.php
+| |____goal_conflict_resolver.php
+| |____entity_extraction_engine.php
+| |____long_horizon_planner.php
+| |____executive_dashboard_engine.php
+| |____dashboard_engine.php
+| |____cluster_engine.php
+| |____client_manager.php
+| |____decision_governor.php
+| |____system_recommendation_engine.php
+| |____graph_data.php
+| |____plain_english_helper.php
+| |____goal_generator.php
+| |____system_insight_engine.php
+| |____goal_arbitration_engine.php
+| |____execution_feedback_engine.php
+| |____execution_router.php
+| |____governance_policy_engine.php
+| |____decision_engine_v2.php
+| |____recommendation_engine.php
+| |____insight_mutator.php
+| |____goal_engine.php
+| |____portfolio_engine.php
+| |____closed_loop.js
+| |____cross_case_engine.php
+|____legaisee.db
+|____SYSTEM_LEGEND.MD
+|____components
+| |____compare.php
+| |____ui_card.php
+| |____ui_folder_tree.php
+| |____legaisee_web_colors.png
+| |____card.php
+| |____legaisee_web_colors.md
+| |____nav.php
+| |____ui_tag.php
+| |____scroll_fx
+| |____blur_bkgd
+|____response.php
+|____files.php
+|____dossiers
+|____semantic_engine.php
+|____legaisee_prospects.php
+|____composer_files.txt
+|____.htaccess
+|____readme_files.txt
+|____tools
+| |____build_relations.php
+| |____build_cluster_summaries_ai.php
+| |____name_clusters.php
+| |____build_clusters.php
+| |____detect_cluster_opportunities.php
+| |____extract_cluster_insights.php
+| |____build_cluster_summaries.php
+|____index.php
+|____shell.php
+|____modules
+| |____insight_module.php
+| |____anomaly_engine_module.php
+| |____utils
+| | |____file_helpers.php
+| | |____debug_helpers.php
+| | |____json_helpers.php
+| | |____bootstrap.php
+| | |____uic_v1.php
+| | |____uic_v2.php
+| |____intelligence_dashboard_module.php
+| |____time_intelligence_module.php
+| |____recommendation_module.php
+| |____semantic_cluster_module.php
+| |____files_module.php
+| |____report_module.php
+| |____alert_module.php
+| |____brain_module.php
+| |____executive_dashboard_module.php
+| |____project_manager
+| | |____project_manager.php
+| | |____assets
+| | |____api
+| | |____views
+| | |____data
+| |____governance_module.php
+| |____view_module.php
+| |____cockpit_module.php
+| |____graph_module.php
+| |____ingest_view_module.php
+| |____search_module.php
+| |____root_cause_graph_module.php
+| |____cluster_module.php
+| |____pm_module.php
+| |____ingest_module.php
+| |____dashboard_module.php
+| |____relations_module.php
+| |____decision_module.php
+| |____dig_review_module.php
+| |____vault_module.php
+| |____predictive_link_module_v1.php
+| |____predictive_module.php
+| |____cases_module.php
+| |____clients_module.php
+| |____clients_module.phpbak
+| |____entity_resolution_module.php
+| |____excavation_module.php
+| |____compare_module.php
+| |____cross_case_engine.php
+|____search_dual.php
+|____saved_views.php
+|____ui
+| |____components.php
+| |____registry.php
+| |____component.php
+| |____images
+| | |____dark-room-with-black-wall-black-wall-with-carved-design_902639-63079-upscale-4x.jpg
+| |____component_contract.php
+| |____layout_engine.php
+| |____layout_contract.php
+| |____component_registry.php
+| |____global.css
+| |____ui_boot.php
+| |____components
+| | |____ingestforshell.php
+| | |____legaisee_web_colors.png
+| | |____card.php
+| | |____legaisee_web_colors.md
+| | |____ingest_exec snap.php
+| | |____scroll_fx
+| | |____blur_bkgd
+| |____component_boot.php
+| |____layout.php
+| |____ui.php
+| |____theme.php
+| |____file_explorer.php
+| |____ui_engine.php
+| |____ui_bootstrap.php
+| |____compare_engine.php
+|____KnowledgeSystem
+| |____# 800 Future Systems
+| | |____0804 — SERIES 800 PATENT IDEAS
+| | |____0807 — SERIES 800 LONG TERM EXPANSION
+| | |____0803 — SERIES 800 ROADMAP
+| | |____0805 — SERIES 800 INVESTMENT OPPORTUNITIES
+| | |____0806 — SERIES 800 ACQUISITION STRATEGY
+| | |____0800 — SERIES 800 FUTURE SYSTEMS
+| | |____0801 — SERIES 800 RESEARCH
+| | |____0802 — SERIES 800 EXPERIMENTAL
+| |____# 400  Knowledge Graph
+| | |____0406_SERIES_400_REASONING.md
+| | |____0404_SERIES_400_TEMPORAL_INTELLIGENCE.md
+| | |____0405_SERIES_400_PREDICTION.md
+| | |____0403_SERIES_400_MEMORY.md
+| | |____0402_SERIES_400_CLUSTERS.md
+| | |____0400_SERIES_400_NODES.md
+| | |____0401_SERIES_400_EDGES.md
+| | |____0407_SERIES_400_LEARNING.md
+| |____# 700 Operations
+| | |____0700 — SERIES 700 OPERATIONS
+| | |____0704 — SERIES 700 TESTING
+| | |____0706 — SERIES 700 PERFORMANCE
+| | |____0701 — SERIES 700 DEPLOYMENT
+| | |____0702 — SERIES 700 BACKUP
+| | |____0705 — SERIES 700 VALIDATION
+| | |____0707 — SERIES 700 MONITORING
+| | |____0703 — SERIES 700 RECOVERY
+| |____# 500  AI Systems
+| | |____0502_SERIES_500_TEACHER_ENGINE.md
+| | |____0500_SERIES_500_COMMAND_ENGINE.
+| | |____0501_SERIES_500_MENTOR_ENGINE.md
+| | |____0506_SERIES_500_AUTONOMOUS_OPERATIONS.md
+| | |____0505_SERIES_500_VOICE_INTERFACE.md
+| | |____0503_SERIES_500_PLANNER_ENGINE.md
+| | |____0504_SERIES_500_PROJECT_MANAGER.md
+| |____# 0000_SERIES-000-Governance
+| | |____0003_DOCUMENTATION_SESSION_PROTOCOL.md
+| | |____0005_WRITING_STYLE_GUIDE.md
+| | |____0008 RELATIONSHIP MODEL
+| | |____0009 SESSION HANDOFF
+| | |____0007_FOLDER_STRUCTURE.md
+| | |____0000_THE_LAW.md
+| | |____0001_KNOWLEDGE_SYSTEM_MASTER_INDEX.md
+| | |____0006_NUMBERING_STANDARD.md
+| | |____0004_DOCUMENT_STANDARD.md
+| | |____0002_KNOWLEDGE_SYSTEM_BUILD_ORDER.md
+| |____# 600  User Interface
+| | |____0606 — SERIES 600 WIDGETS
+| | |____0602_SERIES_600_EXCAVATION_COMMAND.md
+| | |____0608 — SERIES 600 UMBRELLA OS MODEL
+| | |____0607 — SERIES 600 NAVIGATION
+| | |____0603 — SERIES 600 EXECUTIVE DASHBOARD
+| | |____0600 — SERIES 600 USER INTERFACE
+| | |____0601_SERIES_600_DASHBOARD.md
+| | |____0605 — SERIES 600 VISUALIZATION
+| | |____0609-project manager
+| | |____0604 — SERIES 600 INVESTIGATION WORKSPACE
+| |____GPT-chat dump-organism memory
+| |____# 200  System Architecture
+| | |____0207_SERIES_200_STORAGE.md
+| | |____0200_SERIES_200_KERNEL.md
+| | |____0205_SERIES_200_SECURITY.md
+| | |____0201_SERIES_200_BOOT_SEQUENCE.md
+| | |____0208_SERIES_200_FILE_SYSTEM.md
+| | |____0206_SERIES_200_DATABASE.md
+| | |____0203_SERIES_200_SCHEDULER.md
+| | |____0204_SERIES_200_NAVIGATION.md
+| | |____0202_SERIES_200_ROUTER.md
+| |____# 0100_SERIES_100_VISION
+| | |____0101_SERIES_100_MISSION.md
+| | |____0100 — SERIES 100 VISION
+| | |____0103_SERIES_100_BUSINESS_PHILOSOPHY.md
+| | |____0102_SERIES_100_CORE_PRINCIPLES.md
+| | |____0105_SERIES_100_10_YEAR_VISION.md
+| | |____0106_SERIES_100_100_YEAR_VISION.md
+| | |____0104_SERIES_100_OPERATOR_PHILOSOPHY.md
+| |____# 300  Excavation System
+| | |____0307_SERIES_300_TIMELINE_GENERATION.md
+| | |____0306_SERIES_300_RELATIONSHIP_DISCOVERY.md
+| | |____0309_SERIES_300_RECOMMENDATIONS.md
+| | |____0300_SERIES_300_EXCAVATION_SYSTEM.md
+| | |____0304_SERIES_300_ENTITY_RESOLUTION.md
+| | |____0301_SERIES_300_INGESTION.md
+| | |____0305_SERIES_300_GRAPH_BUILDING.md
+| | |____0308_SERIES_300_DOSSIER_PRODUCTION.md
+| | |____0303_SERIES_300_ARTIFACT_EXTRACTION.md
+|____ProjectManager
+| |____permissions.php
+| |____README.md
+| |____BUILD ORDER.md
+| |____app
+| | |____models
+| | | |____Attachment.php
+| | | |____ActivityLog.php
+| | | |____User.php
+| | | |____Permission.php
+| | | |____Role.php
+| | |____middleware
+| | |____interfaces
+| | |____jobs
+| | |____helpers
+| | |____events
+| | |____services
+| | | |____AuthorizationService.php
+| | |____controllers
+| | | |____AuthController.php
+| | |____views
+| | |____components
+| | |____partials
+| | |____repositories
+| | | |____ActivityLogRepository.php
+| | | |____AttachmentRepository.php
+| | | |____RoleRepository.php
+| | | |____UserRepository.php
+| | | |____PermissionRepository.php
+| | |____policies
+| | | |____DocumentPolicy.php
+| | | |____UserPolicy.php
+| | | |____PermissionPolicy.php
+| | | |____RolePolicy.php
+| | | |____ProjectPolicy.php
+| | | |____TaskPolicy.php
+| | |____traits
+| | |____Core
+| | | |____Database.php
+| | | |____Dispatcher.php
+| | | |____Response.php
+| | | |____ExceptionHandler.php
+| | | |____Application.php
+| | | |____Request.php
+| | | |____Router.php
+| | | |____Container.php
+| |____assets
+| | |____images
+| | |____icons
+| | |____css
+| | |____fonts
+| | |____js
+| |____router.php
+| |____config.php
+| |____vendor
+| |____api
+| | |____automations
+| | |____calendar
+| | |____tasks
+| | |____projects
+| | |____comments
+| | |____permissions
+| | | |____index.php
+| | | |____roles.php
+| | |____reports
+| | |____notes
+| | |____graph
+| | |____cases
+| | |____auth
+| | | |____status.php
+| | | |____login.php
+| | | |____logout.php
+| | |____clients
+| | |____attachments
+| | |____labels
+| | |____customfields
+| | |____intelligence
+| | |____subtasks
+| | |____milestones
+| | |____search
+| | |____users
+| | | |____show.php
+| | | |____index.php
+| | |____ingest
+| | |____timeline
+| | |____activity
+| |____governance
+| | |____PROJECT_MANAGER.code-workspace
+| | |____CHANGELOG.md
+| | |____CURRENT_BUILD_TARGET.md
+| | |____TODO.md
+| | |____BUILD_STATUS.md
+| | |____PROJECT_MANAGER_BIBLE
+| | | |____0590_ACTIVITY.md
+| | | |____0640_DEPENDENCIES.md
+| | | |____0700_SYSTEM_INTEGRATIONS.md
+| | | |____0310_DATABASE_SCHEMA.md
+| | | |____0120_USER_ROLES.md
+| | | |____0100_PRODUCT_OVERVIEW.md
+| | | |____0910_CANONICAL_FILE_REGISTRY.md
+| | | |____0730_CASES.md
+| | | |____0500_PROJECT_WORKSPACE.md
+| | | |____0440_TABLE_STANDARDS.md
+| | | |____0320_RELATIONSHIP_MODEL.md
+| | | |____0530_TASK_DETAIL.md
+| | | |____0450_MODAL_STANDARDS.md
+| | | |____0560_TIMELINE.md
+| | | |____0540_KANBAN_BOARD.md
+| | | |____0920_BUILD_ORDER.md
+| | | |____0340_ACTIVITY_LOG.md
+| | | |____0130_PERMISSION_MODEL.md
+| | | |____0000_PROJECT_MANAGER_MANIFEST.md
+| | | |____0020_BUILD_RULES.md
+| | | |____0650_AUTOMATIONS.md
+| | | |____0900_API_SPECIFICATION.md
+| | | |____0610_CUSTOM_FIELDS.md
+| | | |____0930_TEST_PLAN.md
+| | | |____0010_DESIGN_PRINCIPLES.md
+| | | |____0420_COMPONENT_LIBRARY.md
+| | | |____0800_CLIENT_PORTAL.md
+| | | |____0710_INGEST_LIBRARY.md
+| | | |____0400_UI_DESIGN_LANGUAGE.md
+| | | |____0810_PERMISSION_FILTERING.md
+| | | |____0760_SEARCH.md
+| | | |____0999_SESSION_HANDOFF.md
+| | | |____0630_MILESTONES.md
+| | | |____0570_FILES.md
+| | | |____0410_LAYOUT_SYSTEM.md
+| | | |____0820_SHARED_PROJECTS.md
+| | | |____0030_GLOSSARY.md
+| | | |____0740_GRAPH_ENGINE.md
+| | | |____0770_REPORTS.md
+| | | |____0110_FEATURE_MATRIX.md
+| | | |____0015_FILE_OWNERSHIP.md
+| | | |____0005_PROJECT_GOVERNANCE.md
+| | | |____0600_PROJECT_SETTINGS.md
+| | | |_____00BUILD EXECUTION MAP
+| | | |____0430_FORM_STANDARDS.md
+| | | |____0620_LABELS.md
+| | | |____0510_OVERVIEW_PAGE.md
+| | | |____0750_INTELLIGENCE_ENGINE.md
+| | | |____0330_ATTACHMENT_MODEL.md
+| | | |____0520_TASKS_PAGE.md
+| | | |____0580_NOTES.md
+| | | |____0300_DATABASE_ARCHITECTURE.md
+| | | |____0720_CLIENTS.md
+| | | |____0550_CALENDAR.md
+| |____bootstrap.php
+| |____storage
+| | |____temp
+| | |____logs
+| | |____imports
+| | |____cache
+| | |____attachments
+| | |____thumbnails
+| | |____exports
+| |____database
+| | |____migration.php
+| | |____triggers
+| | |____seeders
+| | |____connection.php
+| | |____views
+| | |____schema
+| | |____migrations
+| | | |____006_create_attachments_table.php
+| | | |____001_create_users_table.php
+| | | |____003_create_permissions_table.php
+| | | |____004_create_role_permissions_table.php
+| | | |____005_create_user_roles_table.php
+| | | |____008_create_audit_tables.php
+| | | |____007_create_activity_log_table.php
+| | | |____002_create_roles_table.php
+| | |____schema.php
+| | |____functions
+| |____index.php
+| |____tests
+| | |____File Ownership Validation
+| | |____Governance Validation
+| | |____Auth
+| | | |____AuthenticationTest.php
+| | |____Build Rule Validation
+| | |____unit
+| | |____Permissions
+| | | |____RoleTest.php
+| | | |____AuthorizationTest.php
+| | | |____PermissionTest.php
+| | |____acceptance
+| | |____ui
+| | |____integration
+| | |____Core
+| | | |____ExceptionTest.php
+| | | |____BootstrapTest.php
+| | | |____RouterTest.php
+| | | |____ResponseTest.php
+| | | |____RequestTest.php
+|____ingest2.php
+|____legaisee_diagnostic.phpbak
+|____brain.phpbak
+|____test_modules.php
+|____db.php
+|____legaisee
+| |____Carr_Multimedia
+| | |____20260426_224234_Test_Title.txt
+| |____acme_test
+| | |____20260426_224641_pricing_audit.txt
+| |____clients
+| | |____testclient
+| | | |____project
+| | | | |____sessiondig001
+| | | | | |____raw
+| | | | | | |____GPT Server Start 4-14-26.txt
+| | | |____testproject
+| | | | |____dig-001
+| | | | | |____raw
+| | | | | | |____GPT Server Start 4-14-26.txt
+| | |____raw
+| | |____client n
+| | | |____project n
+| | | | |____dig 001
+| | | | | |____raw
+| | | | | | |____GPT Server Start 4-14-26.txt
+|____export_report.php
+|____Legaisee-Lg-1083.png
+|____test_visual.php
+|____ai_process.php
+|____lib
+| |____legaisee_model.php
+| |____dompdf
+| | |____README.md
+| | |____vendor
+| | | |____dompdf
+| | | | |____dompdf
+| | | | | |____src
+| | | | | | |____FrameDecorator
+| | | | | | | |____TableRowGroup.php
+| | | | | | | |____Page.php
+| | | | | | | |____Text.php
+| | | | | | | |____AbstractFrameDecorator.php
+| | | | | | | |____Inline.php
+| | | | | | | |____NullFrameDecorator.php
+| | | | | | | |____ListBullet.php
+| | | | | | | |____ListBulletImage.php
+| | | | | | | |____TableCell.php
+| | | | | | | |____Block.php
+| | | | | | | |____Table.php
+| | | | | | | |____Image.php
+| | | | | | | |____TableRow.php
+| | | | | | |____Renderer.php
+| | | | | | |____Frame
+| | | | | | | |____FrameListIterator.php
+| | | | | | | |____FrameTree.php
+| | | | | | | |____Factory.php
+| | | | | | | |____FrameTreeIterator.php
+| | | | | | |____LineBox.php
+| | | | | | |____FrameReflower
+| | | | | | | |____TableRowGroup.php
+| | | | | | | |____Page.php
+| | | | | | | |____Text.php
+| | | | | | | |____Inline.php
+| | | | | | | |____ListBullet.php
+| | | | | | | |____TableCell.php
+| | | | | | | |____NullFrameReflower.php
+| | | | | | | |____Block.php
+| | | | | | | |____Table.php
+| | | | | | | |____Image.php
+| | | | | | | |____AbstractFrameReflower.php
+| | | | | | | |____TableRow.php
+| | | | | | |____PhpEvaluator.php
+| | | | | | |____Image
+| | | | | | | |____Cache.php
+| | | | | | |____Cellmap.php
+| | | | | | |____Css
+| | | | | | | |____Style.php
+| | | | | | | |____AttributeTranslator.php
+| | | | | | | |____Content
+| | | | | | | | |____ContentPart.php
+| | | | | | | | |____Counters.php
+| | | | | | | | |____Attr.php
+| | | | | | | | |____OpenQuote.php
+| | | | | | | | |____NoCloseQuote.php
+| | | | | | | | |____StringPart.php
+| | | | | | | | |____Url.php
+| | | | | | | | |____NoOpenQuote.php
+| | | | | | | | |____Counter.php
+| | | | | | | | |____CloseQuote.php
+| | | | | | | |____Stylesheet.php
+| | | | | | | |____Color.php
+| | | | | | |____JavascriptEmbedder.php
+| | | | | | |____Frame.php
+| | | | | | |____Dompdf.php
+| | | | | | |____Renderer
+| | | | | | | |____TableRowGroup.php
+| | | | | | | |____Text.php
+| | | | | | | |____Inline.php
+| | | | | | | |____ListBullet.php
+| | | | | | | |____TableCell.php
+| | | | | | | |____Block.php
+| | | | | | | |____AbstractRenderer.php
+| | | | | | | |____Image.php
+| | | | | | | |____TableRow.php
+| | | | | | |____FontMetrics.php
+| | | | | | |____Options.php
+| | | | | | |____Helpers.php
+| | | | | | |____Exception
+| | | | | | | |____ImageException.php
+| | | | | | |____Canvas.php
+| | | | | | |____Positioner
+| | | | | | | |____Fixed.php
+| | | | | | | |____Absolute.php
+| | | | | | | |____Inline.php
+| | | | | | | |____ListBullet.php
+| | | | | | | |____TableCell.php
+| | | | | | | |____Block.php
+| | | | | | | |____NullPositioner.php
+| | | | | | | |____TableRow.php
+| | | | | | | |____AbstractPositioner.php
+| | | | | | |____CanvasFactory.php
+| | | | | | |____Adapter
+| | | | | | | |____CPDF.php
+| | | | | | | |____PDFLib.php
+| | | | | | | |____GD.php
+| | | | | | |____Exception.php
+| | | | | |____README.md
+| | | | | |____composer.json
+| | | | | |____phpunit.xml
+| | | | | |____AUTHORS.md
+| | | | | |____LICENSE.LGPL
+| | | | | |____lib
+| | | | | | |____Cpdf.php
+| | | | | | |____res
+| | | | | | | |____html.css
+| | | | | | | |____broken_image.svg
+| | | | | | | |____sRGB2014.icc
+| | | | | | | |____sRGB2014.icc.LICENSE
+| | | | | | | |____broken_image.png
+| | | | | | |____fonts
+| | | | | | | |____DejaVuSerif-Bold.ufm
+| | | | | | | |____DejaVuSansMono-BoldOblique.ufm
+| | | | | | | |____DejaVuSerif-BoldItalic.ttf
+| | | | | | | |____installed-fonts.dist.json
+| | | | | | | |____DejaVuSerif-Italic.ttf
+| | | | | | | |____DejaVuSerif.ufm
+| | | | | | | |____DejaVuSerif-Bold.ttf
+| | | | | | | |____Helvetica-BoldOblique.afm
+| | | | | | | |____Symbol.afm
+| | | | | | | |____Courier-Bold.afm
+| | | | | | | |____DejaVuSans-BoldOblique.ufm
+| | | | | | | |____Courier-BoldOblique.afm
+| | | | | | | |____DejaVuSansMono-Bold.ufm
+| | | | | | | |____DejaVuSansMono.ufm
+| | | | | | | |____Courier-Oblique.afm
+| | | | | | | |____DejaVuSans-Oblique.ufm
+| | | | | | | |____Times-Bold.afm
+| | | | | | | |____Helvetica-Bold.afm
+| | | | | | | |____Helvetica-Oblique.afm
+| | | | | | | |____ZapfDingbats.afm
+| | | | | | | |____DejaVuSans-Bold.ufm
+| | | | | | | |____Courier.afm
+| | | | | | | |____DejaVuSansMono-Oblique.ufm
+| | | | | | | |____DejaVuSans-Oblique.ttf
+| | | | | | | |____DejaVuSerif-BoldItalic.ufm
+| | | | | | | |____DejaVuSans.ttf
+| | | | | | | |____mustRead.html
+| | | | | | | |____DejaVuSans-BoldOblique.ttf
+| | | | | | | |____DejaVuSansMono-BoldOblique.ttf
+| | | | | | | |____DejaVuSans-Bold.ttf
+| | | | | | | |____DejaVuSansMono-Bold.ttf
+| | | | | | | |____Times-BoldItalic.afm
+| | | | | | | |____Times-Roman.afm
+| | | | | | | |____Times-Italic.afm
+| | | | | | | |____DejaVuSans.ufm
+| | | | | | | |____Helvetica.afm
+| | | | | | | |____DejaVuSerif-Italic.ufm
+| | | | | | | |____DejaVuSansMono.ttf
+| | | | | | | |____DejaVuSansMono-Oblique.ttf
+| | | | | | | |____DejaVuSerif.ttf
+| | | | | |____VERSION
+| | | | |____php-font-lib
+| | | | | |____src
+| | | | | | |____FontLib
+| | | | | | | |____WOFF
+| | | | | | | | |____File.php
+| | | | | | | | |____TableDirectoryEntry.php
+| | | | | | | | |____Header.php
+| | | | | | | |____TrueType
+| | | | | | | | |____File.php
+| | | | | | | | |____TableDirectoryEntry.php
+| | | | | | | | |____Collection.php
+| | | | | | | | |____Header.php
+| | | | | | | |____AdobeFontMetrics.php
+| | | | | | | |____OpenType
+| | | | | | | | |____File.php
+| | | | | | | | |____TableDirectoryEntry.php
+| | | | | | | |____Table
+| | | | | | | | |____Table.php
+| | | | | | | | |____Type
+| | | | | | | | | |____maxp.php
+| | | | | | | | | |____fpgm.php
+| | | | | | | | | |____prep.php
+| | | | | | | | | |____hhea.php
+| | | | | | | | | |____cvt.php
+| | | | | | | | | |____cmap.php
+| | | | | | | | | |____head.php
+| | | | | | | | | |____name.php
+| | | | | | | | | |____os2.php
+| | | | | | | | | |____glyf.php
+| | | | | | | | | |____hmtx.php
+| | | | | | | | | |____kern.php
+| | | | | | | | | |____loca.php
+| | | | | | | | | |____nameRecord.php
+| | | | | | | | | |____post.php
+| | | | | | | | |____DirectoryEntry.php
+| | | | | | | |____Font.php
+| | | | | | | |____EncodingMap.php
+| | | | | | | |____Header.php
+| | | | | | | |____Exception
+| | | | | | | | |____FontNotFoundException.php
+| | | | | | | |____Glyph
+| | | | | | | | |____OutlineSimple.php
+| | | | | | | | |____OutlineComponent.php
+| | | | | | | | |____OutlineComposite.php
+| | | | | | | | |____Outline.php
+| | | | | | | |____EOT
+| | | | | | | | |____File.php
+| | | | | | | | |____Header.php
+| | | | | | | |____BinaryStream.php
+| | | | | |____README.md
+| | | | | |____LICENSE
+| | | | | |____composer.json
+| | | | | |____maps
+| | | | | | |____cp1258.map
+| | | | | | |____cp1252.map
+| | | | | | |____adobe-standard-encoding.map
+| | | | | | |____cp1254.map
+| | | | | | |____cp874.map
+| | | | | | |____iso-8859-7.map
+| | | | | | |____iso-8859-16.map
+| | | | | | |____iso-8859-9.map
+| | | | | | |____cp1255.map
+| | | | | | |____iso-8859-4.map
+| | | | | | |____cp1250.map
+| | | | | | |____iso-8859-5.map
+| | | | | | |____iso-8859-11.map
+| | | | | | |____cp1251.map
+| | | | | | |____cp1253.map
+| | | | | | |____iso-8859-2.map
+| | | | | | |____koi8-r.map
+| | | | | | |____iso-8859-1.map
+| | | | | | |____cp1257.map
+| | | | | | |____koi8-u.map
+| | | | | | |____iso-8859-15.map
+| | | | |____php-svg-lib
+| | | | | |____src
+| | | | | | |____Svg
+| | | | | | | |____Surface
+| | | | | | | | |____SurfaceInterface.php
+| | | | | | | | |____CPdf.php
+| | | | | | | | |____SurfacePDFLib.php
+| | | | | | | | |____SurfaceCpdf.php
+| | | | | | | |____DefaultStyle.php
+| | | | | | | |____Style.php
+| | | | | | | |____CssLength.php
+| | | | | | | |____Gradient
+| | | | | | | | |____Stop.php
+| | | | | | | |____Tag
+| | | | | | | | |____Symbol.php
+| | | | | | | | |____Line.php
+| | | | | | | | |____AbstractTag.php
+| | | | | | | | |____Group.php
+| | | | | | | | |____UseTag.php
+| | | | | | | | |____Text.php
+| | | | | | | | |____Rect.php
+| | | | | | | | |____LinearGradient.php
+| | | | | | | | |____Circle.php
+| | | | | | | | |____Polygon.php
+| | | | | | | | |____ClipPath.php
+| | | | | | | | |____Ellipse.php
+| | | | | | | | |____StyleTag.php
+| | | | | | | | |____Shape.php
+| | | | | | | | |____RadialGradient.php
+| | | | | | | | |____Path.php
+| | | | | | | | |____Polyline.php
+| | | | | | | | |____Image.php
+| | | | | | | | |____Stop.php
+| | | | | | | | |____Anchor.php
+| | | | | | | |____Document.php
+| | | | | |____README.md
+| | | | | |____LICENSE
+| | | | | |____composer.json
+| | | | | |____AUTHORS.md
+| | | |____sabberworm
+| | | | |____php-css-parser
+| | | | | |____src
+| | | | | | |____Parser.php
+| | | | | | |____Position
+| | | | | | | |____Positionable.php
+| | | | | | | |____Position.php
+| | | | | | |____Property
+| | | | | | | |____Import.php
+| | | | | | | |____AtRule.php
+| | | | | | | |____Charset.php
+| | | | | | | |____CSSNamespace.php
+| | | | | | | |____Selector.php
+| | | | | | | |____KeyframeSelector.php
+| | | | | | |____OutputFormat.php
+| | | | | | |____Settings.php
+| | | | | | |____Comment
+| | | | | | | |____Commentable.php
+| | | | | | | |____Comment.php
+| | | | | | |____CSSElement.php
+| | | | | | |____CSSList
+| | | | | | | |____KeyFrame.php
+| | | | | | | |____AtRuleBlockList.php
+| | | | | | | |____CSSBlockList.php
+| | | | | | | |____CSSList.php
+| | | | | | | |____Document.php
+| | | | | | |____Renderable.php
+| | | | | | |____RuleSet
+| | | | | | | |____AtRuleSet.php
+| | | | | | | |____RuleSet.php
+| | | | | | | |____DeclarationBlock.php
+| | | | | | |____Value
+| | | | | | | |____CalcRuleValueList.php
+| | | | | | | |____RuleValueList.php
+| | | | | | | |____LineName.php
+| | | | | | | |____CSSFunction.php
+| | | | | | | |____PrimitiveValue.php
+| | | | | | | |____URL.php
+| | | | | | | |____CalcFunction.php
+| | | | | | | |____CSSString.php
+| | | | | | | |____Size.php
+| | | | | | | |____Value.php
+| | | | | | | |____ValueList.php
+| | | | | | | |____Color.php
+| | | | | | |____Rule
+| | | | | | | |____Rule.php
+| | | | | | |____Parsing
+| | | | | | | |____UnexpectedEOFException.php
+| | | | | | | |____ParserState.php
+| | | | | | | |____SourceException.php
+| | | | | | | |____OutputException.php
+| | | | | | | |____UnexpectedTokenException.php
+| | | | | | | |____Anchor.php
+| | | | | | |____OutputFormatter.php
+| | | | | |____README.md
+| | | | | |____LICENSE
+| | | | | |____composer.json
+| | | | | |____CHANGELOG.md
+| | | |____masterminds
+| | | | |____html5
+| | | | | |____LICENSE.txt
+| | | | | |____src
+| | | | | | |____HTML5
+| | | | | | | |____Serializer
+| | | | | | | | |____README.md
+| | | | | | | | |____HTML5Entities.php
+| | | | | | | | |____RulesInterface.php
+| | | | | | | | |____Traverser.php
+| | | | | | | | |____OutputRules.php
+| | | | | | | |____InstructionProcessor.php
+| | | | | | | |____Entities.php
+| | | | | | | |____Parser
+| | | | | | | | |____README.md
+| | | | | | | | |____TreeBuildingRules.php
+| | | | | | | | |____EventHandler.php
+| | | | | | | | |____ParseError.php
+| | | | | | | | |____UTF8Utils.php
+| | | | | | | | |____CharacterReference.php
+| | | | | | | | |____InputStream.php
+| | | | | | | | |____Scanner.php
+| | | | | | | | |____Tokenizer.php
+| | | | | | | | |____DOMTreeBuilder.php
+| | | | | | | | |____StringInputStream.php
+| | | | | | | | |____FileInputStream.php
+| | | | | | | |____Exception.php
+| | | | | | | |____Elements.php
+| | | | | | |____HTML5.php
+| | | | | |____README.md
+| | | | | |____RELEASE.md
+| | | | | |____composer.json
+| | | | | |____bin
+| | | | | | |____entities.php
+| | | | | |____UPGRADING.md
+| | | | | |____CREDITS
+| | | |____composer
+| | | | |____autoload_static.php
+| | | | |____autoload_classmap.php
+| | | | |____LICENSE
+| | | | |____ClassLoader.php
+| | | | |____installed.php
+| | | | |____InstalledVersions.php
+| | | | |____autoload_psr4.php
+| | | | |____autoload_real.php
+| | | | |____installed.json
+| | | | |____platform_check.php
+| | | | |____autoload_namespaces.php
+| | | |____autoload.php
+| | |____AUTHORS.md
+| | |____LICENSE.LGPL
+| | |____autoload.inc.php
+| | |____VERSION
+| |____semantic_diff_engine.php
+|____normalized
+| |____671b5458b291529a79b1b49a3680e3de.txt
+| |____0d601ce973234a38e32ffa26e87da77b.txt
+| |____6fe9e24ed7e7cad9aac43a7aa1a3d4a6.txt
+| |____7727e38e2d8c6c90d15529a523c361b9.txt
+| |____37c40dad0e9e264726c271e778de2268.txt
+| |____8d22626e4b21fe3832550938c8604e33.txt
+| |____769d6a7022bb3d2f417f09cb6a4dff2c.txt
+| |____test.md
+| |____test.md.json
+| |____general
+| |____9e421ae3e39e39b23cbc95e7251dbe8e.txt
+| |____2068ae61307086e8de56adfcc68b4208.txt
+| |_____state_s_69e83e696108b.json
+| |_____state_s_69e83ddc6794c.json
+| |____49f6afc2932a71a7883888a4f12df4fe.txt
+| |____239c59b98aefe4a9bb1b9e0a3a05a048.txt
+| |____d98c33e2461a2a180889967b84d644a0.txt
+| |____20260422_015914_server_sys_build_4-21-26.md
+| |____1b41970a822fb43eaf6c74a063e92821.txt
+| |____feb77ed7a1db3c8fb68a1d5970b3a3a2.txt
+| |____c3578eb92771b983b80098145e580850.txt
+| |____1e6525d9d9c8398fc66beecc4445dc2e.txt
+| |____b4e00a49f6a0e602be8a8117c8565d6f.txt
+| |____c14fb342c0d3ca88aa4a626a870ac66d.txt
+| |____index_meta.json
+| |____legaisee
+| | |____Carr_Multimedia
+| | | |____20260426_224234_Test_Title.txt
+| | |____acme_test
+| | | |____20260426_224641_pricing_audit.txt
+| |____20260422_015914_server_sys_build_4-21-26.md.json
+| |____b71b11bbf2318b12b591776ef5d9baea.txt
+| |_____state_s_69e83d41012c9.json
+| |____8cdd9251de98033ed09d415a1bc68584.txt
+| |____a9791612870c9d93dfc7eaeff122c2f1.txt
+| |____72810ab3f5d11b4d37dca1b08a7bb329.txt
+| |____da559865f1c37e8289002cd75e108b45.txt
+| |____3dc3883878bc265b1a1463014dc76eb9.txt
+| |____9ec5a42c90fb7ba25f45250bb6f1bfdf.txt
+|____session.php
+|____view_ingest.php
+|____archive

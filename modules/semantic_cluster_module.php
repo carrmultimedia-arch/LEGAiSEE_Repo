@@ -8,11 +8,11 @@ ini_set('display_errors', '1');
 /* BOOT */
 /* ===================================================== */
 
-if (file_exists(__DIR__ . '/utils/bootstrap.php')) {
-    require_once __DIR__ . '/utils/bootstrap.php';
-}
+require_once __DIR__ . '/../db.php';
 
 global $pdo;
+
+$case_id = $_GET['case_id'] ?? null;
 
 /* ===================================================== */
 /* LOAD GRAPH */
@@ -170,7 +170,54 @@ foreach ($clusters as $clusterId => $members) {
 usort($output, fn($a, $b) => $b['cluster_score'] <=> $a['cluster_score']);
 
 /* ===================================================== */
-/* RETURN */
+/* WRITE CLUSTERS TO CASE FILE
+/* ===================================================== */
+
+function writeClusters(array $clusters, string $case_id): bool {
+    if (!$case_id) return false;
+    
+    // Find case directory
+    $caseDir = null;
+    $clientsDir = __DIR__ . '/../data/clients';
+    
+    foreach (glob($clientsDir . '/*/cases/*', GLOB_ONLYDIR) as $dir) {
+        if (basename($dir) === $case_id) {
+            $caseDir = $dir;
+            break;
+        }
+    }
+    
+    if (!$caseDir) return false;
+    
+    $clustersFile = $caseDir . '/clusters.json';
+    
+    // Convert to schema format
+    $schemaClusters = [];
+    foreach ($clusters as $cluster) {
+        $clusterName = 'cluster_' . $cluster['cluster_id'];
+        $members = [];
+        foreach ($cluster['members'] as $memberId) {
+            $members[] = [
+                'id' => 'n_' . $memberId,
+                'type' => 'signal',
+                'strength' => 100,
+                'content' => "Entity ID: {$memberId}",
+                'created_at' => date('c')
+            ];
+        }
+        $schemaClusters[$clusterName] = $members;
+    }
+    
+    return file_put_contents($clustersFile, json_encode($schemaClusters, JSON_PRETTY_PRINT)) !== false;
+}
+
+// Write clusters if case_id provided
+if ($case_id && !empty($output)) {
+    writeClusters($output, $case_id);
+}
+
+/* ===================================================== */
+/* RETURN
 /* ===================================================== */
 
 return [

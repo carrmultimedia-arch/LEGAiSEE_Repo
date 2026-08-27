@@ -1,0 +1,12 @@
+File Ownership Validation
+
+Status: ⬜ Pending
+
+Validation checks:
+
+ Every production file requires an owner chapter
+ Ownership hierarchy documented
+ File creation rules documented
+ File modification authority documented
+ Canonical File Registry identified as ownership source
+ Unauthorized file creation prohibited

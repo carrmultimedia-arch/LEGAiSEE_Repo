@@ -1,29 +1,18 @@
 <?php
 
-require_once __DIR__ . '/../db.php';
-require_once __DIR__ . '/_response.php';
+require_once __DIR__ . '/../../engine/graph_engine.php';
+require_once __DIR__ . '/../../response.php';
 
 try {
-
-    $case_id = intval($_POST['case_id'] ?? 0);
+    $case_id = $_POST['case_id'] ?? null;
 
     if (!$case_id) {
         json_error("missing case_id", 400);
     }
 
-    // mark graph build task (simple placeholder)
-    $conn->query("
-        INSERT INTO processing_queue (case_id, task_type, status)
-        VALUES ($case_id, 'build_graph', 'pending')
-    ");
-
-    json_response([
-        "message" => "graph build queued",
-        "case_id" => $case_id
-    ]);
+    $result = queue_graph_build_for_case($case_id);
+    json_response($result);
 
 } catch (Throwable $e) {
-    json_error("build_graph failed", 500, [
-        "exception" => $e->getMessage()
-    ]);
+    json_error("build_graph failed: " . $e->getMessage(), 500);
 }

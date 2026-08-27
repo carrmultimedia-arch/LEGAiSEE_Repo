@@ -1,0 +1,245 @@
+# 0608 — SERIES 600 UMBRELLA OS MODEL
+
+## Status
+LOCKED. This document governs every module, engine, and interface decision
+in the LEGAiSEE Command Center. If a future build (by Claude, Windsurf, GPT,
+Kimi, or anyone else) conflicts with this document, this document wins.
+No module spec, work order, or patch supersedes it without an explicit
+architectural ruling logged here.
+
+## The mistake this document corrects
+Every prior session — including multiple sessions with Claude — defaulted
+to "fix this module" thinking. A bug gets diagnosed, a file gets patched,
+the immediate symptom clears, and the next module is built the same
+disconnected way. The system grew to 70+ PHP files, four competing
+dashboards, and a duplicated Project Manager app because every build
+decision was made at the file level instead of the system level.
+
+This document exists so that never happens again. Every decision from
+here forward gets checked against the whole system first, the single file
+second.
+
+## 1. The business is four departments, not four products
+
+LEGAiSEE is one business with four departments:
+
+1. **Business Archaeology** — excavate a client's old marketing, data, and
+   history; translate it into a modern authority system.
+2. **AI Agent** — analyze ingested artifacts and chats, build the node
+   graph, suggest improvements, maintain persistent project memory.
+3. **Project Manager** — John's own daily interface for running the
+   business: tasks, calls, meetings.
+4. **Knowledge System** — ongoing monitoring of onboarded clients;
+   marketing, analytics, node tracking, monthly adjustments. Long-term
+   goal: a full digital copy of the live business, all departments,
+   not just marketing.
+
+Every file in the tree belongs to one of these four departments.
+`ProjectManager/` and `pm_module.php` are two failed attempts at
+department 3 — one gets archived, not both maintained.
+
+## 2. The money pipeline (department 1, the revenue path)
+
+Prospect → Excavation → Dig Review → Dossier Production → Invoice.
+
+As of this document, stage 5 does not exist anywhere in the codebase.
+No module, engine, or table handles invoicing or payment. This is the
+single highest-priority gap in the entire system — nothing upstream of
+it matters until money can actually be collected at the end of it.
+
+Client pipeline stage must become **one real field**, written by every
+module that touches it, read by every dashboard that displays it.
+Today it is scattered and re-derived independently by each module
+(this is what broke `cockpit_module.php`). One field, one source of
+truth, is a prerequisite for every UI item in this document.
+
+## 3. Two interface layers, not one
+
+**Operator Dashboard** — for staff. Shows the money pipeline: today's
+tasks, every client's current stage, flags that need action. This is
+what loads when anyone who is not John logs in.
+
+**Owner Console** — for John. Contains the Operator Dashboard as one
+entry point, plus:
+- Universal entity search (type a business name, get everything)
+- Node graph explorer with plain-English explanations
+- Direct view/edit/delete access to every subsystem's data
+- A literal file tree browser
+- Ingest intake
+- Database access
+- System health monitoring
+
+The Owner Console is the umbrella. Every existing and future module is
+a subsystem accessed *through* it — never a standalone page reached by
+its own separate nav link, the way the current 30-button Grand Lobby
+works.
+
+## 4. The core interaction law: what, connections, why — never how
+
+This is the rule that applies to every subsystem, not just the node
+graph. For anything the system computes or generates automatically,
+the interface shows three things by default:
+
+1. **What exists** (the fact, record, or artifact)
+2. **What it's connected to** (relationships, not foreign keys)
+3. **Why it matters to the business today** (plain English)
+
+The mechanism — how a node was scored, how an artifact was classified,
+how a recommendation was generated, how a database row was computed —
+stays hidden by default. It is always available one click deeper, for
+when John is actually modifying that specific piece. It is never the
+default view.
+
+This law applies identically to:
+- **Extended memory / reasoning engines** — show what the system
+  remembers and why it's surfacing it, not the arbitration math.
+- **Ingest system** — paste anything in (chat logs, artifacts, emails);
+  the system classifies it and routes it automatically. The
+  classification logic is invisible; the result ("this supports client
+  X's authority claim about Y") is not.
+- **Database** — business-object view by default (this client, this
+  case, this task, shown as relationships). Raw table/schema view stays
+  one click away, always available, never removed.
+- **File tree browser** — a literal OS-style file browser (Explorer/
+  Finder equivalent) over the real server tree, plus two extra powers:
+  a notes system attachable to any folder, and the ability to drop a
+  file directly into a client's folder without routing it through
+  ingest. This is a power tool for direct intervention, not the default
+  client view.
+- **Client detail page** (opened from the client list) — files and
+  data grouped by what they are *to the business* ("Acme's excavated
+  2002 TV reel," "Acme's current authority dossier draft," "Acme's dig
+  review queue"), plain-English one-liner per item, raw path and code
+  one click deeper. This doubles as v1 of the future client-facing
+  login dashboard.
+- **Home dashboard** — plain English on what matters right now across
+  the whole business, plus literal system health: storage quota,
+  backup status, maintenance flags.
+
+## 5. Scope requirement: replace cPanel, FTP, and phpMyAdmin
+
+If a normal OS file manager, database tool, or hosting control panel
+can do something for John, the Owner Console must be able to do it
+natively. The target: John never logs into cPanel, never opens FTP,
+never opens phpMyAdmin again. Every file operation, every database
+edit, every system health check happens inside the system itself.
+
+## 6. What this document does not do
+
+This is not a build order and not a module spec. It does not say which
+file gets written first. Its only job is to be the filter every future
+build decision passes through: *does this change serve the whole
+system as described here, or does it solve one file in isolation.*
+Anything that only does the latter gets rejected regardless of how
+good the individual fix is.
+
+## Open items (require separate work orders, not covered here)
+- Invoice/payment stage design (pipeline stage 5 — does not exist)
+- Entity Index design (single lookup: business name → every subsystem
+  location holding data about it — prerequisite for Owner Console
+  search)
+- pm_module.php vs ProjectManager/ — which one is archived
+- Single pipeline-stage field — schema and write-access design
+
+
+0608a — AMENDMENT TO SERIES 600 UMBRELLA OS MODEL
+
+Status
+
+LOCKED, appended to 0608. This amendment supersedes Section 2 of
+0608_SERIES_600_UMBRELLA_OS_MODEL.md in full. Everything else in 0608
+stands unchanged. Append this file immediately after 0608 in the
+0000_SERIES-000-Governance tree, or merge Section 2 below directly into
+0608 and retire this file — either is acceptable, but the content below
+is the authoritative replacement for 0608's Section 2 as of this date.
+
+Reason for amendment
+
+0608 Section 2 described the money pipeline as Prospect → Excavation →
+Dig Review → Dossier Production → Invoice, with invoicing treated as a
+single missing terminal stage. This was an oversimplification, corrected
+against the actual commissions.html structure and confirmed directly by
+John. The original framing — "nothing upstream matters until money can
+be collected at the end" — was backwards: money is collected first, at
+Phase 0, before any Exhibit is even selected.
+
+2. The money pipeline (department 1, the revenue path) — CORRECTED
+
+Registry conversation (free, qualifying) → Phase 0 Shallow Dig
+($2,500) → Exhibit selection (A–G, or enterprise tiers) →
+five engagement stages (Habitat → Raw Stone → Cut & Shaped →
+Mounted → Museum Display) → Delivery → optional CAMERA add-on
+at any point after signal restoration.
+
+2.1 Phase 0 is its own client record
+
+The moment the $2,500 clears, that is a real, tracked client record —
+independent of whether an Exhibit is ever subsequently selected. Phase
+0's purpose is qualification, not "step one of the big engagement": it
+weeds out non-serious prospects by being paid, and stays cheap/fast by
+being shallow. A client can legitimately terminate at Phase 0 and never
+proceed further. Phase 0 therefore needs its own lightweight lifecycle
+(paid → in progress → delivered) that is NOT a sub-stage of the
+five-stage engagement model — the two are separate state machines that
+happen to chain together for clients who continue past Phase 0.
+
+2.2 Payment is multi-point, not a single terminal stage
+
+There is no single "invoice" stage. Payment events occur at multiple,
+independent points:
+
+
+Phase 0 payment ($2,500, qualifying)
+Exhibit commission payment (on selection, bespoke per Exhibit A–G or
+enterprise tier)
+Retainer billing (recurring — applies to retainer-model Exhibits,
+e.g. C, E, G)
+CAMERA add-on payment (optional, any point after signal restoration)
+
+
+The system needs a payment sub-state independent of engagement
+stage, capable of firing more than once per client record, not a
+single invoice flag at the end of a linear pipeline.
+
+2.3 Engagement duration and exit are per-client, negotiated — not systemic
+
+Whether and when a client exits Delivery/Museum Display is negotiated
+per client and is not predictable or standardized. The system must NOT:
+
+
+assume or display an expected timeline for any stage
+treat time-in-stage as a signal of anything (stuck, overdue, healthy)
+encode a default "end state" for the pipeline
+
+
+A client sitting in Museum Display for two years is not an anomaly and
+must not be flagged as one.
+
+2.4 Implication for the pipeline-stage field (open item 4)
+
+The 3-dimension field (exhibit_type, engagement_stage, retainer_status) still holds as the base design, but must additionally
+support Phase 0 clients with exhibit_type = NULL — not yet
+selected, or never proceeding further. Phase 0 is a distinct pre-Exhibit
+state, not "stage 0" of the five-stage engagement model.
+
+Ruling log
+
+
+2026-07-16 — Section 2 of 0608 corrected per above. Confirmed
+directly by John: Phase 0 is its own qualifying client record from
+the moment of payment; engagement exit timing is per-client and
+negotiated, never systemic or time-based.
+
+
+Open items — status update
+
+
+Invoice/payment stage design — no longer "does not exist," now
+understood as multi-point (see 2.2). Design work not yet started.
+Entity Index design — still open, unchanged, now safe to start
+(depends on accurate pipeline model, which this amendment provides).
+pm_module.php vs ProjectManager/ — RESOLVED. See
+LEGAiSEE_PROJECT_MANAGER_WING_WORK_ORDER.md — both retired, PM Wing
+rebuilt fresh per that spec.
+Pipeline-stage field — schema still open, now scoped per 2.4 above.
+Design work not yet started.

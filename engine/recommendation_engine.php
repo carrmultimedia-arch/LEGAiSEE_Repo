@@ -1,76 +1,46 @@
 <?php
 
-function generateRecommendationsFromPath($path){
+/**
+ * recommendation_engine.php
+ * Converts insights into specific recommended actions.
+ * Reads insights.json, produces recommendations.json
+ */
 
-    $file = $path . "insights.json";
-    $outputFile = $path . "recommendations.json";
+function generate_recommendations_for_case(string $case_id): array
+{
+    if (empty($case_id)) {
+        throw new InvalidArgumentException("Case ID cannot be empty.");
+    }
+
+    $caseDir = __DIR__ . "/../data/cases/{$case_id}/";
+    $insightFile = $caseDir . "insights.json";
+    $outputFile = $caseDir . "recommendations.json";
+
+    if (!file_exists($insightFile)) {
+        return ['status' => 'error', 'message' => 'insights.json not found for case.'];
+    }
+
+    $insights = json_decode(file_get_contents($insightFile), true);
+    if (!is_array($insights)) {
+        return ['status' => 'error', 'message' => 'Invalid insights.json format.'];
+    }
 
     $recommendations = [];
 
-    if(file_exists($file)){
-
-        $insights = json_decode(file_get_contents($file), true);
-
-        foreach($insights as $insight){
-
-            $type = $insight['type'] ?? '';
-
-            // GENERIC MAPPINGS (NOT STRICT)
-
-            if(strpos($type, 'risk') !== false){
-
-                $recommendations[] = [
-                    "type" => "action",
-                    "title" => "Risk Exposure Detected",
-                    "action" => "Review risk signals and reduce exposure",
-                    "priority" => "high"
-                ];
-            }
-
-            elseif(strpos($type, 'growth') !== false){
-
-                $recommendations[] = [
-                    "type" => "action",
-                    "title" => "Growth Opportunity Detected",
-                    "action" => "Increase allocation to performing channels",
-                    "priority" => "medium"
-                ];
-            }
-
-            elseif(strpos($type, 'engagement') !== false){
-
-                $recommendations[] = [
-                    "type" => "action",
-                    "title" => "Engagement Shift Detected",
-                    "action" => "Audit content performance trends",
-                    "priority" => "high"
-                ];
-            }
-
-            else {
-                // SAFE DEFAULT
-                $recommendations[] = [
-                    "type" => "action",
-                    "title" => "General System Signal",
-                    "action" => "Review data for emerging patterns",
-                    "priority" => "low"
-                ];
-            }
+    foreach ($insights as $insight) {
+        if (($insight['type'] ?? '') === 'risk_vs_growth') {
+            $recommendations[] = ['title' => 'Resolve Strategic Conflict', 'action' => 'Prioritize risk mitigation before pursuing linked growth opportunities.', 'priority' => 'high'];
         }
-    }
-
-    // FINAL GUARANTEE FALLBACK (NEVER EMPTY)
-    if(empty($recommendations)){
-
-        $recommendations[] = [
-            "type" => "fallback",
-            "title" => "System Active - No Strong Patterns",
-            "action" => "Continue monitoring incoming signals",
-            "priority" => "low"
-        ];
+        if (($insight['type'] ?? '') === 'clean_opportunity') {
+            $recommendations[] = ['title' => 'Explore Clean Opportunity', 'action' => 'Develop action plan for low-risk opportunity.', 'priority' => 'medium'];
+        }
     }
 
     file_put_contents($outputFile, json_encode($recommendations, JSON_PRETTY_PRINT));
 
-    return $recommendations;
+    return [
+        'status' => 'ok',
+        'recommendation_count' => count($recommendations),
+        'recommendations' => $recommendations
+    ];
 }

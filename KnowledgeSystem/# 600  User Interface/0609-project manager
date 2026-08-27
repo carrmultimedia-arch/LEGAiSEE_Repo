@@ -1,0 +1,157 @@
+LEGAiSEE PROJECT MANAGER WING — MASTER WORK ORDER
+Version: 1.0 · Status: AUTHORITATIVE for the PM Wing rebuild only — does not override existing LEGAiSEE governance for the public site or the brain/excavation pipeline, which are separate and already working.
+HOW TO USE THIS DOCUMENT
+Give this entire document to Windsurf as the spec for the PM Wing rebuild. This is a fresh build, not a patch of the current forms-and-tabs version. Build locally first, test against each phase's gate, then deploy the way prior LEGAiSEE work orders have (FTP to SureServer, carrmulti_legaiseearchive).
+PART 0 — NON-NEGOTIABLES
+
+shell.php is the sole routing entry point — the PM Wing registers into it, no parallel front controller.
+kernel_db() is the sole DB access method — no second DB utility layer.
+ui/global.css is the sole stylesheet — extend it, don't fork it.
+Complete replacement files only. No patches, no TODOs.
+Palette locked: obsidian #050505, gold #C9A961, no violet, Cinzel/Cormorant Garamond/Inter.
+Do not rename projects or pm_tasks, do not remove project_id/source_ingest_id from pm_tasks — the brain/excavation pipeline links through these. Extend, never replace.
+
+Phase 0 — Windsurf inspects and reports back before building anything:
+
+DESCRIBE projects; / DESCRIBE pm_tasks; — actual current columns
+SHOW TABLES LIKE 'pm_%'; — any other PM tables already there
+Current kernel_db() signature and calling convention
+Current shell.php routing convention for registering a Wing
+Existing AJAX endpoint convention (e.g. network_add_node.php, brain_*.php) — reuse it, don't invent a new one
+
+If anything below conflicts with what's actually there, the live system wins and this document gets corrected.
+PART 1 — SCOPE (all six, none deferred)
+
+Kanban board — configurable stages per project
+Task dependencies — block/blocked-by
+Timeline/calendar view — same task data, rendered by date
+Docs/wiki per project — nested pages, markdown
+Activity feed / comments per task
+Custom fields per project type
+
+Single user (John) for now — schema leaves room for user_id/client_id later, but no auth/login built this round.
+PART 2 — DATABASE SCHEMA (carrmulti_legaiseearchive)
+Extend existing tables (verify against Phase 0's DESCRIBE first, skip anything already present):
+sqlALTER TABLE projects
+  ADD COLUMN project_type_id INT NULL,
+  ADD COLUMN color VARCHAR(20) NULL,
+  ADD COLUMN icon VARCHAR(50) NULL,
+  ADD COLUMN archived_at DATETIME NULL;
+
+ALTER TABLE pm_tasks
+  ADD COLUMN parent_task_id INT NULL,
+  ADD COLUMN stage_id INT NULL,
+  ADD COLUMN priority VARCHAR(20) NOT NULL DEFAULT 'normal',
+  ADD COLUMN position INT NOT NULL DEFAULT 0,
+  ADD COLUMN start_date DATE NULL,
+  ADD COLUMN due_date DATE NULL,
+  ADD COLUMN completed_at DATETIME NULL,
+  ADD COLUMN assignee VARCHAR(100) NULL;
+  -- project_id and source_ingest_id already exist. Do not touch.
+New tables:
+sqlCREATE TABLE IF NOT EXISTS project_types (
+  id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(100) NOT NULL,
+  default_stages JSON NULL, created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at DATETIME NULL
+);
+
+CREATE TABLE IF NOT EXISTS stages (
+  id INT AUTO_INCREMENT PRIMARY KEY, project_id INT NOT NULL,
+  name VARCHAR(100) NOT NULL, color VARCHAR(20) NULL, position INT NOT NULL DEFAULT 0,
+  is_done_stage TINYINT(1) NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, deleted_at DATETIME NULL
+);
+
+CREATE TABLE IF NOT EXISTS task_dependencies (
+  id INT AUTO_INCREMENT PRIMARY KEY, task_id INT NOT NULL, depends_on_task_id INT NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uniq_dependency (task_id, depends_on_task_id)
+);
+
+-- Already decided in WO-003 — build once, not twice.
+CREATE TABLE IF NOT EXISTS task_sessions (
+  id INT AUTO_INCREMENT PRIMARY KEY, task_id INT NOT NULL, ingest_session_id INT NOT NULL,
+  linked_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS custom_fields (
+  id INT AUTO_INCREMENT PRIMARY KEY, project_type_id INT NULL,
+  scope VARCHAR(20) NOT NULL DEFAULT 'task', name VARCHAR(100) NOT NULL,
+  field_type VARCHAR(20) NOT NULL, options JSON NULL, position INT NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, deleted_at DATETIME NULL
+);
+
+CREATE TABLE IF NOT EXISTS custom_field_values (
+  id INT AUTO_INCREMENT PRIMARY KEY, custom_field_id INT NOT NULL,
+  entity_type VARCHAR(20) NOT NULL, entity_id INT NOT NULL, value TEXT NULL,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uniq_field_entity (custom_field_id, entity_type, entity_id)
+);
+
+CREATE TABLE IF NOT EXISTS comments (
+  id INT AUTO_INCREMENT PRIMARY KEY, task_id INT NOT NULL, body LONGTEXT NOT NULL,
+  author VARCHAR(100) NOT NULL DEFAULT 'John Carr',
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NULL, deleted_at DATETIME NULL
+);
+
+CREATE TABLE IF NOT EXISTS activity_log (
+  id INT AUTO_INCREMENT PRIMARY KEY, entity_type VARCHAR(20) NOT NULL, entity_id INT NOT NULL,
+  action VARCHAR(50) NOT NULL, detail JSON NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS docs (
+  id INT AUTO_INCREMENT PRIMARY KEY, project_id INT NOT NULL, parent_doc_id INT NULL,
+  title VARCHAR(255) NOT NULL, content LONGTEXT NULL, position INT NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NULL, deleted_at DATETIME NULL
+);
+
+CREATE TABLE IF NOT EXISTS labels (
+  id INT AUTO_INCREMENT PRIMARY KEY, project_id INT NOT NULL,
+  name VARCHAR(50) NOT NULL, color VARCHAR(20) NULL, deleted_at DATETIME NULL
+);
+
+CREATE TABLE IF NOT EXISTS task_labels (
+  task_id INT NOT NULL, label_id INT NOT NULL, PRIMARY KEY (task_id, label_id)
+);
+
+CREATE TABLE IF NOT EXISTS attachments (
+  id INT AUTO_INCREMENT PRIMARY KEY, entity_type VARCHAR(20) NOT NULL, entity_id INT NOT NULL,
+  file_path VARCHAR(500) NOT NULL, filename VARCHAR(255) NOT NULL,
+  uploaded_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+Timeline/Kanban views need no extra tables — they're pm_tasks rendered two ways.
+PART 3 — API CONTRACT
+Envelope: {"success":true,"data":{...},"error":null} / {"success":false,"data":null,"error":{"message":"..."}} — use the existing kernel_db() response convention if one exists; this is the fallback.
+Endpoints (functional list — literal names follow whatever Phase 0 finds): projects (list/get/create/update/archive), project_types (list/get/create/update), stages (list-by-project/create/update/reorder), tasks (list/get/create/update/move/delete), task_dependencies (list/create/delete), custom_fields (list/create/update/delete), custom_field_values (get/upsert), comments (list/create/update/delete), activity_log (list, read-only), docs (list-tree/get/create/update/delete/reorder), labels (list/create/delete), task_labels (attach/detach), attachments (upload/list/delete).
+activity_log writes happen automatically inside other actions, never a direct frontend call.
+PART 4 — UI REQUIREMENTS
+
+Project list (Grand Lobby entry): cards showing name/type/stage counts/color/icon/last activity
+Kanban board: columns = stages, cards = tasks, drag wired to move endpoint, card shows title/assignee/due date/labels/comment count
+Task detail panel: side panel/modal — description, custom fields, dependencies, comments, activity log, attachments
+Timeline/calendar: toggle from board header, same tasks by date; dependency arrows are nice-to-have not required
+Docs panel: nested sidebar tree, markdown editor/preview
+Custom fields: dynamic rendering per type; admin config UI in PM Wing settings
+Activity feed: per-task in detail panel; project-wide aggregate is a Phase 9 stretch goal
+
+PART 5 — BUILD ORDER
+
+Phase 0 — Inspection. Gate: all 5 findings reported, Parts 2/3 corrected if needed.
+Phase 1 — Schema. Gate: SHOW TABLES has everything, pm_tasks has new + untouched columns.
+Phase 2 — Projects/Types/Stages CRUD, seeded default type+stages. Gate: new project auto-gets default stages.
+Phase 3 — Tasks + Kanban UI. Gate: drag across 3 columns, reload, order/stage persist.
+Phase 4 — Task detail panel + dependencies. Gate: A/B dependency shows both directions.
+Phase 5 — Timeline/calendar toggle. Gate: due-date task shows correct day; Kanban unaffected.
+Phase 6 — Comments + activity log. Gate: move/assign/comment all log, visible in order.
+Phase 7 — Docs/wiki. Gate: nested docs create/reorder/persist.
+Phase 8 — Custom fields. Gate: select field renders + persists across all tasks of that type.
+Phase 9 — Labels + attachments + activity feed stretch. Gate: labels show on card, file round-trips.
+Phase 10 — Full walkthrough end to end, plus proving task_sessions/WO-003 still links correctly against a task built in the new system.
+
+PART 6 — STANDING RULES
+Complete replacement files only. Every gate passes before the next phase starts. Any gap Windsurf finds gets reported and resolved here, not improvised.
+
+Let me try the file tools again now so you get a clean downloadable copy too.Ran a command, created a fileRan a command, created a fileStill down on my end — this isn't going to resolve itself in the next few tries. The full document is already in my message above, so you're not blocked: copy it into a .md file yourself (or ask me again in a bit and I'll get you a proper downloadable file once the sandbox is back). Everything you need to hand Windsurf is there — schema, API contract, UI spec, and the phased build order with gates.
