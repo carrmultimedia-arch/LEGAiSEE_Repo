@@ -1,0 +1,34 @@
+LEGAiSEE System Audit — kernel
+Audit type: Macro/system-level — real connections and legibility, not "does it execute."
+
+Genuinely live, foundational — the real spine of the system
+db.php (43 references) — defines kernel_db(), the single real MySQL/PDO connection function. This is the correct, current connection layer.
+bootstrap.php (46 references, but trivial — just 2 lines) — a compatibility shim: requires the top-level /db.php, which in turn requires kernel/db.php and exposes a global $pdo. Good news, not a bug: earlier I flagged a possible second/conflicting database connector at the top-level /db.php — checked its actual content directly, and it's just this 3-line wrapper, not a competing connection method. Confirmed non-issue.
+kernel_boot.php (24 references) — the real canonical boot sequence: loads db.php, kernel_paths.php, conditionally loads ui/ui_bootstrap.php if present, starts the session, and explicitly sets a global $db fallback with a comment: "Modules built before kernel_db() existed use $db directly. This makes both approaches work." This confirms, in the system's own words, that two different calling conventions for the database coexist intentionally — worth knowing as a standing fragility, even though it's handled deliberately rather than accidentally.
+kernel_paths.php (real, used) — single source of truth for KERNEL_ROOT, DATA_ROOT, FILES_ROOT, CLIENTS_ROOT, CASES_ROOT, MEMORY_ROOT. Clean, correct.
+module_registry.php (real, used) — the actual key→file map behind every sidebar module already audited.
+kernel.php — self-documented as deprecated in its own comments: "This file previously contained database logic. That responsibility now belongs exclusively to /kernel/kernel_boot.php... intentionally left minimal." Honestly labeled, not a landmine — just a leftover stub that says so.
+nav_engine.php — a real, working session-based navigation history tracker (keeps your last 50 pages visited, dedupes consecutive repeats).
+ingestion_pipeline.php — confirmed live, required directly by modules/ingest_module.php (the real Memory Ingest paste flow already audited). Its analyzeStrength() function is a simple length-based heuristic with its own comment: "simple heuristic scoring (upgrade later with AI)" — worth knowing that the "strength" score you see on ingested sessions today is a basic placeholder, not real analysis, by the system's own admission.
+Orphaned — zero real references anywhere in the codebase
+engine_bindings.php — a real, sensible-looking config mapping module keys to which engine files should power them (e.g. 'brain' => cross_case_engine, system_insight_engine, system_recommendation_engine). Confirms an earlier finding from the backend audit: this file is unused.
+guard.php — a defensive "kernel guard" meant to catch missing DB connections and silent bootstrap failures before they cause bigger problems. Built, never wired into the actual boot sequence.
+system_health.php (184 lines) — worth flagging specifically. Its own header says exactly what you've been asking for this whole audit: "Provides deterministic runtime diagnostics for: DB integrity, module registry validity, file system consistency, graph data integrity... READ-ONLY diagnostics." This is a real, already-built system-health checker — and nothing calls it. Like plain_english_helper.php from the engine/ audit, this is a second "we already built the tool for the problem we're trying to solve" discovery.
+task_generator.php — converts recommendations into database tasks. Unused — and if it ever were wired in, it has a real latent bug: it calls $conn->prepare(...)->bind_param("iss", ...), which is mysqli syntax, not PDO. Since the rest of the live system uses PDO's kernel_db(), this file would fail immediately if connected to the current database layer without being rewritten first.
+graph_auto_builder.php — a real node-to-edge conversion engine using keyword-similarity matching. Unused — most likely superseded by the more sophisticated entity-extraction pipeline already confirmed live in engine/.
+Dead-end chains — real code, but every path to reach it is itself dead
+kernel/graph_engine.php — zero references anywhere. (Separately, engine/graph_engine.php — a different file with the same name — is only reached through api/v8/build_graph.php, which is itself unreachable per the earlier backend audit. Both "graph_engine.php" files are effectively dead, from two different folders.)
+kernel/recommendation_engine.php — only required by kernel/task_generator.php (confirmed orphaned above). Important resolved question: the well-working "Recommendation" module found in the very first audit (readable, plain-English output) does NOT use this file, or its engine/recommendation_engine.php namesake either — both are dead. Its real logic traces to modules/utils/bootstrap.php, which hasn't been opened yet. So there are effectively three different "recommendation" implementations across the codebase — two dead, one live and unexamined.
+cluster_intelligence.php → only required by insight_generator.php, which is only required by the (orphaned) kernel/recommendation_engine.php above. Dead chain.
+folder_engine.php → only required by ui/file_explorer.php, which itself has zero references anywhere. The real, working Files module (confirmed good in the first audit) doesn't use this — it has its own separate logic. Dead chain.
+module_contract.php — not code, just written rules ("modules must never create DB connections, never render layout, only output content"). Good documented intent — worth checking later whether the modules actually audited comply with this (some clearly build their own full HTML pages, which may or may not violate the spirit of "only output content").
+kernel_contract.php — 4-line deprecated stub, honestly labeled, no issue.
+
+Section summary
+The true operational core is small and solid: db.php, bootstrap.php, kernel_boot.php, kernel_paths.php, module_registry.php, ingestion_pipeline.php, nav_engine.php.
+Two more "we already built the fix" discoveries, matching plain_english_helper.php from the engine/ audit: system_health.php is a ready-made system diagnostic tool, and guard.php is a ready-made safety check — both unused.
+A real naming-collision hazard confirmed twice: graph_engine.php and recommendation_engine.php each exist as two separate, different files in kernel/ and engine/ — a real risk that a future edit (by you, Windsurf, or any AI) could target the wrong one without realizing it.
+One open thread: modules/utils/bootstrap.php — where the real, working Recommendation logic actually lives — has not been opened yet. Worth a look given it's clearly load-bearing for at least one confirmed-good module.
+
+kernel/ complete. Per the master checklist, next up: triage the 51 top-level standalone files, then ui/, then api/ top-level, then ProjectManager/ internals.
+
