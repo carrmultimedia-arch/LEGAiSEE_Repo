@@ -506,3 +506,22 @@ Schema (modules/001_create_tree_nodes.php) and full API (api/tree.php) already e
 2. Then, in order, close the three REAL V1 CHECKPOINT gaps: real Hierarchy-of-Truth confidence scoring, a real Findings→Authority System data object, and confirming the 40+ channel excavation runs end-to-end against one real live client's data.
 3. Everything else in the open WO queue (ProjectManager UI, semantic_diff_engine.php wiring, graph_view.php merge review, plain_english_helper.php wire-in) is real, not abandoned, but sequenced behind the checkpoint.
 
+Understood — let's build it right rather than build on the deprecated system. First I need to see the actual shape of what we're migrating before proposing anything. Let me check the tables client_view_module.php depends on.
+
+That reconnaissance just revealed the real size of this: 16 files across the codebase depend on the old clients/cases/payments/processing_queue tables — not just client_view_module.php. That includes live billing (payment_module.php, real Stripe data), report_module.php itself (the very thing Gap #2 needs to fix), cockpit_module.php, and — importantly — api/v8/get_cases.php/get_clients.php, which were explicitly marked "KEEP as the real DB-backed data foundation" back when the brain-system triage happened.
+
+So this isn't "one old page to migrate" — it's a second, separate identity-layer migration, roughly the same size and weight as WO-18 itself, touching real payment data this time. That's not something to scope on the fly at the tail end of an already long session — it deserves the same careful, dedicated treatment WO-18 got (its own mapping session, its own verification passes, nothing rushed).
+
+Memory's fully updated with today's real progress and the new discovery. Here's where things stand at the end of this session:
+
+Closed today:
+
+WO-19 — Brain pipeline wired end-to-end (button → orchestrator → synthesis), verified working, just needs a funded API key to produce real output.
+WO-20 — Real Hierarchy-of-Truth confidence scoring, fully built and tested against real scenarios. Gap #1 is genuinely done.
+
+Open, clearly scoped for next time:
+
+A second identity-layer migration (client_view_module.php + 15 other files still on the old clients/cases/payments scheme) — this is the next real piece of work, and it deserves a fresh, focused session given it touches live billing data.
+Once that's done, real Findings can actually get created and report_module.php can pull from them for real.
+
+Good place to stop for today.
