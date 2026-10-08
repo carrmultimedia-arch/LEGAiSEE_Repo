@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CAMERA · Road Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&family=Inter:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:#d3deea;font-family:Inter,system-ui,sans-serif;color:#16233a}
+
+/* flat 2D backdrop (never 3D, so it costs almost nothing) */
+#backdrop{position:fixed;left:-10%;top:-10%;width:120%;height:120%;z-index:0;
+  background:linear-gradient(170deg,#e6eef6,#c4d3e3)}
+#backdrop canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#backdrop::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(240,246,252,.66),rgba(214,226,238,.5))}
+
+/* the 3D stage. perspective is set by the script */
+#rig{position:fixed;inset:0;z-index:1}
+#world{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
+
+/* every panel is a direct child of #world (flat list = reliable 3D) */
+.p{position:absolute;left:0;top:0;backface-visibility:visible}
+.photo{border:2px solid rgba(255,255,255,.93);border-radius:3px;overflow:hidden;
+  box-shadow:0 18px 38px rgba(50,70,100,.28);
+  background:linear-gradient(155deg,#dfe9f3,#b3c6da)}
+.photo img,.photo canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.photo::after{content:'';position:absolute;inset:0;background:linear-gradient(200deg,rgba(255,255,255,.14),rgba(20,35,60,.12))}
+.navy{border-radius:3px;background:linear-gradient(170deg,#274063,#18243d);
+  box-shadow:0 18px 38px rgba(20,32,54,.35)}
+.haze{border-radius:4px;border:1px solid rgba(255,255,255,.75);
+  background:linear-gradient(160deg,rgba(255,255,255,.56),rgba(238,246,253,.2))}
+.card{border-radius:4px;padding:0 30px;display:flex;align-items:center;
+  background:linear-gradient(165deg,#a9dad9,#82bfc1);
+  border:1px solid rgba(255,255,255,.9);box-shadow:0 18px 38px rgba(40,90,100,.28);
+  font:600 25px/1.35 Inter,system-ui,sans-serif;color:#0e3a41}
+.title{border:2px solid rgba(255,255,255,.96);background:rgba(24,40,68,.6);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 18px 38px rgba(20,32,54,.3)}
+.title .tab{position:absolute;left:24px;top:-15px;background:#2a9fa1;color:#fff;
+  font:600 13px/1 Inter,system-ui,sans-serif;letter-spacing:.18em;padding:7px 13px}
+.title h2{font:700 42px/1 Rajdhani,"Arial Narrow",Arial,sans-serif;letter-spacing:.6em;color:#fff;white-space:nowrap;text-align:center}
+.title h2.sm{font-size:27px;letter-spacing:.34em}
+.title h2.xs{font-size:19px;letter-spacing:.22em}
+.card.small{font-size:18px;line-height:1.32}
+.card.tiny{font-size:13px;line-height:1.4}
+.art svg{width:100%;height:100%;display:block}
+.satin{container-type:inline-size;border-radius:2px;overflow:hidden;box-shadow:0 18px 38px rgba(50,70,100,.28)}
+.satin.sa{background:linear-gradient(98deg,rgba(6,8,13,.94) 0%,rgba(6,8,13,.78) 52%,rgba(6,8,13,.5) 100%),#07090e url('https://www.legaisee.com/Images/BLK_4.png') center/cover}
+.satin.sa .frame{position:absolute;inset:3.2cqw;border:1px solid rgba(185,151,91,.5)}
+.satin.sa .frame i{position:absolute;width:2.2cqw;height:2.2cqw;border:0 solid #d9bf86}
+.satin.sa .frame i:nth-child(1){left:-1px;top:-1px;border-top-width:2px;border-left-width:2px}
+.satin.sa .frame i:nth-child(2){right:-1px;top:-1px;border-top-width:2px;border-right-width:2px}
+.satin.sa .frame i:nth-child(3){left:-1px;bottom:-1px;border-bottom-width:2px;border-left-width:2px}
+.satin.sa .frame i:nth-child(4){right:-1px;bottom:-1px;border-bottom-width:2px;border-right-width:2px}
+.satin.sa .head{position:absolute;left:7.4cqw;right:7.4cqw;top:7.2cqw;display:flex;align-items:center;gap:1.6cqw;font:600 1.15cqw/1 Inter,sans-serif;letter-spacing:.22em;color:#d9bf86;text-transform:uppercase}
+.satin.sa .head b{font-weight:600;color:#f3eee4}
+.satin.sa .head u{flex:1;height:1px;text-decoration:none;background:linear-gradient(90deg,rgba(217,191,134,.8),rgba(217,191,134,0))}
+.satin.sa .copy{position:absolute;left:7.4cqw;top:50%;transform:translateY(-46%);width:62cqw;padding-left:3cqw;border-left:2px solid;border-image:linear-gradient(180deg,#e6d3a3,#8d6d35) 1}
+.satin.sa .copy p{font:400 4.7cqw/1.16 Newsreader,Georgia,serif;color:rgba(243,238,228,.74);text-shadow:0 .25cqw 2.4cqw rgba(0,0,0,.7)}
+.satin.sa .copy p+p{margin-top:1.3cqw}
+.satin.sa .copy p.hi{font-weight:500;color:#f7f2e8}
+.satin.sa.sm .copy p{font-size:3.7cqw}
+.satin.sa.xs .copy p{font-size:3cqw}
+.satin.sa .foot{position:absolute;left:7.4cqw;right:7.4cqw;bottom:6.4cqw;display:flex;justify-content:space-between;align-items:center;font:500 1.05cqw/1 Inter,sans-serif;letter-spacing:.2em;color:rgba(243,238,228,.55);text-transform:uppercase}
+.satin.sa .foot u{flex:1;height:1px;margin:0 1.6cqw;text-decoration:none;background:linear-gradient(90deg,rgba(217,191,134,0),rgba(217,191,134,.45))}
+.satin.sa.chn-on .copy{width:auto;right:7.4cqw;padding-left:0;border-left:0;border-image:none;display:flex;justify-content:center}
+.satin .chn{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.8cqw 1.2cqw}
+.satin .chn span{font:500 2.7cqw/1.2 Newsreader,Georgia,serif;color:#f7f2e8;border:1px solid rgba(217,191,134,.85);padding:1.2cqw 2cqw;background:linear-gradient(165deg,rgba(24,30,44,.92),rgba(10,13,20,.92));box-shadow:0 .8cqw 1.8cqw rgba(0,0,0,.45)}
+.satin .chn i{font-style:normal;color:#d9bf86;font-size:2.4cqw}
+.satin .chn i::before{content:"\2192"}
+.satin.sb{background:#8a6a2e url('https://www.legaisee.com/Images/GLD_3.png') center/cover}
+.satin.sb .panel{position:absolute;left:11cqw;right:11cqw;top:15cqw;bottom:15cqw;background:linear-gradient(160deg,rgba(11,17,31,.95),rgba(24,36,62,.9));border:1px solid rgba(238,220,170,.85);box-shadow:0 2.6cqw 6cqw rgba(0,0,0,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 6cqw}
+.satin.sb .panel::before{content:"";position:absolute;inset:.9cqw;border:1px solid rgba(238,220,170,.32);pointer-events:none}
+.satin.sb .tab{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);white-space:nowrap;background:linear-gradient(180deg,#ecdcae,#b8934f);color:#1a2236;font:600 1.1cqw/1 Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:.9cqw 2.2cqw;box-shadow:0 .8cqw 1.8cqw rgba(0,0,0,.35)}
+.satin.sb .rule{width:9cqw;height:2px;margin-bottom:2.4cqw;background:linear-gradient(90deg,rgba(236,220,174,0),#ecdcae,rgba(236,220,174,0))}
+.satin.sb .rule.bottom{margin:2.6cqw 0 0}
+.satin.sb .panel p{font:400 4.1cqw/1.2 Newsreader,Georgia,serif;color:rgba(244,240,230,.8);text-shadow:0 .25cqw 1.6cqw rgba(0,0,0,.6)}
+.satin.sb .panel p+p{margin-top:1.1cqw}
+.satin.sb .panel p.hi{font-weight:500;color:#fbf7ee}
+.satin.sb.sm .panel p{font-size:3.3cqw}
+.satin.sb.xs .panel p{font-size:2.7cqw}
+.stext{container-type:inline-size;text-align:center;color:#f7f2e8;pointer-events:none}
+.stext .head{position:absolute;left:50%;transform:translateX(-50%);top:1.2cqw;display:flex;align-items:center;gap:1.4cqw;font:600 1.7cqw/1 Inter,system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#d9bf86;text-shadow:0 .2cqw 1cqw rgba(0,0,0,.85);white-space:nowrap;background:linear-gradient(rgba(5,6,10,.72),rgba(5,6,10,.72)) padding-box,linear-gradient(115deg,#f2e4b8,#8d6d35 35%,#eedcab 65%,#8d6d35) border-box;border:1px solid transparent;border-radius:.7cqw;padding:.9cqw 2.2cqw;box-shadow:0 .9cqw 2.2cqw rgba(0,0,0,.55),inset 0 0 .5cqw rgba(255,240,205,.18)}
+.stext .head b{font-weight:600;color:#f3eee4}
+.stext .head span::before{content:"";display:inline-block;width:.6cqw;height:.6cqw;background:#d9bf86;transform:rotate(45deg);margin-right:1.4cqw;vertical-align:middle}
+.stext .foot{position:absolute;left:50%;transform:translateX(-50%);bottom:1.2cqw;display:flex;align-items:center;gap:3cqw;font:500 1.5cqw/1 Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:rgba(243,238,228,.5);background:linear-gradient(rgba(5,6,10,.72),rgba(5,6,10,.72)) padding-box,linear-gradient(115deg,#f2e4b8,#8d6d35 35%,#eedcab 65%,#8d6d35) border-box;border:1px solid transparent;border-radius:.7cqw;padding:.8cqw 2.2cqw;box-shadow:0 .9cqw 2.2cqw rgba(0,0,0,.55),inset 0 0 .5cqw rgba(255,240,205,.18)}
+.stext .copy{position:absolute;left:6cqw;right:6cqw;top:6.5cqw;bottom:6.5cqw;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.stext .m-say p{font:italic 400 10cqw/1.06 Newsreader,Georgia,serif;letter-spacing:-.01em;color:rgba(243,238,228,.64);text-shadow:0 .5cqw 2.6cqw rgba(0,0,0,.92)}
+.stext .m-say p+p{margin-top:1.2cqw}
+.stext .m-say p.hi{font-style:normal;font-weight:500;color:#fbf7ee}
+.stext .m-say p.hi::after{content:"";display:block;width:16cqw;height:3px;margin:2.4cqw auto 0;background:linear-gradient(90deg,rgba(230,211,163,0),#e6d3a3,#b8934f,rgba(230,211,163,0))}
+.stext.z2 .m-say p{font-size:8.2cqw}
+.stext.z3 .m-say p{font-size:6.4cqw}
+.stext.z4 .m-say p{font-size:5.2cqw}
+.stext.pv .m-say p.hi{background:linear-gradient(180deg,#fff7df,#ecd7a0 55%,#b8934f);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+.stext .stair{display:flex;flex-direction:column;gap:.9cqw;text-align:left;padding-left:3cqw}
+.stext .st{display:flex;align-items:baseline;gap:2.4cqw;margin-left:calc(var(--i)*4.6cqw);opacity:var(--o)}
+.stext .st b{min-width:11cqw;font:500 7.6cqw/1 Newsreader,Georgia,serif;color:transparent;-webkit-text-stroke:1.3px #d9bf86}
+.stext .st span{font:500 7.8cqw/1.05 Newsreader,Georgia,serif;color:#fbf7ee;text-shadow:0 .4cqw 2cqw rgba(0,0,0,.92)}
+.stext .stair.s5 .st{margin-left:calc(var(--i)*4cqw)}
+.stext .stair.s5 .st b,.stext .stair.s5 .st span{font-size:6.6cqw}
+.stext .stair.s6 .st{margin-left:calc(var(--i)*3.4cqw)}
+.stext .stair.s6 .st b,.stext .stair.s6 .st span{font-size:5.6cqw}
+.stext .stair.dense{display:grid;grid-auto-flow:column;grid-template-rows:repeat(var(--r),auto);gap:1.2cqw 5cqw}
+.stext .stair.dense .st{margin-left:0;opacity:1}
+.stext .stair.dense .st b,.stext .stair.dense .st span{font-size:4cqw}
+.stext .vs{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:3cqw}
+.stext .vs .sd{font:500 var(--fs)/1.06 Newsreader,Georgia,serif;color:#fbf7ee;text-shadow:0 .5cqw 2.4cqw rgba(0,0,0,.92)}
+.stext .vs .sd.l{text-align:right;font-style:italic;color:rgba(243,238,228,.58)}
+.stext .vs .sd.r{text-align:left}
+.stext .vs .mid{display:flex;flex-direction:column;align-items:center;gap:1.6cqw}
+.stext .vs .mid u{width:1px;height:13cqw;background:linear-gradient(180deg,rgba(230,211,163,0),#e6d3a3,rgba(230,211,163,0))}
+.stext .vs .mid em.big{font:300 11cqw/1 Newsreader,Georgia,serif;letter-spacing:0;text-transform:none;color:#d9bf86}
+.stext .vs .mid em{font:600 1.8cqw/1 Inter,sans-serif;font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:#d9bf86}
+.stext .eq{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.4cqw 2.2cqw}
+.stext .eq .t,.stext .eq .r{font:500 6.6cqw/1.05 Newsreader,Georgia,serif;color:#fbf7ee;text-shadow:0 .5cqw 2.4cqw rgba(0,0,0,.92)}
+.stext .eq .t{color:rgba(243,238,228,.8)}
+.stext .eq .r{border-bottom:3px solid #d9bf86;padding-bottom:.6cqw}
+.stext .eq em{font:300 7cqw/1 Newsreader,Georgia,serif;font-style:normal;color:#d9bf86}
+.stext .cmp{display:grid;grid-template-columns:1fr auto 1fr;gap:4cqw;align-items:start;text-align:left}
+.stext .cmp u{width:1px;align-self:stretch;background:linear-gradient(180deg,rgba(230,211,163,0),#e6d3a3,rgba(230,211,163,0))}
+.stext .cmp h4{font:500 6cqw/1.05 Newsreader,Georgia,serif;color:#fbf7ee;margin-bottom:1.6cqw;text-shadow:0 .5cqw 2.4cqw rgba(0,0,0,.92)}
+.stext .cmp p{font:400 3.8cqw/1.25 Newsreader,Georgia,serif;color:rgba(243,238,228,.8);padding:.9cqw 0;border-top:1px solid rgba(217,191,134,.28)}
+.stext .orb{position:relative;width:100%;aspect-ratio:100/40}
+.stext .orb svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.stext .orb ellipse{fill:none;stroke:rgba(217,191,134,.55);stroke-width:.3}
+.stext .orb line{stroke:rgba(217,191,134,.35);stroke-width:.2}
+.stext .orb .nd{position:absolute;transform:translate(-50%,-50%);max-width:26cqw;font:500 4.5cqw/1.1 Newsreader,Georgia,serif;color:#fbf7ee;text-shadow:0 .4cqw 1.8cqw rgba(0,0,0,.95),0 0 .6cqw rgba(0,0,0,.9)}
+.stext .orb .nd::before{content:"";display:block;width:1cqw;height:1cqw;margin:0 auto .7cqw;background:#e6d3a3;border-radius:50%}
+.stext .orb .ct{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:32cqw;font:500 7cqw/1.05 Newsreader,Georgia,serif;color:#fbf7ee;text-shadow:0 .5cqw 2.4cqw rgba(0,0,0,.95)}
+.stext .m-stk p{font:500 6.6cqw/1.12 Newsreader,Georgia,serif;color:#fbf7ee;opacity:var(--o);text-align:left;padding-left:3cqw;border-left:2px solid #d9bf86;margin:1.2cqw 0;text-shadow:0 .5cqw 2.4cqw rgba(0,0,0,.92)}
+.stext .copy.m-stair,.stext .copy.m-cmp,.stext .copy.m-stk{align-items:stretch}
+.stext.z2 .m-cmp h4{font-size:5cqw}.stext.z2 .m-cmp p{font-size:3.2cqw;padding:.7cqw 0}
+.stext.z3 .m-cmp h4{font-size:4.2cqw}.stext.z3 .m-cmp p{font-size:2.7cqw;padding:.55cqw 0}
+.stext.z4 .m-cmp h4{font-size:3.6cqw}.stext.z4 .m-cmp p{font-size:2.3cqw;padding:.45cqw 0}
+.stext.z3 .m-stk p{font-size:5.4cqw}
+.stext.z4 .m-stk p{font-size:4.6cqw}
+.stext .st{min-width:0}
+.stext .st span{overflow-wrap:break-word}
+.ocard{border-radius:10px;background:rgba(6,8,12,.25);box-shadow:0 18px 44px rgba(0,0,0,.6)}
+.ocard::before{content:"";position:absolute;inset:0;border-radius:10px;padding:1px;background:linear-gradient(115deg,#f2e4b8,#8d6d35 35%,#eedcab 65%,#8d6d35);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;pointer-events:none}
+/* approach sheen: a soft diagonal glint that sweeps across the card while the
+   camera walks in, settled by --sheen (0 = faint static luster, 1 = full glide) */
+.ocard::after{content:"";position:absolute;inset:0;border-radius:10px;overflow:hidden;pointer-events:none;
+  background:linear-gradient(115deg,transparent 26%,rgba(255,244,214,.05) 40%,rgba(255,248,225,.34) 50%,rgba(255,244,214,.05) 60%,transparent 74%);
+  background-size:280% 100%;background-position:calc(100% + var(--sheen,0)*60%) 0;
+  opacity:calc(.28 + var(--sheen,0)*.72);
+  mix-blend-mode:screen;
+  transition:none}
+
+/* workbook overlay: a plain flat box on top of the page (never 3D) */
+#wb{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(640px,88vw);max-height:84vh;overflow:auto;
+  z-index:6;display:none;background:linear-gradient(170deg,#f4f8fc,#e2ecf5);border:1px solid #fff;border-radius:6px;
+  box-shadow:0 26px 70px rgba(20,32,54,.45);padding:24px 30px 18px}
+#wb.on{display:block}
+#wb .x{position:absolute;right:12px;top:8px;border:0;background:none;font:600 20px Inter,sans-serif;color:#7d92ac;cursor:pointer}
+#wb h3{margin:0 0 10px;font:700 13px Inter,sans-serif;letter-spacing:.16em;color:#2a9fa1}
+#wb .q{margin:0 0 6px;font:600 21px/1.35 Inter,sans-serif;color:#16233a}
+#wb label{display:block;margin:12px 0 4px;font:600 11.5px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#3d5a7d}
+#wb textarea{width:100%;box-sizing:border-box;min-height:44px;resize:vertical;border:1px solid #b9c9da;border-radius:4px;
+  background:#fff;padding:8px 10px;font:500 15px/1.4 Inter,sans-serif;color:#16233a}
+#wb textarea:focus{outline:2px solid #2a9fa1;outline-offset:-1px}
+#wb .hint{margin-top:14px;font:600 10.5px Inter,sans-serif;letter-spacing:.12em;color:#8fa3ba}
+
+#count{position:fixed;left:22px;bottom:18px;z-index:5;font:600 15px Inter,sans-serif;letter-spacing:.2em;color:rgba(40,60,90,.65)}
+#hint{position:fixed;right:22px;bottom:18px;z-index:5;font:600 12px Inter,sans-serif;letter-spacing:.14em;color:rgba(40,60,90,.5)}
+</style>
+</head>
+<body>
+<div id="backdrop"><canvas id="bd" width="64" height="36"></canvas></div>
+<div id="rig"><div id="world"></div></div>
+<div id="wb"></div>
+<div id="count"></div>
+<div id="hint">SPACE / CLICK / SCROLL — FORWARD &nbsp;·&nbsp; ← BACK &nbsp;·&nbsp; 1-9 JUMP</div>
+
+<script src="scenes.js"></script>
+<script>
+'use strict';
+/* ═══════════════════════════════════════════════════════════════════
+   SETTINGS — the numbers you can change. Everything is in "world
+   units"; think of them as roughly screen pixels at 1500 px wide.
+   ═══════════════════════════════════════════════════════════════════ */
+const PHOTOS = [
+  'https://www.legaisee.com/Images/Gemini_Generated_Image_97p97h97p97h97p9.png',
+  'https://www.legaisee.com/Images/Gemini_Generated_Image_bc69f0bc69f0bc69.png',
+  'https://www.legaisee.com/Images/IMG_5448.png',
+  'https://www.legaisee.com/Images/Library2Diamond.png'
+];
+const PLATES = [
+  'photos/plate-marble.jpg',
+  'photos/plate-walnut.jpg',
+  'photos/plate-wool.jpg',
+  'photos/plate-oak.jpg',
+  'photos/plate-leather.jpg',
+  'photos/plate-pewter.jpg',
+  'photos/plate-granite.jpg',
+  'photos/plate-mahogany.jpg',
+  'photos/plate-briefcase-2.jpg',
+  'photos/plate-briefcase-3.jpg'
+];
+/* ── the course words come from scenes.js (window.CAMERA_CHAPTERS). Every
+   chapter starts with a chapter stop (its title on the title panel, its
+   kicker on the card); every scene is one stop after it, in order. ── */
+const TYPE_LABEL = { statement:'STATEMENT', contrast:'CONTRAST', chain:'CHAIN', compare:'COMPARE',
+  branch:'BRANCH', equation:'EQUATION', ring:'RING', hub:'HUB', stack:'STACK', workbook:'WORKBOOK' };
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+function cardLinesFor(sc){
+  if(sc.type==='statement') return (sc.lines||[]).slice();
+  if(sc.type==='contrast')  return [sc.left+' '+sc.symbol+' '+sc.right];
+  if(sc.type==='workbook')  return [sc.prompt];
+  if(sc.type==='equation'){
+    const L = (sc.parts||[]).map(p=>p.title);
+    if(sc.result && sc.result.title) L.push('= '+sc.result.title);
+    return L;
+  }
+  if(sc.type==='compare'){
+    const L = [];
+    [sc.left, sc.right].forEach(col=>{ if(!col) return;
+      L.push((col.title||'') + ': ' + (col.items||[]).join(', ')); });
+    return L;
+  }
+  return (sc.items||[]).slice();     /* chain, stack, ring, hub, branch */
+}
+const STOPS = [];
+(window.CAMERA_CHAPTERS||[]).forEach(ch=>{
+  STOPS.push({ kind:'chapter', tab:'CHAPTER',
+    title: ch.title || ('CHAPTER '+ch.id),
+    cardLines: [ch.kicker || ('CHAPTER '+ch.id)], sc:null, ch });
+  (ch.scenes||[]).forEach(sc=>{
+    STOPS.push({ kind:'scene', tab:'',
+      title: sc.heading || TYPE_LABEL[sc.type] || 'SCENE',
+      cardLines: cardLinesFor(sc), sc, ch });
+  });
+});
+STOPS.forEach((s,g)=>{ if(s.kind==='scene') s.tab = 'SCENE '+g; });   /* scene number = its stop on the street */
+/* camera */
+const GROUP_GAP       = 4200;       // distance along the street between scenes
+const HOLD_DIST       = 780;        // how far in front of a scene the camera pauses
+const TRAVEL_SECONDS  = 3.8;        // travel time between two scenes
+const INTRO_SECONDS   = 4.2;        // opening drive-in
+const EASE_INFLUENCE  = 0.45;       // After Effects "easy ease": 0.33 = gentle, 0.5 = longer, softer settle at every pause
+const LOOK_LOCK       = 1.0;        // 1 = pause view is centered on the scene, so "down the road" is out of frame
+const CAM_SIDE        = 60;         // how far the camera sits off the road's center line at each pause
+const FLOAT           = 1;          // hold float: 0 = off, 1 = subtle, 2 = stronger
+const FOCAL           = 1000;       // lens: bigger = flatter, smaller = more dramatic
+/* the scattered ("exploded") state of every scene before the camera arrives.
+   Panels only ever TRANSLATE in x/y while walking: each panel's z is locked to
+   its final landing value and its facing to its final landing turn, so panel
+   planes stay parallel and can never cross each other or the backplates. */
+const WALK_START      = [4300,5100]; // camera distance when a panel starts moving in (keep under 5200 = the previous pause)
+const WALK_END        = [1000,1500]; // camera distance when a panel has landed
+const FACE_WEIGHT     = 1.06;       // 1 = landed scene sits flush to the screen; above 1 = slightly inward toward
+                                    // screen center (never outward)
+/* depth of field: the focused scene is sharp; the deeper a panel sits behind the focal
+   plane, the more out of focus it is. Focus slides to the next scene during travel. */
+const DOF             = 1;          // depth of field: 0 = off, 1 = subtle, 2 = strong
+const DOF_RANGE       = 4200;       // depth over which focus falls off (about one scene gap)
+const DOF_MAX         = 0.9;        // strongest blur-layer opacity on photos
+const DOF_DIM         = 0.35;       // how much far text/navy/art panels dim out of focus
+/* ═══════════════════════════════════════════════════════════════════ */
+
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FLT = REDUCED ? 0 : FLOAT;
+const N = STOPS.length;
+const world = document.getElementById('world');
+const rig = document.getElementById('rig');
+const backdrop = document.getElementById('backdrop');
+const countEl = document.getElementById('count');
+
+/* ── math helpers ── */
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const sstep=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);};
+const DEG=180/Math.PI;
+function rng(seed){let a=seed>>>0;return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);
+  t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+/* After Effects style easy ease: speed is zero at both ends of every move */
+function makeEase(infl){
+  const x1=infl, x2=1-infl;
+  const X=s=>3*(1-s)*(1-s)*s*x1+3*(1-s)*s*s*x2+s*s*s;
+  return u=>{ u=clamp(u,0,1); let lo=0,hi=1;
+    for(let i=0;i<24;i++){ const m=(lo+hi)/2; if(X(m)<u) lo=m; else hi=m; }
+    const s=(lo+hi)/2; return s*s*(3-2*s); };
+}
+const EASE = makeEase(EASE_INFLUENCE);
+
+/* ── street geometry ── */
+const groupZ = k => -k * GROUP_GAP;                 // the street runs toward negative z
+const holdZ  = k => groupZ(k) + HOLD_DIST;          // where the camera pauses for scene k
+const sideOf = k => (k%2===0) ? 1 : -1;             // scenes alternate sides of the road
+
+let P = FOCAL;
+function resize(){
+  const sc = Math.min(innerWidth/1500, innerHeight/850);
+  P = FOCAL * sc;
+  rig.style.perspective = P + 'px';
+}
+addEventListener('resize', resize); resize();
+addEventListener('load', resize);   /* re-measure once everything is laid out */
+
+/* ── photo loading ── */
+const imgCache = {};
+function loadImg(url){
+  if(!imgCache[url]) imgCache[url] = new Promise(res=>{
+    const im = new Image(); im.onload=()=>res(im); im.onerror=()=>res(null); im.src=url; });
+  return imgCache[url];
+}
+function drawCover(cv, im){
+  const c = cv.getContext('2d'), r = Math.max(cv.width/im.width, cv.height/im.height);
+  const w = im.width*r, h = im.height*r;
+  c.drawImage(im, (cv.width-w)/2, (cv.height-h)/2, w, h);
+}
+function fillPhoto(el, url, soft, w, h){
+  /* depth-of-field pair: a sharp layer + a pre-blurred layer (tiny-canvas trick,
+     never CSS blur). Distance from the camera's focal plane fades between them. */
+  const sharp = document.createElement('canvas');
+  sharp.width = 300; sharp.height = Math.max(20, Math.round(300*h/w));
+  sharp.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
+  const blurCv = document.createElement('canvas');
+  blurCv.width = 44; blurCv.height = Math.max(3, Math.round(44*h/w));
+  blurCv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;opacity:0';
+  el.appendChild(sharp); el.appendChild(blurCv);
+  loadImg(url).then(im=>{
+    if(im){ drawCover(sharp, im); drawCover(blurCv, im); }
+    else{
+      const g = sharp.getContext('2d');
+      const gr = g.createLinearGradient(0,0,sharp.width,sharp.height);
+      ['#dfe9f3','#b3c6da'].forEach((c,i,a)=>gr.addColorStop(i/(a.length-1),c));
+      g.fillStyle = gr; g.fillRect(0,0,sharp.width,sharp.height);
+      blurCv.getContext('2d').drawImage(sharp,0,0,44,blurCv.height);
+    }
+  });
+  return {sharp, blurCv};
+}
+loadImg(PHOTOS[0]).then(im=>{ if(im) drawCover(document.getElementById('bd'), im); });
+
+/* ── build the scenes ── */
+function mkPanel(cls, w, h, html){
+  const d = document.createElement('div');
+  d.className = 'p ' + cls;
+  d.style.width = w+'px'; d.style.height = h+'px';
+  d.style.marginLeft = (-w/2)+'px'; d.style.marginTop = (-h/2)+'px';
+  if(html) d.innerHTML = html;
+  world.appendChild(d);
+  return d;
+}
+/* One scene = these panels, laid out for a scene on the RIGHT of the road (odd scenes are mirrored).
+   x = sideways, y = down, z = toward the camera. A panel's z NEVER changes: its layer is locked. */const LAYOUT = [
+  { t:'photo', x: 506.8, y:-28.5, z:    0, w: 885, h:536, ph:0, soft:0, main:1 },
+  { t:'photo', x: 265,  y:-358,  z: -380, w: 359, h:216, ph:1, soft:1 },
+  { t:'photo', x:2913,  y:-69.4, z: -720, w:1314, h:791, ph:2, soft:0 },
+  { t:'photo', x: 248.8,y: 455,  z:-1060, w: 459, h:276, ph:3, soft:1 },
+  { t:'photo', x:-820, y: -40, z: -120, w:480, h:270, ph:0, soft:0 },
+  { t:'navy',  x:-560, y:   0, z:  330, w:240, h:800 },
+  { t:'card',  x: 880.4,y:-294.9,z:  300, w: 280, h:135, late:1 },
+  { t:'title', x: 644.5,y: 270,  z:  210, w: 608, h:122, late:1 },
+  { t:'art',   x:3380, y:-330, z:-1350, w:520, h:300 }
+];
+const mainDef = LAYOUT.find(L=>L.main);
+const LAYOUTS = { standard: LAYOUT };
+/* statement stack: bg / obsidian card / text sit CONCENTRIC on the hold sight line.
+   The camera pauses off the road's center (CAM_SIDE) looking at the bg's center, so
+   nearer layers are aimed down that same sight line and scaled to hit the same
+   apparent size — at the pause everything is centered like a normal webpage:
+     x = hx + (bgx - hx)·(780 - z)/780   (same screen point as the bg's center)
+     w = desired_apparent · (780 - z)/903 (apparent scale: FOCAL at 1366×768 viewport) */
+const SSTACK = { bgx: 506.8, hx: 60, D: 780, S: 903.23, oc: { z:70, w:648.46, h:374.14 }, st: { z:190, w:397.71, h:229.79 } };
+/* sight-line x in the layout's own (right-hand) frame: the pause camera sits at
+   -hx, so a layer at depth z shares the bg's center angle via (bgx+hx)·(D-z)/D - hx;
+   buildStop's ×m mirror keeps it exact for left-side scenes too */
+const slineX = z => (SSTACK.bgx+SSTACK.hx)*(SSTACK.D-z)/SSTACK.D - SSTACK.hx;
+LAYOUTS.statement = LAYOUT.filter(L=>L.t!=='card' && L.t!=='title').map(L=> L.main ? { t:'bg', x:L.x, y:0, z:L.z, w:L.w, h:L.h, main:1 } : L).concat([
+  { t:'ocard', x:slineX(SSTACK.oc.z), y:0, z:SSTACK.oc.z, w:SSTACK.oc.w, h:SSTACK.oc.h },
+  { t:'stext', x:slineX(SSTACK.st.z), y:0, z:SSTACK.st.z, w:SSTACK.st.w, h:SSTACK.st.h, late:1 }
+]);
+LAYOUTS.pivot = LAYOUTS.statement;
+LAYOUTS.chain = LAYOUTS.statement;
+const ART = '<svg viewBox="0 0 520 300" fill="none" stroke="#7d92ac" stroke-width="1.5">'+
+  '<rect x="6" y="6" width="508" height="288"/><circle cx="380" cy="150" r="92"/>'+
+  '<circle cx="380" cy="150" r="58" stroke-dasharray="3 9"/><path d="M0 150H288M380 0V300"/>'+
+  '<rect x="58" y="58" width="26" height="26" fill="#2f5aa0" stroke="none"/></svg>';
+
+/* the street is built stop by stop: only the current stop, the one behind it
+   and the next two ahead exist in the page at any moment (keeps slow machines
+   fast). Traveling on builds the new stops and tears the far ones down. */
+let panels = [];
+const built = {};
+const WIN_BACK = 1, WIN_FWD = 2;
+
+function satinSize(stop){ const t = (stop.cardLines||[]).join(' ').length; return t>170 ? ' z4' : (t>110 ? ' z3' : (t>60 ? ' z2' : ' z1')); }
+function autoLayout(stop){
+  const sc = stop.sc; if(!sc || sc.type==='workbook') return 'standard';
+  if(sc.type==='statement'){
+    const list = (stop.ch && stop.ch.scenes) ? stop.ch.scenes.filter(s=>s.type==='statement') : [];
+    return (list.length && list[list.length-1]===sc) ? 'pivot' : 'statement';
+  }
+  return 'statement';
+}
+function satinHTML(stop, kind){
+  const ch = stop.ch || {}, sc = stop.sc || {}, T = sc.type, L = stop.cardLines || [], n = L.length;
+  const kick = esc(ch.kicker || ('CHAPTER '+(ch.id||''))), ttl = esc(ch.title || '');
+  let body = '', mode = 'say';
+  if(T==='chain' && n>=2){
+    mode = 'stair';
+    const cls = n>6 ? ' dense' : (n===6 ? ' s6' : (n===5 ? ' s5' : ''));
+    body = '<div class="stair'+cls+'" style="--r:'+Math.ceil(n/2)+'">'+L.map((s,i)=>'<div class="st" style="--i:'+i+';--o:'+(0.62+0.38*(i/(n-1))).toFixed(2)+'"><b>'+(i<9?'0':'')+(i+1)+'</b><span>'+esc(s)+'</span></div>').join('')+'</div>';
+  } else if(T==='contrast'){
+    mode = 'vs';
+    const a = String(sc.left||''), b = String(sc.right||''), fs = Math.max(a.length,b.length)>22 ? 6 : 8.6, sym = String(sc.symbol||'vs'), big = (sym.length<=2 && !/^[a-z]+$/i.test(sym)) ? ' big' : '';
+    body = '<div class="vs" style="--fs:'+fs+'cqw"><div class="sd l">'+esc(a)+'</div><div class="mid"><u></u><em class="'+big.trim()+'">'+esc(sym)+'</em><u></u></div><div class="sd r">'+esc(b)+'</div></div>';
+  } else if(T==='equation'){
+    mode = 'eq';
+    const parts = (sc.parts||[]).map(p=>'<span class="t">'+esc(p.title||'')+'</span>').join('<em>+</em>');
+    body = '<div class="eq">'+parts+((sc.result && sc.result.title) ? '<em>=</em><span class="r">'+esc(sc.result.title)+'</span>' : '')+'</div>';
+  } else if(T==='compare'){
+    mode = 'cmp';
+    const col = c => c ? '<div class="cl"><h4>'+esc(c.title||'')+'</h4>'+(c.items||[]).map(s=>'<p>'+esc(s)+'</p>').join('')+'</div>' : '<div class="cl"></div>';
+    body = '<div class="cmp">'+col(sc.left)+'<u></u>'+col(sc.right)+'</div>';
+  } else if((T==='hub' || T==='ring' || T==='branch') && n>=2){
+    mode = 'orb';
+    const ctr = (T==='hub') ? String(sc.center||sc.core||sc.hub||sc.source||'') : '';
+    let svg = '<svg viewBox="0 0 100 40" preserveAspectRatio="none"><ellipse cx="50" cy="20" rx="35" ry="14.5"/>', nodes = '';
+    L.forEach((s,i)=>{
+      const a = -Math.PI/2 + 2*Math.PI*i/n, x = 50+35*Math.cos(a), y = 20+14.5*Math.sin(a);
+      if(T!=='ring') svg += '<line x1="50" y1="20" x2="'+x.toFixed(2)+'" y2="'+y.toFixed(2)+'"/>';
+      nodes += '<span class="nd" style="left:'+x.toFixed(2)+'%;top:'+(y/40*100).toFixed(2)+'%">'+esc(s)+'</span>';
+    });
+    body = '<div class="orb">'+svg+'</svg>'+nodes+(ctr ? '<span class="ct">'+esc(ctr)+'</span>' : '')+'</div>';
+  } else if(T==='stack' && n>=2){
+    mode = 'stk';
+    body = L.map((s,i)=>'<p style="--o:'+(1-0.5*i/(n-1)).toFixed(2)+'">'+esc(s)+'</p>').join('');
+  } else {
+    body = L.map((s,i)=>'<p'+(i===n-1?' class="hi"':'')+'>'+esc(s)+'</p>').join('');
+  }
+  return '<div class="head"><b>'+kick+'</b><span>'+ttl+'</span></div><div class="copy m-'+mode+'">'+body+'</div><div class="foot"><span>CAMERA</span><span>'+esc(stop.tab)+'</span></div>';
+}
+function buildStop(g){
+  const stop = STOPS[g];
+  const n = stop.cardLines.length, mx = Math.max(0, ...stop.cardLines.map(l=>l.length));
+  const cardCls = (n>5 || mx>44) ? ' tiny' : (n>2 || mx>28) ? ' small' : '';
+  const tcls = stop.title.length<=10 ? '' : (stop.title.length<=18 ? ' class="sm"' : ' class="xs"');
+  const m = sideOf(g), gz = groupZ(g), hz = holdZ(g), hx = -m*CAM_SIDE;
+  const R = rng(1000 + g*77);
+  const grp = [];
+  const layoutName = (stop.sc && stop.sc.layout && LAYOUTS[stop.sc.layout]) ? stop.sc.layout : autoLayout(stop);
+  LAYOUTS[layoutName].forEach(L=>{
+    let el, ph = null;
+    if(L.t==='photo'){ el = mkPanel('photo', L.w, L.h); ph = fillPhoto(el, PHOTOS[(g+L.ph)%PHOTOS.length], L.soft, L.w, L.h); }
+    else if(L.t==='bg'){ el = mkPanel('photo bg', L.w, L.h); ph = fillPhoto(el, PLATES[g%PLATES.length], L.soft, L.w, L.h); }
+    else if(L.t==='ocard'){ el = mkPanel('ocard', L.w, L.h); el.style.setProperty('--sheen','1'); }
+    else if(L.t==='stext'){ el = mkPanel('stext'+(layoutName==='pivot'?' pv':'')+satinSize(stop), L.w, L.h, satinHTML(stop, layoutName)); }
+    else if(L.t==='navy'){ el = mkPanel('navy', L.w, L.h); }
+    else if(L.t==='card'){ el = mkPanel('card'+cardCls, L.w, L.h, stop.cardLines.map(esc).join('<br>')); }
+    else if(L.t==='title'){ el = mkPanel('title', L.w, L.h, '<span class="tab">'+esc(stop.tab)+'</span><h2'+tcls+'>'+esc(stop.title)+'</h2>'); }
+    else if(L.t==='satin'){ el = mkPanel('satin '+(layoutName==='pivot'?'sb':'sa')+(layoutName==='chain'?' chn-on':'')+satinSize(stop), L.w, L.h, satinHTML(stop, layoutName)); }
+    else { el = mkPanel('art', L.w, L.h, ART); }
+    grp.push({ L, el, X:L.x*m, Y:L.y, Z:gz+L.z, ph });
+  });
+  /* the scene's center: where its x and y axes cross, at the middle of the finished layout */
+  const xs = grp.map(o=>o.X), ys = grp.map(o=>o.Y);
+  const cX = (Math.min(...xs)+Math.max(...xs))/2, cY = (Math.min(...ys)+Math.max(...ys))/2;
+  const entry = { list:[], haze:[] };
+  grp.forEach(o=>{
+    const L=o.L;
+    /* landing pose: panels cancel the camera's pause yaw so the landed scene sits
+       parallel to the screen (a slide). FACE_WEIGHT 1 = flush; above 1 turns the
+       scene slightly INWARD toward screen center. Never outward. */
+    const yawK = LOOK_LOCK * DEG * Math.atan2(sideOf(g)*mainDef.x - hx, HOLD_DIST);
+    const ts = -FACE_WEIGHT * yawK;
+    /* scattered pose: pushed straight OUT of the road (the scene's own side), plus
+       a modest up/down wander. Never across the lens — this is what keeps walk-in
+       paths from crossing the camera or other scenes' backplates on the approach. */
+    const p = (o.X>=0 ? 1 : -1) * (300 + R()*900);
+    const EX = o.X + p, EY = o.Y + (R()-.5)*560;   /* x/y only — z and facing stay locked */
+    const s0 = L.late ? lerp(3600,4400,R()) : lerp(WALK_START[0],WALK_START[1],R());
+    const s1 = L.late ? lerp(1000,1200,R()) : lerp(WALK_END[0],WALK_END[1],R());
+    const pn = {
+      el:o.el, gz, w:L.w, h:L.h, x:o.X, y:o.Y, z:o.Z, ts, ph:o.ph, lastB:-1,
+      ex:EX, ey:EY, s0, s1,
+      ba:3+R()*4, bw:0.6+R()*0.7, bp:R()*6.28,
+      h2: L.t==='title' ? o.el.querySelector('h2') : null, ls:-1, last:'',
+      sh: (L.t==='ocard') ? 1 : 0, shv:''
+    };
+    panels.push(pn); entry.list.push(pn);
+  });
+  /* haze: big frosted glass slabs standing just past this stop */
+  for(let j=0; j<3; j++){
+    const side = ((g+j)%2) ? 1 : -1;
+    const el = mkPanel('haze', 1000, 640);
+    const x = side*(1050 + j*180), y = (j-1)*260;
+    const z = groupZ(g) - GROUP_GAP*(0.25 + 0.25*j);
+    el.style.transform = 'translate3d('+x+'px,'+y+'px,'+z+'px) rotateY('+(-side*22)+'deg)';
+    entry.haze.push(el);
+  }
+  return entry;
+}
+
+function ensureWindow(fromIdx, toIdx){
+  const lo = Math.max(0, Math.min(fromIdx,toIdx) - WIN_BACK);
+  const hi = Math.min(STOPS.length-1, Math.max(fromIdx,toIdx) + WIN_FWD);
+  for(const k of Object.keys(built)){
+    const ki = +k;
+    if(ki<lo || ki>hi){
+      built[k].list.forEach(p=>p.el.remove());
+      built[k].haze.forEach(e=>e.remove());
+      delete built[k];
+    }
+  }
+  for(let k=lo; k<=hi; k++) if(!built[k]) built[k] = buildStop(k);
+  panels = [];
+  for(let k=lo; k<=hi; k++) if(built[k]) panels.push(...built[k].list);
+}
+
+/* ── the camera: ONE smooth move through the whole street ──
+   Each pause has a pose (sideways position + which way the camera is turned).
+   Between two pauses everything (position, turn) is blended from the same single
+   number, the camera's distance along the road, and that number eases in and out. */
+const keys = [{ z: holdZ(0)+GROUP_GAP, x:0, yaw:0 }];   // opening drive-in starts one block back
+for(let k=0; k<N; k++){
+  const cx = -sideOf(k)*CAM_SIDE;
+  const yaw = LOOK_LOCK * DEG * Math.atan2(sideOf(k)*mainDef.x - cx, HOLD_DIST);
+  keys.push({ z: holdZ(k), x:cx, yaw });
+}
+function poseAt(z){
+  for(let i=0; i<keys.length-1; i++){
+    const a=keys[i], b=keys[i+1];
+    if(z<=a.z && z>=b.z){ const t=(a.z-z)/(a.z-b.z); return { x:lerp(a.x,b.x,t), yaw:lerp(a.yaw,b.yaw,t) }; }
+  }
+  const e = z>keys[0].z ? keys[0] : keys[keys.length-1];
+  return { x:e.x, yaw:e.yaw };
+}
+
+const state = { z: holdZ(0) + GROUP_GAP };
+let idx = 0, tween = null, busy = false, lastWheel = 0;
+function startTween(to, seconds){ tween = { from:state.z, to, dur:seconds*1000, t0:null, born:performance.now() }; busy = true; }
+function goTo(i){
+  i = clamp(i, 0, N-1);
+  if(busy || i===idx) return;
+  closeWB();
+  window.__wbHold = null;
+  ensureWindow(idx, i);
+  idx = i; startTween(holdZ(i), TRAVEL_SECONDS); countEl.textContent = (idx+1)+' / '+N;
+}
+const next = () => goTo(idx+1);
+const prev = () => goTo(idx-1);
+countEl.textContent = '1 / '+N;
+ensureWindow(0,0);
+setTimeout(()=>startTween(holdZ(0), INTRO_SECONDS), 500);
+
+/* ————— workbook stops: a plain flat box on top of the page ————— */
+let wbOpen = null;
+function wbKey(ch,sc,f){ return 'cam.wb.'+ch.id+'.'+sc.id+'.'+f.id; }
+function wbVal(ch,sc,f){ try{ return localStorage.getItem(wbKey(ch,sc,f))||''; }catch(e){ return ''; } }
+function openWB(g){
+  if(wbOpen===g) return;
+  const stop = STOPS[g];
+  if(!stop || !stop.sc || stop.sc.type!=='workbook') return;
+  const ch = stop.ch, sc = stop.sc, box = document.getElementById('wb');
+  let h = '<button class="x" aria-label="close">\u2715</button><h3>'+esc(stop.tab+' \u00b7 '+stop.title)+'</h3><p class="q">'+esc(sc.prompt)+'</p>';
+  (sc.fields||[]).forEach(f=>{
+    h += '<label for="wbf_'+esc(f.id)+'">'+esc(f.label)+'</label>'+
+         '<textarea id="wbf_'+esc(f.id)+'" data-f="'+esc(f.id)+'">'+esc(wbVal(ch,sc,f))+'</textarea>';
+  });
+  h += '<div class="hint">TYPE \u2014 ANSWERS SAVE AUTOMATICALLY \u00b7 ESC OR \u2715 TO CLOSE</div>';
+  box.innerHTML = h;
+  box.querySelectorAll('textarea').forEach(t=>{
+    t.addEventListener('input', ()=>{
+      try{ localStorage.setItem(wbKey(ch,sc,{id:t.dataset.f}), t.value); }catch(e){}
+    });
+  });
+  box.querySelector('.x').addEventListener('click', closeWB);
+  box.classList.add('on');
+  wbOpen = g;
+}
+function closeWB(){
+  if(wbOpen==null) return;
+  document.getElementById('wb').classList.remove('on');
+  wbOpen = null;
+}
+
+addEventListener('keydown', e=>{
+  if(wbOpen!=null && document.getElementById('wb').contains(document.activeElement)){
+    if(e.key==='Escape') closeWB();
+    return;                       /* typing in the workbook: keys stay keys */
+  }
+  if([' ','ArrowRight','ArrowDown','PageDown','Enter'].includes(e.key)){ e.preventDefault(); next(); }
+  else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); prev(); }
+  else if(e.key==='f'||e.key==='F'){ document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+  else if(e.key>='1'&&e.key<='9' && +e.key<=N){ goTo(+e.key-1); }   /* jump straight to a stop */
+});
+addEventListener('wheel', e=>{
+  if(wbOpen!=null && document.getElementById('wb').contains(e.target)) return;
+  e.preventDefault();
+  const now = performance.now();
+  if(now-lastWheel < 700 || Math.abs(e.deltaY) < 8) return;
+  lastWheel = now; e.deltaY>0 ? next() : prev();
+}, {passive:false});
+addEventListener('pointerdown', e=>{
+  if(wbOpen!=null && document.getElementById('wb').contains(e.target)) return;
+  next();
+});
+let mx=0, my=0, mxs=0, mys=0;
+addEventListener('mousemove', e=>{ mx=(e.clientX/innerWidth-.5)*2; my=(e.clientY/innerHeight-.5)*2; });
+
+/* the frame loop */
+function frame(now){
+  requestAnimationFrame(frame);
+  const t = now/1000;
+  if(tween){
+    if(tween.t0===null) tween.t0 = now;
+    const u = clamp((now-tween.t0)/tween.dur, 0, 1);
+    state.z = lerp(tween.from, tween.to, EASE(u));
+    if(u>=1){ tween = null; busy = false; ensureWindow(idx, idx); }
+  }
+  /* watchdog: if the tab was hidden and the frame loop stalled mid-travel,
+     settle the camera here so the page is never stuck between stops */
+  if(tween && performance.now() - tween.born > tween.dur + 600){
+    state.z = tween.to; tween = null; busy = false; ensureWindow(idx, idx);
+  }
+  if(!busy && !wbOpen && STOPS[idx].sc && STOPS[idx].sc.type==='workbook'){
+    if(!window.__wbHold || window.__wbHold!==idx){ window.__wbHold = idx; openWB(idx); }
+  }
+  mxs += (mx-mxs)*0.05; mys += (my-mys)*0.05;
+
+  const cz = state.z, pose = poseAt(cz);
+  const cx = pose.x + FLT*22*Math.sin(t*.52);
+  const cy = FLT*10*Math.sin(t*.37+1);
+  const yaw   = pose.yaw + FLT*0.9*Math.sin(t*.43) + mxs*2;
+  const pitch = FLT*0.5*Math.sin(t*.31+2) - mys*1.2;
+  const roll  = FLT*0.4*Math.sin(t*.27);
+
+  world.style.transform =
+    'translateZ('+P.toFixed(2)+'px) rotateZ('+(-roll).toFixed(3)+'deg) rotateX('+pitch.toFixed(3)+'deg) rotateY('+yaw.toFixed(3)+'deg) translate3d('+(-cx).toFixed(2)+'px,'+(-cy).toFixed(2)+'px,'+(-cz).toFixed(2)+'px)';
+  backdrop.style.transform = 'translate3d('+(-yaw*1.5).toFixed(1)+'px,'+(pitch*1.5).toFixed(1)+'px,0)';
+
+  /* each panel: 0 = scattered, 1 = landed. Driven only by how far the camera is from its scene,
+     so it assembles on the way in and scatters again if you travel back. Its z never changes. */
+  for(let i=0; i<panels.length; i++){
+    const pn = panels[i], dist = cz - pn.gz;
+    const p = 1 - sstep(pn.s1, pn.s0, dist);
+    const bob = pn.ba * Math.sin(t*pn.bw + pn.bp);
+    const s = 'translate3d('+lerp(pn.ex,pn.x,p).toFixed(2)+'px,'+(lerp(pn.ey,pn.y,p)+bob).toFixed(2)+'px,'+pn.z.toFixed(1)+'px) rotateY('+pn.ts.toFixed(2)+'deg)';
+    if(s !== pn.last){ pn.el.style.transform = s; pn.last = s; }
+    /* approach sheen on the obsidian card: the glint sweeps as the scene walks in */
+    if(pn.sh){
+      const v = (1-p).toFixed(3);
+      if(v !== pn.shv){ pn.el.style.setProperty('--sheen', v); pn.shv = v; }
+    }
+    if(pn.h2){
+      const ls = 0.6 - 0.52*p;
+      if(Math.abs(ls-pn.ls) > 0.004){ pn.h2.style.letterSpacing = ls.toFixed(3)+'em'; pn.ls = ls; }
+    }
+    /* depth of field: a panel is sharp when its scene is the focused one and it
+       sits near its main-photo plane; it softens as the camera travels away from
+       its scene and as it sits deeper behind its scene's main photo.
+       Photos crossfade a pre-blurred layer (no CSS blur); text/navy/art dim. */
+    if(DOF){
+      const defocus = DOF * clamp((Math.abs((cz - HOLD_DIST) - pn.gz) + Math.max(0, pn.gz - pn.z)) / DOF_RANGE, 0, 1);
+      if(pn.ph){
+        const b = (defocus * DOF_MAX).toFixed(3);
+        if(b !== pn.lastB){ pn.ph.blurCv.style.opacity = b; pn.lastB = b; }
+      } else {
+        const o = (1 - defocus * DOF_DIM).toFixed(3);
+        if(o !== pn.lastB){ pn.el.style.opacity = o; pn.lastB = o; }
+      }
+    }
+  }
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
