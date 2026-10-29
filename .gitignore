@@ -14,3 +14,7 @@ vendor/
 
 _backup/
 *.zip
+
+.sftp.json
+config.local.php
+dbtest.php
